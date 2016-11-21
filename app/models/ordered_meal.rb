@@ -1,4 +1,4 @@
 class OrderedMeal < ApplicationRecord
-  belongs_to :order
-  belongs_to :meal
+  belongs_to :order, required: true
+  belongs_to :meal, required: true
 end
