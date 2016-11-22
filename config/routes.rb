@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   mount Facebook::Messenger::Server, at: 'bot'
   root to: 'pages#home'
   resources :restaurants, only: [:index, :show, :new, :create, :edit, :update]
+  resources :meals
 end
 
 
