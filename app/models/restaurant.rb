@@ -15,4 +15,5 @@ class Restaurant < ApplicationRecord
 
   has_attachment :photo
 
+  enum category: [ :burgers, :salads, :chinese, :japonese, :italian, :indian, :french ]
 end

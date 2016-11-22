@@ -1,10 +1,9 @@
 /* Main class */
 .navbar-wagon {
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
-  background: white;
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   transition: all 0.3s ease;
   display: flex;
-  height: 70px;
+  height: 100px;
   padding: 0px 30px;
   align-items: center;
   justify-content: space-between;
@@ -21,7 +20,7 @@
 
 /* Navbar logo */
 .navbar-wagon-brand img {
-  width: 50px;
+  width: 40px;
 }
 
 /* Navbar right section (with form, links, button) */
@@ -52,12 +51,12 @@
 .navbar-wagon-button {
   margin-left: 10px;
   padding: 0 20px;
-  border-radius: 20em;
+  border-radius: 5px;
   line-height: 40px;
   background-color: #D23333;
   color: white;
   font-size: 14px;
-  border: 2px solid #D23333;
+  border: none
 }
 .navbar-wagon-button:hover {
   color: white;
