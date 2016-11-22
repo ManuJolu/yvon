@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   mount Attachinary::Engine, at: 'attachinary'
   mount Facebook::Messenger::Server, at: 'bot'
   root to: 'pages#home'
-  resources :restaurants, only: [:index, :show, :new, :create, :edit, :update]
-  resources :meals
+  resources :restaurants, only: [:index, :show, :new, :create, :edit, :update] do
+    resources :meals
+  end
+
 end
 
 
