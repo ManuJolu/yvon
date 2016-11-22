@@ -11,6 +11,9 @@ gem 'redis'
 gem 'draper', '3.0.0.pre1'
 gem 'omniauth-facebook'
 gem 'facebook-messenger'
+gem 'geocoder'
+gem 'pundit'
+gem 'cloudinary', '1.1.0'
 
 gem 'sass-rails'
 gem 'jquery-rails'
@@ -19,8 +22,9 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
-gem 'geocoder'
-gem 'pundit'
+gem "attachinary", github: "assembler/attachinary"
+gem "jquery-fileupload-rails"
+gem "coffee-rails"
 
 group :development, :test do
   gem 'binding_of_caller'
