@@ -1,7 +1,7 @@
 <%= simple_form_for @restaurant do |f| %>
   <%= f.input :name, label: "Restaurant's name", error: "Restaurant's name is mandatory, please specify one" %>
   <%= f.input :address, label: "Restaurant's address", error: "Restaurant's address is mandatory, please specify one" %>
-  <%= f.input :category %>
+  <%= f.input :category, collection: Restaurant.categories.map {|k, v| [k, k]} %>
   <%= f.input :description %>
   <%= f.input :photo, as: :attachinary %>
   <%= f.submit class: 'btn btn-primary' %>
