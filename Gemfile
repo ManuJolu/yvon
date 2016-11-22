@@ -10,6 +10,10 @@ gem 'devise'
 gem 'redis'
 gem 'draper', '3.0.0.pre1'
 gem 'omniauth-facebook'
+gem 'cloudinary', '1.1.0'
+gem "attachinary", github: "assembler/attachinary"
+gem "jquery-fileupload-rails"
+gem "coffee-rails"
 
 gem 'sass-rails'
 gem 'jquery-rails'
