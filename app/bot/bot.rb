@@ -63,10 +63,10 @@ Bot.on :message do |message|
               subtitle: "Carte du jour",
               default_action: {
                 type: "web_url",
-                url: "https://fcatuhe.github.io/lewagon/",
+                url: "https://yvon.herokuapp.com/",
                 messenger_extensions: true,
                 webview_height_ratio: "tall",
-                fallback_url: "https://fcatuhe.github.io/profile/"
+                fallback_url: "https://yvon.herokuapp.com/"
               }
               # buttons: [
               #   {
@@ -85,19 +85,19 @@ Bot.on :message do |message|
               subtitle: "100% mise en appétit",
               default_action: {
                 type: "web_url",
-                url: "https://fcatuhe.github.io/lewagon/",
+                url: "https://yvon.herokuapp.com/",
                 messenger_extensions: true,
                 webview_height_ratio: "tall",
-                fallback_url: "https://fcatuhe.github.io/lewagon/"
+                fallback_url: "https://yvon.herokuapp.com/"
               },
               buttons: [
                 {
                     title: "Commander",
                     type: "web_url",
-                    url: "https://fcatuhe.github.io/lewagon/",
+                    url: "https://yvon.herokuapp.com/",
                     messenger_extensions: true,
                     webview_height_ratio: "tall",
-                    fallback_url: "https://fcatuhe.github.io/lewagon/"
+                    fallback_url: "https://yvon.herokuapp.com/"
                 }
               ]
             },
@@ -107,19 +107,19 @@ Bot.on :message do |message|
               subtitle: "100% local",
               default_action: {
                 type: "web_url",
-                url: "https://fcatuhe.github.io/lewagon/",
+                url: "https://yvon.herokuapp.com/",
                 messenger_extensions: true,
                 webview_height_ratio: "tall",
-                fallback_url: "https://fcatuhe.github.io/lewagon/"
+                fallback_url: "https://yvon.herokuapp.com/"
               },
               buttons: [
                 {
                     title: "Commander",
                     type: "web_url",
-                    url: "https://fcatuhe.github.io/lewagon/",
+                    url: "https://yvon.herokuapp.com/",
                     messenger_extensions: true,
                     webview_height_ratio: "tall",
-                    fallback_url: "https://fcatuhe.github.io/lewagon/"
+                    fallback_url: "https://yvon.herokuapp.com/"
                 }
               ]
             },
@@ -129,19 +129,19 @@ Bot.on :message do |message|
               subtitle: "100% gourmandise",
               default_action: {
                 type: "web_url",
-                url: "https://fcatuhe.github.io/lewagon/",
+                url: "https://yvon.herokuapp.com/",
                 messenger_extensions: true,
                 webview_height_ratio: "tall",
-                fallback_url: "https://fcatuhe.github.io/lewagon/"
+                fallback_url: "https://yvon.herokuapp.com/"
               },
               buttons: [
                 {
                     title: "Commander",
                     type: "web_url",
-                    url: "https://fcatuhe.github.io/lewagon/",
+                    url: "https://yvon.herokuapp.com/",
                     messenger_extensions: true,
                     webview_height_ratio: "tall",
-                    fallback_url: "https://fcatuhe.github.io/lewagon/"
+                    fallback_url: "https://yvon.herokuapp.com/"
                 }
               ]
             }
