@@ -19,6 +19,8 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
+gem 'geocoder'
+gem 'pundit'
 
 group :development, :test do
   gem 'binding_of_caller'
