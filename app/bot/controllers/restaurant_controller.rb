@@ -1,6 +1,6 @@
-class RestaurantsController
+class RestaurantController
   def initialize
-    @view = RestaurantsView.new
+    @view = RestaurantView.new
   end
 
   def hello(message)

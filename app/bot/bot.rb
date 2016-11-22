@@ -2,6 +2,8 @@ require 'facebook/messenger'
 
 include Facebook::Messenger
 
+@restaurant_controller = RestaurantController.new
+
 Bot.on :optin do |optin|
   optin.sender    # => { 'id' => '1008372609250235' }
   optin.recipient # => { 'id' => '2015573629214912' }
@@ -9,15 +11,13 @@ Bot.on :optin do |optin|
   optin.ref       # => 'CONTACT_SKYNET'
 
   optin.reply(
-    text: "Welcome!\nMy name is Yvon, where can I help you find your restaurant?",
+    text: "Welcome! My name is Yvon, where can I help you find your restaurant?",
     quick_replies: [
       {
         content_type: 'location'
       }
     ]
   )
-
-
 
   user_data = RestClient.get("https://graph.facebook.com/v2.6/#{optin.sender}?access_token=#{ENV['ACCESS_TOKEN']}")
   byebug
@@ -35,18 +35,16 @@ end
 #   end
 # end
 
-@restaurants_controller = RestaurantsController.new
-
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
 
   if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
-    @restaurants_controller.index(message)
+    @restaurant_controller.index(message)
   end
 
   case message.text
   when /hello/i
-    @restaurants_controller.hello(message)
+    @restaurant_controller.hello(message)
   when /meal/i
     elements = []
     4.times do |i|

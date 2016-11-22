@@ -1,7 +1,7 @@
-class RestaurantsView
+class RestaurantView
   def hello(message)
     message.reply(
-      text: 'Hello!\nWhere can I help you find your restaurant?',
+      text: 'Hello! Where can I help you find your restaurant?',
       quick_replies: [
         {
           content_type: 'location'
@@ -37,7 +37,13 @@ class RestaurantsView
       )
     else
       message.reply(
-        text: "Sorry, no restaurants near you..."
+        text: "Sorry, I found no restaurants near you..."
+        quick_replies: [
+        {
+          content_type: 'location'
+        }
+      ]
+
       )
     end
   end
