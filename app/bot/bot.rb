@@ -6,7 +6,51 @@ Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
 
   case message.text
-  when /list/i
+  when /hello/i
+    message.reply(
+      text: 'Where are you?',
+      quick_replies: [
+        {
+          content_type: 'location'
+        }
+      ]
+    )
+  when /meal/i
+    elements = []
+    4.times do |i|
+      elements << {
+        title: "Plat #{i}",
+        image_url: 'http://www.formation-pizza-marketing.com/wp-content/uploads/2014/01/pizza-malbouffe-plat-equilibre2.jpg',
+        subtitle: "Description plat #{i}\nOrder and:",
+        buttons: [
+          {
+            type: 'postback',
+            title: 'Pay',
+            payload: "MEAL_#{i}"
+          },
+          {
+            type: 'postback',
+            title: 'Menu',
+            payload: "MEAL_#{i}"
+          },
+          {
+            type: 'postback',
+            title: 'Desserts',
+            payload: "MEAL_#{i}"
+          }
+        ]
+      }
+    end
+    message.reply(
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'generic',
+          elements: elements
+        }
+      }
+    )
+  when /menu/i
     message.reply(
       attachment: {
         type: 'template',
@@ -14,46 +58,90 @@ Bot.on :message do |message|
           template_type: 'list',
           elements: [
             {
-              title: "Classic T-Shirt Collection",
-              image_url: "https://peterssendreceiveapp.ngrok.io/img/collection.png",
-              subtitle: "See all our colors",
+              title: "L'évidence café",
+              image_url: "https://fcatuhe.github.io/lewagon/images/lewagon.png",
+              subtitle: "Carte du jour",
               default_action: {
                 type: "web_url",
-                url: "https://peterssendreceiveapp.ngrok.io/shop_collection",
+                url: "https://fcatuhe.github.io/lewagon/",
                 messenger_extensions: true,
                 webview_height_ratio: "tall",
-                fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+                fallback_url: "https://fcatuhe.github.io/profile/"
+              }
+              # buttons: [
+              #   {
+              #       title: "View",
+              #       type: "web_url",
+              #       url: "https://fcatuhe.github.io/lewagon/",
+              #       messenger_extensions: true,
+              #       webview_height_ratio: "tall",
+              #       fallback_url: "https://fcatuhe.github.io/lewagon/"
+              #   }
+              # ]
+            },
+            {
+              title: "Entrées",
+              image_url: "https://fcatuhe.github.io/lewagon/images/lewagon.png",
+              subtitle: "100% mise en appétit",
+              default_action: {
+                type: "web_url",
+                url: "https://fcatuhe.github.io/lewagon/",
+                messenger_extensions: true,
+                webview_height_ratio: "tall",
+                fallback_url: "https://fcatuhe.github.io/lewagon/"
               },
               buttons: [
                 {
-                    title: "View",
+                    title: "Commander",
                     type: "web_url",
-                    url: "https://peterssendreceiveapp.ngrok.io/collection",
+                    url: "https://fcatuhe.github.io/lewagon/",
                     messenger_extensions: true,
                     webview_height_ratio: "tall",
-                    fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+                    fallback_url: "https://fcatuhe.github.io/lewagon/"
                 }
               ]
             },
             {
-              title: "Classic White T-Shirt",
-              image_url: "https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png",
-              subtitle: "100% Cotton, 200% Comfortable",
+              title: "Plats",
+              image_url: "https://fcatuhe.github.io/lewagon/images/lewagon.png",
+              subtitle: "100% local",
               default_action: {
                 type: "web_url",
-                url: "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                url: "https://fcatuhe.github.io/lewagon/",
                 messenger_extensions: true,
                 webview_height_ratio: "tall",
-                fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+                fallback_url: "https://fcatuhe.github.io/lewagon/"
               },
               buttons: [
                 {
-                    title: "Shop Now",
+                    title: "Commander",
                     type: "web_url",
-                    url: "https://peterssendreceiveapp.ngrok.io/shop?item=100",
+                    url: "https://fcatuhe.github.io/lewagon/",
                     messenger_extensions: true,
                     webview_height_ratio: "tall",
-                    fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+                    fallback_url: "https://fcatuhe.github.io/lewagon/"
+                }
+              ]
+            },
+            {
+              title: "Desserts",
+              image_url: "https://fcatuhe.github.io/lewagon/images/lewagon.png",
+              subtitle: "100% gourmandise",
+              default_action: {
+                type: "web_url",
+                url: "https://fcatuhe.github.io/lewagon/",
+                messenger_extensions: true,
+                webview_height_ratio: "tall",
+                fallback_url: "https://fcatuhe.github.io/lewagon/"
+              },
+              buttons: [
+                {
+                    title: "Commander",
+                    type: "web_url",
+                    url: "https://fcatuhe.github.io/lewagon/",
+                    messenger_extensions: true,
+                    webview_height_ratio: "tall",
+                    fallback_url: "https://fcatuhe.github.io/lewagon/"
                 }
               ]
             }
@@ -61,61 +149,29 @@ Bot.on :message do |message|
         }
       }
     )
-  when /hello/i
-    message.reply(
-      text: 'Hello, human!',
-      quick_replies: [
-        {
-          content_type: 'text',
-          title: 'Hello, bot!',
-          payload: 'HELLO_BOT'
-        }
-      ]
-    )
-  when /something humans like/i
-    message.reply(
-      text: 'I found something humans seem to like:'
-    )
-
-    message.reply(
-      attachment: {
-        type: 'image',
-        payload: {
-          url: 'https://i.imgur.com/iMKrDQc.gif'
-        }
-      }
-    )
-
-    message.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'button',
-          text: 'Did human like it?',
-          buttons: [
-            { type: 'postback', title: 'Yes', payload: 'HUMAN_LIKED' },
-            { type: 'postback', title: 'No', payload: 'HUMAN_DISLIKED' }
-          ]
-        }
-      }
-    )
   else
-    message.reply(
-      text: 'You are now marked for extermination.'
-    )
-
-    message.reply(
-      text: 'Have a nice day.'
-    )
+    if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
+      lat = message.attachments[0]['payload']['coordinates']['lat']
+      lng = message.attachments[0]['payload']['coordinates']['long']
+      message.reply(
+        text: "Your coordinates: #{lat}, #{lng}"
+      )
+    elsif message.text
+      message.reply(
+        text: "Did you say '#{message.text}'?"
+      )
+    else
+      message.reply(
+        text: "Did not understand"
+      )
+    end
   end
 end
 
 Bot.on :postback do |postback|
   case postback.payload
-  when 'HUMAN_LIKED'
-    text = 'That makes bot happy!'
-  when 'HUMAN_DISLIKED'
-    text = 'Oh.'
+  when /MEAL_(?<id>\d+)/
+    text = "Meal #{$LAST_MATCH_INFO['id']} added to order"
   end
 
   postback.reply(

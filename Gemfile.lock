@@ -110,13 +110,10 @@ GEM
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     hashie (3.4.6)
-<<<<<<< HEAD
-    httparty (0.14.0)
-      multi_xml (>= 0.5.2)
-=======
     http-cookie (1.0.3)
       domain_name (~> 0.5)
->>>>>>> 9d8990a76bd93f81552f92bec3d3497f4b143a2b
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
