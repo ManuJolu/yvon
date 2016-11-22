@@ -2,7 +2,9 @@ require 'facebook/messenger'
 
 include Facebook::Messenger
 
+@page_controller = PageController.new
 @restaurant_controller = RestaurantController.new
+@meal_controller = MealController.new
 
 Bot.on :optin do |optin|
   optin.sender    # => { 'id' => '1008372609250235' }
@@ -23,18 +25,6 @@ Bot.on :optin do |optin|
   byebug
 end
 
-# Bot.on :postback do |postback|
-#   postback.sender    # => { 'id' => '1008372609250235' }
-#   postback.recipient # => { 'id' => '2015573629214912' }
-#   postback.sent_at   # => 2016-04-22 21:30:36 +0200
-#   postback.payload   # => 'EXTERMINATE'
-#   ActivityController.new(postback.sender, postback.recipient)
-#   case postback.payload
-#   when 'EXTERMINATE'
-#     @activity_controller.exterminate()
-#   end
-# end
-
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
 
@@ -44,141 +34,11 @@ Bot.on :message do |message|
 
   case message.text
   when /hello/i
-    @restaurant_controller.hello(message)
-  when /meal/i
-    elements = []
-    4.times do |i|
-      elements << {
-        title: "Plat #{i}",
-        image_url: 'http://www.formation-pizza-marketing.com/wp-content/uploads/2014/01/pizza-malbouffe-plat-equilibre2.jpg',
-        subtitle: "Description plat #{i}\nOrder and:",
-        buttons: [
-          {
-            type: 'postback',
-            title: 'Pay',
-            payload: "MEAL_#{i}"
-          },
-          {
-            type: 'postback',
-            title: 'Menu',
-            payload: "MEAL_#{i}"
-          },
-          {
-            type: 'postback',
-            title: 'Desserts',
-            payload: "MEAL_#{i}"
-          }
-        ]
-      }
-    end
-    message.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'generic',
-          elements: elements
-        }
-      }
-    )
+    @page_controller.hello(message)
   when /menu/i
-    message.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'list',
-          elements: [
-            {
-              title: "L'évidence café",
-              image_url: "https://fcatuhe.github.io/lewagon/images/lewagon.png",
-              subtitle: "Carte du jour",
-              default_action: {
-                type: "web_url",
-                url: "https://yvon.herokuapp.com/",
-                messenger_extensions: true,
-                webview_height_ratio: "tall",
-                fallback_url: "https://yvon.herokuapp.com/"
-              }
-              # buttons: [
-              #   {
-              #       title: "View",
-              #       type: "web_url",
-              #       url: "https://fcatuhe.github.io/lewagon/",
-              #       messenger_extensions: true,
-              #       webview_height_ratio: "tall",
-              #       fallback_url: "https://fcatuhe.github.io/lewagon/"
-              #   }
-              # ]
-            },
-            {
-              title: "Entrées",
-              image_url: "https://fcatuhe.github.io/lewagon/images/lewagon.png",
-              subtitle: "100% mise en appétit",
-              default_action: {
-                type: "web_url",
-                url: "https://yvon.herokuapp.com/",
-                messenger_extensions: true,
-                webview_height_ratio: "tall",
-                fallback_url: "https://yvon.herokuapp.com/"
-              },
-              buttons: [
-                {
-                    title: "Commander",
-                    type: "web_url",
-                    url: "https://yvon.herokuapp.com/",
-                    messenger_extensions: true,
-                    webview_height_ratio: "tall",
-                    fallback_url: "https://yvon.herokuapp.com/"
-                }
-              ]
-            },
-            {
-              title: "Plats",
-              image_url: "https://fcatuhe.github.io/lewagon/images/lewagon.png",
-              subtitle: "100% local",
-              default_action: {
-                type: "web_url",
-                url: "https://yvon.herokuapp.com/",
-                messenger_extensions: true,
-                webview_height_ratio: "tall",
-                fallback_url: "https://yvon.herokuapp.com/"
-              },
-              buttons: [
-                {
-                    title: "Commander",
-                    type: "web_url",
-                    url: "https://yvon.herokuapp.com/",
-                    messenger_extensions: true,
-                    webview_height_ratio: "tall",
-                    fallback_url: "https://yvon.herokuapp.com/"
-                }
-              ]
-            },
-            {
-              title: "Desserts",
-              image_url: "https://fcatuhe.github.io/lewagon/images/lewagon.png",
-              subtitle: "100% gourmandise",
-              default_action: {
-                type: "web_url",
-                url: "https://yvon.herokuapp.com/",
-                messenger_extensions: true,
-                webview_height_ratio: "tall",
-                fallback_url: "https://yvon.herokuapp.com/"
-              },
-              buttons: [
-                {
-                    title: "Commander",
-                    type: "web_url",
-                    url: "https://yvon.herokuapp.com/",
-                    messenger_extensions: true,
-                    webview_height_ratio: "tall",
-                    fallback_url: "https://yvon.herokuapp.com/"
-                }
-              ]
-            }
-          ]
-        }
-      }
-    )
+    @meal_controller.menu(message)
+  when /meal/i
+    @meal_controller.index(message)
   else
     if message.text
       message.reply(
@@ -190,13 +50,15 @@ end
 
 Bot.on :postback do |postback|
   case postback.payload
-  when /MEAL_(?<id>\d+)/
+  when /restaurant_(?<id>\d+)/
+    @meal_controller.menu(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
+  when /more_restaurant_(?<id>\d+)/
+    @meal_controller.menu_more(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
+  when /category_(?<id>\d+)/
+    @meal_controller.index(postback, category_id: $LAST_MATCH_INFO['id'].to_i)
+  when /meal_(?<id>\d+)/
     text = "Meal #{$LAST_MATCH_INFO['id']} added to order"
   end
-
-  postback.reply(
-    text: text
-  )
 end
 
 Bot.on :delivery do |delivery|
