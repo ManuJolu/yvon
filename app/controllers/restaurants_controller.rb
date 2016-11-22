@@ -14,7 +14,8 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = current_user.restaurants.new(restaurant_params)
-    authorize @restaurant # pundit approval
+    # pundit approval
+    # authorize @restaurant
     # @restaurant = Restaurant.new(restaurant_params)
     # @restaurant.user = current_user
     if @restaurant.save

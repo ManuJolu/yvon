@@ -1,0 +1,10 @@
+
+<% @restaurants.each do |restaurant| %>
+<%= restaurant.name %><br>
+<%= restaurant.address %><br>
+<%= restaurant.category %><br>
+<%= restaurant.description %><br>
+<%= restaurant.user.first_name %><br>
+<%= cl_image_tag restaurant.photo.path %>
+<%= print "-" * 50 %>
+<% end %>

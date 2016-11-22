@@ -1,0 +1,13 @@
+<div class="results">
+  <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url(<%= cl_image_tag @restaurant.photo.path( height: 300, width: 400, crop: :fill) %>)>
+    <div class="card-category"><%= restaurant.name %><br><%= restaurant.address %></div>
+    <div class="card-description">
+      <h2><%= restaurant.name %></h2>
+      <p><%= "#{restaurant.description.first(50)}..." if restaurant.try(:description) %></p>
+    </div>
+    <% avatar_url = restaurant.user.facebook_picture_url || "http://placehold.it/30x30"  %>
+    <%= image_tag avatar_url, class: 'card-user avatar' %>
+    <%= link_to restaurant.name, restaurant, class: 'card-link' %>
+  </div>
+</div>
+
