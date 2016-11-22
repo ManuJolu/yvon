@@ -1,0 +1,10 @@
+<%= simple_form_for [@restaurant, @meal] do |f| %>
+  <%= f.association :restaurant, as: :hidden %>
+  <%= f.input :name, label: "Meal's name", error: "Meals's name is mandatory, please specify one" %>
+  <%= f.input :category, collection: Meal.categories.map {|k, v| [k, k]} %>
+  <%= f.input :price %>
+  <%= f.input :description %>
+  <%= f.input :tax, collection: Meal.taxes.map {|k, v| [k, k]} %>
+  <%= f.input :photo, as: :attachinary %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>

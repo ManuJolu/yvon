@@ -2,19 +2,51 @@ require 'facebook/messenger'
 
 include Facebook::Messenger
 
+Bot.on :optin do |optin|
+  optin.sender    # => { 'id' => '1008372609250235' }
+  optin.recipient # => { 'id' => '2015573629214912' }
+  optin.sent_at   # => 2016-04-22 21:30:36 +0200
+  optin.ref       # => 'CONTACT_SKYNET'
+
+  optin.reply(
+    text: "Welcome!\nMy name is Yvon, where can I help you find your restaurant?",
+    quick_replies: [
+      {
+        content_type: 'location'
+      }
+    ]
+  )
+
+
+
+  user_data = RestClient.get("https://graph.facebook.com/v2.6/#{optin.sender}?access_token=#{ENV['ACCESS_TOKEN']}")
+  byebug
+end
+
+# Bot.on :postback do |postback|
+#   postback.sender    # => { 'id' => '1008372609250235' }
+#   postback.recipient # => { 'id' => '2015573629214912' }
+#   postback.sent_at   # => 2016-04-22 21:30:36 +0200
+#   postback.payload   # => 'EXTERMINATE'
+#   ActivityController.new(postback.sender, postback.recipient)
+#   case postback.payload
+#   when 'EXTERMINATE'
+#     @activity_controller.exterminate()
+#   end
+# end
+
+@restaurants_controller = RestaurantsController.new
+
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
 
+  if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
+    @restaurants_controller.index(message)
+  end
+
   case message.text
   when /hello/i
-    message.reply(
-      text: 'Where are you?',
-      quick_replies: [
-        {
-          content_type: 'location'
-        }
-      ]
-    )
+    @restaurants_controller.hello(message)
   when /meal/i
     elements = []
     4.times do |i|
@@ -63,10 +95,10 @@ Bot.on :message do |message|
               subtitle: "Carte du jour",
               default_action: {
                 type: "web_url",
-                url: "https://fcatuhe.github.io/lewagon/",
+                url: "https://yvon.herokuapp.com/",
                 messenger_extensions: true,
                 webview_height_ratio: "tall",
-                fallback_url: "https://fcatuhe.github.io/profile/"
+                fallback_url: "https://yvon.herokuapp.com/"
               }
               # buttons: [
               #   {
@@ -85,19 +117,19 @@ Bot.on :message do |message|
               subtitle: "100% mise en appétit",
               default_action: {
                 type: "web_url",
-                url: "https://fcatuhe.github.io/lewagon/",
+                url: "https://yvon.herokuapp.com/",
                 messenger_extensions: true,
                 webview_height_ratio: "tall",
-                fallback_url: "https://fcatuhe.github.io/lewagon/"
+                fallback_url: "https://yvon.herokuapp.com/"
               },
               buttons: [
                 {
                     title: "Commander",
                     type: "web_url",
-                    url: "https://fcatuhe.github.io/lewagon/",
+                    url: "https://yvon.herokuapp.com/",
                     messenger_extensions: true,
                     webview_height_ratio: "tall",
-                    fallback_url: "https://fcatuhe.github.io/lewagon/"
+                    fallback_url: "https://yvon.herokuapp.com/"
                 }
               ]
             },
@@ -107,19 +139,19 @@ Bot.on :message do |message|
               subtitle: "100% local",
               default_action: {
                 type: "web_url",
-                url: "https://fcatuhe.github.io/lewagon/",
+                url: "https://yvon.herokuapp.com/",
                 messenger_extensions: true,
                 webview_height_ratio: "tall",
-                fallback_url: "https://fcatuhe.github.io/lewagon/"
+                fallback_url: "https://yvon.herokuapp.com/"
               },
               buttons: [
                 {
                     title: "Commander",
                     type: "web_url",
-                    url: "https://fcatuhe.github.io/lewagon/",
+                    url: "https://yvon.herokuapp.com/",
                     messenger_extensions: true,
                     webview_height_ratio: "tall",
-                    fallback_url: "https://fcatuhe.github.io/lewagon/"
+                    fallback_url: "https://yvon.herokuapp.com/"
                 }
               ]
             },
@@ -129,19 +161,19 @@ Bot.on :message do |message|
               subtitle: "100% gourmandise",
               default_action: {
                 type: "web_url",
-                url: "https://fcatuhe.github.io/lewagon/",
+                url: "https://yvon.herokuapp.com/",
                 messenger_extensions: true,
                 webview_height_ratio: "tall",
-                fallback_url: "https://fcatuhe.github.io/lewagon/"
+                fallback_url: "https://yvon.herokuapp.com/"
               },
               buttons: [
                 {
                     title: "Commander",
                     type: "web_url",
-                    url: "https://fcatuhe.github.io/lewagon/",
+                    url: "https://yvon.herokuapp.com/",
                     messenger_extensions: true,
                     webview_height_ratio: "tall",
-                    fallback_url: "https://fcatuhe.github.io/lewagon/"
+                    fallback_url: "https://yvon.herokuapp.com/"
                 }
               ]
             }
@@ -150,19 +182,9 @@ Bot.on :message do |message|
       }
     )
   else
-    if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
-      lat = message.attachments[0]['payload']['coordinates']['lat']
-      lng = message.attachments[0]['payload']['coordinates']['long']
-      message.reply(
-        text: "Your coordinates: #{lat}, #{lng}"
-      )
-    elsif message.text
+    if message.text
       message.reply(
         text: "Did you say '#{message.text}'?"
-      )
-    else
-      message.reply(
-        text: "Did not understand"
       )
     end
   end
@@ -182,41 +204,3 @@ end
 Bot.on :delivery do |delivery|
   puts "Delivered message(s) #{delivery.ids}"
 end
-
-# Bot.on :postback do |postback|
-#   postback.sender    # => { 'id' => '1008372609250235' }
-#   postback.recipient # => { 'id' => '2015573629214912' }
-#   postback.sent_at   # => 2016-04-22 21:30:36 +0200
-#   postback.payload   # => 'EXTERMINATE'
-#   ActivityController.new(postback.sender, postback.recipient)
-#   case postback.payload
-#   when 'EXTERMINATE'
-#     @activity_controller.exterminate()
-#   end
-# end
-# # activity_controller.rb
-# class ActivityController
-#   def initialize(sender_id, recipient, sent_at, payload)
-#     @view = ActivityView
-#     @sender = sender
-#     # etc.
-#   end
-#   def exterminate
-#     @user = User.find_by(sender_id: sender_id)
-#     @user.events.destroy_all
-#     @view.confirm_exterminate
-#   end
-# end
-# class ActivityView
-#   def confirm_exterminate
-#     Bot.deliver(
-#       recipient: {
-#         id: '45123'
-#       },
-#       message: {
-#         text: 'All your events have been exterminated'
-#       },
-#       access_token: ENV['ACCESS_TOKEN']
-#     )
-#   end
-# end

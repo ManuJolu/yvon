@@ -14,6 +14,7 @@ gem 'facebook-messenger'
 gem 'geocoder'
 gem 'pundit'
 gem 'cloudinary', '1.1.0'
+gem 'rest-client'
 
 gem 'sass-rails'
 gem 'jquery-rails'
