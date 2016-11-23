@@ -4,11 +4,7 @@ class MealController
   end
 
   def menu(postback, params = {})
-    if params[:restaurant_id].present?
-      restaurant = Restaurant.find(params[:restaurant_id])
-    elsif params[:meal_id].present?
-      restaurant = Meal.find(params[:meal_id]).restaurant
-    end
+    restaurant = Restaurant.find(params[:restaurant_id])
     @view.menu(postback, restaurant)
   end
 
@@ -20,6 +16,7 @@ class MealController
   def index(postback, params = {})
     restaurant = Restaurant.find(params[:restaurant_id])
     meals = restaurant.meals.where(category: params[:category])
-    @view.index(postback, meals)
+    next_category = Meal.categories.key(Meal.categories[params[:category]] + 1)
+    @view.index(postback, meals, next_category: next_category)
   end
 end
