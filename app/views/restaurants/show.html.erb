@@ -1,8 +1,31 @@
+<div class="tabs">
+  <a class="tab active" data-target="#orders">
+    <h3>Orders</h3>
+  </a>
+  <a class="tab" data-target="#meals">
+    <h3>Meals</h3>
+  </a>
+  <a class="tab" data-target="#dashboard">
+    <h3>Dashboard</h3>
+  </a>
+  <a class="tab" data-target="#restaurant">
+    <h3>Edit my restaurant</h3>
+  </a>
+</div>
 
-  <div class="col-xs-12 col-sm-6">
-    <%= render 'restaurant_card', restaurant: @restaurant %>
-  </div>
 
-<br>
+<div class="tab-content" id="orders">
+</div>
 
+<div class="tab-content" id="meals">
 
+  <%= render 'meals/new' %>
+  <%= render 'meals/show' %>
+
+</div>
+
+<div class="tab-content" id="dashboard">
+</div>
+
+<div class="tab-content" id="restaurant">
+</div>
