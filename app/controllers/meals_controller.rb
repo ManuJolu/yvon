@@ -1,9 +1,9 @@
 class MealsController < ApplicationController
   before_action :set_meal, only: [:show, :edit, :update]
-  before_action :find_restaurant, only: [ :new, :create, :updat ]
+  before_action :find_restaurant, only: [ :index, :new, :create, :update ]
 
   def index
-    @meals = Meals.all
+    @meals = @restaurant.meals.all
   end
 
   def show
