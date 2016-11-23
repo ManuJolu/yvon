@@ -7,7 +7,7 @@ class MealView
     elements = [
       {
         title: "#{restaurant.name}",
-        image_url: "#{cl_image_path restaurant.photo.path, width: 382, height: 191, crop: :fill}",
+        image_url: "#{cl_image_path restaurant.photo.path, width: 382, height: 200, crop: :fill}",
         subtitle: "Carte du jour",
         default_action: {
           type: "web_url",
@@ -47,7 +47,7 @@ class MealView
           {
               title: "Open",
               type: "postback",
-              payload: "category_1"
+              payload: "restaurant_#{restaurant.id}_category_main_course"
           }
         ]
       },
@@ -59,7 +59,7 @@ class MealView
           {
               title: "Open",
               type: "postback",
-              payload: "category_2"
+              payload: "restaurant_#{restaurant.id}_category_dessert"
           }
         ]
       }
@@ -90,7 +90,7 @@ class MealView
     meals = meals.map do |meal|
       {
         title: "#{meal.name}",
-        image_url: "#{cl_image_path meal.photo.path, width: 382, height: 191, crop: :fill}",
+        image_url: "#{cl_image_path meal.photo.path, width: 382, height: 200, crop: :fill}",
         subtitle: "#{meal.description}\n#{meal.price.fdiv(100)} €",
         buttons: [
           {

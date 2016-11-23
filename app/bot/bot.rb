@@ -6,24 +6,24 @@ include Facebook::Messenger
 @restaurant_controller = RestaurantController.new
 @meal_controller = MealController.new
 
-Bot.on :optin do |optin|
-  optin.sender    # => { 'id' => '1008372609250235' }
-  optin.recipient # => { 'id' => '2015573629214912' }
-  optin.sent_at   # => 2016-04-22 21:30:36 +0200
-  optin.ref       # => 'CONTACT_SKYNET'
+# Bot.on :optin do |optin|
+#   optin.sender    # => { 'id' => '1008372609250235' }
+#   optin.recipient # => { 'id' => '2015573629214912' }
+#   optin.sent_at   # => 2016-04-22 21:30:36 +0200
+#   optin.ref       # => 'CONTACT_SKYNET'
 
-  optin.reply(
-    text: "Welcome! My name is Yvon, where can I help you find your restaurant?",
-    quick_replies: [
-      {
-        content_type: 'location'
-      }
-    ]
-  )
+#   optin.reply(
+#     text: "Welcome! My name is Yvon, where can I help you find your restaurant?",
+#     quick_replies: [
+#       {
+#         content_type: 'location'
+#       }
+#     ]
+#   )
 
-  user_data = RestClient.get("https://graph.facebook.com/v2.6/#{optin.sender}?access_token=#{ENV['ACCESS_TOKEN']}")
-  byebug
-end
+#   user_data = RestClient.get("https://graph.facebook.com/v2.6/#{optin.sender}?access_token=#{ENV['ACCESS_TOKEN']}")
+#   byebug
+# end
 
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
