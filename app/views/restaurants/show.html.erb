@@ -1,31 +1,55 @@
-<div class="tabs">
-  <a class="tab active" data-target="#orders">
-    <h3>Orders</h3>
-  </a>
-  <a class="tab" data-target="#meals">
-    <h3>Meals</h3>
-  </a>
-  <a class="tab" data-target="#dashboard">
-    <h3>Dashboard</h3>
-  </a>
-  <a class="tab" data-target="#restaurant">
-    <h3>Edit my restaurant</h3>
-  </a>
+<div class="container">
+  <div class="tabs">
+    <a class="tab active" data-target="#orders">
+      <h3>Orders</h3>
+    </a>
+    <a class="tab" data-target="#meals">
+      <h3>Meals</h3>
+    </a>
+    <a class="tab" data-target="#dashboard">
+      <h3>Dashboard</h3>
+    </a>
+    <a class="tab" data-target="#restaurant">
+      <h3>Edit my restaurant</h3>
+    </a>
+  </div>
+
+
+  <div class="tab-content" id="orders">
+  </div>
+
+  <div class="tab-content" id="meals">
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMeal">
+      Add a meal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addMeal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add a meal</h4>
+          </div>
+          <div class="modal-body">
+            <%= render 'meals/new' %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="display-meals">
+      <%= render 'meals/show' %>
+    </div>
+  </div>
+
+  <div class="tab-content" id="dashboard">
+  </div>
 </div>
 
-
-<div class="tab-content" id="orders">
-</div>
-
-<div class="tab-content" id="meals">
-
-  <%= render 'meals/new' %>
-  <%= render 'meals/show' %>
-
-</div>
-
-<div class="tab-content" id="dashboard">
-</div>
-
-<div class="tab-content" id="restaurant">
-</div>
+  <div class="tab-content" id="restaurant">
+  </div>
