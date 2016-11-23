@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :restaurants, only: [:index, :show, :new, :create, :edit, :update] do
     resources :meals
+    resources :orders, only: [:index, :show, :edit, :update]
   end
 
 end
