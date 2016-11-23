@@ -4,7 +4,11 @@ class MealController
   end
 
   def menu(postback, params = {})
-    restaurant = Restaurant.find(params[:restaurant_id])
+    if params[:restaurant_id].present?
+      restaurant = Restaurant.find(params[:restaurant_id])
+    elsif params[:meal_id].present?
+      restaurant = Meal.find(params[:meal_id]).restaurant
+    end
     @view.menu(postback, restaurant)
   end
 
@@ -14,31 +18,8 @@ class MealController
   end
 
   def index(postback, params = {})
-    elements = []
-    4.times do |i|
-      elements << {
-        title: "Plat #{i}",
-        image_url: 'http://www.formation-pizza-marketing.com/wp-content/uploads/2014/01/pizza-malbouffe-plat-equilibre2.jpg',
-        subtitle: "Description plat #{i}\nOrder and:",
-        buttons: [
-          {
-            type: 'postback',
-            title: 'Pay',
-            payload: "meal_#{i}"
-          },
-          {
-            type: 'postback',
-            title: 'Menu',
-            payload: "meal_#{i}"
-          },
-          {
-            type: 'postback',
-            title: 'Desserts',
-            payload: "meal_#{i}"
-          }
-        ]
-      }
-    end
-    @view.index(postback, elements)
+    restaurant = Restaurant.find(params[:restaurant_id])
+    meals = restaurant.meals.where(category: params[:category])
+    @view.index(postback, meals)
   end
 end

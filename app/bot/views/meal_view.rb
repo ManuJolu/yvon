@@ -7,7 +7,7 @@ class MealView
     elements = [
       {
         title: "#{restaurant.name}",
-        image_url: "#{cl_image_path restaurant.photo.path}",
+        image_url: "#{cl_image_path restaurant.photo.path, width: 382, height: 191, crop: :fill}",
         subtitle: "Carte du jour",
         default_action: {
           type: "web_url",
@@ -35,7 +35,7 @@ class MealView
           {
               title: "Open",
               type: "postback",
-              payload: "category_0"
+              payload: "restaurant_#{restaurant.id}_category_starter"
           }
         ]
       },
@@ -86,13 +86,38 @@ class MealView
   def menu_more(postback, restaurant)
   end
 
-  def index(postback, elements)
+  def index(postback, meals)
+    meals = meals.map do |meal|
+      {
+        title: "#{meal.name}",
+        image_url: "#{cl_image_path meal.photo.path, width: 382, height: 191, crop: :fill}",
+        subtitle: "#{meal.description}\n#{meal.price.fdiv(100)} €",
+        buttons: [
+          {
+            type: 'postback',
+            title: 'Pay',
+            payload: "meal_#{meal.id}_pay"
+          },
+          {
+            type: 'postback',
+            title: 'Menu',
+            payload: "meal_#{meal.id}_menu"
+          },
+          {
+            type: 'postback',
+            title: 'Desserts',
+            payload: "meal_#{meal.id}_next"
+          }
+        ]
+      }
+    end
+
     postback.reply(
       attachment: {
         type: 'template',
         payload: {
           template_type: 'generic',
-          elements: elements
+          elements: meals
         }
       }
     )
