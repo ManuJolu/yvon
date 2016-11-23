@@ -1,0 +1,11 @@
+<h1>Pending orders</h1>
+
+<% @orders.each do |order| %>
+  <p>User: <%=  order.user.name %></p>
+  <p>Paid at: <%=  order.start_at %></p>
+  <p>Delivered at: <%=  order.finish_at %></p>
+  <% order.ordered_meals.each do |ordered_meals| %>
+    <%=  ordered_meals.meal.name %>
+    <%=  ordered_meals.meal.price %>
+  <% end %>
+<% end %>
