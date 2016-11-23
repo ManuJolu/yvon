@@ -1,0 +1,19 @@
+<div class="container">
+  <% @restaurant.meals.each do |meal| %>
+
+
+    <div class="row">
+      <div class="col-md-3">
+        <p><%= meal.category %></p>
+      </div>
+      <div class="col-md-3">
+        <p><%= meal.name %></p>
+      </div>
+      <div class="col-md-3">
+        <p><%= meal.price %></p>
+      </div>
+    </div>
+
+
+  <% end %>
+</div>
