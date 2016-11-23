@@ -3,10 +3,6 @@ class RestaurantController
     @view = RestaurantView.new
   end
 
-  def hello(message)
-    @view.hello(message)
-  end
-
   def index(message)
     lat = message.attachments[0]['payload']['coordinates']['lat']
     lng = message.attachments[0]['payload']['coordinates']['long']

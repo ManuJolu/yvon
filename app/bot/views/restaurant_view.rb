@@ -1,26 +1,19 @@
-class RestaurantView
-  def hello(message)
-    message.reply(
-      text: 'Hello! Where can I help you find your restaurant?',
-      quick_replies: [
-        {
-          content_type: 'location'
-        }
-      ]
-    )
-  end
+require 'cloudinary'
 
+include CloudinaryHelper
+
+class RestaurantView
   def index(message, restaurants)
     if restaurants.present?
       elements = restaurants.map do |restaurant|
         {
           title: "#{restaurant.name}",
-          # image_url: image_path 'logo.png',
+          image_url: "#{cl_image_path restaurant.photo.path}",
           subtitle: "#{restaurant.description}",
           buttons: [
             {
               type: 'postback',
-              title: 'Go',
+              title: 'Enter',
               payload: "restaurant_#{restaurant.id}"
             }
           ]
@@ -37,13 +30,12 @@ class RestaurantView
       )
     else
       message.reply(
-        text: "Sorry, I found no restaurants near you..."
+        text: "Sorry, I found no restaurants near you...",
         quick_replies: [
-        {
-          content_type: 'location'
-        }
-      ]
-
+          {
+            content_type: 'location'
+          }
+        ]
       )
     end
   end
