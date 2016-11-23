@@ -8,11 +8,11 @@ class MealView
       {
         title: "#{restaurant.name}",
         image_url: "#{cl_image_path restaurant.photo.path, width: 382, height: 200, crop: :fill}",
-        subtitle: "Carte du jour",
-        default_action: {
-          type: "web_url",
-          url: "#{restaurant.facebook_url}"
-        }
+        subtitle: "Today's specials"
+        # default_action: {
+        #   type: "web_url",
+        #   url: "#{restaurant.facebook_url}"
+        # }
       },
       {
         title: "Starter",
