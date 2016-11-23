@@ -35,10 +35,6 @@ Bot.on :message do |message|
   case message.text
   when /hello/i
     @page_controller.hello(message)
-  when /menu/i
-    @meal_controller.menu(message)
-  when /meal/i
-    @meal_controller.index(message)
   else
     if message.text
       message.reply(
@@ -50,14 +46,14 @@ end
 
 Bot.on :postback do |postback|
   case postback.payload
-  when /restaurant_(?<id>\d+)/
+  when /\Arestaurant_(?<id>\d+)\z/
     @meal_controller.menu(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
-  when /more_restaurant_(?<id>\d+)/
+  when /\Amore_restaurant_(?<id>\d+)\z/
     @meal_controller.menu_more(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
-  when /category_(?<id>\d+)/
-    @meal_controller.index(postback, category_id: $LAST_MATCH_INFO['id'].to_i)
-  when /meal_(?<id>\d+)/
-    text = "Meal #{$LAST_MATCH_INFO['id']} added to order"
+  when /\Arestaurant_(?<restaurant_id>\d+)_category_(?<category>\w+)\z/
+    @meal_controller.index(postback, restaurant_id: $LAST_MATCH_INFO['restaurant_id'].to_i, category: $LAST_MATCH_INFO['category'])
+  when /\Ameal_(?<id>\d+)/
+    @meal_controller.menu(postback, meal_id: $LAST_MATCH_INFO['id'].to_i)
   end
 end
 
