@@ -15,7 +15,6 @@ class OrderController
       ordered_meal = order.ordered_meals.new
       ordered_meal.meal = Meal.find(meal['meal_id'])
     end
-    byebug
     order.save
 
     @view.cart(user)
