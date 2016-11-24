@@ -3,7 +3,7 @@ class PageController
     @view = PageView.new
   end
 
-  def hello(message)
-    @view.hello(message)
+  def hello(message, user)
+    @view.hello(message, user)
   end
 end

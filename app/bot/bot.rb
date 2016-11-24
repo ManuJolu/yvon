@@ -5,6 +5,7 @@ include Facebook::Messenger
 @page_controller = PageController.new
 @restaurant_controller = RestaurantController.new
 @meal_controller = MealController.new
+@order_controller = OrderController.new
 
 # Bot.on :optin do |optin|
 #   optin.sender    # => { 'id' => '1008372609250235' }
@@ -57,7 +58,13 @@ Bot.on :message do |message|
 
   case message.text
   when /hello/i
-    @page_controller.hello(message)
+    unless user.session.try(:[], 'hello_at') && user.session['hello_at'] > (Time.now - 30.minutes)
+      user.session = {
+        'hello_at' => Time.now
+      }
+      user.save
+    end
+    @page_controller.hello(message, user)
   else
     if message.text
       message.reply(
@@ -68,8 +75,11 @@ Bot.on :message do |message|
 end
 
 Bot.on :postback do |postback|
+  user = User.find_by(messenger_id: postback.sender['id'])
   case postback.payload
   when /\Arestaurant_(?<id>\d+)\z/
+    (user.session['order'] ||= {})['restaurant_id'] = $LAST_MATCH_INFO['id'].to_i
+    user.save
     @meal_controller.menu(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
   when /\Amore_restaurant_(?<id>\d+)\z/
     @meal_controller.menu_more(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
@@ -78,6 +88,7 @@ Bot.on :postback do |postback|
   when /\Ameal_(?<id>\d+)_(?<action>\w+)\z/
     meal = Meal.find($LAST_MATCH_INFO['id'])
     action = $LAST_MATCH_INFO['action']
+    @order_controller.add_meal(user, $LAST_MATCH_INFO['id'])
     case action
     when 'menu'
       @meal_controller.menu(postback, restaurant_id: meal.restaurant.id)
@@ -85,7 +96,10 @@ Bot.on :postback do |postback|
       category = Meal.categories.key(Meal.categories[meal.category] + 1)
       @meal_controller.index(postback, restaurant_id: meal.restaurant.id, category: category)
     when 'pay'
+      @order_controller.cart(user)
     end
+  when /\Apay\z/
+    @order_controller.cart(user)
   end
 end
 
