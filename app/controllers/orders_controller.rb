@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:ready_at, :delete_at)
+    params.require(:order).permit(:ready_at, :delivered_at)
   end
 
 end

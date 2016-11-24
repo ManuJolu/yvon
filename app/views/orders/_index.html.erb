@@ -55,10 +55,13 @@
           <%= order.ordered_meals.sum { |om| om.meal.price } %>€
         </td>
         <td><%= order.paid_at %></td>
-        <td><%= order.ready_at %></td>
-        <td><%= order.delivered_at %></td>
+        <td><%= order.ready_at.strftime('%-H:%M:%S') if order.ready_at %></td>
+        <td><%= order.delivered_at.strftime('%-H:%M:%S') if order.delivered_at %></td>
         <td>
-          <%= render 'orders/form' %>
+          <%= render 'orders/form_order_ready' %>
+        </td>
+        <td>
+          <%= render 'orders/form_order_delivered' %>
         </td>
 
       </tr>
