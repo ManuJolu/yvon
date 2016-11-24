@@ -51,7 +51,7 @@ class RestaurantView
       )
     else
       message.reply(
-        text: "Sorry, I found no restaurants near you...",
+        text: "Sorry, I found no restaurants near you... Can I help you again?",
         quick_replies: [
           {
             content_type: 'location'

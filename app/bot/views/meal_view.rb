@@ -8,7 +8,7 @@ class MealView
       {
         title: "#{restaurant.name}",
         image_url: "#{cl_image_path restaurant.photo.path, width: 382, height: 200, crop: :fill}",
-        subtitle: "Today's specials",
+        subtitle: "#{restaurant.description}",
         buttons: [
           {
               title: "Pay",
@@ -24,7 +24,7 @@ class MealView
       {
         title: "Starter",
         image_url: "#{cl_image_path(restaurant.meals.where(category: 'starter').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'starter').present?}",
-        subtitle: "#{('Daily specials: ' + restaurant.meals.where(category: 'starter').first.name) if restaurant.meals.where(category: 'starter').present?}",
+        subtitle: "#{('Daily specials:\n' + restaurant.meals.where(category: 'starter').first.name) if restaurant.meals.where(category: 'starter').present?}",
         buttons: [
           {
               title: "➥ Starter",
@@ -87,7 +87,7 @@ class MealView
         {
           title: "#{meal.name}",
           image_url: "#{cl_image_path meal.photo.path, width: 382, height: 200, crop: :fill}",
-          subtitle: "#{meal.description}\n#{format("%.2f", meal.price.fdiv(100))} €\nORDER and:",
+          subtitle: "#{meal.description}\n#{format("%.2f", meal.price.fdiv(100))} €",
           buttons: [
             {
               type: 'postback',
@@ -112,7 +112,7 @@ class MealView
         {
           title: "#{meal.name}",
           image_url: "#{cl_image_path meal.photo.path, width: 382, height: 200, crop: :fill}",
-          subtitle: "#{meal.description}\n#{meal.price.fdiv(100)} €",
+          subtitle: "#{meal.description}\n#{format("%.2f", meal.price.fdiv(100))} €",
           buttons: [
             {
               type: 'postback',
