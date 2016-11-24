@@ -31,7 +31,7 @@ print "Creating restaurants"
     address: "#{Faker::Address.city}, France",
     category: rand(0..6),
     description: Faker::Hipster.sentence,
-    photo_url: "http://res.cloudinary.com/dsc0gdltc/image/upload/v1479894819/e0umkfjymjlzhaytwfaw.jpg"
+    photo_url: "http://res.cloudinary.com/dsc0gdltc/image/upload/v1479919370/lowgdzolykz7vtm1kuby.jpg"
   })
   restaurant.user = User.all[rand(0..4)]
   restaurant.save
@@ -44,7 +44,7 @@ print "Creating meals"
     name: Faker::GameOfThrones.city,
     price: rand(3..90),
     category: rand(0..3),
-    photo_url: "http://res.cloudinary.com/dsc0gdltc/image/upload/v1479894819/e0umkfjymjlzhaytwfaw.jpg"
+    photo_url: "http://res.cloudinary.com/dsc0gdltc/image/upload/v1479919370/lowgdzolykz7vtm1kuby.jpg"
 })
   meal.restaurant = Restaurant.all[rand(0..9)]
   meal.save
