@@ -28,6 +28,17 @@ include Facebook::Messenger
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
 
+  # handle user authentification
+  # if messenger id
+    # instanciante
+  # elsif fb photo id
+    # instanciante
+    # save messenger id
+  # else
+    # user_data = RestClient.get("https://graph.facebook.com/v2.6/#{message.sender['id']}?access_token=#{ENV['ACCESS_TOKEN']}")
+    # create user
+  # end
+
   if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
     @restaurant_controller.index(message)
   end

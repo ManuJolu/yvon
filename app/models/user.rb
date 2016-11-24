@@ -14,12 +14,16 @@ class User < ApplicationRecord
     user_params.merge! auth.info.slice(:email, :first_name, :last_name)
     user_params[:facebook_picture_url] = auth.info.image
     user_params[:token] = auth.credentials.token
-    user_params[:token_expiry] = Time.at(auth.credentials.expires_at)
+    user_params[:token_expiry] = Time.at(auth.credentials.expires_at) rescue Time.now + 30.days
 
     user = User.where(provider: auth.provider, uid: auth.uid).first
     user ||= User.where(email: auth.info.email).first # User did a regular sign up in the past.
-    if user
+    if user # if exiting from fb
       user.update(user_params)
+    # elsif fb photo id => exist from messenger
+      # instanciate user from messenger id with fb photo id
+      # set facebook id to this user
+      # save
     else
       user = User.new(user_params)
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
