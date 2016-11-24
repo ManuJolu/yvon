@@ -26,11 +26,15 @@
 
 }
 .item:nth-child(1) {
-  background-color: red
+
+
 }
 
 .item:nth-child(2) {
-  background-color: blue
+  background-image: url("http://res.cloudinary.com/da2krghvd/image/upload/c_crop,h_200,w_400/v1479829832/texture_footbar1_ehqghf.jpg");
+h3{
+  color: white
+}
 }
 
 .item:nth-child(3) {
@@ -38,13 +42,18 @@
 }
 
 .item:nth-child(4) {
-  background-color: yellow
+  background-image: url("http://res.cloudinary.com/da2krghvd/image/upload/c_crop,h_200,w_400/v1479829832/texture_footbar1_ehqghf.jpg");
+h3{
+  color: white
 }
-
+}
 .item:nth-child(5) {
   background-color: purple
 }
 
 .item:nth-child(6) {
-  background-color: pink
+  background-image: url("http://res.cloudinary.com/da2krghvd/image/upload/c_crop,h_200,w_400/v1479829832/texture_footbar1_ehqghf.jpg");
+h3{
+  color: white
+}
 }
