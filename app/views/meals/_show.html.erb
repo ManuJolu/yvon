@@ -1,5 +1,5 @@
 <div class="container">
-  <% @restaurant.meals.each do |meal| %>
+  <% @restaurant.meals.select { |meal| meal.persisted? }.each do |meal| %>
 
 
     <div class="row">
@@ -11,6 +11,11 @@
       </div>
       <div class="col-md-3">
         <p><%= meal.price %></p>
+      </div>
+      <div class="col-md-3">
+        <%= link_to edit_restaurant_meal_path(meal) do %>
+          <i class="fa fa-pencil" ></i>
+        <% end %>
       </div>
     </div>
 

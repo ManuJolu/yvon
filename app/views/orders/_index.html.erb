@@ -1,11 +1,75 @@
 <h1>Pending orders</h1>
 
-<% @orders.each do |order| %>
-  User: <%=  order.user.first_name %><br>
-  Paid at: <%=  order.start_at %><br>
-  Delivered at: <%=  order.finish_at %><br>
-  <% order.ordered_meals.each do |ordered_meals| %>
-    Meal name :<%=  ordered_meals.meal.name %><br>
-    Meal price: <%=  ordered_meals.meal.price %><br>
-  <% end %>
-<% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Drinks</th>
+      <th>Starters</th>
+      <th>Main Courses</th>
+      <th>Desserts</th>
+      <th>Total Price</th>
+      <th>Paid at</th>
+      <th>Ready at</th>
+      <th>Delivered at</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <% @order = order %>
+      <tr>
+        <td>
+          <%= order.user.first_name.capitalize %> <%=  order.user.last_name.capitalize %>
+        </td>
+        <td>
+          <% order.ordered_meals.each do |ordered_meal| %>
+            <% if ordered_meal.meal.category == "drink" %>
+              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% order.ordered_meals.each do |ordered_meal| %>
+            <% if ordered_meal.meal.category == "starter" %>
+              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% order.ordered_meals.each do |ordered_meal| %>
+            <% if ordered_meal.meal.category == "main_course" %>
+              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% order.ordered_meals.each do |ordered_meal| %>
+            <% if ordered_meal.meal.category == "dessert" %>
+              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= order.ordered_meals.sum { |om| om.meal.price } %>€
+        </td>
+        <td><%= order.paid_at %></td>
+        <td><%= order.ready_at.strftime('%-H:%M:%S') if order.ready_at %></td>
+        <td><%= order.delivered_at.strftime('%-H:%M:%S') if order.delivered_at %></td>
+        <td>
+          <%= render 'orders/form_order_ready' %>
+        </td>
+        <td>
+          <%= render 'orders/form_order_delivered' %>
+        </td>
+
+      </tr>
+    <% end %>
+
+  </tbody>
+
+
+</table>
+
+
