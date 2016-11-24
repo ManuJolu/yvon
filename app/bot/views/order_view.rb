@@ -1,4 +1,4 @@
 class OrderView
-  def cart(user)
+  def cart(order)
   end
 end
