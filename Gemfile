@@ -15,6 +15,11 @@ gem 'geocoder'
 gem 'pundit'
 gem 'cloudinary', '1.1.0'
 gem 'rest-client'
+gem "gmaps4rails"
+
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
 
 gem 'sprockets-helpers'
 gem 'sass-rails'
