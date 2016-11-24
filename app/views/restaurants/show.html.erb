@@ -19,7 +19,7 @@
     <%= render 'orders/index' %>
   </div>
 
-  <div class="tab-content" id="meals">
+  <div class="tab-content hidden" id="meals">
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMeal">
@@ -43,14 +43,17 @@
         </div>
       </div>
     </div>
+
     <div class="display-meals">
+    Meals in Your Restaurant:
       <%= render 'meals/show' %>
     </div>
+
   </div>
 
-  <div class="tab-content" id="dashboard">
+  <div class="tab-content hidden" id="dashboard">
   </div>
 </div>
 
-  <div class="tab-content" id="restaurant">
+  <div class="tab-content hidden" id="restaurant">
   </div>

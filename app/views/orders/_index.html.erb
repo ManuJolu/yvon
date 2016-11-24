@@ -1,15 +1,9 @@
 <h1>Pending orders</h1>
 
-
-
 <table class="table table-striped">
-
   <thead>
     <tr>
-      <th>
-      Cusomer
-      test
-      </th>
+      <th>Customer</th>
       <th>Drinks</th>
       <th>Starters</th>
       <th>Main Courses</th>
@@ -18,48 +12,54 @@
       <th>Paid at</th>
       <th>Ready at</th>
       <th>Delivered at</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @orders.each do |order| %>
+      <% @order = order %>
       <tr>
-        <td><%= order.user.first_name.capitalize %> <%=  order.user.last_name.capitalize %></td>
-
+        <td>
+          <%= order.user.first_name.capitalize %> <%=  order.user.last_name.capitalize %>
+        </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "drink" %>
-              <p><%= ordered_meal.meal.name %><p>
+              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "starter" %>
-              <p><%= ordered_meal.meal.name %><p>
+              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "main_course" %>
-              <p><%= ordered_meal.meal.name %><p>
+              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "dessert" %>
-              <p><%= ordered_meal.meal.name %><p>
+              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
             <% end %>
           <% end %>
         </td>
-
-
-        <td>"-"</td>
-        <td>"-"</td>
-        <td>"-"</td>
-        <td>"-"</td>
+        <td>
+          <%= order.ordered_meals.sum { |om| om.meal.price } %>€
+        </td>
+        <td><%= order.paid_at %></td>
+        <td><%= order.ready_at %></td>
+        <td><%= order.delivered_at %></td>
+        <td>
+          <%= render 'orders/form' %>
+        </td>
 
       </tr>
     <% end %>
