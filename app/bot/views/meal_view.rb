@@ -6,9 +6,9 @@ class MealView
   def menu(postback, restaurant)
     elements = [
       {
-        title: "#{restaurant.name}",
-        image_url: "#{cl_image_path restaurant.photo.path, width: 382, height: 200, crop: :fill}",
-        subtitle: "#{restaurant.description}",
+        title: restaurant.name,
+        image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),
+        subtitle: restaurant.description,
         buttons: [
           {
               title: "Pay",
@@ -23,7 +23,7 @@ class MealView
       },
       {
         title: "Starter",
-        image_url: "#{cl_image_path(restaurant.meals.where(category: 'starter').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'starter').present?}",
+        image_url: (cl_image_path(restaurant.meals.where(category: 'starter').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'starter').present?),
         subtitle: "#{('Daily specials:\n' + restaurant.meals.where(category: 'starter').first.name) if restaurant.meals.where(category: 'starter').present?}",
         buttons: [
           {
@@ -35,7 +35,7 @@ class MealView
       },
       {
         title: "Main course",
-        image_url: "#{cl_image_path(restaurant.meals.where(category: 'main_course').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'main_course').present?}",
+        image_url: (cl_image_path(restaurant.meals.where(category: 'main_course').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'main_course').present?),
         subtitle: "#{('Daily specials: ' + restaurant.meals.where(category: 'main_course').first.name) if restaurant.meals.where(category: 'main_course').present?}",
         buttons: [
           {
@@ -47,7 +47,7 @@ class MealView
       },
       {
         title: "Dessert",
-        image_url: "#{cl_image_path(restaurant.meals.where(category: 'dessert').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'dessert').present?}",
+        image_url: (cl_image_path(restaurant.meals.where(category: 'dessert').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'dessert').present?),
         subtitle: "#{('Daily specials: ' + restaurant.meals.where(category: 'dessert').first.name) if restaurant.meals.where(category: 'dessert').present?}",
         buttons: [
           {
@@ -85,8 +85,8 @@ class MealView
     if next_category
       meals = meals.map do |meal|
         {
-          title: "#{meal.name}",
-          image_url: "#{cl_image_path meal.photo.path, width: 382, height: 200, crop: :fill}",
+          title: meal.name,
+          image_url: cl_image_path(meal.photo.path, width: 382, height: 200, crop: :fill),
           subtitle: "#{meal.description}\n#{format("%.2f", meal.price.fdiv(100))} €",
           buttons: [
             {
@@ -110,8 +110,8 @@ class MealView
     else
       meals = meals.map do |meal|
         {
-          title: "#{meal.name}",
-          image_url: "#{cl_image_path meal.photo.path, width: 382, height: 200, crop: :fill}",
+          title: meal.name,
+          image_url: cl_image_path(meal.photo.path, width: 382, height: 200, crop: :fill),
           subtitle: "#{meal.description}\n#{format("%.2f", meal.price.fdiv(100))} €",
           buttons: [
             {

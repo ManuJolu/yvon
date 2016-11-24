@@ -1,4 +1,4 @@
-require 'cloudinary'
+# require 'cloudinary'
 
 include CloudinaryHelper
 
@@ -20,8 +20,8 @@ class RestaurantView
         url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 5]}%7Clabel:#{i + 1}%7C#{restaurant.address.tr(' ', '+')}"
         {
           title: "#{i + 1} - ready in #{rand(5..25)}min - #{restaurant.name}",
-          item_url: "#{restaurant.facebook_url}",
-          image_url: "#{cl_image_path restaurant.photo.path, width: 382, height: 200, crop: :fill, border: "5px_solid_rgb:#{colors[(i + 1) % 5]}"}",
+          item_url: restaurant.facebook_url,
+          image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill, border: "5px_solid_rgb:#{colors[(i + 1) % 5]}"),
           subtitle: "#{(restaurant.distance_from(coordinates)*1000).round}m heading #{Geocoder::Calculations.compass_point(restaurant.bearing_from(coordinates))}\n#{restaurant.description}",
           buttons: [
             {
