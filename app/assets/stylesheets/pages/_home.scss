@@ -3,3 +3,48 @@
   display: flex;
   flex-direction: row;
 }
+
+.carousel {
+  width: 400px;
+  height: 200px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+  perspective: 1000px;
+  transform-style: preserve-3d;
+
+}
+
+.carousel .item {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border: 2px solid black;
+  transition: transform 1s;
+
+}
+.item:nth-child(1) {
+  background-color: red
+}
+
+.item:nth-child(2) {
+  background-color: blue
+}
+
+.item:nth-child(3) {
+  background-color: green
+}
+
+.item:nth-child(4) {
+  background-color: yellow
+}
+
+.item:nth-child(5) {
+  background-color: purple
+}
+
+.item:nth-child(6) {
+  background-color: pink
+}
