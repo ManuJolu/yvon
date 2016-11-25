@@ -22,9 +22,11 @@
   <div class="tab-content hidden" id="meals">
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMeal">
-      Add a meal
-    </button>
+    <div class = text-center>
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMeal">
+        Add a meal
+      </button>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="addMeal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -45,7 +47,7 @@
     </div>
 
     <div class="display-meals">
-    Meals in Your Restaurant:
+    <h1>Meals in Your Restaurant:</h1>
       <%= render 'meals/show' %>
     </div>
 
