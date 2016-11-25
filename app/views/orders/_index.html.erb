@@ -1,23 +1,26 @@
 <h1>Pending orders</h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Customer</th>
-      <th>Drinks</th>
-      <th>Starters</th>
-      <th>Main Courses</th>
-      <th>Desserts</th>
-      <th>Total Price</th>
-      <th>Paid at</th>
-      <th>Ready at</th>
-      <th>Delivered at</th>
-      <th></th>
-    </tr>
-  </thead>
+<% if @orders.any? && @orders.select { |order| order.delivered_at.blank? }.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Drinks</th>
+        <th>Starters</th>
+        <th>Main Courses</th>
+        <th>Desserts</th>
+        <th>Total Price</th>
+        <th>Paid at</th>
+        <th>Ready at</th>
+        <th>Delivered at</th>
+      </tr>
+    </thead>
+<% else %>
+  <p> You have no pending order </p>
+<% end %>
 
   <tbody>
-    <% @orders.each do |order| %>
+    <% @orders.select { |order| order.delivered_at.blank? }.sort_by! {|order| order.id }.each do |order| %>
       <% @order = order %>
       <tr>
         <td>
@@ -26,50 +29,128 @@
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "drink" %>
-              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "starter" %>
-              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "main_course" %>
-              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "dessert" %>
-              <p><%= ordered_meal.meal.name %> - <%= ordered_meal.meal.price %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
-          <%= order.ordered_meals.sum { |om| om.meal.price } %>€
+          <%= format("%.2f", order.total_cost.fdiv(100)) %>€
         </td>
-        <td><%= order.paid_at %></td>
-        <td><%= order.ready_at.strftime('%-H:%M:%S') if order.ready_at %></td>
-        <td><%= order.delivered_at.strftime('%-H:%M:%S') if order.delivered_at %></td>
+        <td><%= order.paid_at&.strftime('%-H:%M:%S') %></td>
         <td>
-          <%= render 'orders/form_order_ready' %>
+          <% if order.ready_at == nil %>
+            <%= render 'orders/form_order_ready' %>
+          <% else %>
+            <%= order.ready_at&.strftime('%-H:%M:%S') %>
+          <% end %>
         </td>
         <td>
-          <%= render 'orders/form_order_delivered' %>
+          <% if order.ready_at != nil && order.delivered_at == nil %>
+            <%= render 'orders/form_order_delivered' %>
+          <% else %>
+            <%= order.delivered_at&.strftime('%-H:%M:%S') %>
+          <% end %>
         </td>
-
       </tr>
     <% end %>
-
   </tbody>
-
-
 </table>
 
 
+<h1>Delivered orders</h1>
+
+<% if @orders.any? && @orders.select { |order| order.delivered_at.present? }.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Drinks</th>
+        <th>Starters</th>
+        <th>Main Courses</th>
+        <th>Desserts</th>
+        <th>Total Price</th>
+        <th>Paid at</th>
+        <th>Ready at</th>
+        <th>Delivered at</th>
+      </tr>
+    </thead>
+<% else %>
+  <p> You have no delivered order </p>
+<% end %>
+  <tbody>
+    <% @orders.select { |order| order.delivered_at.present? }.sort_by! {|order| - order.id }.each do |order| %>
+      <tr>
+        <td>
+          <%= order.user.first_name.capitalize %> <%=  order.user.last_name.capitalize %>
+        </td>
+        <td>
+          <% order.ordered_meals.each do |ordered_meal| %>
+            <% if ordered_meal.meal.category == "drink" %>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% order.ordered_meals.each do |ordered_meal| %>
+            <% if ordered_meal.meal.category == "starter" %>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% order.ordered_meals.each do |ordered_meal| %>
+            <% if ordered_meal.meal.category == "main_course" %>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% order.ordered_meals.each do |ordered_meal| %>
+            <% if ordered_meal.meal.category == "dessert" %>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= format("%.2f", order.total_cost.fdiv(100)) %>€
+        </td>
+        <td><%= order.paid_at&.strftime('%-H:%M:%S') %></td>
+        <td>
+          <% if order.ready_at == nil %>
+            <%= render 'orders/form_order_ready' %>
+          <% else %>
+            <%= order.ready_at&.strftime('%-H:%M:%S') %>
+          <% end %>
+        </td>
+        <td>
+          <% if order.ready_at != nil && order.delivered_at == nil %>
+            <%= render 'orders/form_order_delivered' %>
+          <% else %>
+            <%= order.delivered_at&.strftime('%-H:%M:%S') %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
