@@ -25,37 +25,16 @@
   transition: transform 1s;
 
 }
-.item:nth-child(1) {
 
-}
 
-.item:nth-child(2) {
-  background-image: url("http://res.cloudinary.com/da2krghvd/image/upload/c_crop,h_200,w_400/v1479829832/texture_footbar1_ehqghf.jpg");
-  h3 {
-    color: white
-}
-}
-
-.item:nth-child(3) {
-  background-color: green
-}
-
-.item:nth-child(4) {
-  background-image: url("http://res.cloudinary.com/da2krghvd/image/upload/c_crop,h_200,w_400/v1479829832/texture_footbar1_ehqghf.jpg");
-  h3 {
-    color: white
-  }
-}
 .item:nth-child(5) {
-  background-color: purple
-}
-
-.item:nth-child(6) {
   background-image: url("http://res.cloudinary.com/da2krghvd/image/upload/c_crop,h_200,w_400/v1479829832/texture_footbar1_ehqghf.jpg");
-  h3 {
-    color: white
+  h1 {
+    color: white;
+    text-align: center;
   }
 }
+
 .banner {
   color: white;
   text-align: center;
