@@ -11,4 +11,20 @@ class Meal < ApplicationRecord
   enum tax: [ "2.1", "5.5", "10", "20" ]
 
   has_attachment :photo
+
+  def tax_amount
+    if tax.present?
+      price * tax.to_f / (100 + tax.to_f)
+    else
+      0
+    end
+  end
+
+  def gross_price
+    if tax.present?
+      price / (1 + (tax.to_f / 100))
+    else
+      price
+    end
+  end
 end

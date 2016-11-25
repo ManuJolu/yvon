@@ -12,7 +12,7 @@ class OrderController
     user.save
   end
 
-  def cart(user)
+  def cart(postback, user)
     order = user.orders.new
     order.restaurant = Restaurant.find(user.session['order']['restaurant_id'])
     user.session['order']['meals'].each do |meal_id, quantity|
@@ -27,6 +27,6 @@ class OrderController
       user.save
     else
     end
-    @view.cart(order)
+    @view.cart(postback, order)
   end
 end

@@ -97,10 +97,10 @@ Bot.on :postback do |postback|
       category = Meal.categories.key(Meal.categories[meal.category] + 1)
       @meal_controller.index(postback, restaurant_id: meal.restaurant.id, category: category)
     when 'pay'
-      @order_controller.cart(user)
+      @order_controller.cart(postback, user)
     end
   when 'pay'
-    @order_controller.cart(user)
+    @order_controller.cart(postback, user)
   end
 end
 
