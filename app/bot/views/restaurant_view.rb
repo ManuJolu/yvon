@@ -13,11 +13,11 @@ class RestaurantView
       "&size=382x382", # size
       "&maptype=roadmap&format=png&visual_refresh=true", # format
       "&key=#{ENV['GOOGLE_API_KEY']}", # key
-      "&markers=size:mid%7Ccolor:0x#{colors[0]}%7Clabel:%7C#{coordinates[0]},+#{coordinates[1]}" # user_marker
+      "&markers=size:mid%7Ccolor:0x#{colors[0]}%7Clabel:%7C#{coordinates[0]},#{coordinates[1]}" # user_marker
     ]
     if restaurants.present?
       elements = restaurants.map.with_index do |restaurant, i|
-        url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 5]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},+#{restaurant.longitude}"
+        url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 5]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},#{restaurant.longitude}"
         {
           title: "#{i + 1} - ready in #{rand(5..25)}min - #{restaurant.name}",
           item_url: restaurant.facebook_url,
