@@ -132,9 +132,19 @@
 
 #logo {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+}
+
+#logo h1 {
+  font-family: $logo;
+  color: $brand-color;
+  font-size: 60px;
+  text-decoration: none !important;
 }
 
 #slogan {
   margin-left: 10px;
+  color: $brand-color;
 }
+
+
