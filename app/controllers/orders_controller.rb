@@ -14,7 +14,13 @@ class OrdersController < ApplicationController
 
   def update
     @order.update(order_params)
-    @order.save
+    if @order.save
+      @orders = @restaurant.orders.all
+      respond_to do |format|
+        format.html { redirect_to restaurant_path(@restaurant) }
+        format.js
+      end
+    end
   end
 
   private
