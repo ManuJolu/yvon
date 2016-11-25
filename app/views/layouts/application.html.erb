@@ -9,11 +9,13 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch|Open+Sans+Condensed:300" rel="stylesheet">
   </head>
-  <body>
+  <body class="Site">
 
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
+    <main class="Site-content">
     <%= yield %>
+    </main>
     <%= render 'shared/footer' %>
 
     <%= javascript_include_tag 'application' %>
