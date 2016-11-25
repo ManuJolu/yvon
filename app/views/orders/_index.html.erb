@@ -1,6 +1,5 @@
 <h1>Pending orders</h1>
 
-
 <% if @orders.any? && @orders.select { |order| order.delivered_at.blank? }.any? %>
   <table class="table table-striped">
     <thead>
@@ -77,6 +76,7 @@
     <% end %>
   </tbody>
 </table>
+
 
 <h1>Delivered orders</h1>
 
