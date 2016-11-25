@@ -1,22 +1,27 @@
 <div class="footer" style="background-image: url(<%= image_path 'texture_footbar1.jpg' %>);">
   <div class="container">
-    <div class="col-sm-6 style" style="text-align: left">
-      <%= link_to root_path, class: "navbar-wagon-brand" do %>
-        <%= image_tag "yvon.png" %>
-      <% end %>
-        <p>Made with <i class="fa fa-heart-o fa-lg" ></i></p>
-    </div>
+
     <div class="row">
-      <a href="#">
-        <i class="fa fa-facebook fa-2x" id="fb"></i>
-      </a>
-      <a href="#">
-        <i class="fa fa-instagram fa-2x" id="insta"></i>
-      </a>
-      <a href="#">
-        <i class="fa fa-youtube fa-2x" id="youtube"></i>
-      </a>
+      <div class="col-sm-6" style="text-align: left">
+        <%= link_to root_path, class: "navbar-wagon-brand" do %>
+          <%= image_tag "yvon.png" %>
+        <% end %>
+        Made with <i class="fa fa-heart-o fa-lg" ></i>
+      </div>
+
+      <div class="col-sm-6" style="text-align: right">
+        <a href="#">
+          <i class="fa fa-facebook fa-2x" id="fb"></i>
+        </a>
+        <a href="#">
+          <i class="fa fa-instagram fa-2x" id="insta"></i>
+        </a>
+        <a href="#">
+          <i class="fa fa-youtube fa-2x" id="youtube"></i>
+        </a>
+      </div>
     </div>
+
   </div>
 </div>
 
