@@ -1,4 +1,4 @@
-<div class="container">
+
   <div class="tabs">
     <a class="tab active" data-target="#orders">
       <h3>Orders</h3>
@@ -16,46 +16,48 @@
 
 
   <div class="tab-content" id="orders">
-    <%= render 'orders/index' %>
+    <div class="container">
+      <%= render 'orders/index' %>
+    </div>
   </div>
 
   <div class="tab-content hidden" id="meals">
+    <div class="container">
+      <!-- Button trigger modal -->
+      <div class = text-center>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMeal">
+          Add a meal
+        </button>
+      </div>
 
-    <!-- Button trigger modal -->
-    <div class = text-center>
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMeal">
-        Add a meal
-      </button>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="addMeal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add a meal</h4>
-          </div>
-          <div class="modal-body">
-            <%= render 'meals/new' %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <!-- Modal -->
+      <div class="modal fade" id="addMeal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add a meal</h4>
+            </div>
+            <div class="modal-body">
+              <%= render 'meals/new' %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="display-meals">
-    <h1>Meals in Your Restaurant:</h1>
-      <%= render 'meals/show' %>
+      <div class="display-meals">
+      <h1>Meals in Your Restaurant:</h1>
+        <%= render 'meals/show' %>
+      </div>
     </div>
-
   </div>
 
   <div class="tab-content hidden" id="dashboard">
   </div>
-</div>
+
 
   <div class="tab-content hidden" id="restaurant">
   </div>

@@ -3,7 +3,7 @@
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   transition: all 0.3s ease;
   display: flex;
-  height: 100px;
+  height: 80px;
   padding: 0px 30px;
   align-items: center;
   justify-content: space-between;
@@ -132,9 +132,18 @@
 
 #logo {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+}
+
+#logo h1 {
+  font-family: $logo;
+  color: $brand-color;
+  font-size: 60px;
 }
 
 #slogan {
   margin-left: 10px;
+  color: $brand-color;
 }
+
+
