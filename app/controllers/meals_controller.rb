@@ -18,7 +18,8 @@ class MealsController < ApplicationController
     if @meal.save
       redirect_to @restaurant
     else
-      render 'new'
+      @orders = @restaurant.orders
+      render 'restaurants/show'
     end
   end
 
