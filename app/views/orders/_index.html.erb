@@ -14,7 +14,6 @@
         <th>Paid at</th>
         <th>Ready at</th>
         <th>Delivered at</th>
-        <th></th>
       </tr>
     </thead>
 <% else %>
@@ -81,7 +80,6 @@
 
 <h1>Delivered orders</h1>
 
-
 <% if @orders.any? && @orders.select { |order| order.delivered_at.present? }.any? %>
   <table class="table table-striped">
     <thead>
@@ -95,7 +93,6 @@
         <th>Paid at</th>
         <th>Ready at</th>
         <th>Delivered at</th>
-        <th></th>
       </tr>
     </thead>
 <% else %>
