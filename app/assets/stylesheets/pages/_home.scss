@@ -130,6 +130,9 @@
 }
 
 /* Hover effects */
+a:hover {
+  text-decoration: none;
+}
 .product:hover {
   background: #f7f7fa;
   cursor: pointer;
