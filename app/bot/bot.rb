@@ -52,18 +52,23 @@ Bot.on :message do |message|
     user.save
   end
 
+  unless user.session.try(:[], 'hello_at') && user.session['hello_at'] > (Time.now - 30.minutes)
+    user.session = {
+      'hello_at' => Time.now
+    }
+    user.save
+  end
+
   if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
     @restaurant_controller.index(message)
   end
 
   case message.text
   when /hello/i
-    unless user.session.try(:[], 'hello_at') && user.session['hello_at'] > (Time.now - 30.minutes)
-      user.session = {
-        'hello_at' => Time.now
-      }
-      user.save
-    end
+    @page_controller.hello(message, user)
+  when /restart/i
+    user.session = {}
+    user.save
     @page_controller.hello(message, user)
   else
     if message.text
@@ -98,7 +103,7 @@ Bot.on :postback do |postback|
     when 'pay'
       @order_controller.cart(user)
     end
-  when /\Apay\z/
+  when 'pay'
     @order_controller.cart(user)
   end
 end

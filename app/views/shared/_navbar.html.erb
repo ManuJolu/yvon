@@ -4,7 +4,7 @@
     <%= link_to root_path, class: "navbar-wagon-brand" do %>
       <%= image_tag "yvon.png" %>
     <% end %>
-    <div id="slogan"><p>YVON, can't let you wait !</p></div>
+    <div id="slogan"><p>Yvon, wait no more</p></div>
   </div>
 
   <!-- Right Navigation -->
@@ -32,15 +32,11 @@
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= image_tag "http://placehold.it/30x30", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+          <%= image_tag avatar_url, class: 'avatar dropdown-toggle', id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to "#" do %>
+              <%= link_to current_user do %>
                 <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
               <% end %>
             </li>

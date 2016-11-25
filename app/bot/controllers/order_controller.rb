@@ -17,6 +17,6 @@ class OrderController
     end
     order.save
 
-    @view.cart(user)
+    @view.cart(order)
   end
 end

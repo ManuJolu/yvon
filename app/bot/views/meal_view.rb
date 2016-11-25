@@ -24,7 +24,7 @@ class MealView
       {
         title: "Starter",
         image_url: (cl_image_path(restaurant.meals.where(category: 'starter').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'starter').present?),
-        subtitle: "#{('Daily specials:\n' + restaurant.meals.where(category: 'starter').first.name) if restaurant.meals.where(category: 'starter').present?}",
+        subtitle: "#{('Suggestion: ' + restaurant.meals.where(category: 'starter').first.name) if restaurant.meals.where(category: 'starter').present?}",
         buttons: [
           {
               title: "➥ Starter",
@@ -36,7 +36,7 @@ class MealView
       {
         title: "Main course",
         image_url: (cl_image_path(restaurant.meals.where(category: 'main_course').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'main_course').present?),
-        subtitle: "#{('Daily specials: ' + restaurant.meals.where(category: 'main_course').first.name) if restaurant.meals.where(category: 'main_course').present?}",
+        subtitle: "#{('Suggestion: ' + restaurant.meals.where(category: 'main_course').first.name) if restaurant.meals.where(category: 'main_course').present?}",
         buttons: [
           {
               title: "➥ Main course",
@@ -48,7 +48,7 @@ class MealView
       {
         title: "Dessert",
         image_url: (cl_image_path(restaurant.meals.where(category: 'dessert').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'dessert').present?),
-        subtitle: "#{('Daily specials: ' + restaurant.meals.where(category: 'dessert').first.name) if restaurant.meals.where(category: 'dessert').present?}",
+        subtitle: "#{('Suggestion: ' + restaurant.meals.where(category: 'dessert').first.name) if restaurant.meals.where(category: 'dessert').present?}",
         buttons: [
           {
               title: "➥ Dessert",
@@ -78,6 +78,42 @@ class MealView
   end
 
   def menu_more(postback, restaurant)
+        elements = [
+      {
+        title: restaurant.name,
+        image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),
+        subtitle: restaurant.description,
+        buttons: [
+          {
+              title: "Pay",
+              type: "postback",
+              payload: "pay"
+          }
+        ]
+      },
+      {
+        title: "Drink",
+        image_url: (cl_image_path(restaurant.meals.where(category: 'drink').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'drink').present?),
+        subtitle: "#{('Suggestion: ' + restaurant.meals.where(category: 'drink').first.name) if restaurant.meals.where(category: 'drink').present?}",
+        buttons: [
+          {
+              title: "➥ Drink",
+              type: "postback",
+              payload: "restaurant_#{restaurant.id}_category_drink"
+          }
+        ]
+      }
+    ]
+
+    postback.reply(
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'list',
+          elements: elements
+        }
+      }
+    )
   end
 
   def index(postback, meals, params = {})

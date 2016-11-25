@@ -1,10 +1,15 @@
-<% @restaurants.each do |restaurant| %>
-  <div class="col-xs-12 col-sm-6">
-    <%= render 'restaurant_card', restaurant: restaurant %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class= "text-center" id="map" style="width: 640px; height: 480px;"></div>
+    </div>
+    <% @restaurants.each do |restaurant| %>
+      <div class="col-xs-12 col-sm-4">
+        <%= render 'restaurant_card', restaurant: restaurant %>
+      </div>
+    <% end %>
   </div>
-<% end %>
-<br>
-<div id="map" style="width: 300px; height: 300px;"></div>
+</div>
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
