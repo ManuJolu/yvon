@@ -52,23 +52,16 @@ Bot.on :message do |message|
     user.save
   end
 
-  unless user.session.try(:[], 'hello_at') && user.session['hello_at'] > (Time.now - 30.minutes)
+  if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
     user.session = {
       'hello_at' => Time.now
     }
     user.save
-  end
-
-  if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
     @restaurant_controller.index(message)
   end
 
   case message.text
   when /hello/i
-    @page_controller.hello(message, user)
-  when /restart/i
-    user.session = {}
-    user.save
     @page_controller.hello(message, user)
   else
     if message.text
@@ -83,8 +76,11 @@ Bot.on :postback do |postback|
   user = User.find_by(messenger_id: postback.sender['id'])
   case postback.payload
   when /\Arestaurant_(?<id>\d+)\z/
-    (user.session['order'] ||= {})['restaurant_id'] = $LAST_MATCH_INFO['id'].to_i
-    user.save
+    unless (user.session['order'] ||= {})['restaurant_id'] == $LAST_MATCH_INFO['id'].to_i
+      (user.session['order'] ||= {})['restaurant_id'] = $LAST_MATCH_INFO['id'].to_i
+      user.session['order']['meals'] = []
+      user.save
+    end
     @meal_controller.menu(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
   when /\Amore_restaurant_(?<id>\d+)\z/
     @meal_controller.menu_more(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
