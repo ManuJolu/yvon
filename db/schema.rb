@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124101341) do
+ActiveRecord::Schema.define(version: 20161124164819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 20161124101341) do
     t.integer  "restaurant_id"
     t.integer  "user_rating"
     t.string   "user_comment"
-    t.date     "paid_at"
-    t.date     "ready_at"
+    t.datetime "paid_at"
+    t.datetime "ready_at"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.date     "delivered_at"
@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(version: 20161124101341) do
     t.string   "facebook_picture_url"
     t.string   "token"
     t.datetime "token_expiry"
+    t.string   "facebook_picture_check"
+    t.json     "session"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
