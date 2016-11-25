@@ -1,6 +1,5 @@
 <h1>Pending orders</h1>
 
-
 <% if @orders.any? && @orders.select { |order| order.delivered_at.blank? }.any? %>
   <table class="table table-striped">
     <thead>
@@ -30,28 +29,28 @@
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "drink" %>
-              <p><%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "starter" %>
-              <p><%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "main_course" %>
-              <p><%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "dessert" %>
-              <p><%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
@@ -77,6 +76,7 @@
     <% end %>
   </tbody>
 </table>
+
 
 <h1>Delivered orders</h1>
 
@@ -107,28 +107,28 @@
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "drink" %>
-              <p><%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "starter" %>
-              <p><%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "main_course" %>
-              <p><%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
         <td>
           <% order.ordered_meals.each do |ordered_meal| %>
             <% if ordered_meal.meal.category == "dessert" %>
-              <p><%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
+              <p><%= ordered_meal.quantity %>x - <%= ordered_meal.meal.name %> - <%= format("%.2f", ordered_meal.meal.price.fdiv(100)) %>€<p>
             <% end %>
           <% end %>
         </td>
