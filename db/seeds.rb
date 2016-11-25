@@ -52,7 +52,7 @@ print "Creating meals"
 end
 
 print "Creating orders"
-10.times do
+30.times do
   order = Order.new ({
     })
   order.restaurant = Restaurant.all[rand(0..9)]

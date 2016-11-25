@@ -22,7 +22,8 @@ module Yvon
     config.generators do |generate|
       generate.assets false
     end
-
+    # ajax
+    config.action_view.embed_authenticity_token_in_remote_forms = true
     # Auto-load the bot and its subdirectories
     config.paths.add File.join('app', 'bot'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'bot', '*')]
