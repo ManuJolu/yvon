@@ -78,7 +78,7 @@ Bot.on :postback do |postback|
   when /\Arestaurant_(?<id>\d+)\z/
     unless (user.session['order'] ||= {})['restaurant_id'] == $LAST_MATCH_INFO['id'].to_i
       (user.session['order'] ||= {})['restaurant_id'] = $LAST_MATCH_INFO['id'].to_i
-      user.session['order']['meals'] = []
+      user.session['order']['meals'] = {}
       user.save
     end
     @meal_controller.menu(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
