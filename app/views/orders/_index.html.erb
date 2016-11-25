@@ -58,7 +58,7 @@
         <td>
           <%= order.ordered_meals.sum { |om| om.meal.price } %>€
         </td>
-        <td><%= order.paid_at %></td>
+        <td><%= order.paid_at@.strftime('%-H:%M:%S') %></td>
         <td>
           <% if order.ready_at == nil %>
             <%= render 'orders/form_order_ready' %>
