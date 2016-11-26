@@ -72,7 +72,7 @@ class OrderView
             {
               title: "Go to #{order.restaurant.name}",
               image_url: url_array.join,
-              item_url: "http://maps.apple.com/maps?q=#{order.restaurant.name.tr(' ', '+')}&sll=#{order.restaurant.latitude},#{order.restaurant.longitude}"
+              item_url: "http://maps.apple.com/maps?q=#{order.restaurant.latitude},#{order.restaurant.longitude}"
             }
           ]
         }
