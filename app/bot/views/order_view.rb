@@ -1,4 +1,10 @@
 class OrderView
+  def no_meals(postback)
+    postback.reply(
+      text: "Sorry, you have no meals to order"
+    )
+  end
+
   def cart(postback, order)
     elements = order.ordered_meals.map do |ordered_meal|
       {
