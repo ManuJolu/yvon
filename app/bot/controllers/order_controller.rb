@@ -24,6 +24,13 @@ class OrderController
         ordered_meal.meal = Meal.find(meal_id.to_i)
         ordered_meal.quantity = quantity.to_i
       end
+      order.ordered_meals = order.ordered_meals.sort do |x, y|
+        if (x.meal.category <=> y.meal.category) != 0
+          x.meal.category <=> y.meal.category
+        else
+          x.meal.name.downcase <=> y.meal.name.downcase
+        end
+      end
       order.paid_at = Time.now
 
       if order.save
