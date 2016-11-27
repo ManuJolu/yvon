@@ -5,7 +5,7 @@ class OrderView
         title: ordered_meal.meal.name,
         subtitle: ordered_meal.meal.description,
         quantity: ordered_meal.quantity,
-        price: format("%.2f", ordered_meal.meal.price.fdiv(100)),
+        price: ordered_meal.meal.price_num,
         currency: "EUR",
         image_url: cl_image_path(ordered_meal.meal.photo.path, width: 100, height: 100, crop: :fill)
       }
@@ -16,7 +16,7 @@ class OrderView
         type: "template",
         payload: {
           template_type: "receipt",
-          recipient_name: "#{order.user.first_name} #{order.user.last_name}",
+          recipient_name: "#{order.user.name}",
           order_number: "#{order.id}",
           currency: "EUR",
           payment_method: "Visa #{rand(1000..9999)}",
@@ -32,9 +32,9 @@ class OrderView
             country: "FR"
           },
           summary: {
-            subtotal: format("%.2f", order.subtotal.fdiv(100)),
-            total_tax: format("%.2f", order.total_tax.fdiv(100)),
-            total_cost: format("%.2f", order.total_cost.fdiv(100))
+            subtotal: order.pretax_price_num,
+            total_tax: order.tax_num,
+            total_cost: order.price_num
           }
           # adjustments: [
           #   {
@@ -72,7 +72,7 @@ class OrderView
             {
               title: "Go to #{order.restaurant.name}",
               image_url: url_array.join,
-              item_url: "http://maps.apple.com/maps?q=#{order.restaurant.latitude},#{order.restaurant.longitude}"
+              item_url: "http://maps.apple.com/maps?q=#{order.restaurant.address}"
             }
           ]
         }

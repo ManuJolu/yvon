@@ -4,7 +4,7 @@ namespace :fbm do
     Facebook::Messenger::Thread.set({
       setting_type: 'greeting',
       greeting: {
-        text: 'Hello {{user_first_name}}, my name is Yvon.'
+        text: "Hello {{user_first_name}}, my name is Yvon.\nYou can ask me to order your meals."
       },
     }, access_token: ENV['ACCESS_TOKEN'])
   end

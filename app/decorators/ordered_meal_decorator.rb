@@ -1,5 +1,6 @@
 class OrderedMealDecorator < Draper::Decorator
   delegate_all
+  decorates_association :meal
 
   def to_s
     "#{object.quantity} x #{object.meal.name}"

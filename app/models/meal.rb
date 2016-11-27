@@ -14,7 +14,7 @@ class Meal < ApplicationRecord
 
   def tax
     if tax_rate.present?
-      price * tax_rate.to_f / (100 + tax.to_f)
+      price * tax_rate.to_f / (100 + tax_rate.to_f)
     else
       0
     end
