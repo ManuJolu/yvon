@@ -13,7 +13,7 @@ class OrderController
   end
 
   def cart(postback, user)
-    if user.session['order']['meals'].any?
+    if (user.session['order'] ||= {})['meals'].present?
       order = user.orders.new
       order.restaurant = Restaurant.find(user.session['order']['restaurant_id'])
       order.located_at = user.session['located_at'].to_datetime
