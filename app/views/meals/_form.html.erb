@@ -4,7 +4,7 @@
   <%= f.input :category, collection: Meal.categories.map {|k, v| [k, k]} %>
   <%= f.input :price %>
   <%= f.input :description %>
-  <%= f.input :tax, collection: Meal.taxes.map {|k, v| [k, k]} %>
+  <%= f.input :tax_rate, collection: Meal.tax_rates.map {|k, v| [k, k]} %>
   <%= f.input :photo, as: :attachinary %>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

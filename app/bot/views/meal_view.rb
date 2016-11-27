@@ -123,7 +123,7 @@ class MealView
         {
           title: meal.name,
           image_url: cl_image_path(meal.photo.path, width: 382, height: 200, crop: :fill),
-          subtitle: "#{meal.description}\n#{format("%.2f", meal.price.fdiv(100))} €",
+          subtitle: "#{meal.description}\n#{meal.price}",
           buttons: [
             {
               type: 'postback',
@@ -148,7 +148,7 @@ class MealView
         {
           title: meal.name,
           image_url: cl_image_path(meal.photo.path, width: 382, height: 200, crop: :fill),
-          subtitle: "#{meal.description}\n#{format("%.2f", meal.price.fdiv(100))} €",
+          subtitle: "#{meal.description}\n#{meal.price}",
           buttons: [
             {
               type: 'postback',
@@ -164,27 +164,6 @@ class MealView
         }
       end
     end
-
-    # postback.reply(
-    #   attachment: {
-    #     type: 'template',
-    #     payload: {
-    #       template_type: 'generic',
-    #       elements: [
-    #         {
-    #           title: "Yvon",
-    #           buttons: [
-    #             {
-    #               type: 'postback',
-    #               title: 'Back to menu',
-    #               payload: '?'
-    #             }
-    #           ]
-    #         }
-    #       ]
-    #     }
-    #   }
-    # )
 
     postback.reply(
       attachment: {
