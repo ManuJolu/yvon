@@ -11,7 +11,7 @@ puts "   💥"
 Faker::Config.locale = 'fr'
 
 print "Creating Users"
-10.times do
+15.times do
   user = User.new({
     email: Faker::Internet.email,
     password: "123456",
@@ -20,7 +20,7 @@ print "Creating Users"
     })
   user.encrypted_password="ENCRYPT.MY.ASS!!!KJASOPJ090923ULXCIULSH.IXJ!S920"
   user.save
-  print "🐎  "
+  print "💂 "
 
 end
 
@@ -35,7 +35,7 @@ print "Creating restaurants"
   })
   restaurant.user = User.all[rand(0..4)]
   restaurant.save
-  print "🐎  "
+  print "🏡  "
 end
 
 print "Creating meals"
@@ -48,26 +48,26 @@ print "Creating meals"
 })
   meal.restaurant = Restaurant.all[rand(0..9)]
   meal.save
-  print "🐎  "
+  print "🍱  "
 end
 
 print "Creating orders"
-30.times do
+60.times do
   order = Order.new ({
     })
   order.restaurant = Restaurant.all[rand(0..9)]
-  order.user = User.all[rand(5..9)]
+  order.user = User.all[rand(5..14)]
   order.save
-  print "🐎  "
+  print "💶  "
 end
 
 
 print "Creating ordered meals"
-50.times do
+150.times do
   ordered_meal = OrderedMeal.new ({
     })
-  ordered_meal.order = Order.all[rand(0..9)]
+  ordered_meal.order = Order.all[rand(0..59)]
   ordered_meal.meal = Meal.all[rand(0..29)]
   ordered_meal.save
-  print "🐎  "
+  print "🍕  "
 end

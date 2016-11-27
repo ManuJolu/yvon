@@ -1,1 +1,5 @@
-$('#orders').html("<%= j render 'orders/index', @orders: @orders %>");
+$(document).ready ->
+  $("#order_update").on("ajax:success", (e, data, status, xhr) ->
+    $("#order_update").append xhr.responseText
+  ).on "ajax:error", (e, xhr, status, error) ->
+    $("#order_update").append "<p>ERROR</p>"
