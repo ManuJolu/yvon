@@ -1,7 +1,7 @@
 class OrderDecorator < Draper::Decorator
   delegate_all
   decorates_association :user
-  decorates_association :ordered_meals
+  decorates_association :ordered_meals, scope: :by_category
 
   def price
     "#{format('%.2f', object.price.fdiv(100))} €"
