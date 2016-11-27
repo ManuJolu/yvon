@@ -1,8 +1,8 @@
-class UserDecorator < Draper::Decorator
+class OrderedMealDecorator < Draper::Decorator
   delegate_all
 
-  def name
-    "#{first_name.capitalize} #{last_name.capitalize}"
+  def to_s
+    "#{object.quantity} x #{object.meal.name}"
   end
 
   # Define presentation-specific methods here. Helpers are accessed through

@@ -125,11 +125,11 @@ class MealView
           image_url: cl_image_path(meal.photo.path, width: 382, height: 200, crop: :fill),
           subtitle: "#{meal.description}\n#{format("%.2f", meal.price.fdiv(100))} €",
           buttons: [
-            {
-              type: 'postback',
-              title: 'Order & Pay',
-              payload: "meal_#{meal.id}_pay"
-            },
+            # {
+            #   type: 'postback',
+            #   title: 'Order & Pay',
+            #   payload: "meal_#{meal.id}_pay"
+            # },
             {
               type: 'postback',
               title: 'Order & ➥ Menu',
@@ -195,5 +195,18 @@ class MealView
         }
       }
     )
+
+    postback.reply(
+      text: "Or",
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: 'Pay',
+          payload: 'pay'
+        }
+      ]
+    )
+
+
   end
 end
