@@ -16,23 +16,27 @@ class OrderController
     if (user.session['order'] ||= {})['meals'].present?
       order = user.orders.new
       order.restaurant = Restaurant.find(user.session['order']['restaurant_id'])
-      order.located_at = user.session['located_at'].to_datetime
-      order.latitude = user.session['latitude'].to_f
-      order.longitude = user.session['longitude'].to_f
-      user.session['order']['meals'].each do |meal_id, quantity|
-        ordered_meal = order.ordered_meals.new
-        ordered_meal.meal = Meal.find(meal_id.to_i)
-        ordered_meal.quantity = quantity.to_i
-      end
-      order.paid_at = Time.now
+      if order.restaurant.on_duty?
+        order.located_at = user.session['located_at'].to_datetime
+        order.latitude = user.session['latitude'].to_f
+        order.longitude = user.session['longitude'].to_f
+        user.session['order']['meals'].each do |meal_id, quantity|
+          ordered_meal = order.ordered_meals.new
+          ordered_meal.meal = Meal.find(meal_id.to_i)
+          ordered_meal.quantity = quantity.to_i
+        end
+        order.paid_at = Time.now
 
-      if order.save
-        user.session['order']['meals'] = {}
-        user.save
+        if order.save
+          user.session['order']['meals'] = {}
+          user.save
+        else
+          #implement else here
+        end
+        @view.cart(postback, order.decorate)
       else
-        #implement else here
+        @view.restaurant_closed(postback, order.restaurant)
       end
-      @view.cart(postback, order.decorate)
     else
       @view.no_meals(postback)
     end
