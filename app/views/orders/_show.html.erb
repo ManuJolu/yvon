@@ -1,0 +1,71 @@
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Drinks</th>
+        <th>Starters</th>
+        <th>Main Courses</th>
+        <th>Desserts</th>
+        <th>Total Price</th>
+        <th>Paid at</th>
+        <th>Ready at</th>
+        <th>Delivered at</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% orders.decorate.each do |order| %>
+        <tr>
+          <td>
+            <%= order.user.name %>
+          </td>
+          <td>
+            <% order.ordered_meals.each do |ordered_meal| %>
+              <% if ordered_meal.meal.category == "drink" %>
+                <p><%= ordered_meal%><p>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% order.ordered_meals.each do |ordered_meal| %>
+              <% if ordered_meal.meal.category == "starter" %>
+                <p><%= ordered_meal %><p>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% order.ordered_meals.each do |ordered_meal| %>
+              <% if ordered_meal.meal.category == "main_course" %>
+                <p><%= ordered_meal %><p>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% order.ordered_meals.each do |ordered_meal| %>
+              <% if ordered_meal.meal.category == "dessert" %>
+                <p><%= ordered_meal %><p>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <%= order.price %>
+          </td>
+          <td><%= order.paid_at %></td>
+          <td>
+            <% if order.ready_at == nil %>
+              <%= render 'orders/form_order_ready', restaurant: restaurant, order: order %>
+            <% else %>
+              <%= order.ready_at %>
+            <% end %>
+          </td>
+          <td>
+            <% if order.ready_at != nil && order.delivered_at == nil %>
+              <%= render 'orders/form_order_delivered', restaurant: restaurant, order: order %>
+            <% else %>
+              <%= order.delivered_at %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
