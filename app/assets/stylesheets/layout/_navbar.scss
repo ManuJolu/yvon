@@ -1,5 +1,5 @@
 /* Main class */
-.navbar-wagon {
+nav{
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   transition: all 0.3s ease;
   display: flex;
@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: solid 3px #D23333;
+
 }
 
 /* Optional class to fix the navbar on top */

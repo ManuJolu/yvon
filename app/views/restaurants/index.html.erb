@@ -1,8 +1,8 @@
-<div class="row">
-<%= image_tag "banner 2" %>
+<div class="banner" style="background-image: url('http://res.cloudinary.com/da2krghvd/image/upload/c_fill,h_400,w_1500/v1480262045/banner_2_l43xir.jpg');">
+  <div class="banner-content">
+    <h1>Yvon knows that taste and time matter</h1>
+  </div>
 </div>
-
-
 
 
 <div class="container">
@@ -15,14 +15,7 @@
     <div class= "item"><%=image_tag 'people' %></div>
   </div>
 </div>
-<div class="btn-group">
-  <button class="btn btn-default btn-lg dropdown-toggle" type="button" onclick = "rotate(1)">
-    Go left! <span class="caret"></span>
-  </button>
-  <button class="btn btn-default btn-lg dropdown-toggle" type="button" onclick = "rotate(-1)">
-    Go right! <span class="caret"></span>
-  </button>
-</div>
+
 </div>
 
 
@@ -58,12 +51,21 @@ function load(){
 window.addEventListener('load', load);
 
 </script>
-
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class= "text-center" id="map" style="width: 640px; height: 480px;"></div>
+<div class="product">
+  <div class='product-body'><h3>We believe the highest level of engagement between consumers and brands happens when the moment is instantaneous and beautiful.</h3>
+    <div class="btn-group">
+      <button class="action" type="button" onclick = "rotate(1)">
+        Go left !
+      </button>
+      <button class="action" type="button" onclick = "rotate(-1)">
+        Go right!
+      </button>
     </div>
+  </div>
+</div>
+
+<div class="box">
+  <div class="row">
     <% @restaurants.each do |restaurant| %>
       <div class="col-xs-12 col-sm-4">
         <%= render 'restaurant_card', restaurant: restaurant %>
