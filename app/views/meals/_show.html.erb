@@ -11,7 +11,9 @@
   <% @restaurant.meals.categories.each do |category| %>
     <div class="row">
       <div class="col-md-12">
-        <%= category[0].capitalize.tr("_", " ").pluralize %>
+        <div class="entete">
+          <%= category[0].capitalize.tr("_", " ").pluralize %>
+        </div>
       </div>
       <% @restaurant.meals.where(category: category[0]).each do |meal| %>
         <div class="col-md-3">Photo</div>
