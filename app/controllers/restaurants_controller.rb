@@ -13,8 +13,8 @@ class RestaurantsController < ApplicationController
 
   def show
     @meal = @restaurant.meals.new
-    @orders = @restaurant.orders.decorate
-
+    @restaurant = @restaurant.decorate
+    @orders = @restaurant.orders
   end
 
   def new
