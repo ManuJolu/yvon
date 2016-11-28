@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update]
+  before_action :set_restaurant, only: [:show, :edit, :update, :duty]
 
   def index
     @restaurants = Restaurant.where.not(latitude: nil, longitude: nil)
@@ -13,8 +13,6 @@ class RestaurantsController < ApplicationController
 
   def show
     @meal = @restaurant.meals.new
-    @orders = @restaurant.orders.decorate
-
   end
 
   def new
@@ -46,10 +44,15 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def duty
+    @restaurant.on_duty = (params[:state] == "on" ? true : false)
+    @restaurant.save
+  end
+
   private
 
   def set_restaurant
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = Restaurant.includes(:orders).find(params[:id])
   end
 
   def restaurant_params

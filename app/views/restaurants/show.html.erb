@@ -17,12 +17,19 @@
 
   <div class="tab-content" id="orders">
     <div class="container">
-      <%= render 'orders/index' %>
+      <div id="orderslist">
+        <%= render 'orders/index', restaurant: @restaurant %>
+      </div>
     </div>
   </div>
 
   <div class="tab-content hidden" id="meals">
     <div class="container">
+
+      <div class="display-meals">
+        <%= render 'meals/show' %>
+      </div>
+
       <!-- Button trigger modal -->
       <div class = text-center>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMeal">
@@ -47,17 +54,20 @@
           </div>
         </div>
       </div>
-
-      <div class="display-meals">
-      <h1>Meals in Your Restaurant:</h1>
-        <%= render 'meals/show' %>
-      </div>
     </div>
   </div>
 
   <div class="tab-content hidden" id="dashboard">
+    <div id="ordersdashboard">
+      <%= render 'orders/dashboard', restaurant: @restaurant, orders: @orders %>
+    </div>
   </div>
 
 
   <div class="tab-content hidden" id="restaurant">
   </div>
+
+
+  <script>
+    var restaurantId = <%= @restaurant.id %>;
+  </script>

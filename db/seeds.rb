@@ -10,7 +10,7 @@ puts "   💥"
 
 Faker::Config.locale = 'fr'
 
-print "Creating Users"
+puts "Creating Users"
 15.times do
   user = User.new({
     email: Faker::Internet.email,
@@ -24,7 +24,7 @@ print "Creating Users"
 
 end
 
-print "Creating restaurants"
+puts "Creating restaurants"
 10.times do
   restaurant = Restaurant.new ({
     name: Faker::Pokemon.name,
@@ -38,11 +38,11 @@ print "Creating restaurants"
   print "🏡  "
 end
 
-print "Creating meals"
-30.times do
+puts "Creating meals"
+25.times do
   meal = Meal.new ({
     name: Faker::GameOfThrones.city,
-    price: rand(3..90),
+    price: rand(100..10000),
     category: rand(0..3),
     photo_url: "http://res.cloudinary.com/dsc0gdltc/image/upload/v1479919370/lowgdzolykz7vtm1kuby.jpg"
 })
@@ -51,8 +51,8 @@ print "Creating meals"
   print "🍱  "
 end
 
-print "Creating orders"
-60.times do
+puts "Creating orders"
+100.times do
   order = Order.new ({
     })
   order.restaurant = Restaurant.all[rand(0..9)]
@@ -62,12 +62,12 @@ print "Creating orders"
 end
 
 
-print "Creating ordered meals"
+puts "Creating ordered meals"
 150.times do
   ordered_meal = OrderedMeal.new ({
     })
   ordered_meal.order = Order.all[rand(0..59)]
   ordered_meal.meal = Meal.all[rand(0..29)]
   ordered_meal.save
-  print "🍕  "
+  print "🍕 "
 end

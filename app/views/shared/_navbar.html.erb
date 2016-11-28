@@ -8,13 +8,22 @@
     <div id="slogan"><h3></h3></div>
 
   </div>
-
+  <div id="restaurant_name">
+    <% if @restaurant.nil? %>
+      <% "" %>
+    <% else %>
+      <h1>"<%=  @restaurant.name %>"</h1>
+    <% end %>
+  </div>
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
 
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
-
+      <!-- Checkbox On/Off Duty -->
+      <div class="checkbox">
+        <%= render 'shared/checkbox' %>
+      </div>
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
         <div class="dropdown">

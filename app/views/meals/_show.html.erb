@@ -1,37 +1,45 @@
 <div class="container">
+  <div class="entete">
+    <div class="row">
+      <div class="col-md-4">Photo</div>
+      <div class="col-md-3">Meal Name</div>
+      <div class="col-md-3">Description</div>
+      <div class="col-md-1">Price</div>
+      <div class="col-md-1">Edit</div>
+    </div>
+  </div>
 
-  <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Meal Name</th>
-      <th>Description</th>
-      <th>Prix</th>
-      <th>Edit</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @restaurant.meals.select { |meal| meal.persisted? }.each do |meal| %>
-      <tr>
-        <td>
-          <%= meal.category %>
-        </td>
-        <td>
-          <%= meal.name %>
-        </td>
-        <td>
-          <%= meal.description %>
-        </td>
-        <td>
-          <%= meal.price %>
-        </td>
-        <td>
-          <%= link_to edit_restaurant_meal_path(meal) do %>
-          <i class="fa fa-pencil" ></i>
-          <% end %>
-        </td>
-      </tr>
+  <% @restaurant.meals.categories.each do |category| %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="categorie">
+          <hr>
+          <%= category[0].capitalize.tr("_", " ").pluralize %>
+        </div>
+      </div>
+    </div>
+    <% @restaurant.meals.where(category: category[0]).each do |meal| %>
+      <div class="ligne">
+        <div class="row">
+          <div class="col-md-4">
+            <%= cl_image_tag(meal.photo.path, height: 50, width: 100, crop: :fill) %>
+          </div>
+          <div class="col-md-3"><%= meal.name %></div>
+          <div class="col-md-3"><%= meal.description %></div>
+          <div class="col-md-1"><%= meal.price %></div>
+          <div class="col-md-1">
+            <i class="fa fa-pencil" ></i>
+          </div>
+        </div>
+      </div>
     <% end %>
+
+  <% end %>
+</div>
+
+
+
+
+
   </tbody>
 </table>
