@@ -1,3 +1,3 @@
-$('#orderslist').html("<%= j render 'orders/index' %>");
+$('#orderslist').html("<%= j render 'orders/index', restaurant: @restaurant, orders: @orders %>");
 
 
