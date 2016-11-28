@@ -1,24 +1,25 @@
-$("#pending").click(function () {
+$(document).on("click", "#pending", function () {
   $("#orderspending").toggleClass( "hidden" );
 });
 
-
-$("#pending").click(function () {
+$(document).on("click", "#pending", function () {
   $("#trianglependingdown").toggleClass( "hidden" );
 });
 
-$("#pending").click(function () {
+$(document).on("click", "#pending", function () {
   $("#trianglependingup").toggleClass( "hidden" );
 });
 
-$("#delivered").click(function () {
+
+
+$(document).on("click", "#delivered", function () {
   $("#ordersdelivered").toggleClass( "hidden" );
 });
 
-$("#delivered").click(function () {
+$(document).on("click", "#delivered", function () {
   $("#triangledelivereddown").toggleClass( "hidden" );
 });
 
-$("#delivered").click(function () {
+$(document).on("click", "#delivered", function () {
   $("#triangledeliveredup").toggleClass( "hidden" );
 });

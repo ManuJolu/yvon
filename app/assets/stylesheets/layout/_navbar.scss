@@ -13,6 +13,7 @@ body {
   justify-content: space-between;
   border-bottom: solid 1px white;
   background-color: black;
+  opacity: 0;
 
 }
 
@@ -154,4 +155,10 @@ body {
   color: $brand-color;
 }
 
+#restaurant_name h1 {
+  font-family: $logo;
+  color: white;
+  font-size: 45px;
+  text-decoration: none !important;
+}
 
