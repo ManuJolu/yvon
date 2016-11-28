@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% @restaurant.meals.select { |meal| meal.persisted? }.each do |meal| %>
+    <% @restaurant.meals.each do |meal| %>
       <tr>
         <td>
           <%= meal.category %>

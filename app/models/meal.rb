@@ -12,6 +12,8 @@ class Meal < ApplicationRecord
 
   has_attachment :photo
 
+  scope :by_category, -> { where('id IS NOT NULL').order(:category).order('lower(name)') }
+
   def tax
     if tax_rate.present?
       price * tax_rate.to_f / (100 + tax_rate.to_f)

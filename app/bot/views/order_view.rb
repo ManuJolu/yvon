@@ -5,6 +5,18 @@ class OrderView
     )
   end
 
+  def restaurant_closed(postback, restaurant)
+    postback.reply(
+      text: "Oups, #{restaurant.name} has just closed... Can I help you find another restaurant?",
+      quick_replies: [
+        {
+          content_type: 'location'
+        }
+      ]
+    )
+
+  end
+
   def cart(postback, order)
     elements = order.ordered_meals.map do |ordered_meal|
       {

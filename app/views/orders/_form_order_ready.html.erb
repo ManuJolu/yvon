@@ -1,4 +1,4 @@
-<%= simple_form_for([@restaurant, @order], remote: true) do |f| %>
+<%= simple_form_for([restaurant, order], remote: true) do |f| %>
   <%= f.hidden_field :ready_at, value: Time.now %>
   <%= f.button :submit, "READY", class: 'btn btn-primary' %>
 <% end %>

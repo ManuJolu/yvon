@@ -15,5 +15,11 @@ class Restaurant < ApplicationRecord
 
   has_attachment :photo
 
-  enum category: [ :burgers, :salads, :chinese, :japonese, :italian, :indian, :french ]
+  enum category: [ :french, :burgers, :salads, :italian, :chinese, :japonese, :indian ]
+
+  scope :on_duty, -> { where(on_duty: true) }
+
+  def on_duty?
+    on_duty
+  end
 end
