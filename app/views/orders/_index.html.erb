@@ -1,13 +1,30 @@
-<h1>Pending orders</h1>
-<% if orders.pending.any? %>
-  <%= render 'orders/show', restaurant: restaurant, orders: orders.pending %>
-<% else %>
-  <p> You have no pending orders </p>
-<% end %>
+<div id="pending" class="btn-default">
+  <h1>
+    Pending orders
+    <i id="trianglependingdown" class="fa fa-caret-down hidden"></i>
+    <i id="trianglependingup" class="fa fa-caret-up"></i>
+  </h1>
+</div>
+<div id="orderspending">
+  <% if orders.pending.any? %>
+    <%= render 'orders/show', restaurant: restaurant, orders: orders.pending %>
+  <% else %>
+    <p> You have no pending orders yet</p>
+  <% end %>
+</div>
 
-<h1>Delivered orders</h1>
-<% if orders.delivered.any? %>
-  <%= render 'orders/show', restaurant: restaurant, orders: orders.delivered %>
-<% else %>
-  <p> You have no delivered orders </p>
-<% end %>
+<div id="delivered" class="btn-default">
+  <h1>
+    Delivered orders
+    <i id="triangledelivereddown" class="fa fa-caret-down"></i>
+    <i id="triangledeliveredup" class="fa fa-caret-up  hidden"></i>
+  </h1>
+</div>
+<div id="ordersdelivered" class="hidden">
+  <% if orders.delivered.any? %>
+    <%= render 'orders/show', restaurant: restaurant, orders: orders.delivered %>
+  <% else %>
+    <p> You have no delivered orders yet </p>
+  <% end %>
+</div>
+
