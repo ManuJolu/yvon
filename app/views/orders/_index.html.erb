@@ -6,8 +6,8 @@
   </h1>
 </div>
 <div id="orderspending">
-  <% if orders.pending.any? %>
-    <%= render 'orders/show', restaurant: restaurant, orders: orders.pending %>
+  <% if restaurant.orders.pending.any? %>
+    <%= render 'orders/show', orders: restaurant.orders.pending %>
   <% else %>
     <p> You have no pending orders yet</p>
   <% end %>
@@ -21,8 +21,8 @@
   </h1>
 </div>
 <div id="ordersdelivered" class="hidden">
-  <% if orders.delivered.any? %>
-    <%= render 'orders/show', restaurant: restaurant, orders: orders.delivered %>
+  <% if restaurant.orders.delivered.any? %>
+    <%= render 'orders/show', orders: restaurant.orders.delivered %>
   <% else %>
     <p> You have no delivered orders yet </p>
   <% end %>
