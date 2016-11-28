@@ -45,6 +45,11 @@ class OrdersController < ApplicationController
       @orders = @restaurant.orders.all
       respond_to do |format|
         format.html { redirect_to restaurant_path(@restaurant) }
+        format.js { }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to restaurant_path(@restaurant) }
         format.js
       end
     end

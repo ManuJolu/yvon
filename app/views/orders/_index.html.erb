@@ -1,156 +1,163 @@
-<h1>Pending orders</h1>
+<div id="orderslist">
+  <h1>Pending orders</h1>
 
-<% if @orders.any? && @orders.select { |order| order.delivered_at.blank? }.any? %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Customer</th>
-        <th>Drinks</th>
-        <th>Starters</th>
-        <th>Main Courses</th>
-        <th>Desserts</th>
-        <th>Total Price</th>
-        <th>Paid at</th>
-        <th>Ready at</th>
-        <th>Delivered at</th>
-      </tr>
-    </thead>
+  <% if @orders.any? && @orders.select { |order| order.delivered_at.blank? }.any? %>
 
-    <tbody>
-      <% @orders.select { |order| order.delivered_at.blank? }.sort_by! {|order| order.id }.each do |order| %>
-        <% @order = order %>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td>
-            <%= order.user.name %>
-          </td>
-          <td>
-            <% order.ordered_meals.each do |ordered_meal| %>
-              <% if ordered_meal.meal.category == "drink" %>
-                <p><%= ordered_meal %><p>
-              <% end %>
-            <% end %>
-          </td>
-          <td>
-            <% order.ordered_meals.each do |ordered_meal| %>
-              <% if ordered_meal.meal.category == "starter" %>
-                <p><%= ordered_meal %><p>
-              <% end %>
-            <% end %>
-          </td>
-          <td>
-            <% order.ordered_meals.each do |ordered_meal| %>
-              <% if ordered_meal.meal.category == "main_course" %>
-                <p><%= ordered_meal %><p>
-              <% end %>
-            <% end %>
-          </td>
-          <td>
-            <% order.ordered_meals.each do |ordered_meal| %>
-              <% if ordered_meal.meal.category == "dessert" %>
-                <p><%= ordered_meal %><p>
-              <% end %>
-            <% end %>
-          </td>
-          <td>
-            <%= order.price %>
-          </td>
-          <td><%= order.paid_at %></td>
-          <td>
-            <% if order.ready_at == nil %>
-              <%= render 'orders/form_order_ready' %>
-            <% else %>
-              <%= order.ready_at %>
-            <% end %>
-          </td>
-          <td>
-            <% if order.ready_at != nil && order.delivered_at == nil %>
-              <%= render 'orders/form_order_delivered' %>
-            <% else %>
-              <%= order.delivered_at %>
-            <% end %>
-          </td>
+          <th>Customer</th>
+          <th>Drinks</th>
+          <th>Starters</th>
+          <th>Main Courses</th>
+          <th>Desserts</th>
+          <th>Total Price</th>
+          <th>Paid at</th>
+          <th>Ready at</th>
+          <th>Delivered at</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p> You have no pending orders </p>
-<% end %>
+      </thead>
+
+      <tbody>
+        <% @orders.select { |order| order.delivered_at.blank? }.sort_by! {|order| order.id }.each do |order| %>
+          <% @order = order %>
+          <tr>
+            <td>
+              <%= order.user.name %>
+            </td>
+            <td>
+              <% order.ordered_meals.each do |ordered_meal| %>
+                <% if ordered_meal.meal.category == "drink" %>
+                  <p><%= ordered_meal %><p>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% order.ordered_meals.each do |ordered_meal| %>
+                <% if ordered_meal.meal.category == "starter" %>
+                  <p><%= ordered_meal %><p>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% order.ordered_meals.each do |ordered_meal| %>
+                <% if ordered_meal.meal.category == "main_course" %>
+                  <p><%= ordered_meal %><p>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% order.ordered_meals.each do |ordered_meal| %>
+                <% if ordered_meal.meal.category == "dessert" %>
+                  <p><%= ordered_meal %><p>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <%= order.price %>
+            </td>
+            <td><%= order.paid_at %></td>
+            <div id="ordersbuttons">
+            <td>
+
+              <% if order.ready_at == nil %>
+                <%= render 'orders/form_order_ready' %>
+              <% else %>
+                <%= order.ready_at %>
+              <% end %>
+            </td>
+            <td>
+              <% if order.ready_at != nil && order.delivered_at == nil %>
+                <%= render 'orders/form_order_delivered' %>
+              <% else %>
+                <%= order.delivered_at %>
+              <% end %>
+            </td>
+            </div>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p> You have no pending orders </p>
+  <% end %>
 
 
-<h1>Delivered orders</h1>
+  <h1>Delivered orders</h1>
 
-<% if @orders.any? && @orders.select { |order| order.delivered_at.present? }.any? %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Customer</th>
-        <th>Drinks</th>
-        <th>Starters</th>
-        <th>Main Courses</th>
-        <th>Desserts</th>
-        <th>Total Price</th>
-        <th>Paid at</th>
-        <th>Ready at</th>
-        <th>Delivered at</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.select { |order| order.delivered_at.present? }.sort_by! {|order| - order.id }.each do |order| %>
+  <% if @orders.any? && @orders.select { |order| order.delivered_at.present? }.any? %>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td>
-            <%= order.user.name %>
-          </td>
-          <td>
-            <% order.ordered_meals.each do |ordered_meal| %>
-              <% if ordered_meal.meal.category == "drink" %>
-                <p><%= ordered_meal %><p>
-              <% end %>
-            <% end %>
-          </td>
-          <td>
-            <% order.ordered_meals.each do |ordered_meal| %>
-              <% if ordered_meal.meal.category == "starter" %>
-                <p><%= ordered_meal %><p>
-              <% end %>
-            <% end %>
-          </td>
-          <td>
-            <% order.ordered_meals.each do |ordered_meal| %>
-              <% if ordered_meal.meal.category == "main_course" %>
-                <p><%= ordered_meal %><p>
-              <% end %>
-            <% end %>
-          </td>
-          <td>
-            <% order.ordered_meals.each do |ordered_meal| %>
-              <% if ordered_meal.meal.category == "dessert" %>
-                <p><%= ordered_meal %><p>
-              <% end %>
-            <% end %>
-          </td>
-          <td>
-            <%= order.price %>
-          </td>
-          <td><%= order.paid_at %></td>
-          <td>
-            <% if order.ready_at == nil %>
-              <%= render 'orders/form_order_ready' %>
-            <% else %>
-              <%= order.ready_at %>
-            <% end %>
-          </td>
-          <td>
-            <% if order.ready_at != nil && order.delivered_at == nil %>
-              <%= render 'orders/form_order_delivered' %>
-            <% else %>
-              <%= order.delivered_at %>
-            <% end %>
-          </td>
+          <th>Customer</th>
+          <th>Drinks</th>
+          <th>Starters</th>
+          <th>Main Courses</th>
+          <th>Desserts</th>
+          <th>Total Price</th>
+          <th>Paid at</th>
+          <th>Ready at</th>
+          <th>Delivered at</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p> You have no delivered orders </p>
-<% end %>
+      </thead>
+      <tbody>
+        <% @orders.select { |order| order.delivered_at.present? }.sort_by! {|order| - order.id }.each do |order| %>
+          <tr>
+            <td>
+              <%= order.user.first_name %>
+            </td>
+            <td>
+              <% order.ordered_meals.each do |ordered_meal| %>
+                <% if ordered_meal.meal.category == "drink" %>
+                  <p><%= ordered_meal %></p>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% order.ordered_meals.each do |ordered_meal| %>
+                <% if ordered_meal.meal.category == "starter" %>
+                  <p><%= ordered_meal %></p>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% order.ordered_meals.each do |ordered_meal| %>
+                <% if ordered_meal.meal.category == "main_course" %>
+                  <p><%= ordered_meal %></p>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% order.ordered_meals.each do |ordered_meal| %>
+                <% if ordered_meal.meal.category == "dessert" %>
+                  <p><%= ordered_meal %></p>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <%= order.price %>
+            </td>
+            <td><%= order.paid_at %></td>
+            <td>
+              <% if order.ready_at == nil %>
+                <%= render 'orders/form_order_ready' %>
+              <% else %>
+                <%= order.ready_at %>
+              <% end %>
+            </td>
+            <td>
+              <% if order.ready_at != nil && order.delivered_at == nil %>
+                <%= render 'orders/form_order_delivered' %>
+              <% else %>
+                <%= order.delivered_at %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p> You have no delivered orders </p>
+  <% end %>
+</div>
+
