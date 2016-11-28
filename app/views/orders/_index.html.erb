@@ -6,7 +6,6 @@
 <% end %>
 
 <h1>Delivered orders</h1>
-
 <% if orders.delivered.any? %>
   <%= render 'orders/show', restaurant: restaurant, orders: orders.delivered %>
 <% else %>

@@ -17,7 +17,9 @@
 
   <div class="tab-content" id="orders">
     <div class="container">
-      <%= render 'orders/index', restaurant: @restaurant, orders: @orders %>
+      <div id="orderslist">
+        <%= render 'orders/index', restaurant: @restaurant, orders: @orders %>
+      </div>
     </div>
   </div>
 
