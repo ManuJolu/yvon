@@ -14,7 +14,10 @@
 
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
-
+      <!-- Checkbox On/Off Duty -->
+      <div class="checkbox">
+        <%= render 'shared/checkbox' %>
+      </div>
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
         <div class="dropdown">

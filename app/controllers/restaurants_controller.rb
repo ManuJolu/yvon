@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update]
+  before_action :set_restaurant, only: [:show, :edit, :update, :duty]
 
   def index
     @restaurants = Restaurant.where.not(latitude: nil, longitude: nil)
@@ -43,6 +43,11 @@ class RestaurantsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def duty
+    @restaurant.on_duty = (params[:state] == "on" ? true : false)
+    @restaurant.save
   end
 
   private
