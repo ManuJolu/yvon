@@ -28,7 +28,9 @@
           <div class="col-md-3"><%= meal.description %></div>
           <div class="col-md-1"><%= meal.price %></div>
           <div class="col-md-1">
-            <i class="fa fa-pencil" ></i>
+            <% link_to do %>
+              <i class="fa fa-pencil" ></i>
+            <% end %>
           </div>
         </div>
       </div>
@@ -37,9 +39,3 @@
   <% end %>
 </div>
 
-
-
-
-
-  </tbody>
-</table>
