@@ -2,7 +2,6 @@ $("#pending").click(function () {
   $("#orderspending").toggleClass( "hidden" );
 });
 
-
 $("#pending").click(function () {
   $("#trianglependingdown").toggleClass( "hidden" );
 });
@@ -10,6 +9,8 @@ $("#pending").click(function () {
 $("#pending").click(function () {
   $("#trianglependingup").toggleClass( "hidden" );
 });
+
+
 
 $("#delivered").click(function () {
   $("#ordersdelivered").toggleClass( "hidden" );
