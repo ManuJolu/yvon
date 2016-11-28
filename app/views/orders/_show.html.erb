@@ -53,14 +53,14 @@
           <td><%= order.paid_at %></td>
           <td>
             <% if order.ready_at == nil %>
-              <%= render 'orders/form_order_ready', restaurant: restaurant, order: order %>
+              <%= render 'orders/form_order_ready', order: order %>
             <% else %>
               <%= order.ready_at %>
             <% end %>
           </td>
           <td>
             <% if order.ready_at != nil && order.delivered_at == nil %>
-              <%= render 'orders/form_order_delivered', restaurant: restaurant, order: order %>
+              <%= render 'orders/form_order_delivered', order: order %>
             <% else %>
               <%= order.delivered_at %>
             <% end %>

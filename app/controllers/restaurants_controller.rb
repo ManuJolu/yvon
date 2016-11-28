@@ -13,7 +13,6 @@ class RestaurantsController < ApplicationController
 
   def show
     @meal = @restaurant.meals.new
-    @orders = @restaurant.orders.persisted
   end
 
   def new
@@ -48,7 +47,7 @@ class RestaurantsController < ApplicationController
   private
 
   def set_restaurant
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = Restaurant.includes(:orders).find(params[:id])
   end
 
   def restaurant_params
