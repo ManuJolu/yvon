@@ -4,7 +4,6 @@ class Order < ApplicationRecord
   has_many :ordered_meals
   has_many :meals, through: :ordered_meals
 
-  scope :persisted, -> { where('id IS NOT NULL') }
   scope :pending, ->{ where(delivered_at: nil).order(paid_at: :desc) }
   scope :delivered, -> { where('delivered_at IS NOT NULL').order(delivered_at: :desc) }
 
