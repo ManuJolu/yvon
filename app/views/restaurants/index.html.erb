@@ -65,16 +65,13 @@ window.addEventListener('load', load);
 </div>
 
 <div class="container">
-    <div class="col-sm-push-2 col-sm-8">
-      <div class="col-sm-6">
-        <% @restaurants.each do |restaurant| %>
+  <div class="row">
+    <div class="col-sm-push-1 col-sm-10">
+      <% @restaurants.each do |restaurant| %>
+        <div class="col-sm-6">
           <%= render 'restaurant_card', restaurant: restaurant %>
-        <% end %>
-      </div>
-      <div class="col-sm-6">
-        <% @restaurants.each do |restaurant| %>
-          <%= render 'restaurant_card', restaurant: restaurant %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
+  </div>
 </div>
