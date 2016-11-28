@@ -1,13 +1,14 @@
 /* Main class */
-nav{
+.navbar-wagon-fixed{
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   transition: all 0.3s ease;
   display: flex;
-  height: 80px;
+  height: 90px;
   padding: 0px 30px;
   align-items: center;
   justify-content: space-between;
-  border-bottom: solid 3px #D23333;
+  border-bottom: solid 1px white;
+  background-color: black;
 
 }
 
