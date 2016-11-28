@@ -1,9 +1,44 @@
 <div class="container">
 
+  <div class="row">
+    <div class="col-md-3">Photo</div>
+    <div class="col-md-2">Meal Name</div>
+    <div class="col-md-3">Description</div>
+    <div class="col-md-1">Price</div>
+    <div class="col-md-1">Edit</div>
+  </div>
+
+  <% @restaurant.meals.categories.each do |category| %>
+    <div class="row">
+      <div class="col-md-12">
+        <%= category[0].capitalize.tr("_", " ").pluralize %>
+      </div>
+      <% @restaurant.meals.where(category: category[0]).each do |meal| %>
+        <div class="col-md-3">Photo</div>
+        <div class="col-md-2"><%= meal.name %></div>
+        <div class="col-md-3"><%= meal.description %></div>
+        <div class="col-md-1"><%= meal.price %></div>
+        <div class="col-md-1">
+          <%= link_to edit_restaurant_meal_path(meal) do %>
+            <i class="fa fa-pencil" ></i>
+          <% end %>
+        </div>
+      <% end %>
+
+
+    </div>
+  <% end %>
+</div>
+
+
+
+
+<div class="container">
+
   <table class="table table-striped">
   <thead>
     <tr>
-      <th>Category</th>
+      <th>Photo</th>
       <th>Meal Name</th>
       <th>Description</th>
       <th>Prix</th>
@@ -12,26 +47,31 @@
   </thead>
 
   <tbody>
-    <% @restaurant.meals.each do |meal| %>
-      <tr>
-        <td>
-          <%= meal.category %>
-        </td>
-        <td>
-          <%= meal.name %>
-        </td>
-        <td>
-          <%= meal.description %>
-        </td>
-        <td>
-          <%= meal.price %>
-        </td>
-        <td>
-          <%= link_to edit_restaurant_meal_path(meal) do %>
-          <i class="fa fa-pencil" ></i>
-          <% end %>
-        </td>
-      </tr>
+      <% Meal.categories.each do |category| %>
+      <tr><td><%= category[0] %></td></tr>
+
+      <% @restaurant.meals.where(category: category[0]).each do |meal| %>
+
+        <tr>
+          <td>
+            <%= meal.category %>
+          </td>
+          <td>
+            <%= meal.name %>
+          </td>
+          <td>
+            <%= meal.description %>
+          </td>
+          <td>
+            <%= meal.price %>
+          </td>
+          <td>
+            <%= link_to edit_restaurant_meal_path(meal) do %>
+            <i class="fa fa-pencil" ></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
