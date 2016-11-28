@@ -47,7 +47,7 @@ class RestaurantsController < ApplicationController
   private
 
   def set_restaurant
-    @restaurant = Restaurant.includes(:orders).find(params[:id])
+    @restaurant = Restaurant.find(params[:id])
   end
 
   def restaurant_params
