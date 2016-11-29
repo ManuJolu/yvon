@@ -12,9 +12,9 @@ body {
   bottom: 0;
   width: 100%;
   height: 150px;
-  background-color: #111;
+  background-color: $gray;
   text-align: center;
-  border-top: solid 1px white;
+  border-top: solid 1px $white;
 }
 
 .box{
@@ -24,27 +24,27 @@ body {
 }
 
 .fa-twitter {
-    color: white;
+    color: $white;
 }
 
 .fa-facebook {
-    color: white;
+    color: $white;
 }
 
 .fa-youtube-play {
-    color: white;
+    color: $white;
 }
 
 .fa-rss {
-    color: white;
+    color: $white;
 }
 
 
 .fa-flickr {
-    color: white;
+    color: $white;
 }
 
 
 .fa-linkedin {
-    color: white;
+    color: $white;
 }
