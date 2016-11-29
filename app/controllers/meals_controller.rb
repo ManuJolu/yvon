@@ -14,10 +14,12 @@ class MealsController < ApplicationController
 
   def update
     @meal.update(meal_params)
-    if meal.save
+    if @meal.save
       redirect_to @restaurant
     else
-      render 'edit'
+      redirect_to @restaurant
+      # @new_meal = @restaurant.meals.new
+      # render 'restaurants/show'
     end
   end
 

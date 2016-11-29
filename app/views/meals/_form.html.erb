@@ -1,4 +1,4 @@
-<%= simple_form_for [@restaurant, @meal] do |f| %>
+<%= simple_form_for [@restaurant, meal] do |f| %>
   <%= f.association :restaurant, as: :hidden %>
   <%= f.input :name, label: "Meal's name", error: "Meals's name is mandatory, please specify one" %>
   <%= f.input :category, collection: Meal.categories.map {|k, v| [k, k]} %>
