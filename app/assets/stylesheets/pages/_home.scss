@@ -22,15 +22,18 @@
 .product {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   border-radius: 3px;
   transition: all 0.15s ease;
+}
+
+#first {
+  margin-top: 10px;
 }
 
 /* Body design */
 .product-body {
   flex: 1 1 auto;
-  text-align: center;
   align-items: center;
   justify-content: center;
 }
@@ -43,6 +46,7 @@
   font-weight: lighter;
   color: $gray;
   margin-bottom: 0;
+  margin-top: 10px;
   font-size: 18px;
 }
 
