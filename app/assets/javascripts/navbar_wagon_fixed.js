@@ -1,3 +1,3 @@
 $(document).on('scroll', function (e) {
-    $('.navbar-wagon-fixed').css('opacity', ($(document).scrollTop() / 500));
+    $('.background-custom').css('opacity', ($(document).scrollTop() / 500));
 });
