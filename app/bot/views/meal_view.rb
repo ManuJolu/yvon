@@ -1,7 +1,3 @@
-require 'cloudinary'
-
-include CloudinaryHelper
-
 class MealView
   def menu(postback, restaurant)
     elements = [

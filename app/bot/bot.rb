@@ -1,6 +1,8 @@
 require 'facebook/messenger'
 
 include Facebook::Messenger
+include CloudinaryHelper
+
 
 @page_controller = PageController.new
 @user_controller = UserController.new
@@ -58,6 +60,7 @@ Bot.on :postback do |postback|
   when /\Arestaurant_(?<id>\d+)\z/
     unless (user.session['order'] ||= {})['restaurant_id'] == $LAST_MATCH_INFO['id'].to_i
       (user.session['order'] ||= {})['restaurant_id'] = $LAST_MATCH_INFO['id'].to_i
+      user.session['order']['preperation_time'] = Restaurant.find($LAST_MATCH_INFO['id'].to_i).preperation_time
       user.session['order']['meals'] = {}
       user.save
     end
