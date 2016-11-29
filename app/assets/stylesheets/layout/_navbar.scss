@@ -154,10 +154,22 @@ body {
   color: $brand-color;
 }
 
-#restaurant_name h1 {
+#checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#switch {
+  margin-top:11px;
+}
+
+#checkbox h1 {
   font-family: $logo;
   color: white;
-  font-size: 45px;
+  font-size: 20px;
   text-decoration: none !important;
+  margin-top:11px;
 }
 
