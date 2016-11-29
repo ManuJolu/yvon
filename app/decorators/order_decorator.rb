@@ -31,6 +31,7 @@ class OrderDecorator < Draper::Decorator
     object.delivered_at&.strftime('%-H:%M:%S')
   end
 
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #

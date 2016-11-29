@@ -23,8 +23,19 @@
   padding: 0px 30px;
   align-items: center;
   justify-content: space-between;
+<<<<<<< HEAD
   background-color: transparent;
   position: relative;
+=======
+  border-bottom: solid 1px white;
+  background-color: black;
+  // opacity: 0;
+}
+
+/* Optional class to fix the navbar on top */
+.navbar-wagon-fixed {
+  position: fixed;
+>>>>>>> b7f6738c54fb41f3966094b9d9e99d915e6c409d
   left: 0px;
   top: 0px;
   z-index: 1;
@@ -159,10 +170,27 @@
   color: $white;
 }
 
-#restaurant_name h1 {
+#checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#switch {
+  margin-top:11px;
+}
+
+#checkbox h1 {
   font-family: $logo;
+<<<<<<< HEAD
   color: $white;
   font-size: 45px;
+=======
+  color: white;
+  font-size: 20px;
+>>>>>>> b7f6738c54fb41f3966094b9d9e99d915e6c409d
   text-decoration: none !important;
+  margin-top:11px;
 }
 

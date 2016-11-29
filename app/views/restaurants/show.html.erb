@@ -18,7 +18,7 @@
   <div class="tab-content" id="orders">
     <div class="container">
       <div id="orderslist">
-        <%= render 'orders/index', restaurant: @restaurant %>
+        <%= render 'orders/index', orders: @restaurant.orders %>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@
               <h4 class="modal-title" id="myModalLabel">Add a meal</h4>
             </div>
             <div class="modal-body">
-              <%= render 'meals/new' %>
+              <%= render 'meals/form', meal: @new_meal %>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -54,13 +54,12 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 
   <div class="tab-content hidden" id="dashboard">
-    <div id="ordersdashboard">
-      <%= render 'orders/dashboard', restaurant: @restaurant, orders: @orders %>
-    </div>
+    <%= render 'orders/dashboard' %>
   </div>
 
 
