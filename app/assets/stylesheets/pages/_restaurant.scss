@@ -1,5 +1,5 @@
 .banner {
-  color: white;
+  color: $white;
   text-align: center;
   height: 100vh;
   background-size: cover !important;
@@ -34,13 +34,13 @@
 .action {
   line-height: 40px;
   background-color: #D23333;
-  color: white;
+  color: $white;
   font-size: 14px;
   border: none
 }
 
 .action:hover {
-  color: white;
+  color: $white;
   background: #D23333;
   border-color: #ac2626;
 }

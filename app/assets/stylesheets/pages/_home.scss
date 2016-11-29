@@ -1,11 +1,12 @@
 .banner {
-  color: white;
+  color: $white;
   text-align: center;
   height: 100vh;
   background-size: cover !important;
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 .banner h1 {
   font-size: 75px;
@@ -40,7 +41,7 @@
 }
 .product-body h3 {
   font-weight: lighter;
-  color: #999999;
+  color: $gray;
   margin-bottom: 0;
 }
 
@@ -61,7 +62,7 @@
 .product-controls a {
   padding: 0 20px;
   font-size: 17px;
-  color: #E6E6E6;
+  color: $white;
 }
 .product-controls a:hover {
   color: #D3473C !important
