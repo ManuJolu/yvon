@@ -1,3 +1,8 @@
-<h1><%= restaurant.name %></h1>
+<!-- <h1><%= restaurant.name %></h1>
 <h2>Your turnover</h2>
-<h2></h2>
+<h2><%= restaurant.name %></h2>
+
+<% restaurant.orders.each do |order| %>
+<%= order.sum(&:price)    %>
+<% end %>
+ -->

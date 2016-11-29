@@ -1,3 +1,2 @@
-$('#orderslist').html("<%= j render 'orders/index', restaurant: @restaurant, orders: @orders %>");
-
-
+$('#ordersdelivered').html("<%= j render 'orders/show', restaurant: @restaurant, orders: @restaurant.orders.delivered %>");
+$('#orderspending').html("<%= j render 'orders/show', restaurant: @restaurant, orders: @restaurant.orders.pending %>");
