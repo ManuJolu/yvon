@@ -1,6 +1,6 @@
 .frontview {
 text-align: center;
-background-color: white;
+background-color: $white;
 }
 
 .thumbnail {
@@ -9,7 +9,7 @@ height: 200px;
 }
 
 .banner {
-  color: white;
+  color: $white;
   text-align: center;
   height: 100vh;
   /* if you have a 70px navbar => height: calc(100vh - 70px); */
