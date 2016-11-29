@@ -17,7 +17,7 @@
     <div class="row">
       <div class="col-md-8">
 
-        <div class="product">
+        <div class="product" id="first">
           <img src="http://res.cloudinary.com/da2krghvd/image/upload/v1480083341/geolocalisation_wlk5ok.jpg" alt="kudoz" class="product-image hidden-xs" style="width: 100px; height: 100px; ">
           <div class='product-body'>
             <h1>Tell your location.</h1>
@@ -50,9 +50,12 @@
         </div>
 
       </div>
-    </div>
-    <div class="col-md-4">
-      VIDEO DEMO YVON
+
+      <div class="col-md-4">
+        <div class="vdo">
+          <%= image_tag "iphone.png" %>
+        </div>
+      </div>
     </div>
     <div class='product-body'>
       <h3 class="navbar-wagon-item navbar-wagon-button btn"><%= link_to "To add your restaurant to Yvon's network? Click here", new_restaurant_path  %></h3>
