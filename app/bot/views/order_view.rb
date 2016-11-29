@@ -39,7 +39,7 @@ class OrderView
           currency: "EUR",
           payment_method: "Visa #{rand(1000..9999)}",
           order_url: "http://www.hello-yvon.com",
-          timestamp: "#{order.paid_at.to_i}",
+          timestamp: "#{(order.paid_at.to_f * 1000).to_i}",
           elements: elements,
           address: {
             street_1: "Place de la Bourse",
