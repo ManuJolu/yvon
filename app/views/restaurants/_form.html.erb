@@ -3,6 +3,7 @@
   <%= f.input :address, label: "Restaurant's address", error: "Restaurant's address is mandatory, please specify one" %>
   <%= f.input :category, collection: Restaurant.categories.map {|k, v| [k, k]} %>
   <%= f.input :description %>
+  <%= f.input :preperation_time %>
   <%= f.input :photo, as: :attachinary %>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

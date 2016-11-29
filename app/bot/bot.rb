@@ -1,6 +1,8 @@
 require 'facebook/messenger'
 
 include Facebook::Messenger
+include CloudinaryHelper
+
 
 @page_controller = PageController.new
 @user_controller = UserController.new

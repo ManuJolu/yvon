@@ -38,8 +38,8 @@ class OrderView
           order_number: "#{order.id}",
           currency: "EUR",
           payment_method: "Visa #{rand(1000..9999)}",
-          order_url: "https://yvon.herokuapp.com",
-          timestamp: "#{order.paid_at.to_i}",
+          order_url: "http://www.hello-yvon.com",
+          timestamp: "#{(order.paid_at.to_f * 1000).to_i}",
           elements: elements,
           address: {
             street_1: "Place de la Bourse",
@@ -80,6 +80,10 @@ class OrderView
       # "&markers=size:mid%7Ccolor:0x#{colors[0]}%7Clabel:%7C#{coordinates[0]},#{coordinates[1]}", # user_marker
       "&markers=size:mid%7Ccolor:0x#{colors[3]}%7Clabel:%7C#{order.restaurant.latitude},#{order.restaurant.longitude}"
     ]
+
+    postback.reply(
+      text: "Your order will be ready in #{order.preperation_time}min at #{(Time.now + order.preperation_time.minutes).strftime('%-H:%m')}."
+    )
 
     postback.reply(
       attachment: {

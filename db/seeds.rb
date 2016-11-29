@@ -31,7 +31,8 @@ puts "Creating restaurants"
     address: "#{Faker::Address.city}, France",
     category: rand(0..6),
     description: Faker::Hipster.sentence,
-    photo_url: "http://res.cloudinary.com/dsc0gdltc/image/upload/v1479919370/lowgdzolykz7vtm1kuby.jpg"
+    photo_url: "http://res.cloudinary.com/dsc0gdltc/image/upload/v1479919370/lowgdzolykz7vtm1kuby.jpg",
+    preperation_time: rand(5..20)
   })
   restaurant.user = User.all[rand(0..4)]
   restaurant.save
