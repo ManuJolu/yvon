@@ -92,3 +92,11 @@ a:hover {
 .product:hover .product-controls-hidden a { color: #E6E6E6 }
 .product-upvote:hover .product-arrow { border-bottom: 9px solid #5898f1 }
 
+
+.vdo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+
