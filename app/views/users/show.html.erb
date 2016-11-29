@@ -1,14 +1,12 @@
-<% avatar_url = @user.facebook_picture_url || "http://placehold.it/30x30" %>
-<%= image_tag avatar_url, class: 'avatar-large' %>
-
-<%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %>
-
-<h3>Restaurants</h3>
 <div class="container">
+  <h3><% avatar_url = @user.facebook_picture_url || "http://placehold.it/30x30" %>
+  <%= image_tag avatar_url, class: 'avatar-large' %>  <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %>, here are your your restaurants</h3>
   <div class="row">
     <% @user.restaurants.each do |restaurant| %>
-      <div class="col-xs-12 col-sm-4">
-        <%= render 'restaurants/restaurant_card', restaurant: restaurant %>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+          <%= render 'users/user_restaurant_card', restaurant: restaurant %>
+        </div>
       </div>
     <% end %>
   </div>

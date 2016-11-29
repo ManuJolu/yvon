@@ -5,6 +5,7 @@
   color: white;
   position: relative;
   margin: 10px 0;
+  border-radius: 10px;
 }
 .card-user {
   position: absolute;
@@ -17,18 +18,61 @@
   left: 10px;
   font-size: 10px;
   text-transform: uppercase;
+  h2 {
+    margin: 0px;
+  }
 }
+
 .card-description {
   position: absolute;
   bottom: 10px;
   left: 10px;
-}
-.card-description h2 {
-  font-size: 24px;
-}
-.card-description p {
-  font-size: 13px;
+  h2 {
+  font-size: 20px;
+    margin: 0px;
   }
+  p {
+    font-size: 13px;
+    margin: 0px;
+  }
+}
+
+.card-large {
+  height: 300px;
+  width: 800px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  background-size: cover !important;
+  color: white;
+  position: relative;
+  margin: 20px 0;
+  border-radius: 20px;
+}
+
+.card-category-large {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 10px;
+  text-transform: uppercase;
+  h2 {
+    margin: 0px;
+  }
+}
+
+.card-description-large {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  h2 {
+  font-size: 20px;
+    margin: 10px;
+  }
+  p {
+    font-size: 13px;
+    margin: 10px;
+  }
+}
+
 .card-link {
   position: absolute;
   top: 0;
