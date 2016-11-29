@@ -38,7 +38,7 @@ class OrderView
           order_number: "#{order.id}",
           currency: "EUR",
           payment_method: "Visa #{rand(1000..9999)}",
-          order_url: "https://yvon.herokuapp.com",
+          order_url: "http://www.hello-yvon.com",
           timestamp: "#{order.paid_at.to_i}",
           elements: elements,
           address: {
