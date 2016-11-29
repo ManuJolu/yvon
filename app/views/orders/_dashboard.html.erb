@@ -1,8 +1,15 @@
-<!-- <h1><%= restaurant.name %></h1>
-<h2>Your turnover</h2>
-<h2><%= restaurant.name %></h2>
+<div class="container">
+  <div class="turnover">
+    <h2>Your turnover</h2>
 
-<% restaurant.orders.each do |order| %>
-<%= order.sum(&:price)    %>
-<% end %>
- -->
+    <% sum = 0 %>
+    <% @restaurant.orders.each do |order| %>
+      <% sum = sum + order.price %>
+    <% end %>
+
+    <%= sum.fdiv(100)  %> €
+  </div>
+  <div class="number">
+    <h2>Number of orders</h2>
+  </div>
+</div>

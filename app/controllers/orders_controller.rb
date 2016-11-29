@@ -75,6 +75,8 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:ready_at, :delivered_at)
   end
 
+
+
 end
 
 
