@@ -5,16 +5,28 @@
     <% end %>
 
   </div>
+
+  <% if user_signed_in? %>
+    <div id="restaurant_name">
+      <% if @restaurant.nil? %>
+        <% %>
+      <% else %>
+        <div id="checkbox">
+          <h1>"<%=  @restaurant.name %>"</h1>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
+
 <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
-      <div id="restaurant_name">
+      <div id="restaurant_status">
         <% if @restaurant.nil? %>
-          <% "" %>
+          <% %>
         <% else %>
           <div id="checkbox">
-            <h1>"<%=  @restaurant.name %>"</h1>
             <%= render 'shared/checkbox' %>
           </div>
         <% end %>
@@ -42,8 +54,6 @@
 <!-- Login text link -->
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
-
   </div>
-
 </div>
 
