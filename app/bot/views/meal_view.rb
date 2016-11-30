@@ -113,6 +113,7 @@ class MealView
   end
 
   def index(postback, meals, params = {})
+    current_category = params[:current_category]
     next_category = params[:next_category]
     if next_category
       meals = meals.map do |meal|
@@ -139,6 +140,28 @@ class MealView
           ]
         }
       end
+      meals << {
+        title: "No #{current_category.tr("_", " ")} for me",
+        # image_url: cl_image_path(path, width: 382, height: 200, crop: :fill),
+        # subtitle: "",
+        buttons: [
+          {
+            type: 'postback',
+            title: 'Pay',
+            payload: "pay"
+          },
+          {
+            type: 'postback',
+            title: '➥ Menu',
+            payload: "menu"
+          },
+          {
+            type: 'postback',
+            title: "➥ #{next_category.tr("_", " ").capitalize}",
+            payload: "category_#{next_category}"
+          }
+        ]
+      }
     else
       meals = meals.map do |meal|
         {
@@ -159,6 +182,24 @@ class MealView
           ]
         }
       end
+      meals << {
+        title: "No #{current_category.tr("_", " ")} for me",
+        # image_url: cl_image_path(path, width: 382, height: 200, crop: :fill),
+        # subtitle: "",
+        buttons: [
+          {
+            type: 'postback',
+            title: '➥ Menu',
+            payload: "menu"
+          },
+          {
+            type: 'postback',
+            title: 'Pay',
+            payload: "pay"
+          }
+        ]
+      }
+
     end
 
     postback.reply(
@@ -169,6 +210,17 @@ class MealView
           elements: meals
         }
       }
+    )
+  end
+
+  def no_restaurant(postback)
+    postback.reply(
+      text: "Sorry, you have no restaurant selected. Can I help you find one?",
+      quick_replies: [
+        {
+          content_type: 'location'
+        }
+      ]
     )
   end
 end

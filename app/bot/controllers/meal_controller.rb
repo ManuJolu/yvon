@@ -15,8 +15,12 @@ class MealController
 
   def index(postback, params = {})
     restaurant = Restaurant.find(params[:restaurant_id])
-    meals = restaurant.meals.where(category: params[:category])
+    meals = restaurant.meals.where(category: params[:category]).limit(9)
     next_category = Meal.categories.key(Meal.categories[params[:category]] + 1)
-    @view.index(postback, meals.decorate, next_category: next_category)
+    @view.index(postback, meals.decorate, current_category: params[:category], next_category: next_category)
+  end
+
+  def no_restaurant(postback)
+    @view.no_restaurant(postback)
   end
 end

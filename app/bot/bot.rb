@@ -81,6 +81,18 @@ Bot.on :postback do |postback|
     when 'pay'
       @order_controller.cart(postback, user)
     end
+  when 'menu'
+    if (user.session['order'] ||= {})['restaurant_id'].present?
+      @meal_controller.menu(postback, restaurant_id: user.session['order']['restaurant_id'].to_i)
+    else
+      @meal_controller.no_restaurant(postback)
+    end
+  when /\Acategory_(?<category>\w+)\z/
+    if (user.session['order'] ||= {})['restaurant_id'].present?
+      @meal_controller.index(postback, restaurant_id: user.session['order']['restaurant_id'].to_i, category: $LAST_MATCH_INFO['category'])
+    else
+      @meal_controller.no_restaurant(postback)
+    end
   when 'pay'
     @order_controller.cart(postback, user)
   end
