@@ -1,6 +1,6 @@
 <div class="container">
   <h3><% avatar_url = @user.facebook_picture_url || "http://placehold.it/30x30" %>
-  <%= image_tag avatar_url, class: 'avatar-large' %>  <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %>, here are your your restaurants</h3>
+  <%= image_tag avatar_url, class: 'avatar-large' %>  <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %>, here are your your restaurants: </h3>
   <div class="row">
     <% @user.restaurants.each do |restaurant| %>
       <div class="row">
@@ -9,5 +9,13 @@
         </div>
       </div>
     <% end %>
+  </div>
+  <div class="add">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <!-- Button (call-to-action) -->
+        <%= link_to t(".top_call_to_action", default: "Add a restaurant"), new_restaurant_path, class: "action-btn" %>
+      </div>
+    </div>
   </div>
 </div>
