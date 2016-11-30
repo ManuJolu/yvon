@@ -4,7 +4,7 @@ namespace :fbm do
     Facebook::Messenger::Thread.set({
       setting_type: 'greeting',
       greeting: {
-        text: "Hello {{user_first_name}}, my name is Yvon.\nYou can ask me to order your meals."
+        text: "Hello {{user_first_name}}, my name is Yvon.\nTime is too precious to wait in line!\nSave your time & order you lunch with me.\nSay 'Hello' anytime to find restaurants around you."
       },
     }, access_token: ENV['ACCESS_TOKEN'])
   end
@@ -35,13 +35,18 @@ namespace :fbm do
         },
         {
           type: 'postback',
+          title: '➥ Menu',
+          payload: 'menu'
+        },
+        {
+          type: 'postback',
           title: 'Start a New Order',
           payload: 'hello'
         },
         {
           type: 'web_url',
-          title: 'View Website',
-          url: 'http://hello-yvon.com/'
+          title: 'Visit Website',
+          url: 'http://www.hello-yvon.com'
         }
       ]
     }, access_token: ENV['ACCESS_TOKEN'])
