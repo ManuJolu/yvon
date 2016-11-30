@@ -54,10 +54,14 @@
       <div class="col-md-4">
         <div class="vdo">
           <%= image_tag "iphone.png" %>
+          <div class="gif">
+            <%= image_tag "gifyvon.gif",  width: 210 %>
+          </div>
+
         </div>
       </div>
     </div>
-<%= image_tag "gifyvonmoinslourd.gif", width: 300, height: 1000 %>
+
       <!-- Button (call-to-action) -->
       <%= link_to t(".top_call_to_action", default: "Get Yvon for your restaurant !"), new_restaurant_path, class: "action-btn" %>
     </div>
