@@ -50,15 +50,16 @@
         </div>
 
       </div>
-
       <div class="col-md-4">
         <div class="vdo">
           <%= image_tag "iphone.png" %>
         </div>
       </div>
     </div>
-    <div class='product-body'>
-      <h3 class="navbar-wagon-item navbar-wagon-button btn"><%= link_to "To add your restaurant to Yvon's network? Click here", new_restaurant_path  %></h3>
+
+    <div class="call">
+      <!-- Button (call-to-action) -->
+      <%= link_to t(".top_call_to_action", default: "Add my Restaurant"), new_restaurant_path, class: "action-btn" %>
     </div>
   </div>
 </div>
