@@ -36,7 +36,10 @@
   background-color: #D23333;
   color: $white;
   font-size: 14px;
-  border: none
+  border: none;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 3px;
 }
 
 .action:hover {
@@ -48,4 +51,9 @@
 .entete {
   font-size: 25px;
   margin-top: 50px;
+}
+
+.btn-group-1{
+  margin-left: 450px;
+
 }
