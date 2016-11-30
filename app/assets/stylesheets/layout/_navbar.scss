@@ -7,7 +7,7 @@
 }
 
 .background-custom{
-  height: 50px;
+  height: 60px;
   width: 100%;
   background-color: $gray;
   position: absolute;
@@ -16,7 +16,7 @@
 }
 
 .background-dark{
-  height: 50px;
+  height: 60px;
   width: 100%;
   background-color: #292c3c;
   position: absolute;
@@ -161,7 +161,7 @@
 
 #logo h1 {
   font-family: $logo;
-  color: $brand-color;
+  color: $white;
   font-size: 60px;
   text-decoration: none !important;
 }
@@ -190,3 +190,6 @@
   margin-top:11px;
 }
 
+#restaurant_name h2 {
+  color: $white;
+}

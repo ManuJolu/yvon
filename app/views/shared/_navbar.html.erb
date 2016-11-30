@@ -1,7 +1,7 @@
 <div class="navbar-wagon">
   <div id="logo">
     <%= link_to root_path do %>
-      <div id="slogan"><h2>YVON</h2></div>
+      <div id="slogan"><h1>YVON</h1></div>
     <% end %>
 
   </div>
@@ -11,8 +11,8 @@
       <% if @restaurant.nil? %>
         <% %>
       <% else %>
-        <div id="checkbox">
-          <h1>"<%=  @restaurant.name %>"</h1>
+        <div>
+          <h2>"<%=  @restaurant.name %>"</h2>
         </div>
       <% end %>
     </div>
