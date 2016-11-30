@@ -20,8 +20,9 @@
     <% end %>
         <%= render 'shared/navbar' %>
     </div>
-
-    <%= render 'shared/flashes' %>
+    <div id="flashes">
+      <%= render 'shared/flashes' %>
+    </div>
     <main class="site-content">
       <%= yield %>
     </main>
