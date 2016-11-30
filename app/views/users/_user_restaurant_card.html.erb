@@ -5,7 +5,7 @@
     </div>
     <div class="card-description-large">
       <p><strong><%= "#{restaurant.description.first(50)}..." if restaurant.try(:description) %></strong><p>
-      <h2><%= restaurant.address.capitalize %></h2>
+      <h2><%= restaurant.address %></h2>
     </div>
     <%= link_to "", restaurant, class: 'card-link' %>
   </div>
