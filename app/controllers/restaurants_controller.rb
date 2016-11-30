@@ -37,10 +37,11 @@ class RestaurantsController < ApplicationController
 
   def update
     @restaurant.update(restaurant_params)
-    if restaurant.save
+    if @restaurant.save
       redirect_to @restaurant
     else
-      render 'edit'
+      @new_meal = @restaurant.meals.new
+      render 'restaurants/show'
     end
   end
 
@@ -56,7 +57,7 @@ class RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :user_id, :address, :category, :on_duty, :shift, :photo, :description)
+    params.require(:restaurant).permit(:name, :user_id, :address, :category, :on_duty, :shift, :photo, :description, :preperation_time)
   end
 
 end
