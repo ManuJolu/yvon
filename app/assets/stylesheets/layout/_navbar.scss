@@ -53,13 +53,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: 15px;
 }
 
 /* Navbar item */
 .navbar-wagon-item {
   flex: 0 1 auto;
   cursor: pointer;
-  padding: 0 20px;
+  padding: 0px 20px;
 }
 
 /* Navbar standard link */

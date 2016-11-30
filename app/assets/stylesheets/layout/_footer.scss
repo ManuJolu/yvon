@@ -26,10 +26,13 @@ body {
   color: #dddddd;
   p {
   text-color: white;
+  margin-bottom: 0px
 }
 }
 
-
+.fa {
+  margin: 5px;
+}
 
 .fa-facebook {
     color: $white;
