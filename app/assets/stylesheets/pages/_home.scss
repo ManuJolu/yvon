@@ -97,10 +97,15 @@ a:hover {
 
 
 .vdo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.gif {
+  position: absolute;
 }
 
 .msg-yvon {
