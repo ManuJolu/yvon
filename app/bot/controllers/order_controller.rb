@@ -34,7 +34,7 @@ class OrderController
         else
           #implement else here
         end
-        @view.cart(postback, order.decorate)
+        @view.cart(postback, order.decorate, paid_at: order.paid_at.to_i)
       else
         @view.restaurant_closed(postback, order.restaurant)
       end

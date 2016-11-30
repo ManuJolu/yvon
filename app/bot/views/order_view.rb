@@ -17,7 +17,7 @@ class OrderView
 
   end
 
-  def cart(postback, order)
+  def cart(postback, order, params = {})
     elements = order.ordered_meals.map do |ordered_meal|
       {
         title: ordered_meal.meal.name,
@@ -39,7 +39,7 @@ class OrderView
           currency: "EUR",
           payment_method: "Visa #{rand(1000..9999)}",
           order_url: "http://www.hello-yvon.com",
-          timestamp: "#{(order.paid_at.to_f * 1000).to_i}",
+          timestamp: params[:paid_at],
           elements: elements,
           address: {
             street_1: "Place de la Bourse",
@@ -82,7 +82,7 @@ class OrderView
     ]
 
     postback.reply(
-      text: "Your order will be ready in #{order.preperation_time}min at #{(Time.now + order.preperation_time.minutes).strftime('%-H:%m')}."
+      text: "Your order will be ready in #{order.preperation_time}min at #{(Time.now + order.preperation_time.minutes).strftime('%-H:%M')}."
     )
 
     postback.reply(
