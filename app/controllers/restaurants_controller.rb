@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :duty]
+  skip_before_action :authenticate_user!, only: [ :index ]
 
   def index
     @restaurants = Restaurant.where.not(latitude: nil, longitude: nil)
