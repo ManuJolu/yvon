@@ -142,8 +142,8 @@ class MealView
       end
       meals << {
         title: "No #{current_category.tr("_", " ")} for me",
-        # image_url: cl_image_path(path, width: 382, height: 200, crop: :fill),
-        # subtitle: "",
+        image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
+        subtitle: "\nI'd better watch my figure",
         buttons: [
           {
             type: 'postback',
@@ -184,8 +184,8 @@ class MealView
       end
       meals << {
         title: "No #{current_category.tr("_", " ")} for me",
-        # image_url: cl_image_path(path, width: 382, height: 200, crop: :fill),
-        # subtitle: "",
+        image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
+        subtitle: "\nI'd better watch my figure",
         buttons: [
           {
             type: 'postback',
