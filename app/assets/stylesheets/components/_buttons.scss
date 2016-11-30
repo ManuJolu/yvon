@@ -33,3 +33,20 @@
   border-radius: 5px;
   font-weight: lighter;
 }
+
+.action-btn {
+  margin-left: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  line-height: 40px;
+  background-color: #D23333;
+  color: $white;
+  font-size: 18px;
+  border: none;
+}
+
+.action-btn:hover {
+  color: $white;
+  background: #D23333;
+  border-color: #ac2626;
+}
