@@ -1,24 +1,25 @@
 <div class="navbar-wagon">
-  <%= link_to root_path do %>
-    <div id="logo">
-      <h1>YVON</h1>
-    </div>
-  <% end %>
+  <div class="col-sm-4 ">
+    <%= link_to root_path do %>
+      <div id="logo"><h1>YVON</h1></div>
+    <% end %>
+  </div>
 
+  <div class="col-sm-4">
   <% if user_signed_in? %>
     <div id="restaurant_name">
       <% if @restaurant.nil? %>
         <% %>
       <% else %>
         <div>
-          <h2>"<%=  @restaurant.name %>"</h2>
+          <h2><%=  @restaurant.name %></h2>
         </div>
       <% end %>
     </div>
   <% end %>
+  </div>
 <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
-
 <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
       <div id="restaurant_status">
