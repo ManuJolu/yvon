@@ -8,6 +8,15 @@
           <div id="slogan"><h4>can't let you wait</h4></div>
       </div>
 <!-- Right Navigation -->
+        <div id="restaurant_name">
+          <% if @restaurant.nil? %>
+            <% "" %>
+          <% else %>
+            <div id="checkbox">
+              <h1>"<%=  @restaurant.name %>"</h1>
+            </div>
+          <% end %>
+        </div>
       <div class="navbar-wagon-right hidden-xs hidden-sm">
 <!-- Different navigation if login or not -->
         <% if user_signed_in? %>
