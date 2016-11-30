@@ -4,14 +4,14 @@ class MealView
       {
         title: restaurant.name,
         image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),
-        subtitle: restaurant.description,
-        buttons: [
-          {
-              title: "Pay",
-              type: "postback",
-              payload: "pay"
-          }
-        ]
+        subtitle: restaurant.description
+        # buttons: [
+        #   {
+        #       title: "Pay",
+        #       type: "postback",
+        #       payload: "pay"
+        #   }
+        # ]
         # default_action: {
         #   type: "web_url",
         #   url: "#{restaurant.facebook_url}"
