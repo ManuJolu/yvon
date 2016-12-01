@@ -4,7 +4,7 @@ class Meal < ApplicationRecord
   validates :category, presence: true
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :tax, presence: true
+  validates :tax_rate, presence: true
   validates :photo, presence: true
 
   enum category: [ :starter, :main_course, :dessert, :drink ]
@@ -15,7 +15,7 @@ class Meal < ApplicationRecord
   scope :by_category, -> { order(:category).order('lower(name)') }
 
   def tax
-    if tax_rate.present?
+    if price.present? && tax_rate.present?
       price * tax_rate.to_f / (100 + tax_rate.to_f)
     else
       0
@@ -23,7 +23,7 @@ class Meal < ApplicationRecord
   end
 
   def pretax_price
-    if tax_rate.present?
+    if price.present? && tax_rate.present?
       price / (1 + (tax_rate.to_f / 100))
     else
       price

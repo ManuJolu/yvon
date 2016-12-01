@@ -7,19 +7,17 @@ class MealsController < ApplicationController
     if @meal.save
       redirect_to @restaurant
     else
-      @orders = @restaurant.orders
-      render 'restaurants/show'
+      render :new
     end
   end
 
   def update
+    @meal = Meal.find(params[:id])
     @meal.update(meal_params)
     if @meal.save
       redirect_to @restaurant
     else
-      redirect_to @restaurant
-      # @new_meal = @restaurant.meals.new
-      # render 'restaurants/show'
+      render :edit
     end
   end
 

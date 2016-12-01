@@ -9,16 +9,17 @@
     </div>
   </div>
 
-  <% @restaurant.meals.categories.each do |category| %>
+  <% @restaurant.meals.categories.keys.each do |category| %>
     <div class="row">
       <div class="col-md-12">
         <div class="categorie">
           <hr>
-          <%= category[0].capitalize.tr("_", " ").pluralize %>
+          <%= category.capitalize.tr("_", " ").pluralize %>
         </div>
       </div>
     </div>
-    <% @restaurant.meals.where(category: category[0]).each do |meal| %>
+    <% @restaurant.meals.where(category: category).each do |meal| %>
+    <% if meal.persisted? %>
       <div class="ligne">
         <div class="row">
           <div class="col-md-4">
@@ -49,6 +50,7 @@
 
         </div>
       </div>
+    <% end %>
     <% end %>
 
   <% end %>
