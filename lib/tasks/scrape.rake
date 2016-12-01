@@ -19,7 +19,8 @@ namespace :scrap do
       name = element.children[1].child.text
       photo_url = element.child.child.child.attribute('data-src').value
       address = element.children[1].children[1].child.text.strip
-      restaurant = Restaurant.new(user: user, name: name, photo_url: photo_url, address: address, description: "test", category: rand(0..6), preperation_time: rand(5..20))
+      description = element.children[1].children[2].child.child.child.text
+      restaurant = Restaurant.new(user: user, name: name, photo_url: photo_url, address: address, description: description, category: rand(0..6), preperation_time: rand(5..20))
       puts restaurant.name
       restaurant.valid?
       puts restaurant.errors.inspect
