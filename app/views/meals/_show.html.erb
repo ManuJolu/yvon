@@ -25,7 +25,7 @@
           <div class="col-md-2">
             <div class="ui checked checkbox">
               <%= simple_form_for [ @restaurant, meal], remote: true do |f| %>
-                <%= f.input :active, label: false %>
+                <%= f.input :active, label: false, input_html: { class: "input_active" } %>
               <% end %>
             </div>
           </div>
@@ -58,17 +58,11 @@
           </div>
         </div>
       </div>
-      <% content_for :after_js do %>
-        <script>
-          $("#edit_meal_<%= meal.id %>").change(function() {
-            $(this).trigger('submit.rails');
-          });
-        </script>
-      <% end %>
     <% end %>
 
   <% end %>
 </div>
+
 
 
 
