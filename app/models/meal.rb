@@ -13,7 +13,7 @@ class Meal < ApplicationRecord
   has_attachment :photo
 
   scope :by_category, -> { order(:category).order('lower(name)') }
-  scope :active, -> { where(active: true) }
+  scope :is_active, -> { where(active: true) }
 
   def tax
     if price.present? && tax_rate.present?
