@@ -27,9 +27,15 @@ class RestaurantsController < ApplicationController
     # @restaurant = Restaurant.new(restaurant_params)
     # @restaurant.user = current_user
     if @restaurant.save
-      redirect_to @restaurant
+      respond_to do |format|
+        format.html { redirect_to @restaurant }
+        format.js
+      end
     else
-      render 'new'
+      respond_to do |format|
+        format.html { render :new }
+        format.js
+      end
     end
   end
 
@@ -39,10 +45,16 @@ class RestaurantsController < ApplicationController
   def update
     @restaurant.update(restaurant_params)
     if @restaurant.save
-      redirect_to @restaurant
+      respond_to do |format|
+        format.html { redirect_to @restaurant }
+        format.js
+      end
     else
       @new_meal = @restaurant.meals.new
-      render 'restaurants/show'
+      respond_to do |format|
+        format.html { render :show }
+        format.js
+      end
     end
   end
 
