@@ -2,3 +2,4 @@ $('#orderspending').html("<%= j render 'orders/show', restaurant: @restaurant, o
 <% unless @ready %>
   $('#ordersdelivered').html("<%= j render 'orders/show', restaurant: @restaurant, orders: @restaurant.orders.delivered %>");
 <% end %>
+

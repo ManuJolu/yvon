@@ -61,6 +61,11 @@ class OrdersController < ApplicationController
     end
   end
 
+  def pending
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    respond_to :js
+  end
+
   private
 
   def set_order
