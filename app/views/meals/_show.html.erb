@@ -1,8 +1,9 @@
 <div class="container">
   <div class="entete">
     <div class="row">
-      <div class="col-md-4">Photo</div>
-      <div class="col-md-3">Meal Name</div>
+      <div class="col-md-2">On the Menu</div>
+      <div class="col-md-3">Photo</div>
+      <div class="col-md-2">Meal Name</div>
       <div class="col-md-3">Description</div>
       <div class="col-md-1">Price</div>
       <div class="col-md-1">Edit</div>
@@ -14,19 +15,26 @@
       <div class="col-md-12">
         <div class="categorie">
           <hr>
-          <%= category[0].capitalize.tr("_", " ").pluralize %>
+          <h4><%= category[0].capitalize.tr("_", " ").pluralize %></h4>
         </div>
       </div>
     </div>
     <% @restaurant.meals.where(category: category[0]).each do |meal| %>
       <div class="ligne">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-2">
+            <div class="ui checked checkbox">
+              <%= simple_form_for [ @restaurant, meal], remote: true do |f| %>
+                <%= f.input :active, label: false %>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-md-3">
             <div id="bordered">
               <%= cl_image_tag(meal.photo.path, height: 50, width: 100, crop: :fill) %>
             </div>
           </div>
-          <div class="col-md-3"><%= meal.name %></div>
+          <div class="col-md-2"><%= meal.name %></div>
           <div class="col-md-3"><%= meal.description %></div>
           <div class="col-md-1"><%= meal.decorate.price %></div>
           <div class="col-md-1">
@@ -51,8 +59,18 @@
 
         </div>
       </div>
+      <% content_for :after_js do %>
+        <script>
+          $("#edit_meal_<%= meal.id %>").change(function() {
+            $(this).trigger('submit.rails');
+          });
+        </script>
+      <% end %>
     <% end %>
 
   <% end %>
 </div>
+
+
+
 

@@ -14,12 +14,16 @@ class MealsController < ApplicationController
 
   def update
     @meal.update(meal_params)
-    if @meal.save
-      redirect_to @restaurant
-    else
-      redirect_to @restaurant
-      # @new_meal = @restaurant.meals.new
-      # render 'restaurants/show'
+    respond_to do |format|
+      if @meal.save
+        format.js { render :nothing => true }
+        format.html { redirect_to @restaurant }
+      else
+        format.js { render :nothing => true }
+        format.html { redirect_to @restaurant }
+        # @new_meal = @restaurant.meals.new
+        # render 'restaurants/show'
+      end
     end
   end
 
@@ -34,7 +38,7 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:restaurant_id, :category, :name, :description, :price, :tax_rate, :photo)
+    params.require(:meal).permit(:restaurant_id, :category, :name, :description, :price, :tax_rate, :photo, :active)
   end
 
 end
