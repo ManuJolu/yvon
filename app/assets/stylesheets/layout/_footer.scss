@@ -1,15 +1,7 @@
-html {
-  position: relative;
-  min-height: 100%;
-}
 
-body {
-  margin-bottom: 150px;
-}
 
 //
 .footer {
-  position: absolute;
   right: 0;
   bottom: 0px !important;
   left: 0;
@@ -22,7 +14,6 @@ body {
   align-items: center;
   text-align: center;
   justify-content: space-between;
-  margin-top: 20px;
   color: #dddddd;
   p {
     text-color: white;
@@ -52,3 +43,12 @@ body {
   text-align: left;
   width: 100px;
 }
+
+@media (max-width: 768px) {
+  .footer {
+    p {
+      font-size: 13px;
+    }
+  }
+}
+
