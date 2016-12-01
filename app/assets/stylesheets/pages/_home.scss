@@ -1,3 +1,7 @@
+.home-body {
+  height: 100vh;
+}
+
 .banner {
   color: $white;
   text-align: center;
@@ -112,3 +116,20 @@ a:hover {
   margin-top: 80px;
 }
 
+.owners {
+  padding: 15px 0 45px 0;
+  background-color: #E3E3E5;
+}
+
+.owners-content {
+  margin-bottom: 30px;
+  h1 {
+    margin-top: 12.5px;
+  }
+  h3 {
+    color: #292c3c;
+    margin-bottom: 0;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+}
