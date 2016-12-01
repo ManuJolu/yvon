@@ -1,0 +1,6 @@
+<% if @meal.errors.any? %>
+  $('#modalBodyNewMeal').html("<%= j render 'meals/form', meal: @meal %>");
+<% else %>
+  $('#display-meals').html("<%= j render 'meals/show' %>");
+  $('#addMeal').modal('hide');
+<% end %>

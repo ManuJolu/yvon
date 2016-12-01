@@ -5,9 +5,15 @@ class MealsController < ApplicationController
   def create
     @meal = @restaurant.meals.new(meal_params)
     if @meal.save
-      redirect_to @restaurant
+      respond_to do |format|
+        format.html { redirect_to @restaurant }
+        format.js
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.js
+      end
     end
   end
 
@@ -15,9 +21,15 @@ class MealsController < ApplicationController
     @meal = Meal.find(params[:id])
     @meal.update(meal_params)
     if @meal.save
-      redirect_to @restaurant
+      respond_to do |format|
+        format.html { redirect_to @restaurant }
+        format.js
+      end
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.js
+      end
     end
   end
 

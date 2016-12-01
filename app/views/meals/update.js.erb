@@ -1,0 +1,8 @@
+<% if @meal.errors.any? %>
+  $('#modalBodyMeal_<%= @meal.id %>').html("<%= j render 'meals/form', meal: @meal %>");
+<% else %>
+  $('#display-meals').html("<%= j render 'meals/show' %>");
+  $('#editMeal_<%= @meal.id %>').modal('hide');
+  $('.modal-backdrop').remove();
+  $('.modal-open').removeClass('modal-open')
+<% end %>
