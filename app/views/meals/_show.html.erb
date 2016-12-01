@@ -22,7 +22,9 @@
       <div class="ligne">
         <div class="row">
           <div class="col-md-4">
-            <%= cl_image_tag(meal.photo.path, height: 50, width: 100, crop: :fill) %>
+            <div id="bordered">
+              <%= cl_image_tag(meal.photo.path, height: 50, width: 100, crop: :fill) %>
+            </div>
           </div>
           <div class="col-md-3"><%= meal.name %></div>
           <div class="col-md-3"><%= meal.description %></div>
