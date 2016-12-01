@@ -10,22 +10,22 @@
     </div>
   </div>
 
-  <% @restaurant.meals.categories.each do |category| %>
+  <% @restaurant.meals.categories.keys.each do |category| %>
     <div class="row">
       <div class="col-md-12">
         <div class="categorie">
           <hr>
-          <h4><%= category[0].capitalize.tr("_", " ").pluralize %></h4>
+          <h4><%= category.capitalize.tr("_", " ").pluralize %></h4>
         </div>
       </div>
     </div>
-    <% @restaurant.meals.where(category: category[0]).each do |meal| %>
+    <% @restaurant.meals.where(category: category).each do |meal| %>
       <div class="ligne">
         <div class="row">
           <div class="col-md-2">
             <div class="ui checked checkbox">
               <%= simple_form_for [ @restaurant, meal], remote: true do |f| %>
-                <%= f.input :active, label: false %>
+                <%= f.input :active, label: false, input_html: { class: "input_active" } %>
               <% end %>
             </div>
           </div>
@@ -45,9 +45,9 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Add a meal</h4>
+                  <h4 class="modal-title" id="myModalLabel">Edit your meal</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id='modalBodyMeal_<%= meal.id %>'>
                   <%= render 'meals/form', meal: meal %>
                 </div>
                 <div class="modal-footer">
@@ -56,20 +56,13 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      <% content_for :after_js do %>
-        <script>
-          $("#edit_meal_<%= meal.id %>").change(function() {
-            $(this).trigger('submit.rails');
-          });
-        </script>
-      <% end %>
     <% end %>
 
   <% end %>
 </div>
+
 
 
 

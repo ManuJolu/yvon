@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
         end
         respond_to do |format|
           format.html { redirect_to restaurant_path(@restaurant) }
-          format.js { }
+          format.js { @ready = true }
         end
       else
         @meal = @restaurant.meals.new

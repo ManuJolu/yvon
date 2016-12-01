@@ -1,4 +1,4 @@
-<%= simple_form_for @restaurant do |f| %>
+<%= simple_form_for @restaurant, remote: true do |f| %>
   <%= f.input :name, label: "Restaurant's name", error: "Restaurant's name is mandatory, please specify one" %>
   <%= f.input :address, label: "Restaurant's address", error: "Restaurant's address is mandatory, please specify one" %>
   <%= f.input :category, collection: Restaurant.categories.map {|k, v| [k, k]} %>
