@@ -68,7 +68,7 @@ class OrderView
       }
     )
 
-    colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970']
+    colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
     url_array = [
       "http://maps.googleapis.com/maps/api/staticmap", # base
       "?center=#{order.restaurant.latitude},+#{order.restaurant.longitude}", # center

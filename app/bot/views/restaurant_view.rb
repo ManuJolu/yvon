@@ -13,13 +13,13 @@ class RestaurantView
     ]
     if restaurants.present?
       elements = restaurants.map.with_index do |restaurant, i|
-        url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 5]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},#{restaurant.longitude}"
+        url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 8]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},#{restaurant.longitude}"
         {
           title: "#{i + 1} - ready in #{restaurant.preperation_time}min - #{restaurant.name}",
           item_url: restaurant.facebook_url,
           image_url: cl_image_path(restaurant.photo.path, transformation: [
             { width: 382, height: 180, crop: :fill },
-            { overlay: 'one_pixel.png', effect: :colorize, color: "rgb:#{colors[(i + 1) % 5]}", width: 382, height: 20, y: -100 }
+            { overlay: 'one_pixel.png', effect: :colorize, color: "rgb:#{colors[(i + 1) % 8]}", width: 382, height: 20, y: -100 }
           ]),
           subtitle: "#{(restaurant.distance_from(coordinates)*1000).round}m heading #{Geocoder::Calculations.compass_point(restaurant.bearing_from(coordinates))} - #{restaurant.category.capitalize} food\n#{restaurant.description}",
           buttons: [
