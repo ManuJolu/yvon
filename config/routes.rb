@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   mount Facebook::Messenger::Server, at: 'bot'
 
   root to: 'pages#home'
+  get '/privacy_policy', to: 'pages#privacy_policy'
   resources :users, only: [:show]
   resources :restaurants, only: [:index, :show, :new, :create, :edit, :update] do
     member do
