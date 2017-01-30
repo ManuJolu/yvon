@@ -5,6 +5,12 @@
 
     <title><%= yield_with_default(:title, "Yvon - Don't fall in line") %></title>
 
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch|Open+Sans+Condensed:300" rel="stylesheet">
+    <%= favicon_link_tag 'y.jpg' %>
+
+    <%= javascript_include_tag "application", "data-turbolinks-track" => 'reload' %>
+
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,10 +35,6 @@
     <meta property="og:description" content="Save your time and order your lunch with Yvon ! Yvon is a bot to order in less than 1 min chrono in yours best restaurants. You will be impressed.">
     <meta property="og:site_name" content="Hello Yvon"/>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch|Open+Sans+Condensed:300" rel="stylesheet">
-    <%= favicon_link_tag 'y.jpg' %>
-
   </head>
 
   <body class="site">
@@ -56,8 +58,6 @@
     </main>
 
     <%= render 'shared/footer' %>
-
-    <%= javascript_include_tag 'application' %>
 
     <%= cloudinary_js_config %>
 
