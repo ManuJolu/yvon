@@ -1,3 +1,5 @@
+<% content_for title: restaurant.name  %>
+
 <div class="tabs">
   <a class="tab active" data-target="#orders">
     <h3>Orders</h3>
@@ -81,23 +83,5 @@
       $(this).closest('form').trigger('submit.rails');
       // $(this).submit();
     });
-
-
-    $(function(){
-
-      function refresh() {
-        $.ajax({
-          method: "get",
-          type: "text/javascript",
-          url: "<%= pending_restaurant_orders_path(@restaurant) %>.js",
-          success: function(data) {
-            eval(data);
-          }
-        });
-      }
-
-      setInterval(refresh, 3000);
-    });
-
   </script>
 <% end %>
