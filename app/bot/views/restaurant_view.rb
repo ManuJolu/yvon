@@ -15,7 +15,7 @@ class RestaurantView
       elements = restaurants.map.with_index do |restaurant, i|
         url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 8]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},#{restaurant.longitude}"
         {
-          title: "#{i + 1} - ready in #{restaurant.preperation_time}min - #{restaurant.name}",
+          title: "#{i + 1} - ready in #{restaurant.preparation_time}min - #{restaurant.name}",
           item_url: restaurant.facebook_url,
           image_url: cl_image_path(restaurant.photo.path, transformation: [
             { width: 382, height: 180, crop: :fill },

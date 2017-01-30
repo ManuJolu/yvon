@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201093255) do
+ActiveRecord::Schema.define(version: 20170130154735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20161201093255) do
     t.datetime "located_at"
     t.float    "latitude"
     t.float    "longitude"
-    t.integer  "preperation_time"
+    t.integer  "preparation_time"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20161201093255) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "facebook_url"
-    t.integer  "preperation_time"
+    t.integer  "preparation_time"
     t.index ["user_id"], name: "index_restaurants_on_user_id", using: :btree
   end
 

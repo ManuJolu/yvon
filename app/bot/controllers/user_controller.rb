@@ -1,4 +1,4 @@
-class UserController
+ class UserController
   def match_user(message)
     user = User.find_by(messenger_id: message.sender['id'])
     # Could implement refresh of facebook_picture_check here, or better make a cron tab for that every day?

@@ -3,27 +3,11 @@ require 'facebook/messenger'
 include Facebook::Messenger
 include CloudinaryHelper
 
-
 @page_controller = PageController.new
 @user_controller = UserController.new
 @restaurant_controller = RestaurantController.new
 @meal_controller = MealController.new
 @order_controller = OrderController.new
-
-# Bot.on :optin do |optin|
-#   optin.sender    # => { 'id' => '1008372609250235' }
-#   optin.recipient # => { 'id' => '2015573629214912' }
-#   optin.sent_at   # => 2016-04-22 21:30:36 +0200
-#   optin.ref       # => 'CONTACT_SKYNET'
-#   optin.reply(
-#     text: "Welcome! My name is Yvon, where can I help you find your restaurant?",
-#     quick_replies: [
-#       {
-#         content_type: 'location'
-#       }
-#     ]
-#   )
-# end
 
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
