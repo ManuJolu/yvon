@@ -82,7 +82,7 @@ class OrderView
     ]
 
     postback.reply(
-      text: "Your order will be ready in #{order.preperation_time}min at #{(Time.now + order.preperation_time.minutes).strftime('%-H:%M')}."
+      text: "Your order will be ready in #{order.preparation_time}min at #{(Time.now + order.preparation_time.minutes).strftime('%-H:%M')}."
     )
 
     postback.reply(
