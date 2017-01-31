@@ -3,11 +3,11 @@ class OrderController
     @view = OrderView.new
   end
 
-  def create(message, user)
+  def create(message, user, params = {})
     order = user.orders.create({
         located_at: Time.now,
-        latitude: message.attachments[0]['payload']['coordinates']['lat'],
-        longitude: message.attachments[0]['payload']['coordinates']['long']
+        latitude: params[:lat] || message.attachments[0]['payload']['coordinates']['lat'],
+        longitude: params[:lng] || message.attachments[0]['payload']['coordinates']['long']
       })
   end
 
