@@ -16,7 +16,7 @@ namespace :fbm do
       thread_state: 'new_thread',
       call_to_actions: [
         {
-          payload: 'hello'
+          payload: 'start'
         }
       ]
     }, access_token: ENV['ACCESS_TOKEN'])
@@ -41,7 +41,7 @@ namespace :fbm do
         {
           type: 'postback',
           title: 'Start a New Order',
-          payload: 'hello'
+          payload: 'start'
         },
         {
           type: 'web_url',

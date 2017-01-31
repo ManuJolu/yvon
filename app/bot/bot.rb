@@ -16,7 +16,8 @@ Bot.on :message do |message|
   user = @user_controller.match_user(message)
 
   if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
-    coordinates = @user_controller.initialize_session(message, user)
+    new_order = @order_controller.create(message, user)
+    coordinates = [new_order.latitude, new_order.longitude]
     @restaurant_controller.index(message, coordinates)
   end
 
@@ -35,43 +36,48 @@ end
 Bot.on :postback do |postback|
   user = @user_controller.match_user(postback)
   case postback.payload
-  when 'hello'
+  when 'start'
     @page_controller.hello(postback, user)
   when /\Arestaurant_(?<id>\d+)\z/
-    unless (user.session['order'] ||= {})['restaurant_id'] == $LAST_MATCH_INFO['id'].to_i
-      (user.session['order'] ||= {})['restaurant_id'] = $LAST_MATCH_INFO['id'].to_i
-      user.session['order']['meals'] = {}
-      user.save
-    end
-    @meal_controller.menu(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
+    restaurant_id = $LAST_MATCH_INFO['id'].to_i
+    @order_controller.update(postback, user, restaurant_id: restaurant_id)
+    @restaurant_controller.menu(postback, restaurant_id: restaurant_id)
   when /\Amore_restaurant_(?<id>\d+)\z/
-    @meal_controller.menu_more(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
+    restaurant_id = $LAST_MATCH_INFO['id'].to_i
+    @restaurant_controller.menu_more(postback, restaurant_id: restaurant_id)
   when /\Arestaurant_(?<restaurant_id>\d+)_category_(?<category>\w+)\z/
-    @meal_controller.index(postback, restaurant_id: $LAST_MATCH_INFO['restaurant_id'].to_i, category: $LAST_MATCH_INFO['category'])
+    restaurant_id = $LAST_MATCH_INFO['restaurant_id'].to_i
+    category = $LAST_MATCH_INFO['category']
+    @meal_controller.index(postback, restaurant_id: restaurant_id, category: category)
   when /\Ameal_(?<id>\d+)_(?<action>\w+)\z/
     meal = Meal.find($LAST_MATCH_INFO['id'])
     action = $LAST_MATCH_INFO['action']
-    @order_controller.add_meal(user, $LAST_MATCH_INFO['id'])
-    case action
-    when 'menu'
-      @meal_controller.menu(postback, restaurant_id: meal.restaurant.id)
-    when 'next'
-      category = Meal.categories.key(Meal.categories[meal.category] + 1)
-      @meal_controller.index(postback, restaurant_id: meal.restaurant.id, category: category)
-    when 'pay'
-      @order_controller.cart(postback, user)
+    if @order_controller.meal_match_restaurant(user, meal)
+      @order_controller.add_meal(user, meal)
+      case action
+      when 'menu'
+        @restaurant_controller.menu(postback, restaurant_id: meal.restaurant.id)
+      when 'next'
+        category = Meal.categories.key(Meal.categories[meal.category] + 1)
+        @meal_controller.index(postback, restaurant_id: meal.restaurant.id, category: category)
+      when 'pay'
+        @order_controller.cart(postback, user)
+      end
+    else
+      @restaurant_controller.not_my_meal(postback, restaurant_id: meal.restaurant.id)
     end
   when 'menu'
-    if (user.session['order'] ||= {})['restaurant_id'].present?
-      @meal_controller.menu(postback, restaurant_id: user.session['order']['restaurant_id'].to_i)
+    if user.current_order&.restaurant
+      @restaurant_controller.menu(postback, restaurant_id: user.current_order.restaurant.id)
     else
-      @meal_controller.no_restaurant(postback)
+      @restaurant_controller.no_restaurant(postback)
     end
   when /\Acategory_(?<category>\w+)\z/
-    if (user.session['order'] ||= {})['restaurant_id'].present?
-      @meal_controller.index(postback, restaurant_id: user.session['order']['restaurant_id'].to_i, category: $LAST_MATCH_INFO['category'])
+    category = $LAST_MATCH_INFO['category']
+    if user.current_order&.restaurant
+      @meal_controller.index(postback, restaurant_id: user.current_order.restaurant.id, category: category)
     else
-      @meal_controller.no_restaurant(postback)
+      @restaurant_controller.no_restaurant(postback)
     end
   when 'pay'
     @order_controller.cart(postback, user)
