@@ -11,17 +11,17 @@ class MealView
           buttons: [
             {
               type: 'postback',
-              title: 'Order & Pay',
+              title: 'Pick & Pay',
               payload: "meal_#{meal.id}_pay"
             },
             {
               type: 'postback',
-              title: 'Order & ➥ Menu',
+              title: 'Pick & ➥ Menu',
               payload: "meal_#{meal.id}_menu"
             },
             {
               type: 'postback',
-              title: "Order & ➥ #{next_category.tr("_", " ").capitalize}",
+              title: "Pick & ➥ #{next_category.tr("_", " ").capitalize}",
               payload: "meal_#{meal.id}_next"
             }
           ]
@@ -58,12 +58,12 @@ class MealView
           buttons: [
             {
               type: 'postback',
-              title: 'Order & ➥ Menu',
+              title: 'Pick & ➥ Menu',
               payload: "meal_#{meal.id}_menu"
             },
             {
               type: 'postback',
-              title: 'Order & Pay',
+              title: 'Pick & Pay',
               payload: "meal_#{meal.id}_pay"
             }
           ]
