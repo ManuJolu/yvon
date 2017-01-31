@@ -3,7 +3,7 @@ require 'facebook/messenger'
 include Facebook::Messenger
 include CloudinaryHelper
 
-@page_controller = PageController.new
+@message_controller = MessageController.new
 @user_controller = UserController.new
 @restaurant_controller = RestaurantController.new
 @meal_controller = MealController.new
@@ -18,16 +18,20 @@ Bot.on :message do |message|
   if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
     new_order = @order_controller.create(message, user)
     coordinates = [new_order.latitude, new_order.longitude]
-    @restaurant_controller.index(message, coordinates)
+    @message_controller.no_restaurant(message) unless @restaurant_controller.index(message, coordinates)
   end
 
   case message.text
   when /hello/i
-    @page_controller.hello(message, user)
+    @message_controller.hello(message, user)
+  when /bordeaux/i
+    new_order = @order_controller.create(message, user, lat: '44.840715', lng: '-0.5721098')
+    coordinates = [new_order.latitude, new_order.longitude]
+    @message_controller.no_restaurant unless @restaurant_controller.index(message, coordinates)
   else
     if message.text
       message.reply(
-        text: "Did you say '#{message.text}'?"
+        text: "Say 'Hello' to start a new order"
       )
     end
   end
@@ -37,7 +41,7 @@ Bot.on :postback do |postback|
   user = @user_controller.match_user(postback)
   case postback.payload
   when 'start'
-    @page_controller.hello(postback, user)
+    @message_controller.hello(postback, user)
   when /\Arestaurant_(?<id>\d+)\z/
     restaurant_id = $LAST_MATCH_INFO['id'].to_i
     @order_controller.update(postback, user, restaurant_id: restaurant_id)
@@ -48,7 +52,11 @@ Bot.on :postback do |postback|
   when /\Arestaurant_(?<restaurant_id>\d+)_category_(?<category>\w+)\z/
     restaurant_id = $LAST_MATCH_INFO['restaurant_id'].to_i
     category = $LAST_MATCH_INFO['category']
-    @meal_controller.index(postback, restaurant_id: restaurant_id, category: category)
+    if @restaurant_controller.check(user, restaurant_id: restaurant_id)
+      @meal_controller.index(postback, restaurant_id: restaurant_id, category: category)
+    else
+      @restaurant_controller.restaurant_mismatch(postback, user, restaurant_id: restaurant_id)
+    end
   when /\Ameal_(?<id>\d+)_(?<action>\w+)\z/
     meal = Meal.find($LAST_MATCH_INFO['id'])
     action = $LAST_MATCH_INFO['action']
@@ -64,20 +72,20 @@ Bot.on :postback do |postback|
         @order_controller.cart(postback, user)
       end
     else
-      @restaurant_controller.not_my_meal(postback, restaurant_id: meal.restaurant.id)
+      @restaurant_controller.not_my_meal(postback, user, restaurant_id: meal.restaurant.id)
     end
   when 'menu'
     if user.current_order&.restaurant
       @restaurant_controller.menu(postback, restaurant_id: user.current_order.restaurant.id)
     else
-      @restaurant_controller.no_restaurant(postback)
+      @restaurant_controller.no_restaurant_selected(postback)
     end
   when /\Acategory_(?<category>\w+)\z/
     category = $LAST_MATCH_INFO['category']
     if user.current_order&.restaurant
       @meal_controller.index(postback, restaurant_id: user.current_order.restaurant.id, category: category)
     else
-      @restaurant_controller.no_restaurant(postback)
+      @restaurant_controller.no_restaurant_selected(postback)
     end
   when 'pay'
     @order_controller.cart(postback, user)
