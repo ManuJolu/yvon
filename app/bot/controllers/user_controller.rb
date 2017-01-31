@@ -23,18 +23,4 @@
     end
     user
   end
-
-  def initialize_session(message, user)
-    lat = message.attachments[0]['payload']['coordinates']['lat']
-    lng = message.attachments[0]['payload']['coordinates']['long']
-
-    user.session = {
-      'located_at' => Time.now,
-      'latitude' => lat,
-      'longitude' => lng
-    }
-    user.save
-
-    [lat, lng]
-  end
 end

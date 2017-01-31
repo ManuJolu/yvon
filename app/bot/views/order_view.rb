@@ -7,14 +7,13 @@ class OrderView
 
   def restaurant_closed(postback, restaurant)
     postback.reply(
-      text: "Oups, #{restaurant.name} has just closed... Can I help you find another restaurant?",
+      text: "Woops, #{restaurant.name} has just closed... Can I help you find another restaurant?",
       quick_replies: [
         {
           content_type: 'location'
         }
       ]
     )
-
   end
 
   def cart(postback, order, params = {})
