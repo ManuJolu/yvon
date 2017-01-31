@@ -23,12 +23,12 @@ class OrderController
     user.current_order&.restaurant == meal.restaurant
   end
 
-  def add_meal(user, meal)
-    current_ordered_meal = user.current_order.ordered_meals.find_by(meal: meal)
+  def add_meal(user, meal, option = nil)
+    current_ordered_meal = user.current_order.ordered_meals.find_by(meal: meal, option: option)
     if current_ordered_meal
       current_ordered_meal.quantity += 1
     else
-      current_ordered_meal = user.current_order.ordered_meals.new(meal: meal)
+      current_ordered_meal = user.current_order.ordered_meals.new(meal: meal, option: option)
     end
     current_ordered_meal.save
   end

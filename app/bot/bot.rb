@@ -57,11 +57,33 @@ Bot.on :postback do |postback|
     else
       @restaurant_controller.restaurant_mismatch(postback, user, restaurant_id: restaurant_id)
     end
-  when /\Ameal_(?<id>\d+)_(?<action>\w+)\z/
+  when /\Ameal_(?<id>\d+)_(?<action>\D+)\z/
     meal = Meal.find($LAST_MATCH_INFO['id'])
     action = $LAST_MATCH_INFO['action']
     if @order_controller.meal_match_restaurant(user, meal)
-      @order_controller.add_meal(user, meal)
+      if meal.options.any?
+        @meal_controller.get_option(postback, meal, action: action)
+      else
+        @order_controller.add_meal(user, meal)
+        case action
+        when 'menu'
+          @restaurant_controller.menu(postback, restaurant_id: meal.restaurant.id)
+        when 'next'
+          category = Meal.categories.key(Meal.categories[meal.category] + 1)
+          @meal_controller.index(postback, restaurant_id: meal.restaurant.id, category: category)
+        when 'pay'
+          @order_controller.cart(postback, user)
+        end
+      end
+    else
+      @restaurant_controller.meal_restaurant_mismatch(postback, user, restaurant_id: meal.restaurant.id)
+    end
+  when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
+    meal = Meal.find($LAST_MATCH_INFO['meal_id'])
+    option = Option.find($LAST_MATCH_INFO['option_id'])
+    action = $LAST_MATCH_INFO['action']
+    if @order_controller.meal_match_restaurant(user, meal)
+      @order_controller.add_meal(user, meal, option)
       case action
       when 'menu'
         @restaurant_controller.menu(postback, restaurant_id: meal.restaurant.id)
@@ -74,6 +96,7 @@ Bot.on :postback do |postback|
     else
       @restaurant_controller.meal_restaurant_mismatch(postback, user, restaurant_id: meal.restaurant.id)
     end
+
   when 'menu'
     if user.current_order&.restaurant
       @restaurant_controller.menu(postback, restaurant_id: user.current_order.restaurant.id)

@@ -99,4 +99,24 @@ class MealView
       }
     )
   end
+
+  def get_option(postback, options, params = {})
+    options = options.map do |option|
+      {
+        type: 'postback',
+        title: option.name.capitalize,
+        payload: "meal_#{params[:meal_id]}_option_#{option.id}_#{params[:action]}"
+      }
+    end
+    postback.reply(
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: "Choose your option:",
+          buttons: options
+        }
+      }
+    )
+  end
 end
