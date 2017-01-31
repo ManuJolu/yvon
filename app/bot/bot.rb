@@ -78,14 +78,14 @@ Bot.on :postback do |postback|
     if user.current_order&.restaurant
       @restaurant_controller.menu(postback, restaurant_id: user.current_order.restaurant.id)
     else
-      @restaurant_controller.no_restaurant_selected(postback)
+      @message_controller.no_restaurant_selected(postback)
     end
   when /\Acategory_(?<category>\w+)\z/
     category = $LAST_MATCH_INFO['category']
     if user.current_order&.restaurant
       @meal_controller.index(postback, restaurant_id: user.current_order.restaurant.id, category: category)
     else
-      @restaurant_controller.no_restaurant_selected(postback)
+      @message_controller.no_restaurant_selected(postback)
     end
   when 'pay'
     @order_controller.cart(postback, user)
