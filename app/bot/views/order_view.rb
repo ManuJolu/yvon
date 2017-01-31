@@ -1,7 +1,7 @@
 class OrderView
   def no_meals(postback)
     postback.reply(
-      text: "Sorry, you have no meals to order"
+      text: "Sorry, you have no meals to order yet!"
     )
   end
 

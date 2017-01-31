@@ -164,13 +164,13 @@ class RestaurantView
 
   def restaurant_mismatch(postback, restaurant_name)
     postback.reply(
-      text: "Sorry, this menu belongs to #{restaurant_name}, here is my menu:",
+      text: "Sorry, this menu belongs to #{restaurant_name}, here is the right menu:",
     )
   end
 
-  def not_my_meal(postback, restaurant_name)
+  def meal_restaurant_mismatch(postback, restaurant_name)
     postback.reply(
-      text: "Sorry, this meal belongs to #{restaurant_name}, here is my menu:",
+      text: "Sorry, this meal belongs to #{restaurant_name}, here is the right menu:",
     )
   end
 end

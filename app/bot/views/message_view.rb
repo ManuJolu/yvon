@@ -12,8 +12,7 @@ class MessageView
 
   def no_restaurant(message)
     message.reply(
-      text: "Sorry, I found no restaurants near you... Try a new location or
-        my hometown Bordeaux to find fine restaurants for sure!",
+      text: "Sorry, I found no restaurants near you... Try a new location or my hometown Bordeaux to find fine restaurants for sure!",
       quick_replies: [
         {
           content_type: 'location'

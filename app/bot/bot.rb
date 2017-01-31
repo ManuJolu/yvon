@@ -72,7 +72,7 @@ Bot.on :postback do |postback|
         @order_controller.cart(postback, user)
       end
     else
-      @restaurant_controller.not_my_meal(postback, user, restaurant_id: meal.restaurant.id)
+      @restaurant_controller.meal_restaurant_mismatch(postback, user, restaurant_id: meal.restaurant.id)
     end
   when 'menu'
     if user.current_order&.restaurant

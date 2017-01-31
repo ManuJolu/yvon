@@ -30,10 +30,10 @@ class RestaurantController
     @view.menu(postback, right_restaurant)
   end
 
-  def not_my_meal(postback, user, params = {})
+  def meal_restaurant_mismatch(postback, user, params = {})
     wrong_restaurant = Restaurant.find(params[:restaurant_id])
     right_restaurant = user.current_order.restaurant
-    @view.not_my_meal(postback, wrong_restaurant.name)
+    @view.meal_restaurant_mismatch(postback, wrong_restaurant.name)
     @view.menu(postback, right_restaurant)
   end
 end
