@@ -20,7 +20,7 @@ class OrderView
     elements = order.ordered_meals.map do |ordered_meal|
       {
         title: ordered_meal.meal.name,
-        subtitle: ordered_meal.meal.description,
+        subtitle: "#{(ordered_meal.option.name + ' - ') if ordered_meal.option}#{ordered_meal.meal.description}",
         quantity: ordered_meal.quantity,
         price: ordered_meal.meal.price_num,
         currency: "EUR",

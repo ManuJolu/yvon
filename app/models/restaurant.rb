@@ -3,6 +3,7 @@ class Restaurant < ApplicationRecord
   has_many :meals
   has_many :orders
   has_many :ordered_meals, through: :orders
+  has_many :options
 
   validates :name, presence: true
   validates :address, presence: true

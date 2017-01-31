@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130182605) do
+ActiveRecord::Schema.define(version: 20170131171219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20170130182605) do
     t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
   end
 
+  create_table "meal_options", force: :cascade do |t|
+    t.integer  "meal_id"
+    t.integer  "option_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meal_id"], name: "index_meal_options_on_meal_id", using: :btree
+    t.index ["option_id"], name: "index_meal_options_on_option_id", using: :btree
+  end
+
   create_table "meals", force: :cascade do |t|
     t.integer  "restaurant_id"
     t.integer  "category"
@@ -44,13 +53,23 @@ ActiveRecord::Schema.define(version: 20170130182605) do
     t.index ["restaurant_id"], name: "index_meals_on_restaurant_id", using: :btree
   end
 
+  create_table "options", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "restaurant_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["restaurant_id"], name: "index_options_on_restaurant_id", using: :btree
+  end
+
   create_table "ordered_meals", force: :cascade do |t|
     t.integer  "order_id"
     t.integer  "meal_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "quantity",   default: 1
+    t.integer  "option_id"
     t.index ["meal_id"], name: "index_ordered_meals_on_meal_id", using: :btree
+    t.index ["option_id"], name: "index_ordered_meals_on_option_id", using: :btree
     t.index ["order_id"], name: "index_ordered_meals_on_order_id", using: :btree
   end
 
@@ -116,8 +135,12 @@ ActiveRecord::Schema.define(version: 20170130182605) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "meal_options", "meals"
+  add_foreign_key "meal_options", "options"
   add_foreign_key "meals", "restaurants"
+  add_foreign_key "options", "restaurants"
   add_foreign_key "ordered_meals", "meals"
+  add_foreign_key "ordered_meals", "options"
   add_foreign_key "ordered_meals", "orders"
   add_foreign_key "orders", "restaurants"
   add_foreign_key "orders", "users"

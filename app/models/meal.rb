@@ -1,11 +1,14 @@
 class Meal < ApplicationRecord
   belongs_to :restaurant, required: true
+  has_many :meal_options
+  has_many :options, through: :meal_options
 
   validates :category, presence: true
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :tax_rate, presence: true
   validates :photo, presence: true
+  validates :meal_options, length: { maximum: 3 } # does not work
 
   enum category: [ :starter, :main_course, :dessert, :drink ]
   enum tax_rate: [ "2.1", "5.5", "10", "20" ]
