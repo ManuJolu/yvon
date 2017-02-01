@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   mount Attachinary::Engine, at: 'attachinary'
   mount Facebook::Messenger::Server, at: 'bot'
 
   root to: 'pages#home'
-  get '/privacy_policy', to: 'pages#privacy_policy'
+  get '/privacy-policy', to: 'pages#privacy_policy'
   resources :users, only: [:show]
   resources :restaurants, only: [:index, :show, :new, :create, :edit, :update] do
     member do
