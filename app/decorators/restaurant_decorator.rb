@@ -4,7 +4,10 @@ class RestaurantDecorator < Draper::Decorator
   # decorates_association :orders, scope: :persisted
 
   def address
-    address.capitalize
+    object.address.capitalize
   end
 
+  def turnover
+    humanized_money_with_symbol object.turnover
+  end
 end
