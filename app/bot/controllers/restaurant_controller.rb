@@ -10,7 +10,9 @@ class RestaurantController
 
   def menu(postback, params = {})
     restaurant = Restaurant.find(params[:restaurant_id])
-    @view.menu(postback, restaurant)
+    page = params[:page] || 0
+    next_page = (page + 1) if page < (restaurant.meal_categories.size % 3)
+    @view.menu(postback, restaurant, page: page, next_page: next_page)
   end
 
   def menu_more(postback, params = {})
