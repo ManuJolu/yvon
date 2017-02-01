@@ -1,5 +1,6 @@
 class Meal < ApplicationRecord
   belongs_to :restaurant, required: true
+  belongs_to :meal_category
   has_many :meal_options
   has_many :options, through: :meal_options
 
@@ -8,6 +9,8 @@ class Meal < ApplicationRecord
   validates :tax_rate, presence: true
   validates :photo, presence: true
   validates :meal_options, length: { maximum: 3 } # does not work
+
+  acts_as_list scope: :meal_category
 
   monetize :price_cents, allow_nil: false, numericality: { greater_than_or_equal_to: 0 }
   monetize :tax_cents

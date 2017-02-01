@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201094453) do
+ActiveRecord::Schema.define(version: 20170201164916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20170201094453) do
     t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
   end
 
+  create_table "meal_categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "restaurant_id"
+    t.integer  "position"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["restaurant_id"], name: "index_meal_categories_on_restaurant_id", using: :btree
+  end
+
   create_table "meal_options", force: :cascade do |t|
     t.integer  "meal_id"
     t.integer  "option_id"
@@ -47,9 +56,12 @@ ActiveRecord::Schema.define(version: 20170201094453) do
     t.integer  "price_cents"
     t.integer  "tax_rate"
     t.string   "photo"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.boolean  "active",        default: true
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "active",           default: true
+    t.integer  "position"
+    t.integer  "meal_category_id"
+    t.index ["meal_category_id"], name: "index_meals_on_meal_category_id", using: :btree
     t.index ["restaurant_id"], name: "index_meals_on_restaurant_id", using: :btree
   end
 
@@ -136,8 +148,10 @@ ActiveRecord::Schema.define(version: 20170201094453) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "meal_categories", "restaurants"
   add_foreign_key "meal_options", "meals"
   add_foreign_key "meal_options", "options"
+  add_foreign_key "meals", "meal_categories"
   add_foreign_key "meals", "restaurants"
   add_foreign_key "options", "restaurants"
   add_foreign_key "ordered_meals", "meals"

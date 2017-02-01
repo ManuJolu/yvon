@@ -5,9 +5,10 @@ class MealController
 
   def index(postback, params = {})
     restaurant = Restaurant.find(params[:restaurant_id])
-    meals = restaurant.meals.is_active.where(category: params[:category]).limit(9)
-    next_category = Meal.categories.key(Meal.categories[params[:category]] + 1)
-    @view.index(postback, meals.decorate, current_category: params[:category], next_category: next_category)
+    meal_category = MealCategory.find(params[:meal_category_id])
+    next_meal_category = meal_category.lower_item
+    meals = restaurant.meals.is_active.where(meal_category: meal_category).limit(9)
+    @view.index(postback, meals.decorate, current_meal_category: meal_category, next_meal_category: next_meal_category)
   end
 
   def get_option(postback, meal, params = {})

@@ -42,18 +42,16 @@ Bot.on :postback do |postback|
   case postback.payload
   when 'start'
     @message_controller.hello(postback, user)
-  when /\Arestaurant_(?<id>\d+)\z/
+  when /\Arestaurant_(?<id>\d+)_page_(?<page>\d+)\z/
     restaurant_id = $LAST_MATCH_INFO['id'].to_i
+    page = $LAST_MATCH_INFO['page'].to_i
     @order_controller.update(postback, user, restaurant_id: restaurant_id)
-    @restaurant_controller.menu(postback, restaurant_id: restaurant_id)
-  when /\Amore_restaurant_(?<id>\d+)\z/
-    restaurant_id = $LAST_MATCH_INFO['id'].to_i
-    @restaurant_controller.menu_more(postback, restaurant_id: restaurant_id)
-  when /\Arestaurant_(?<restaurant_id>\d+)_category_(?<category>\w+)\z/
+    @restaurant_controller.menu(postback, restaurant_id: restaurant_id, page: page)
+  when /\Arestaurant_(?<restaurant_id>\d+)_category_(?<meal_category_id>\w+)\z/
     restaurant_id = $LAST_MATCH_INFO['restaurant_id'].to_i
-    category = $LAST_MATCH_INFO['category']
+    meal_category_id = $LAST_MATCH_INFO['meal_category_id']
     if @restaurant_controller.check(user, restaurant_id: restaurant_id)
-      @meal_controller.index(postback, restaurant_id: restaurant_id, category: category)
+      @meal_controller.index(postback, restaurant_id: restaurant_id, meal_category_id: meal_category_id)
     else
       @restaurant_controller.restaurant_mismatch(postback, user, restaurant_id: restaurant_id)
     end
@@ -69,8 +67,8 @@ Bot.on :postback do |postback|
         when 'menu'
           @restaurant_controller.menu(postback, restaurant_id: meal.restaurant.id)
         when 'next'
-          category = Meal.categories.key(Meal.categories[meal.category] + 1)
-          @meal_controller.index(postback, restaurant_id: meal.restaurant.id, category: category)
+          next_category = meal.meal_category.lower_item
+          @meal_controller.index(postback, restaurant_id: meal.restaurant.id, meal_category_id: next_category.id)
         when 'pay'
           @order_controller.cart(postback, user)
         end
@@ -88,8 +86,8 @@ Bot.on :postback do |postback|
       when 'menu'
         @restaurant_controller.menu(postback, restaurant_id: meal.restaurant.id)
       when 'next'
-        category = Meal.categories.key(Meal.categories[meal.category] + 1)
-        @meal_controller.index(postback, restaurant_id: meal.restaurant.id, category: category)
+        next_category = meal.meal_category.lower_item
+        @meal_controller.index(postback, restaurant_id: meal.restaurant.id, meal_category_id: next_category.id)
       when 'pay'
         @order_controller.cart(postback, user)
       end
@@ -103,10 +101,10 @@ Bot.on :postback do |postback|
     else
       @message_controller.no_restaurant_selected(postback)
     end
-  when /\Acategory_(?<category>\w+)\z/
-    category = $LAST_MATCH_INFO['category']
+  when /\Acategory_(?<meal_category_id>\w+)\z/
+    meal_category_id = $LAST_MATCH_INFO['meal_category_id']
     if user.current_order&.restaurant
-      @meal_controller.index(postback, restaurant_id: user.current_order.restaurant.id, category: category)
+      @meal_controller.index(postback, restaurant_id: user.current_order.restaurant.id, meal_category_id: meal_category_id)
     else
       @message_controller.no_restaurant_selected(postback)
     end

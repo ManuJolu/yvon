@@ -1,8 +1,8 @@
 class MealView
   def index(postback, meals, params = {})
-    current_category = params[:current_category]
-    next_category = params[:next_category]
-    if next_category
+    current_meal_category = params[:current_meal_category]
+    next_meal_category = params[:next_meal_category]
+    if next_meal_category
       meals = meals.map do |meal|
         {
           title: meal.name,
@@ -21,14 +21,14 @@ class MealView
             },
             {
               type: 'postback',
-              title: "Pick & ➥ #{next_category.tr("_", " ").capitalize}",
+              title: "Pick & ➥ #{next_meal_category.name}",
               payload: "meal_#{meal.id}_next"
             }
           ]
         }
       end
       meals << {
-        title: "No #{current_category.tr("_", " ")} for me",
+        title: "No #{current_meal_category.name.downcase} for me",
         image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
         subtitle: "\nI'd better watch my figure",
         buttons: [
@@ -44,8 +44,8 @@ class MealView
           },
           {
             type: 'postback',
-            title: "➥ #{next_category.tr("_", " ").capitalize}",
-            payload: "category_#{next_category}"
+            title: "➥ #{next_meal_category.name}",
+            payload: "category_#{next_meal_category.id}"
           }
         ]
       }
@@ -70,7 +70,7 @@ class MealView
         }
       end
       meals << {
-        title: "No #{current_category.tr("_", " ")} for me",
+        title: "No #{current_meal_category.name.downcase} for me",
         image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
         subtitle: "\nI'd better watch my figure",
         buttons: [
