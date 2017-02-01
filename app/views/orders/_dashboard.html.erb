@@ -1,13 +1,7 @@
 <div class="container">
   <div class="turnover">
     <h2>Your turnover</h2>
-
-    <% sum = 0 %>
-    <% @restaurant.orders.each do |order| %>
-      <% sum = sum + order.price %>
-    <% end %>
-
-    <%= sum.fdiv(100)  %> €
+    <p><%= @restaurant.decorate.turnover %></p>
   </div>
   <div class="number">
     <h2>Number of orders</h2>

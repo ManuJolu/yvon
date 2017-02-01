@@ -4,18 +4,22 @@ class Order < ApplicationRecord
   has_many :ordered_meals
   has_many :meals, through: :ordered_meals
 
-  scope :pending, ->{ where(delivered_at: nil).order(paid_at: :desc).order(id: :desc) }
+  monetize :price_cents
+  monetize :tax_cents
+  monetize :pretax_price_cents
+
+  scope :pending, ->{ where('paid_at IS NOT NULL').where(delivered_at: nil).order(paid_at: :desc) }
   scope :delivered, -> { where('delivered_at IS NOT NULL').order(delivered_at: :desc) }
 
-  def price
-    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.meal.price }
+  def price_cents
+    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.meal.price_cents }
   end
 
-  def tax
-    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.meal.tax }
+  def tax_cents
+    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.meal.tax_cents }
   end
 
-  def pretax_price
-    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.meal.pretax_price }
+  def pretax_price_cents
+    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.meal.pretax_price_cents }
   end
 end
