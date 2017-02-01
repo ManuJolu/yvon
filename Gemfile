@@ -17,6 +17,8 @@ gem 'pundit'
 gem 'cloudinary', '1.1.0'
 gem 'rest-client'
 gem "gmaps4rails"
+gem 'remotipart', github: 'mshibuya/remotipart'
+gem 'rails_admin', '>= 1.0.0.rc'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
