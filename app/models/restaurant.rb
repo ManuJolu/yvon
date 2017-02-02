@@ -2,6 +2,7 @@ class Restaurant < ApplicationRecord
   belongs_to :user, required: true
   has_many :meals
   has_many :meal_categories, -> { order(position: :asc) }
+  has_many :menus
   has_many :orders
   has_many :ordered_meals, through: :orders
   has_many :options

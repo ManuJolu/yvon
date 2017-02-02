@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :restaurant
   has_many :ordered_meals
   has_many :meals, through: :ordered_meals
+  has_many :meal_categories, through: :ordered_meals
 
   monetize :price_cents
   monetize :tax_cents
@@ -21,5 +22,19 @@ class Order < ApplicationRecord
 
   def pretax_price_cents
     ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.meal.pretax_price_cents }
+  end
+
+  def meal_categories_array
+    array = []
+    ordered_meals.each do |ordered_meal|
+      ordered_meal.quantity.times { array << ordered_meal.meal_category }
+    end
+    array
+  end
+
+  def create_elements
+    order.restaurant.menus.by_price.each do |menu|
+
+    end
   end
 end
