@@ -1,97 +1,93 @@
-
-  <div class="banner" style="background-image: linear-gradient(-225deg, rgba(41,44,60,0.6) 0%, rgba(80,78,100,0.5) 50%), url('http://res.cloudinary.com/da2krghvd/image/upload/c_fill,h_400,w_1600/v1480081049/banner_1_d7qs3r.jpg');">
-    <div class="banner-content">
-      <h1><%= t('home.slogan') %></h1>
-      <h2><%= t('home.tagline') %></h2>
-      <div class="msg-yvon">
-        <a href="https://www.messenger.com/t/HelloYvon/" id="btn-fb">
-          <i class="fa fa-commenting-o" aria-hidden="true"></i>
-          <%= t('home.calltoaction') %>
-        </a>
-      </div>
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(41,44,60,0.6) 0%, rgba(80,78,100,0.5) 50%), url('http://res.cloudinary.com/da2krghvd/image/upload/c_fill,h_400,w_1600/v1480081049/banner_1_d7qs3r.jpg');">
+  <div class="banner-content">
+    <h1><%= t('home.slogan') %></h1>
+    <h2><%= t('home.tagline') %></h2>
+    <div class="msg-yvon">
+      <a href="https://www.messenger.com/t/HelloYvon/" id="btn-fb">
+        <i class="fa fa-commenting-o" aria-hidden="true"></i>
+        <%= t('home.calltoaction') %>
+      </a>
     </div>
   </div>
+</div>
 
-  <div class="container">
+<!-- Avantage Yvon -->
+<div class="wrapper owners">
+  <div class="container text-center">
     <div class="row">
-      <div class="col-md-8">
-
-        <div class="product" id="first">
-          <%= image_tag "map.png", width: 100, height: 100 %>
-
-          <div class='product-body'>
-            <h1><%= t('home.fonc.titre1') %></h1>
-            <h3><%= t('home.fonc.det1') %></h3>
-          </div>
-        </div>
-
-        <div class="product">
-          <%= image_tag "store.png", width: 100, height: 100 %>
-          <div class='product-body'>
-            <h1><%= t('home.fonc.titre2') %></h1>
-            <h3><%= t('home.fonc.det2') %></h3>
-          </div>
-        </div>
-
-        <div class="product">
-          <%= image_tag "pay.png", width: 100, height: 100 %>
-          <div class='product-body'>
-            <h1><%= t('home.fonc.titre3') %></h1>
-            <h3><%= t('home.fonc.det3') %></h3>
-          </div>
-        </div>
-
-        <div class="product">
-          <%= image_tag "takeaway.png", width: 100, height: 100 %>
-          <div class='product-body'>
-            <h1><%= t('home.fonc.titre4') %></h1>
-            <h3><%= t('home.fonc.det4') %></h3>
-          </div>
-        </div>
-
+      <div class="col-md-4 product-body">
+        <h1><%= t('home.avant.tit1') %></h1>
+        <h3><%= t('home.avant.det1') %></h3>
+        <br>
+        <h1><%= t('home.avant.tit3') %></h1>
+        <h3><%= t('home.avant.det3') %></h3>
       </div>
+
       <div class="col-md-4">
-        <div class="vdo">
-          <%= image_tag "iphone.png" %>
-          <div class="gif">
-            <%= image_tag "gifyvon.gif", width: 210 %>
-          </div>
+          <%= image_tag 'yvon_avatar.jpg', class: 'avatar-extra-large' %>
+      </div>
 
-        </div>
+      <div class="col-md-4 product-body">
+        <h1><%= t('home.avant.tit2') %></h1>
+        <h3><%= t('home.avant.det2') %></h3>
+        <br>
+        <h1><%= t('home.avant.tit4') %></h1>
+        <h3><%= t('home.avant.det4') %></h3>
       </div>
     </div>
   </div>
-  <!-- Restaurant's owners -->
-  <div class="wrapper owners">
-  <!-- Button (call-to-action) -->
-    <div class="container text-center">
-      <div class="row">
-        <h1>Restaurant's owner ? Yvon is for you !</h1>
-        </div>
-      <div class="row">
-        <div class="col-md-4 product-body">
-          <h1>Raise your turnover</h1>
-          <h3>With Yvon, you can now offer a take away service<br> and your room magically expands</h3>
-          <br>
-          <h1>Diminue your queue</h1>
-          <h3>No more queue, people get served <br>ready meals directly at the counter !</h3>
-        </div>
 
-        <div class="col-md-4">
-            <%= image_tag 'yvon_avatar.jpg', class: 'avatar-extra-large' %>
-        </div>
+<!-- fonctionnement Yvon -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
 
-        <div class="col-md-4 product-body">
-          <h1>Access new customers</h1>
-          <h3>Yvon gives you access to new customers<br> who wouldn't sit in your retaurant otherwise</h3>
-          <br>
-          <h1>Improve your staff productivity</h1>
-          <h3>No more ordering and paying time,<br> Yvon automatically send you orders, already paid. No new staff needed</h3>
+      <div class="product" id="first">
+        <%= image_tag "map.png", width: 100, height: 100 %>
+
+        <div class='product-body'>
+          <h1><%= t('home.fonc.titre1') %></h1>
+          <h3><%= t('home.fonc.det1') %></h3>
         </div>
       </div>
-      <div class="row">
-      <%= link_to t(".top_call_to_action", default: "Get Yvon for your restaurant !"), new_restaurant_path, class: "action-btn" %>
+
+      <div class="product">
+        <%= image_tag "store.png", width: 100, height: 100 %>
+        <div class='product-body'>
+          <h1><%= t('home.fonc.titre2') %></h1>
+          <h3><%= t('home.fonc.det2') %></h3>
+        </div>
+      </div>
+
+      <div class="product">
+        <%= image_tag "pay.png", width: 100, height: 100 %>
+        <div class='product-body'>
+          <h1><%= t('home.fonc.titre3') %></h1>
+          <h3><%= t('home.fonc.det3') %></h3>
+        </div>
+      </div>
+
+      <div class="product">
+        <%= image_tag "takeaway.png", width: 100, height: 100 %>
+        <div class='product-body'>
+          <h1><%= t('home.fonc.titre4') %></h1>
+          <h3><%= t('home.fonc.det4') %></h3>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-4">
+      <div class="vdo">
+        <%= image_tag "iphone.png" %>
+        <div class="gif">
+          <%= image_tag "gifyvon.gif", width: 210 %>
+        </div>
+
       </div>
     </div>
   </div>
+</div>
+
+
+</div>
 

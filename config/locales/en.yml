@@ -33,7 +33,12 @@ en:
       det3: "Yvon allows you to pay the restaurant so that you won't have to wait to get your order"
       titre4: "Pick-up your food directly at the desk"
       det4: "No more queue, you order waits you at the restaurant. You will even be notified when it's ready !"
-
+    avant:
+      tit1: ""
+      det1: ""
+      tit2: ""
+      det2: ""
+      tit4: ""
 
 
 
