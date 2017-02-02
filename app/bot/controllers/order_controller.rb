@@ -3,37 +3,43 @@ class OrderController
     @view = OrderView.new
   end
 
-  def add_meal(user, meal_id)
-    if (user.session['order']['meals'] ||= {})[meal_id].present?
-      (user.session['order']['meals'] ||= {})[meal_id] += 1
-    else
-      (user.session['order']['meals'] ||= {})[meal_id] = 1
+  def create(message, user, params = {})
+    order = user.orders.create({
+        located_at: Time.now,
+        latitude: params[:lat] || message.attachments[0]['payload']['coordinates']['lat'],
+        longitude: params[:lng] || message.attachments[0]['payload']['coordinates']['long']
+      })
+  end
+
+  def update(postback, user, params = {})
+    restaurant = Restaurant.find(params[:restaurant_id])
+    unless user.current_order&.restaurant == restaurant
+      user.current_order.ordered_meals.destroy_all
+      user.current_order.update(restaurant: restaurant)
     end
-    user.save
+  end
+
+  def meal_match_restaurant(user, meal)
+    user.current_order&.restaurant == meal.restaurant
+  end
+
+  def add_meal(user, meal, option = nil)
+    current_ordered_meal = user.current_order.ordered_meals.find_by(meal: meal, option: option)
+    if current_ordered_meal
+      current_ordered_meal.quantity += 1
+    else
+      current_ordered_meal = user.current_order.ordered_meals.new(meal: meal, option: option)
+    end
+    current_ordered_meal.save
   end
 
   def cart(postback, user)
-    if (user.session['order'] ||= {})['meals'].present?
-      order = user.orders.new
-      order.restaurant = Restaurant.find(user.session['order']['restaurant_id'])
+    if user.current_order&.meals.present?
+      order = user.current_order
       if order.restaurant.on_duty?
-        order.located_at = user.session['located_at'].to_datetime
-        order.latitude = user.session['latitude'].to_f
-        order.longitude = user.session['longitude'].to_f
-        order.preperation_time = order.restaurant.preperation_time
-        user.session['order']['meals'].each do |meal_id, quantity|
-          ordered_meal = order.ordered_meals.new
-          ordered_meal.meal = Meal.find(meal_id.to_i)
-          ordered_meal.quantity = quantity.to_i
-        end
+        order.preparation_time = order.restaurant.preparation_time
         order.paid_at = Time.now
-
-        if order.save
-          user.session['order']['meals'] = {}
-          user.save
-        else
-          #implement else here
-        end
+        order.save
         @view.cart(postback, order.decorate, paid_at: order.paid_at.to_i)
       else
         @view.restaurant_closed(postback, order.restaurant)

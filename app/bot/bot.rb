@@ -3,27 +3,11 @@ require 'facebook/messenger'
 include Facebook::Messenger
 include CloudinaryHelper
 
-
-@page_controller = PageController.new
+@message_controller = MessageController.new
 @user_controller = UserController.new
 @restaurant_controller = RestaurantController.new
 @meal_controller = MealController.new
 @order_controller = OrderController.new
-
-# Bot.on :optin do |optin|
-#   optin.sender    # => { 'id' => '1008372609250235' }
-#   optin.recipient # => { 'id' => '2015573629214912' }
-#   optin.sent_at   # => 2016-04-22 21:30:36 +0200
-#   optin.ref       # => 'CONTACT_SKYNET'
-#   optin.reply(
-#     text: "Welcome! My name is Yvon, where can I help you find your restaurant?",
-#     quick_replies: [
-#       {
-#         content_type: 'location'
-#       }
-#     ]
-#   )
-# end
 
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
@@ -32,17 +16,22 @@ Bot.on :message do |message|
   user = @user_controller.match_user(message)
 
   if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
-    coordinates = @user_controller.initialize_session(message, user)
-    @restaurant_controller.index(message, coordinates)
+    new_order = @order_controller.create(message, user)
+    coordinates = [new_order.latitude, new_order.longitude]
+    @message_controller.no_restaurant(message) unless @restaurant_controller.index(message, coordinates)
   end
 
   case message.text
   when /hello/i
-    @page_controller.hello(message, user)
+    @message_controller.hello(message, user)
+  when /bordeaux/i
+    new_order = @order_controller.create(message, user, lat: '44.840715', lng: '-0.5721098')
+    coordinates = [new_order.latitude, new_order.longitude]
+    @message_controller.no_restaurant unless @restaurant_controller.index(message, coordinates)
   else
     if message.text
       message.reply(
-        text: "Did you say '#{message.text}'?"
+        text: "Say 'Hello' to start a new order"
       )
     end
   end
@@ -51,43 +40,73 @@ end
 Bot.on :postback do |postback|
   user = @user_controller.match_user(postback)
   case postback.payload
-  when 'hello'
-    @page_controller.hello(postback, user)
-  when /\Arestaurant_(?<id>\d+)\z/
-    unless (user.session['order'] ||= {})['restaurant_id'] == $LAST_MATCH_INFO['id'].to_i
-      (user.session['order'] ||= {})['restaurant_id'] = $LAST_MATCH_INFO['id'].to_i
-      user.session['order']['meals'] = {}
-      user.save
+  when 'start'
+    @message_controller.hello(postback, user)
+  when /\Arestaurant_(?<id>\d+)_page_(?<page>\d+)\z/
+    restaurant_id = $LAST_MATCH_INFO['id'].to_i
+    page = $LAST_MATCH_INFO['page'].to_i
+    @order_controller.update(postback, user, restaurant_id: restaurant_id)
+    @restaurant_controller.menu(postback, restaurant_id: restaurant_id, page: page)
+  when /\Arestaurant_(?<restaurant_id>\d+)_category_(?<meal_category_id>\w+)\z/
+    restaurant_id = $LAST_MATCH_INFO['restaurant_id'].to_i
+    meal_category_id = $LAST_MATCH_INFO['meal_category_id']
+    if @restaurant_controller.check(user, restaurant_id: restaurant_id)
+      @meal_controller.index(postback, restaurant_id: restaurant_id, meal_category_id: meal_category_id)
+    else
+      @restaurant_controller.restaurant_mismatch(postback, user, restaurant_id: restaurant_id)
     end
-    @meal_controller.menu(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
-  when /\Amore_restaurant_(?<id>\d+)\z/
-    @meal_controller.menu_more(postback, restaurant_id: $LAST_MATCH_INFO['id'].to_i)
-  when /\Arestaurant_(?<restaurant_id>\d+)_category_(?<category>\w+)\z/
-    @meal_controller.index(postback, restaurant_id: $LAST_MATCH_INFO['restaurant_id'].to_i, category: $LAST_MATCH_INFO['category'])
-  when /\Ameal_(?<id>\d+)_(?<action>\w+)\z/
+  when /\Ameal_(?<id>\d+)_(?<action>\D+)\z/
     meal = Meal.find($LAST_MATCH_INFO['id'])
     action = $LAST_MATCH_INFO['action']
-    @order_controller.add_meal(user, $LAST_MATCH_INFO['id'])
-    case action
-    when 'menu'
-      @meal_controller.menu(postback, restaurant_id: meal.restaurant.id)
-    when 'next'
-      category = Meal.categories.key(Meal.categories[meal.category] + 1)
-      @meal_controller.index(postback, restaurant_id: meal.restaurant.id, category: category)
-    when 'pay'
-      @order_controller.cart(postback, user)
+    if @order_controller.meal_match_restaurant(user, meal)
+      if meal.options.any?
+        @meal_controller.get_option(postback, meal, action: action)
+      else
+        @order_controller.add_meal(user, meal)
+        case action
+        when 'menu'
+          @restaurant_controller.menu(postback, restaurant_id: meal.restaurant.id)
+        when 'next'
+          next_category = meal.meal_category.lower_item
+          @meal_controller.index(postback, restaurant_id: meal.restaurant.id, meal_category_id: next_category.id)
+        when 'pay'
+          @order_controller.cart(postback, user)
+        end
+      end
+    else
+      @restaurant_controller.meal_restaurant_mismatch(postback, user, restaurant_id: meal.restaurant.id)
     end
+  when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
+    meal = Meal.find($LAST_MATCH_INFO['meal_id'])
+    option = Option.find($LAST_MATCH_INFO['option_id'])
+    action = $LAST_MATCH_INFO['action']
+    if @order_controller.meal_match_restaurant(user, meal)
+      @order_controller.add_meal(user, meal, option)
+      case action
+      when 'menu'
+        @restaurant_controller.menu(postback, restaurant_id: meal.restaurant.id)
+      when 'next'
+        next_category = meal.meal_category.lower_item
+        @meal_controller.index(postback, restaurant_id: meal.restaurant.id, meal_category_id: next_category.id)
+      when 'pay'
+        @order_controller.cart(postback, user)
+      end
+    else
+      @restaurant_controller.meal_restaurant_mismatch(postback, user, restaurant_id: meal.restaurant.id)
+    end
+
   when 'menu'
-    if (user.session['order'] ||= {})['restaurant_id'].present?
-      @meal_controller.menu(postback, restaurant_id: user.session['order']['restaurant_id'].to_i)
+    if user.current_order&.restaurant
+      @restaurant_controller.menu(postback, restaurant_id: user.current_order.restaurant.id)
     else
-      @meal_controller.no_restaurant(postback)
+      @message_controller.no_restaurant_selected(postback)
     end
-  when /\Acategory_(?<category>\w+)\z/
-    if (user.session['order'] ||= {})['restaurant_id'].present?
-      @meal_controller.index(postback, restaurant_id: user.session['order']['restaurant_id'].to_i, category: $LAST_MATCH_INFO['category'])
+  when /\Acategory_(?<meal_category_id>\w+)\z/
+    meal_category_id = $LAST_MATCH_INFO['meal_category_id']
+    if user.current_order&.restaurant
+      @meal_controller.index(postback, restaurant_id: user.current_order.restaurant.id, meal_category_id: meal_category_id)
     else
-      @meal_controller.no_restaurant(postback)
+      @message_controller.no_restaurant_selected(postback)
     end
   when 'pay'
     @order_controller.cart(postback, user)

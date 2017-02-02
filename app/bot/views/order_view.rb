@@ -1,27 +1,26 @@
 class OrderView
   def no_meals(postback)
     postback.reply(
-      text: "Sorry, you have no meals to order"
+      text: "Sorry, you have no meals to order yet!"
     )
   end
 
   def restaurant_closed(postback, restaurant)
     postback.reply(
-      text: "Oups, #{restaurant.name} has just closed... Can I help you find another restaurant?",
+      text: "Woops, #{restaurant.name} has just closed... Can I help you find another restaurant?",
       quick_replies: [
         {
           content_type: 'location'
         }
       ]
     )
-
   end
 
   def cart(postback, order, params = {})
     elements = order.ordered_meals.map do |ordered_meal|
       {
         title: ordered_meal.meal.name,
-        subtitle: ordered_meal.meal.description,
+        subtitle: "#{(ordered_meal.option.name + ' - ') if ordered_meal.option}#{ordered_meal.meal.description}",
         quantity: ordered_meal.quantity,
         price: ordered_meal.meal.price_num,
         currency: "EUR",
@@ -68,7 +67,7 @@ class OrderView
       }
     )
 
-    colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970']
+    colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
     url_array = [
       "http://maps.googleapis.com/maps/api/staticmap", # base
       "?center=#{order.restaurant.latitude},+#{order.restaurant.longitude}", # center
@@ -82,7 +81,7 @@ class OrderView
     ]
 
     postback.reply(
-      text: "Your order will be ready in #{order.preperation_time}min at #{(Time.now + order.preperation_time.minutes).strftime('%-H:%M')}."
+      text: "Your order will be ready in #{order.preparation_time}min at #{(Time.now + order.preparation_time.minutes).strftime('%-H:%M')}."
     )
 
     postback.reply(

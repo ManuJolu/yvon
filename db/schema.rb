@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201093255) do
+ActiveRecord::Schema.define(version: 20170201164916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,18 +30,47 @@ ActiveRecord::Schema.define(version: 20161201093255) do
     t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
   end
 
+  create_table "meal_categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "restaurant_id"
+    t.integer  "position"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["restaurant_id"], name: "index_meal_categories_on_restaurant_id", using: :btree
+  end
+
+  create_table "meal_options", force: :cascade do |t|
+    t.integer  "meal_id"
+    t.integer  "option_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meal_id"], name: "index_meal_options_on_meal_id", using: :btree
+    t.index ["option_id"], name: "index_meal_options_on_option_id", using: :btree
+  end
+
   create_table "meals", force: :cascade do |t|
     t.integer  "restaurant_id"
     t.integer  "category"
     t.string   "name"
     t.string   "description"
-    t.integer  "price"
+    t.integer  "price_cents"
     t.integer  "tax_rate"
     t.string   "photo"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.boolean  "active",        default: true
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "active",           default: true
+    t.integer  "position"
+    t.integer  "meal_category_id"
+    t.index ["meal_category_id"], name: "index_meals_on_meal_category_id", using: :btree
     t.index ["restaurant_id"], name: "index_meals_on_restaurant_id", using: :btree
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "restaurant_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["restaurant_id"], name: "index_options_on_restaurant_id", using: :btree
   end
 
   create_table "ordered_meals", force: :cascade do |t|
@@ -50,7 +79,9 @@ ActiveRecord::Schema.define(version: 20161201093255) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "quantity",   default: 1
+    t.integer  "option_id"
     t.index ["meal_id"], name: "index_ordered_meals_on_meal_id", using: :btree
+    t.index ["option_id"], name: "index_ordered_meals_on_option_id", using: :btree
     t.index ["order_id"], name: "index_ordered_meals_on_order_id", using: :btree
   end
 
@@ -67,7 +98,7 @@ ActiveRecord::Schema.define(version: 20161201093255) do
     t.datetime "located_at"
     t.float    "latitude"
     t.float    "longitude"
-    t.integer  "preperation_time"
+    t.integer  "preparation_time"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
@@ -86,23 +117,23 @@ ActiveRecord::Schema.define(version: 20161201093255) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "facebook_url"
-    t.integer  "preperation_time"
+    t.integer  "preparation_time"
     t.index ["user_id"], name: "index_restaurants_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "messenger_id"
@@ -112,13 +143,19 @@ ActiveRecord::Schema.define(version: 20161201093255) do
     t.string   "token"
     t.datetime "token_expiry"
     t.string   "facebook_picture_check"
-    t.json     "session"
+    t.boolean  "admin",                  default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "meal_categories", "restaurants"
+  add_foreign_key "meal_options", "meals"
+  add_foreign_key "meal_options", "options"
+  add_foreign_key "meals", "meal_categories"
   add_foreign_key "meals", "restaurants"
+  add_foreign_key "options", "restaurants"
   add_foreign_key "ordered_meals", "meals"
+  add_foreign_key "ordered_meals", "options"
   add_foreign_key "ordered_meals", "orders"
   add_foreign_key "orders", "restaurants"
   add_foreign_key "orders", "users"

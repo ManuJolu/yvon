@@ -3,24 +3,16 @@ class MealController
     @view = MealView.new
   end
 
-  def menu(postback, params = {})
-    restaurant = Restaurant.find(params[:restaurant_id])
-    @view.menu(postback, restaurant)
-  end
-
-  def menu_more(postback, params = {})
-    restaurant = Restaurant.find(params[:restaurant_id])
-    @view.menu_more(postback, restaurant)
-  end
-
   def index(postback, params = {})
     restaurant = Restaurant.find(params[:restaurant_id])
-    meals = restaurant.meals.active.where(category: params[:category]).limit(9)
-    next_category = Meal.categories.key(Meal.categories[params[:category]] + 1)
-    @view.index(postback, meals.decorate, current_category: params[:category], next_category: next_category)
+    meal_category = MealCategory.find(params[:meal_category_id])
+    next_meal_category = meal_category.lower_item
+    meals = restaurant.meals.is_active.where(meal_category: meal_category).limit(9)
+    @view.index(postback, meals.decorate, current_meal_category: meal_category, next_meal_category: next_meal_category)
   end
 
-  def no_restaurant(postback)
-    @view.no_restaurant(postback)
+  def get_option(postback, meal, params = {})
+    options = meal.options
+    @view.get_option(postback, options, meal_id: meal.id, action: params[:action])
   end
 end

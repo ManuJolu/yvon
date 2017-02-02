@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   mount Attachinary::Engine, at: 'attachinary'
@@ -6,11 +7,16 @@ Rails.application.routes.draw do
 
 
   scope '(:locale)', locale: /fr|en/ do
-    root to: 'pages#home'
-    resources :users, only: [:show]
-    resources :restaurants, only: [:index, :show, :new, :create, :edit, :update] do
-      member do
-        patch '/duty/:state' => "restaurants#duty"
+  root to: 'pages#home'
+  get '/privacy-policy', to: 'pages#privacy_policy'
+  resources :users, only: [:show]
+  resources :restaurants, only: [:index, :show, :new, :create, :edit, :update] do
+    member do
+      patch '/duty/:state' => "restaurants#duty"
+    end
+    resources :orders, only: [] do
+      collection do
+        get 'pending'
       end
       resources :orders, only: [] do
         collection do

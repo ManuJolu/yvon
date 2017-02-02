@@ -1,4 +1,4 @@
-class UserController
+ class UserController
   def match_user(message)
     user = User.find_by(messenger_id: message.sender['id'])
     # Could implement refresh of facebook_picture_check here, or better make a cron tab for that every day?
@@ -22,19 +22,5 @@ class UserController
       user.save
     end
     user
-  end
-
-  def initialize_session(message, user)
-    lat = message.attachments[0]['payload']['coordinates']['lat']
-    lng = message.attachments[0]['payload']['coordinates']['long']
-
-    user.session = {
-      'located_at' => Time.now,
-      'latitude' => lat,
-      'longitude' => lng
-    }
-    user.save
-
-    [lat, lng]
   end
 end
