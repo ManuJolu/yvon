@@ -20,5 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  slogan: "Time is too precious to wait in line!"
-  tagline: "Save your time & order your lunch with Yvon"
+  home:
+    slogan: "Time is too precious to wait in line!"
+    tagline: "Save your time & order your lunch with Yvon"
+    calltoaction: "Message Yvon"
+    fonc:
+      titre1: "Find the best restaurants around you"
+      det1: "Yvon uses your geolocation datas to indicate the closest restaurants"
+      titre2: "Select one and have a look at the menu"
+      det2: "Yvon allows you to see restaurants avaibilities around you"
+      titre3: "Order your meals and pay with Yvon"
+      det3: "Yvon allows you to pay the restaurant so that you won't have to wait to get your order"
+      titre4: "Pick-up your food directly at the desk"
+      det4: "No more queue, you order waits you at the restaurant. You will even be notified when it's ready !"
+
+
+
+
