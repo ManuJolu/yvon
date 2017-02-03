@@ -10,16 +10,16 @@
     </div>
   </div>
 
-  <% @restaurant.meals.categories.keys.each do |category| %>
+  <% @restaurant.meal_categories.each do |meal_category| %>
     <div class="row">
       <div class="col-md-12">
         <div class="categorie">
           <hr>
-          <h4><%= category.capitalize.tr("_", " ").pluralize %></h4>
+          <h4><%= meal_category.name %></h4>
         </div>
       </div>
     </div>
-    <% @restaurant.meals.where(category: category).each do |meal| %>
+    <% @restaurant.meals.where(meal_category: meal_category).each do |meal| %>
       <div class="ligne">
         <div class="row">
           <div class="col-md-2">

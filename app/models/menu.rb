@@ -2,6 +2,7 @@ class Menu < ApplicationRecord
   belongs_to :restaurant, required: true
   has_many :menu_meal_categories
   has_many :meal_categories, through: :menu_meal_categories
+  has_many :order_elements, as: :element
 
   monetize :price_cents, allow_nil: false, numericality: { greater_than_or_equal_to: 0 }
   monetize :tax_cents

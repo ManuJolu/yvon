@@ -3,6 +3,8 @@ class Meal < ApplicationRecord
   belongs_to :meal_category
   has_many :meal_options
   has_many :options, through: :meal_options
+  has_many :order_elements, as: :element
+
 
   validates :category, presence: true
   validates :name, presence: true
