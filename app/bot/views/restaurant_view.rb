@@ -73,8 +73,8 @@ class RestaurantView
     restaurant.meal_categories[start_index..end_index].each do |meal_category|
       elements << {
         title: meal_category.name,
-        image_url: (cl_image_path(restaurant.meals.where(meal_category: meal_category).first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(meal_category: meal_category).present?),
-        subtitle: "#{('Suggestion: ' + restaurant.meals.where(meal_category: meal_category).first.name) if restaurant.meals.where(meal_category: meal_category).present?}",
+        image_url: (cl_image_path(restaurant.meals.is_active.where(meal_category: meal_category).first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.is_active.where(meal_category: meal_category).present?),
+        subtitle: "#{('Suggestion: ' + restaurant.meals.is_active.where(meal_category: meal_category).first.name) if restaurant.meals.is_active.where(meal_category: meal_category).present?}",
         buttons: [
           {
               title: "➥ #{meal_category.name}",
@@ -100,45 +100,6 @@ class RestaurantView
           template_type: 'list',
           elements: elements,
           buttons: button
-        }
-      }
-    )
-  end
-
-  def menu_more(postback, restaurant)
-    elements = [
-      {
-        title: restaurant.name,
-        image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),
-        subtitle: restaurant.description,
-        buttons: [
-          {
-              title: "Pay",
-              type: "postback",
-              payload: "pay"
-          }
-        ]
-      },
-      {
-        title: "Drink",
-        image_url: (cl_image_path(restaurant.meals.where(category: 'drink').first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.where(category: 'drink').present?),
-        subtitle: "#{('Suggestion: ' + restaurant.meals.where(category: 'drink').first.name) if restaurant.meals.where(category: 'drink').present?}",
-        buttons: [
-          {
-              title: "➥ Drink",
-              type: "postback",
-              payload: "restaurant_#{restaurant.id}_category_drink"
-          }
-        ]
-      }
-    ]
-
-    postback.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'list',
-          elements: elements
         }
       }
     )
