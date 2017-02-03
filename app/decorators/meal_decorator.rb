@@ -6,6 +6,6 @@ class MealDecorator < Draper::Decorator
   end
 
   def price_num
-    humanized_money object.price
+    format '%.2f', object.price
   end
 end

@@ -8,23 +8,23 @@ class OrderDecorator < Draper::Decorator
   end
 
   def price_num
-    humanized_money object.price
+    format '%.2f', object.price
   end
 
   def tax_num
-    humanized_money object.tax
+    format '%.2f', object.tax
   end
 
   def pretax_price_num
-    humanized_money object.pretax_price
+    format '%.2f', object.pretax_price
   end
 
   def alacarte_price_num
-    humanized_money object.alacarte_price
+    format '%.2f', object.alacarte_price
   end
 
   def discount_num
-    humanized_money object.discount
+    format '%.2f', object.discount
   end
 
   def paid_at
