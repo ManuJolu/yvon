@@ -19,6 +19,14 @@ class OrderDecorator < Draper::Decorator
     humanized_money object.pretax_price
   end
 
+  def alacarte_price_num
+    humanized_money object.alacarte_price
+  end
+
+  def discount_num
+    humanized_money object.discount
+  end
+
   def paid_at
     object.paid_at&.strftime('%-H:%M:%S')
   end

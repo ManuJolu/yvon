@@ -52,17 +52,17 @@ class OrderView
             subtotal: order.pretax_price_num,
             total_tax: order.tax_num,
             total_cost: order.price_num
-          }
-          # adjustments: [
-          #   {
-          #     name: "New Customer Discount",
-          #     amount: 20
-          #   },
-          #   {
-          #     name: "$10 Off Coupon",
-          #     amount: 10
-          #   }
-          # ]
+          },
+          adjustments: [
+            {
+              name: "Discounts",
+              amount: order.discount_num
+            }
+            # {
+            #   name: "Welcome coupon",
+            #   amount: 5
+            # }
+          ]
         }
       }
     )
