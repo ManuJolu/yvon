@@ -1,5 +1,4 @@
 fr:
-
   home:
     slogan: "Votre temps est trop précieux pour le perdre à faire la queue !"
     tagline: "Laissez Yvon commander votre déjeuner et allez le récupérer seulement lorsqu’il est prêt."
@@ -22,3 +21,5 @@ fr:
       det3: ""
       tit4: "Retrouvez vos reçus et factures dans votre espace dédié"
       det4: ""
+  bot:
+    hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ?"
