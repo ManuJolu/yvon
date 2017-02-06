@@ -1,7 +1,7 @@
 class MessageView
   def hello(message, user)
     message.reply(
-      text: "Hello #{user.first_name.capitalize}! Where can I help you find your restaurant?",
+      text: I18n.t('hello', username: user.first_name.capitalize, scope: :bot),
       quick_replies: [
         {
           content_type: 'location'
