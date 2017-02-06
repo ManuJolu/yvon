@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201164916) do
+ActiveRecord::Schema.define(version: 20170203080428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,12 +65,43 @@ ActiveRecord::Schema.define(version: 20170201164916) do
     t.index ["restaurant_id"], name: "index_meals_on_restaurant_id", using: :btree
   end
 
+  create_table "menu_meal_categories", force: :cascade do |t|
+    t.integer  "menu_id"
+    t.integer  "meal_category_id"
+    t.integer  "quantity",         default: 1
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["meal_category_id"], name: "index_menu_meal_categories_on_meal_category_id", using: :btree
+    t.index ["menu_id"], name: "index_menu_meal_categories_on_menu_id", using: :btree
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "price_cents",   default: 0, null: false
+    t.integer  "tax_rate"
+    t.integer  "restaurant_id"
+    t.index ["restaurant_id"], name: "index_menus_on_restaurant_id", using: :btree
+  end
+
   create_table "options", force: :cascade do |t|
     t.string   "name"
     t.integer  "restaurant_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["restaurant_id"], name: "index_options_on_restaurant_id", using: :btree
+  end
+
+  create_table "order_elements", force: :cascade do |t|
+    t.integer  "order_id"
+    t.string   "element_type"
+    t.integer  "element_id"
+    t.integer  "quantity",     default: 1
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["element_type", "element_id"], name: "index_order_elements_on_element_type_and_element_id", using: :btree
+    t.index ["order_id"], name: "index_order_elements_on_order_id", using: :btree
   end
 
   create_table "ordered_meals", force: :cascade do |t|
@@ -153,7 +184,11 @@ ActiveRecord::Schema.define(version: 20170201164916) do
   add_foreign_key "meal_options", "options"
   add_foreign_key "meals", "meal_categories"
   add_foreign_key "meals", "restaurants"
+  add_foreign_key "menu_meal_categories", "meal_categories"
+  add_foreign_key "menu_meal_categories", "menus"
+  add_foreign_key "menus", "restaurants"
   add_foreign_key "options", "restaurants"
+  add_foreign_key "order_elements", "orders"
   add_foreign_key "ordered_meals", "meals"
   add_foreign_key "ordered_meals", "options"
   add_foreign_key "ordered_meals", "orders"

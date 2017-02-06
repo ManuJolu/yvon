@@ -40,6 +40,8 @@ class OrderController
         order.preparation_time = order.restaurant.preparation_time
         order.paid_at = Time.now
         order.save
+        order.create_elements
+        order.reload
         @view.cart(postback, order.decorate, paid_at: order.paid_at.to_i)
       else
         @view.restaurant_closed(postback, order.restaurant)
