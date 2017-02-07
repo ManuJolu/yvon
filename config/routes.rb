@@ -13,11 +13,7 @@ Rails.application.routes.draw do
       member do
         patch '/duty/:state' => "restaurants#duty"
       end
-      resources :orders, only: [] do
-        collection do
-          get 'pending'
-        end
-      end
+      resources :orders, only: [:index]
       resources :meals, only: [:create, :update]
     end
     resources :orders, only: [:update]

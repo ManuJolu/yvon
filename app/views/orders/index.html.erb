@@ -1,0 +1,46 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#pending">
+        <span class="show-ctrl">
+          <%= t '.pending' %> <i class="fa fa-chevron-down"></i>
+        </span>
+        <span class="hide-ctrl">
+          <%= t '.pending' %> <i class="fa fa-chevron-up"></i>
+        </span>
+      </button>
+      <div class="collapse in" id="pending">
+        <% if @orders.pending.any? %>
+          <%= render 'orders/list', orders: @orders.pending %>
+        <% else %>
+          <p><%= t '.no_pending' %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-default collapsed" type="button" data-toggle="collapse" data-target="#delivered">
+        <span class="show-ctrl">
+          <%= t '.delivered' %><i class="fa fa-chevron-down"></i>
+        </span>
+        <span class="hide-ctrl">
+          <%= t '.delivered' %><i class="fa fa-chevron-up"></i>
+        </span>
+
+      </button>
+      <div class="collapse" id="delivered">
+        <% if @orders.delivered.any? %>
+          <%= render 'orders/list', orders: @orders.delivered %>
+        <% else %>
+          <p><%= t '.no_delivered' %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

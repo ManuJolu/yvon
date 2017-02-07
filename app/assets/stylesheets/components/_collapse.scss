@@ -1,0 +1,12 @@
+button.btn .show-ctrl{
+    display: none;
+}
+button.btn .hide-ctrl{
+    display: block;
+}
+button.btn.collapsed .show-ctrl{
+    display: block;
+}
+button.btn.collapsed .hide-ctrl{
+    display: none;
+}

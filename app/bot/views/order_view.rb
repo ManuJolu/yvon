@@ -1,13 +1,13 @@
 class OrderView
   def no_meals(postback)
     postback.reply(
-      text: "Sorry, you have no meals to order yet!"
+      text: I18n.t('bot.order.no_meals')
     )
   end
 
   def restaurant_closed(postback, restaurant)
     postback.reply(
-      text: "Woops, #{restaurant.name} has just closed... Can I help you find another restaurant?",
+      text: I18n.t('bot.order.restaurant_closed', restaurant_name: restaurant.name),
       quick_replies: [
         {
           content_type: 'location'
@@ -55,7 +55,7 @@ class OrderView
           },
           adjustments: [
             {
-              name: "Discounts",
+              name: I18n.t('bot.order.cart.discounts'),
               amount: order.discount_num
             }
             # {
@@ -81,7 +81,7 @@ class OrderView
     ]
 
     postback.reply(
-      text: "Your order will be ready in #{order.preparation_time}min at #{(Time.now + order.preparation_time.minutes).strftime('%-H:%M')}."
+      text: I18n.t('bot.order.cart.ready', preparation_time: order.preparation_time, ready_time: (Time.now + order.preparation_time.minutes).strftime('%-H:%M'))
     )
 
     postback.reply(
@@ -91,7 +91,7 @@ class OrderView
           template_type: "generic",
           elements: [
             {
-              title: "Go to #{order.restaurant.name}",
+              title: I18n.t('bot.order.cart.go_to', restaurant_name: order.restaurant.name),
               image_url: url_array.join,
               item_url: "http://maps.apple.com/maps?q=#{order.restaurant.address}"
             }

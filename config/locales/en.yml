@@ -1,26 +1,73 @@
 en:
-  home:
-    slogan: "Time is too precious to wait in line!"
-    tagline: "Save your time & order your lunch with Yvon"
-    calltoaction: "Message Yvon"
-    fonc:
-      titre1: "Find the best restaurants around you"
-      det1: "Yvon uses your geolocation datas to indicate the closest restaurants"
-      titre2: "Select one and have a look at the menu"
-      det2: "Yvon allows you to see restaurants avaibilities around you"
-      titre3: "Order your meals and pay with Yvon"
-      det3: "Yvon allows you to pay the restaurant so that you won't have to wait to get your order"
-      titre4: "Pick-up your food directly at the desk"
-      det4: "No more queue, you order waits you at the restaurant. You will even be notified when it's ready !"
-    avant:
-      tit1: ""
-      det1: ""
-      tit2: ""
-      det2: ""
-      tit4: ""
+  layouts:
+    application:
+      title: "Yvon - Don't fall in line"
+  pages:
+    home:
+      slogan: "Time is too precious to wait in line!"
+      tagline: "Save your time & order your lunch with Yvon"
+      calltoaction: "Message Yvon"
+      fonc:
+        titre1: "Find the best restaurants around you"
+        det1: "Yvon uses your geolocation datas to indicate the closest restaurants"
+        titre2: "Select one and have a look at the menu"
+        det2: "Yvon allows you to see restaurants avaibilities around you"
+        titre3: "Order your meals and pay with Yvon"
+        det3: "Yvon allows you to pay the restaurant so that you won't have to wait to get your order"
+        titre4: "Pick-up your food directly at the desk"
+        det4: "No more queue, you order waits you at the restaurant. You will even be notified when it's ready !"
+      avant:
+        tit1: ""
+        det1: ""
+        tit2: ""
+        det2: ""
+        tit4: ""
+    index:
+      pending: "Pending"
+      delivered: "Delivered"
+      no_pending: "You have no pending orders"
+      no_delivered: "You have no delivered orders"
+    list:
+      customer: "Customers"
+      starters: "Startes"
+      main_courses: "Main courses"
+      desserts: "Desserts"
+      drinks: "Drinks"
+      total_price: "Total price"
+      paid_at: "Paid at"
+      ready_at: "Ready at"
+      delivered_at: "Delivered at"
+    button_ready:
+      ready: "READY"
+    button_delivered:
+      delivered: "DELIVERED"
   bot:
     hello: "Hello %{username}! Where can I help you find your restaurant?"
-
-
-
-
+    no_restaurant: "Sorry, I found no restaurants near you... Try a new location or my hometown Bordeaux to find fine restaurants for sure!"
+    no_restaurant_selected: "Sorry, you have no restaurant selected. Can I help you find one?"
+    restaurant:
+      index:
+        ready_in: "ready in"
+        heading: "heading"
+        enter: "Enter"
+      menu:
+        view_more: "View more"
+      restaurant_mismatch: "Sorry, this menu belongs to %{restaurant_name}, here is the right menu:"
+      meal_restaurant_mismatch: "Sorry, this meal belongs to %{restaurant_name}, here is the right menu:"
+    meal:
+      index:
+        pick_pay: 'Pick & Pay'
+        pick_menu: 'Pick & ➥ Menu'
+        pick_next: "Pick & ➥ %{next_category}"
+        pay: 'Pay'
+        menu: '➥ Menu'
+        next: "➥ %{next_category}"
+      get_option:
+        choose_option: "Choose your option:"
+    order:
+      no_meals: "Sorry, you have no meals to order yet!"
+      restaurant_closed: "Woops, %{restaurant_name} has just closed... Can I help you find another restaurant?"
+      cart:
+        discounts: "Discounts"
+        ready: "Your order will be ready in %{preparation_time}min at %{ready_time}."
+        go_to: "Go to %{restaurant_name}"
