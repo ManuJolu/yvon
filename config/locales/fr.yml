@@ -1,25 +1,79 @@
 fr:
-  home:
-    slogan: "Votre temps est trop précieux pour le perdre à faire la queue !"
-    tagline: "Laissez Yvon commander votre déjeuner et allez le récupérer seulement lorsqu’il est prêt."
-    calltoaction: "Commandez avec Yvon"
-    fonc:
-      titre1: "Yvon géolocalise les meilleurs restaurants autour de vous"
-      det1: "et vous indique les temps d’attente de chacun"
-      titre2: "Yvon vous apporte le menu"
-      det2: ""
-      titre3: "Commandez (et payez) en 1 clic  avec Yvon"
-      det3: ""
-      titre4: "Yvon vous prévient lorsque votre commande est prête."
-      det4: "Vous n’avez plus qu’à la récupérer sans faire la queue"
-    avant:
-      tit1: "Simple d’utilisation"
-      det1: "Pas d'application à installer, pas de compte à créer, commandez avec Yvon comme vous discutez avec un ami."
-      tit2: "Rapide"
-      det2: "Commandez votre déjeuner en 1 min et gagnez jusqu’à 30 min de temps pour vous"
-      tit3: "Aucun surcoût"
-      det3: ""
-      tit4: "Retrouvez vos reçus et factures dans votre espace dédié"
-      det4: ""
+  layouts:
+    application:
+      title: "Yvon - Coupez la file"
+  pages:
+    home:
+      slogan: "Votre temps est trop précieux pour le perdre à faire la queue !"
+      tagline: "Laissez Yvon commander votre déjeuner et allez le récupérer seulement lorsqu’il est prêt."
+      calltoaction: "Commandez avec Yvon"
+      fonc:
+        titre1: "Yvon géolocalise les meilleurs restaurants autour de vous"
+        det1: "et vous indique les temps d’attente de chacun"
+        titre2: "Yvon vous apporte le menu"
+        det2: ""
+        titre3: "Commandez (et payez) en 1 clic  avec Yvon"
+        det3: ""
+        titre4: "Yvon vous prévient lorsque votre commande est prête."
+        det4: "Vous n’avez plus qu’à la récupérer sans faire la queue"
+      avant:
+        tit1: "Simple d’utilisation"
+        det1: "Pas d'application à installer, pas de compte à créer, commandez avec Yvon comme vous discutez avec un ami."
+        tit2: "Rapide"
+        det2: "Commandez votre déjeuner en 1 min et gagnez jusqu’à 30 min de temps pour vous"
+        tit3: "Aucun surcoût"
+        det3: ""
+        tit4: "Retrouvez vos reçus et factures dans votre espace dédié"
+        det4: ""
+  restaurant:
+
+  orders:
+    index:
+      pending: "En cours"
+      delivered: "Livrées"
+      no_pending: "Vous n'avez pas de commandes en cours"
+      no_delivered: "Vous n'avez pas de commandes livrées"
+    list:
+      customer: "Client"
+      starters: "Entrées"
+      main_courses: "Plats"
+      desserts: "Desserts"
+      drinks: "Boissons"
+      total_price: "Prix total"
+      paid_at: "Payé à"
+      ready_at: "Prêt à"
+      delivered_at: "Livré à"
+    button_ready:
+      ready: "PRÊT"
+    button_delivered:
+      delivered: "LIVRÉ"
   bot:
     hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ?"
+    no_restaurant: "Désolé, je n'ai pas trouvé de restaurant près de toi... Essaye un nouveeau lieu, ou ma ville natale Bordeaux pour être sûr de trouver de bons restaurants !"
+    no_restaurant_selected: "Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider à en trouver un ?"
+    restaurant:
+      index:
+        ready_in: "prêt en"
+        heading: "direction"
+        enter: "Entrer"
+      menu:
+        view_more: "Voir la suite"
+      restaurant_mismatch: "Désolé, ce menu appartient au %{restaurant_name}, voici le bon menu :"
+      meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
+    meal:
+      index:
+        pick_pay: '✔️️ & Payer'
+        pick_menu: '✔️️ & ➥ Menu'
+        pick_next: "✔️️ & ➥ %{next_category}"
+        pay: 'Payer'
+        menu: '➥ Menu'
+        next: "➥ %{next_category}"
+      get_option:
+        choose_option: "Choisis ton option :"
+    order:
+      no_meals: "Désolé, tu n'as pas encore de plat à commander !"
+      restaurant_closed: "Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à trouver un autre restaurantn?"
+      cart:
+        discounts: "Réductions"
+        ready: "Ta commande sera prête dans %{preparation_time}min à %{ready_time}."
+        go_to: "Vas au %{restaurant_name}"

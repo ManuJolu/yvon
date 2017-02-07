@@ -13,8 +13,9 @@ class Order < ApplicationRecord
   monetize :alacarte_price_cents
   monetize :discount_cents
 
-  scope :pending, ->{ where('paid_at IS NOT NULL').where(delivered_at: nil).order(paid_at: :desc) }
-  scope :delivered, -> { where('delivered_at IS NOT NULL').order(delivered_at: :desc) }
+  scope :at_week, -> { where('paid_at > ?', 1.week.ago)}
+  scope :pending, -> { where('paid_at IS NOT NULL').where(delivered_at: nil).includes(:user).includes(:order_elements).order(paid_at: :desc) }
+  scope :delivered, -> { where('delivered_at IS NOT NULL').includes(:user).includes(:order_elements).order(delivered_at: :desc) }
 
   def price_cents
     order_elements.sum { |order_element| order_element.quantity * order_element.element.price_cents }

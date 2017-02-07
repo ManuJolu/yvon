@@ -1,7 +1,7 @@
 class MessageView
   def hello(message, user)
     message.reply(
-      text: I18n.t('hello', username: user.first_name.capitalize, scope: :bot),
+      text: I18n.t('bot.hello', username: user.first_name.capitalize),
       quick_replies: [
         {
           content_type: 'location'
@@ -12,7 +12,7 @@ class MessageView
 
   def no_restaurant(message)
     message.reply(
-      text: "Sorry, I found no restaurants near you... Try a new location or my hometown Bordeaux to find fine restaurants for sure!",
+      text: I18n.t('bot.no_restaurant'),
       quick_replies: [
         {
           content_type: 'location'
@@ -28,7 +28,7 @@ class MessageView
 
   def no_restaurant_selected(postback)
     postback.reply(
-      text: "Sorry, you have no restaurant selected. Can I help you find one?",
+      text: I18n.t('bot.no_restaurant_selected'),
       quick_replies: [
         {
           content_type: 'location'

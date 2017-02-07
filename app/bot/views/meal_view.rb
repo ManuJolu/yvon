@@ -11,17 +11,17 @@ class MealView
           buttons: [
             {
               type: 'postback',
-              title: 'Pick & Pay',
+              title: I18n.t('bot.meal.index.pick_pay'),
               payload: "meal_#{meal.id}_pay"
             },
             {
               type: 'postback',
-              title: 'Pick & ➥ Menu',
+              title: I18n.t('bot.meal.index.pick_menu'),
               payload: "meal_#{meal.id}_menu"
             },
             {
               type: 'postback',
-              title: "Pick & ➥ #{next_meal_category.name}",
+              title: I18n.t('bot.meal.index.pick_next', next_category: next_meal_category.name),
               payload: "meal_#{meal.id}_next"
             }
           ]
@@ -34,17 +34,17 @@ class MealView
         buttons: [
           {
             type: 'postback',
-            title: 'Pay',
+            title: I18n.t('bot.meal.index.pay'),
             payload: "pay"
           },
           {
             type: 'postback',
-            title: '➥ Menu',
+            title: I18n.t('bot.meal.index.menu'),
             payload: "menu"
           },
           {
             type: 'postback',
-            title: "➥ #{next_meal_category.name}",
+            title: I18n.t('bot.meal.index.next', next_category: next_meal_category.name),
             payload: "category_#{next_meal_category.id}"
           }
         ]
@@ -58,12 +58,12 @@ class MealView
           buttons: [
             {
               type: 'postback',
-              title: 'Pick & ➥ Menu',
+              title: I18n.t('bot.meal.index.pick_menu'),
               payload: "meal_#{meal.id}_menu"
             },
             {
               type: 'postback',
-              title: 'Pick & Pay',
+              title: I18n.t('bot.meal.index.pick_pay'),
               payload: "meal_#{meal.id}_pay"
             }
           ]
@@ -76,12 +76,12 @@ class MealView
         buttons: [
           {
             type: 'postback',
-            title: '➥ Menu',
+            title: I18n.t('bot.meal.index.menu'),
             payload: "menu"
           },
           {
             type: 'postback',
-            title: 'Pay',
+            title: I18n.t('bot.meal.index.pay'),
             payload: "pay"
           }
         ]
@@ -113,7 +113,7 @@ class MealView
         type: 'template',
         payload: {
           template_type: 'button',
-          text: "Choose your option:",
+          text: I18n.t('bot.meal.get_option.choose_option'),
           buttons: options
         }
       }

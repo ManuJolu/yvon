@@ -83,6 +83,8 @@ MoneyRails.configure do |config|
     :sign_before_symbol => nil
   }
 
+  config.no_cents_if_whole = false
+
   # Set default raise_error_on_money_parsing option
   # It will be raise error if assigned different currency
   # The default value is false

@@ -1,8 +1,13 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:update]
-  before_action :set_restaurant, only: [:update]
+  before_action :set_restaurant, only: [:index]
+
+  def index
+    @orders = @restaurant.orders.at_week.includes(:user)
+  end
 
   def update
+    @restaurant = @order.restaurant
     if order_params[:ready_at]
       @order.ready_at = DateTime.now
       if @order.save
@@ -73,7 +78,7 @@ class OrdersController < ApplicationController
   end
 
   def set_restaurant
-    @restaurant = @order.restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 
   def order_params
