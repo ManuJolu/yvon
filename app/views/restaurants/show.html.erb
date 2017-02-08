@@ -9,8 +9,8 @@
   <a class="tab" data-target="#meals">
     <h3>Meals</h3>
   </a>
-  <a class="tab" data-target="#dashboard">
-    <h3>Dashboard</h3>
+  <a class="tab" data-target="#configure">
+    <h3>Configure</h3>
   </a>
   <a class="tab" data-target="#restaurant">
     <h3>Edit my restaurant</h3>
@@ -28,41 +28,12 @@
 
 <div class="tab-content hidden" id="meals">
   <div class="container">
-
-    <div class="display-meals" id="display-meals">
-      <%= render 'meals/show' %>
-    </div>
-
-    <!-- Button trigger modal -->
-    <div class = text-center>
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMeal">
-        Add a meal
-      </button>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="addMeal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add a meal</h4>
-          </div>
-          <div class="modal-body" id='modalBodyNewMeal'>
-            <%= render 'meals/form', meal: @new_meal %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <%= link_to "Meals", restaurant_meals_path(@restaurant) %>
   </div>
 </div>
 
-<div class="tab-content hidden" id="dashboard">
-  <%= render 'orders/dashboard' %>
+<div class="tab-content hidden" id="configure">
+  <%= render 'restaurants/configure', restaurant: @restaurant %>
 </div>
 
 
@@ -75,11 +46,7 @@
   var restaurantId = <%= @restaurant.id %>;
 </script>
 
-
-
-
 <% content_for :after_js do %>
-
   <script>
     $(".input_active").change(function() {
       $(this).closest('form').trigger('submit.rails');

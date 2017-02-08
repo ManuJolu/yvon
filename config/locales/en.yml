@@ -6,7 +6,16 @@ en:
     home:
       slogan: "Time is too precious to wait in line!"
       tagline: "Save your time & order your lunch with Yvon"
-      calltoaction: "Message Yvon"
+      call_to_action: "Message Yvon"
+      avant:
+        tit1: "Simple d’utilisation"
+        det1: "Pas d'application à installer, pas de compte à créer, commandez avec Yvon comme vous discutez avec un ami."
+        tit2: "Rapide"
+        det2: "Commandez votre déjeuner en 1 min et gagnez jusqu’à 30 min de temps pour vous"
+        tit3: "Aucun surcoût"
+        det3: ""
+        tit4: "Retrouvez vos reçus et factures dans votre espace dédié"
+        det4: ""
       fonc:
         titre1: "Find the best restaurants around you"
         det1: "Yvon uses your geolocation datas to indicate the closest restaurants"
@@ -16,12 +25,6 @@ en:
         det3: "Yvon allows you to pay the restaurant so that you won't have to wait to get your order"
         titre4: "Pick-up your food directly at the desk"
         det4: "No more queue, you order waits you at the restaurant. You will even be notified when it's ready !"
-      avant:
-        tit1: ""
-        det1: ""
-        tit2: ""
-        det2: ""
-        tit4: ""
   orders:
     index:
       pending: "Pending"
