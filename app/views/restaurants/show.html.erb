@@ -2,37 +2,9 @@
   <% @restaurant.name %>
 <% end %>
 
-<div class="tabs">
-  <a class="tab active" data-target="#orders">
-    <h3>Orders</h3>
-  </a>
-  <a class="tab" data-target="#meals">
-    <h3>Meals</h3>
-  </a>
-  <a class="tab" data-target="#configure">
-    <h3>Configure</h3>
-  </a>
-  <a class="tab" data-target="#restaurant">
-    <h3>Edit my restaurant</h3>
-  </a>
-</div>
+<%= render "restaurants/tabs", restaurant: @restaurant, active: 'configure' %>
 
-
-<div class="tab-content" id="orders">
-  <div class="container">
-    <div id="orderslist">
-      <%= render 'orders/index', orders: @restaurant.orders %>
-    </div>
-  </div>
-</div>
-
-<div class="tab-content hidden" id="meals">
-  <div class="container">
-    <%= link_to "Meals", restaurant_meals_path(@restaurant) %>
-  </div>
-</div>
-
-<div class="tab-content hidden" id="configure">
+<div class="tab-content" id="configure">
   <%= render 'restaurants/configure', restaurant: @restaurant %>
 </div>
 

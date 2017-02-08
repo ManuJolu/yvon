@@ -1,0 +1,6 @@
+<div class="tabs">
+  <%= link_to "Meals", restaurant_meals_path(restaurant), class: "tab#{ ' active' if active == 'meals'}" %>
+  <%= link_to "Orders", restaurant_orders_path(restaurant), class: "tab#{ ' active' if active == 'orders'}" %>
+  <%= link_to "Configure", restaurant_path(restaurant), class: "tab#{ ' active' if active == 'configure'}" %>
+  <%= link_to "Edit", restaurant_path(restaurant), class: "tab#{ ' active' if active == 'edit'}" %>
+</div>
