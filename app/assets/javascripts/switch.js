@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
   $('#switch input').change(function(e){

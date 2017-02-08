@@ -1,30 +1,38 @@
-<div id="pending" class="btn-default">
-  <h1>
-    Pending orders
-    <i id="trianglependingdown" class="fa fa-caret-down hidden"></i>
-    <i id="trianglependingup" class="fa fa-caret-up"></i>
-  </h1>
-</div>
-<div id="orderspending">
+<br>
+
+<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#pending">
+  <span class="show-ctrl">
+    <%= t 'orders.index.pending' %> <i class="fa fa-chevron-down"></i>
+  </span>
+  <span class="hide-ctrl">
+    <%= t 'orders.index.pending' %> <i class="fa fa-chevron-up"></i>
+  </span>
+</button>
+<div class="collapse in" id="pending">
   <% if orders.pending.any? %>
-    <%= render 'orders/show', orders: orders.pending %>
+    <%= render 'orders/list', orders: orders.pending %>
   <% else %>
-    <p> You have no pending orders yet</p>
+    <p><%= t 'orders.index.no_pending' %></p>
   <% end %>
 </div>
 
-<div id="delivered" class="btn-default">
-  <h1>
-    Delivered orders
-    <i id="triangledelivereddown" class="fa fa-caret-down"></i>
-    <i id="triangledeliveredup" class="fa fa-caret-up  hidden"></i>
-  </h1>
-</div>
-<div id="ordersdelivered" class="hidden">
+<br>
+
+<button class="btn btn-default collapsed" type="button" data-toggle="collapse" data-target="#delivered">
+  <span class="show-ctrl">
+    <%= t 'orders.index.delivered' %><i class="fa fa-chevron-down"></i>
+  </span>
+  <span class="hide-ctrl">
+    <%= t 'orders.index.delivered' %><i class="fa fa-chevron-up"></i>
+  </span>
+
+</button>
+<div class="collapse" id="delivered">
   <% if orders.delivered.any? %>
-    <%= render 'orders/show', orders: orders.delivered %>
+    <%= render 'orders/list', orders: orders.delivered %>
   <% else %>
-    <p> You have no delivered orders yet </p>
+    <p><%= t 'orders.index.no_delivered' %></p>
   <% end %>
 </div>
 
+<br>

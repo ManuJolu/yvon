@@ -1,7 +1,7 @@
 class OrderDecorator < Draper::Decorator
   delegate_all
   decorates_association :user
-  decorates_association :ordered_meals, scope: :by_category
+  decorates_association :ordered_meals
 
   def price
     humanized_money_with_symbol object.price

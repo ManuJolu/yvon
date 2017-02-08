@@ -3,4 +3,6 @@ class MealCategory < ApplicationRecord
   has_many :meals
 
   acts_as_list scope: :restaurant
+
+  enum timing: [ :starter, :main_course, :dessert, :drink ]
 end

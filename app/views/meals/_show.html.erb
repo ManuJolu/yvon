@@ -1,18 +1,18 @@
 <div class="container">
   <div class="entete">
     <div class="row">
-      <div class="col-md-2">On the Menu</div>
-      <div class="col-md-3">Photo</div>
-      <div class="col-md-2">Meal Name</div>
-      <div class="col-md-3">Description</div>
-      <div class="col-md-1">Price</div>
-      <div class="col-md-1">Edit</div>
+      <div class="col-xs-2">On the Menu</div>
+      <div class="col-xs-3">Photo</div>
+      <div class="col-xs-2">Meal Name</div>
+      <div class="col-xs-3">Description</div>
+      <div class="col-xs-1">Price</div>
+      <div class="col-xs-1">Edit</div>
     </div>
   </div>
 
   <% @restaurant.meal_categories.each do |meal_category| %>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-xs-12">
         <div class="categorie">
           <hr>
           <h4><%= meal_category.name %></h4>
@@ -22,22 +22,22 @@
     <% @restaurant.meals.where(meal_category: meal_category).each do |meal| %>
       <div class="ligne">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-xs-2">
             <div class="ui checked checkbox">
-              <%= simple_form_for [ @restaurant, meal], remote: true do |f| %>
+              <%= simple_form_for meal, remote: true do |f| %>
                 <%= f.input :active, label: false, input_html: { class: "input_active" } %>
               <% end %>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-xs-3">
             <div id="bordered">
               <%= cl_image_tag(meal.photo.path, height: 50, width: 100, crop: :fill) %>
             </div>
           </div>
-          <div class="col-md-2"><%= meal.name %></div>
-          <div class="col-md-3"><%= meal.description %></div>
-          <div class="col-md-1"><%= meal.decorate.price %></div>
-          <div class="col-md-1">
+          <div class="col-xs-2"><%= meal.name %></div>
+          <div class="col-xs-3"><%= meal.description %></div>
+          <div class="col-xs-1"><%= meal.decorate.price %></div>
+          <div class="col-xs-1">
             <a data-toggle="modal" data-target="#editMeal_<%= meal.id %>"><i class="fa fa-pencil" ></i></a>
           </div>
           <div class="modal fade" id="editMeal_<%= meal.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -62,8 +62,3 @@
 
   <% end %>
 </div>
-
-
-
-
-

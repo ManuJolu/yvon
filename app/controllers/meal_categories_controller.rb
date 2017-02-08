@@ -1,14 +1,10 @@
-class MealsController < ApplicationController
-  before_action :set_meal, only: [:update]
-  before_action :set_restaurant, only: [:index, :create, :update]
-
-  def index
-    @meal = @restaurant.meals
-  end
+class MealCategoriesController < ApplicationController
+  before_action :set_meal_category, only: [:update]
+  before_action :set_restaurant, only: [:create]
 
   def create
-    @meal = @restaurant.meals.new(meal_params)
-    if @meal.save
+    @meal_category = @restaurant.meal_categories.new(meal_category_params)
+    if @meal_category.save
       respond_to do |format|
         format.html { redirect_to @restaurant }
         format.js
@@ -22,8 +18,9 @@ class MealsController < ApplicationController
   end
 
   def update
-    @meal.update(meal_params)
-    if @meal.save
+    @restaurant = @meal_category.restaurant
+    @meal_category.update(meal_category_params)
+    if @meal_category.save
       respond_to do |format|
         format.html { redirect_to @restaurant }
         format.js
@@ -38,15 +35,15 @@ class MealsController < ApplicationController
 
   private
 
-  def set_meal
-    @meal = Meal.find(params[:id])
+  def set_meal_category
+    @meal_category = MealCategory.find(params[:id])
   end
 
   def set_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
   end
 
-  def meal_params
-    params.require(:meal).permit(:restaurant_id, :category, :meal_category_id, :name, :description, :price, :tax_rate, :photo, :active)
+  def meal_category_params
+    params.require(:meal_category).permit(:name, :timing, :position)
   end
 end

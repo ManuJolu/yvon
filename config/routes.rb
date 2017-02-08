@@ -13,13 +13,9 @@ Rails.application.routes.draw do
       member do
         patch '/duty/:state' => "restaurants#duty"
       end
-      resources :orders, only: [] do
-        collection do
-          get 'pending'
-        end
-      end
-      resources :meals, only: [:create, :update]
+      resources :meal_categories, only: [:create, :update], shallow: true
+      resources :meals, only: [:index, :create, :update], shallow: true
+      resources :orders, only: [:index, :update], shallow: true
     end
-    resources :orders, only: [:update]
   end
 end
