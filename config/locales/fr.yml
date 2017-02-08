@@ -14,8 +14,17 @@ fr:
         det2: "Commandez votre déjeuner en 1 minute et gagnez jusqu’à 20 minutes"
         tit3: "Aucun surcoût"
         det3: "Payez le même prix qu'en restaurant"
-        tit4: "Espace dédiéRetrouvez vos reçus et factures dans votre espace dédié"
+        tit4: "Espace dédié"
         det4: "Retrouver tous vos reçus et factures facilement"
+      fonc:
+        titre1: "Yvon géolocalise les meilleurs restaurants autour de vous"
+        det1: "et vous indique les temps d’attente de chacun"
+        titre2: "Yvon vous apporte le menu"
+        det2: ""
+        titre3: "Commandez en 1 clic avec Yvon"
+        det3: ""
+        titre4: "Yvon vous prévient lorsque votre commande est prête"
+        det4: "Vous n’avez plus qu’à la récupérer sans faire la queue"
   orders:
     index:
       pending: "En cours"
