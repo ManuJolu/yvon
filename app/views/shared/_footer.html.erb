@@ -1,6 +1,6 @@
 <div class="footer">
 
-  <div class="col-sm-4 text-left">
+  <div class="col-sm-4 text-left linked">
       <a target="_blank" href="https://www.facebook.com/HelloYvon/">
         <i class="fa fa-facebook fa-lg" ></i>
       </a>
@@ -10,12 +10,15 @@
   </div>
 
   <div class="col-sm-4" style="text-align: center">
-    <p>Made with <i class="fa fa-heart-o fa-lg" ></i> by a dedicated team</p>
+    <p>Made with <i class="fa fa-heart-o fa-lg" ></i> by a <%= link_to "dedicated team" %></p>
   </div>
 
-  <div class="col-sm-4" style="text-align: right">
-    <p>The DreamTeam, El Carro, November 2016 </p>
+  <div class="col-sm-2 linked" style="text-align: right">
     <p><%= link_to "Privacy policy", privacy_policy_path %></p>
+  </div>
+
+  <div class="col-sm-2" style="text-align: right">
+    <p>&copy; 2017 | Yvon</p>
   </div>
 
 </div>
