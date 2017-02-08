@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <% @restaurant.meal_categories.each do |meal_category| %>
+      <div class="col-xs-12">
+        <div class="categorie">
+          <h4><%= meal_category.name %></h4>
+        </div>
+      </div>
+      <% @restaurant.meals.where(meal_category: meal_category).each do |meal| %>
+        <div class="product">
+          <div class='product-upvote'>
+            <div class="product-arrow"></div>
+            <div class='product-count'>95</div>
+          </div>
+          <%= cl_image_tag(meal.photo.path, height: 50, width: 100, crop: :fill, class: "product_image hidden-xs") %>
+          <div class='product-body'>
+            <h3><%= meal.name %></h3>
+            <p><%= meal.description %> <%= meal.decorate.price %></p>
+          </div>
+          <ul class="list-inline product-controls hidden-sm hidden-xs">
+            <li><a href=""><i class="fa fa-heart"></i></a></li>
+            <li><a href=""><i class="fa fa-share"></i></a></li>
+            <li><a href=""><i class="fa fa-pencil" ></i></a></li>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
