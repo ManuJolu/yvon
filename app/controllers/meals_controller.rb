@@ -1,9 +1,9 @@
 class MealsController < ApplicationController
-  before_action :set_meal, only: [:update]
-  before_action :set_restaurant, only: [:index, :create, :update]
+  before_action :set_meal, only: [:edit, :update]
+  before_action :set_restaurant, only: [:index, :create]
 
   def index
-    @meal = @restaurant.meals
+    @meals = @restaurant.meals.order(:position)
   end
 
   def create
@@ -21,11 +21,20 @@ class MealsController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def update
+    @restaurant = @meal.restaurant
+    @meals = @restaurant.meals.order(:position)
     @meal.update(meal_params)
     if @meal.save
       respond_to do |format|
-        format.html { redirect_to @restaurant }
+        format.html { redirect_to @meal }
         format.js
       end
     else
@@ -47,6 +56,6 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:restaurant_id, :category, :meal_category_id, :name, :description, :price, :tax_rate, :photo, :active)
+    params.require(:meal).permit(:restaurant_id, :meal_category_id, :position, :name, :description, :price, :tax_rate, :photo, :active)
   end
 end

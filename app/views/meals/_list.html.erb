@@ -1,0 +1,29 @@
+<% restaurant.meal_categories.each do |meal_category| %>
+  <div class="col-xs-12">
+    <div class="categorie">
+      <h4><%= meal_category.name %></h4>
+    </div>
+  </div>
+  <% meals.where(meal_category: meal_category).each do |meal| %>
+    <div class="product">
+      <div class='product-upvote'>
+        <div class="product-arrow"></div>
+        <div class='product-count'>95</div>
+      </div>
+      <%= cl_image_tag(meal.photo.path, height: 50, width: 100, crop: :fill, class: "product_image hidden-xs") %>
+      <div class='product-body'>
+        <h3><%= meal.name %></h3>
+        <p><%= meal.description %> <%= meal.decorate.price %></p>
+        <p>Options : <%= meal.options.map { |option| option.name }.join(' - ') %></p>
+      </div>
+      <ul class="list-inline product-controls hidden-sm hidden-xs">
+        <li><a href="" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a></li>
+        <li>
+          <%= link_to edit_meal_path(meal), class: 'btn btn-primary btn-sm', data: {toggle: "modal", target: "#mealEditModal"}, remote: true do %>
+            <i class="fa fa-pencil"></i>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
