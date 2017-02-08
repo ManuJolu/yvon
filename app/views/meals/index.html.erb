@@ -1,3 +1,5 @@
+<%= render 'restaurants/tabs', restaurant: @restaurant, active: "meals" %>
+
 <div class="container">
   <div class="row">
     <% @restaurant.meal_categories.each do |meal_category| %>
