@@ -2,4 +2,3 @@ $('#pending').html("<%= j render 'orders/list', orders: @restaurant.orders.pendi
 <% unless @ready %>
   $('#delivered').html("<%= j render 'orders/list', orders: @restaurant.orders.delivered %>");
 <% end %>
-
