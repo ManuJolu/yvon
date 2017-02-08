@@ -7,6 +7,8 @@ class OrderedMeal < ApplicationRecord
   scope :by_category, -> { joins(:meal).merge(Meal.order(:category).includes(:meal).order('lower(name)')) }
 
   def self.at_timing(timing)
-   joins(:meal_category).merge(MealCategory.where(timing: timing)).includes(:meal).includes(:option).includes(:meal_category)
+    # select { |ordered_meal| ordered_meal.meal_category.timing == timing }
+    # includes(:meal).includes(:meal_category).where('meal.meal_category.timing = ?', timing)
+    joins(:meal_category).merge(MealCategory.where(timing: timing))
   end
 end

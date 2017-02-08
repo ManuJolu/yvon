@@ -100,4 +100,33 @@ class OrderView
       }
     )
   end
+
+  def notify_ready(order)
+    Facebook::Messenger::Bot.deliver({
+      recipient: {
+        id: order.user.messenger_id
+      },
+      message: {
+        text: I18n.t('bot.order.notify_ready', user_first_name: order.user.first_name,restaurant_name: order.restaurant.name)
+      }},
+      access_token: ENV['ACCESS_TOKEN']
+    )
+  end
+
+  def notify_delivered(order)
+    Facebook::Messenger::Bot.deliver({
+      recipient: {
+        id: order.user.messenger_id
+      },
+      message: {
+        text: I18n.t('bot.order.notify_delivered', user_first_name: order.user.first_name,restaurant_name: order.restaurant.name),
+        quick_replies: [
+          {
+            content_type: 'location'
+          }
+        ]
+      }},
+      access_token: ENV['ACCESS_TOKEN']
+    )
+  end
 end

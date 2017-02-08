@@ -25,8 +25,6 @@ fr:
         det3: ""
         tit4: "Retrouvez vos reçus et factures dans votre espace dédié"
         det4: ""
-  restaurant:
-
   orders:
     index:
       pending: "En cours"
@@ -72,8 +70,11 @@ fr:
         choose_option: "Choisis ton option :"
     order:
       no_meals: "Désolé, tu n'as pas encore de plat à commander !"
-      restaurant_closed: "Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à trouver un autre restaurantn?"
+      restaurant_closed: "Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à trouver un autre restaurant ?"
       cart:
         discounts: "Réductions"
         ready: "Ta commande sera prête dans %{preparation_time}min à %{ready_time}."
         go_to: "Vas au %{restaurant_name}"
+      notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
+      notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}. Est-ce que je peux t'aider à nouveau ?"
+

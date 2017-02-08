@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :restaurant
   has_many :ordered_meals
   has_many :meals, through: :ordered_meals
+  has_many :options, through: :ordered_meals
   has_many :meal_categories, through: :ordered_meals
   has_many :order_elements
   has_many :elements, through: :order_elements
@@ -13,9 +14,17 @@ class Order < ApplicationRecord
   monetize :alacarte_price_cents
   monetize :discount_cents
 
-  scope :at_week, -> { where('paid_at > ?', 1.week.ago)}
-  scope :pending, -> { where('paid_at IS NOT NULL').where(delivered_at: nil).includes(:user).includes(:order_elements).order(paid_at: :desc) }
-  scope :delivered, -> { where('delivered_at IS NOT NULL').includes(:user).includes(:order_elements).order(delivered_at: :desc) }
+  scope :at_week, -> { where('paid_at > ?', 1.week.ago).order(paid_at: :desc) }
+  scope :pending, -> { where('paid_at IS NOT NULL').where(delivered_at: nil).order(paid_at: :desc) }
+  scope :delivered, -> { where('delivered_at IS NOT NULL').order(delivered_at: :desc) }
+
+  # def self.pending
+  #   select { |order| order.paid_at && order.delivered_at.nil? }
+  # end
+
+  # def self.delivered
+  #   select { |order| order.delivered_at }
+  # end
 
   def price_cents
     order_elements.sum { |order_element| order_element.quantity * order_element.element.price_cents }

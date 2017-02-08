@@ -22,14 +22,15 @@ en:
         tit2: ""
         det2: ""
         tit4: ""
+  orders:
     index:
       pending: "Pending"
       delivered: "Delivered"
       no_pending: "You have no pending orders"
       no_delivered: "You have no delivered orders"
     list:
-      customer: "Customers"
-      starters: "Startes"
+      customer: "Customer"
+      starters: "Starters"
       main_courses: "Main courses"
       desserts: "Desserts"
       drinks: "Drinks"
@@ -71,3 +72,5 @@ en:
         discounts: "Discounts"
         ready: "Your order will be ready in %{preparation_time}min at %{ready_time}."
         go_to: "Go to %{restaurant_name}"
+      notify_ready: "Hey %{user_first_name}, your order at %{restaurant_name} is ready for pick-up!"
+      notify_delivered: "%{user_first_name}, you picked up your order at %{restaurant_name}. Can I help you for something else?"

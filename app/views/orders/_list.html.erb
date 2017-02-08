@@ -21,22 +21,22 @@
             <%= order.decorate.user.name %>
           </td>
           <td>
-            <% order.ordered_meals.at_timing(0).each do |ordered_meal| %>
+            <% order.ordered_meals.at_timing("starter").each do |ordered_meal| %>
               <p><%= ordered_meal.decorate %></p>
             <% end %>
           </td>
           <td>
-            <% order.ordered_meals.at_timing(1).each do |ordered_meal| %>
+            <% order.ordered_meals.at_timing("main_course").each do |ordered_meal| %>
               <p><%= ordered_meal.decorate %></p>
             <% end %>
           </td>
           <td>
-            <% order.ordered_meals.at_timing(2).each do |ordered_meal| %>
+            <% order.ordered_meals.at_timing("dessert").each do |ordered_meal| %>
               <p><%= ordered_meal.decorate %></p>
             <% end %>
           </td>
           <td>
-            <% order.ordered_meals.at_timing(3).each do |ordered_meal| %>
+            <% order.ordered_meals.at_timing("drink").each do |ordered_meal| %>
               <p><%= ordered_meal.decorate %></p>
             <% end %>
           </td>

@@ -109,7 +109,11 @@ Bot.on :postback do |postback|
       @message_controller.no_restaurant_selected(postback)
     end
   when 'pay'
-    @order_controller.cart(postback, user)
+    if user.current_order&.restaurant
+      @order_controller.cart(postback, user)
+    else
+      @message_controller.no_restaurant_selected(postback)
+    end
   end
 end
 
