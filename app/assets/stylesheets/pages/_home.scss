@@ -98,8 +98,7 @@ a:hover {
   text-decoration: none;
 }
 .product:hover {
-  background: #e3e3e5;
-  cursor: pointer;
+  background: #f6f6f3;
 }
 
 // .product:hover .product-upvote { transform: scale(1.2) }
@@ -121,11 +120,14 @@ a:hover {
 
 .msg-yvon {
   margin-top: 80px;
+  :hover {
+    border: 1px solid #8b9dc3;
+  }
 }
 
 .owners {
   padding: 45px 0 45px 0;
-  background-color: #E3E3E5;
+  background-color: #f6f6f3;
 }
 
 .owners-content {
