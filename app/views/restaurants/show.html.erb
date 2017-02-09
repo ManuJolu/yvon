@@ -1,10 +1,9 @@
-<%= render "restaurants/tabs", restaurant: @restaurant, active: 'configure' %>
+<%= render "restaurants/tabs", restaurant: @restaurant, active: 'edit' %>
 
-<div class="tab-content" id="configure">
+<div class="tab-content<%= ' hidden' unless @active == 'configure' %>" id="configureRestaurant">
   <%= render 'restaurants/configure', restaurant: @restaurant %>
 </div>
 
-
-<div class="tab-content hidden" id="restaurant">
+<div class="tab-content<%= ' hidden' unless @active == 'edit' %>" id="editRestaurant">
   <%= render 'restaurants/edit' %>
 </div>

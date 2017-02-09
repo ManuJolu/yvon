@@ -13,7 +13,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @new_meal = @restaurant.meals.new
+    @active = params[:tab]
   end
 
   def new
@@ -70,7 +70,7 @@ class RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :user_id, :address, :category, :on_duty, :shift, :photo, :description, :preparation_time, :facebook_url)
+    params.require(:restaurant).permit(:name, :user_id, :address, :category, :on_duty, :shift, :photo, :description, :preparation_time, :facebook_url, meal_categories_attributes: [:id, :name, :_destroy])
   end
 
 end

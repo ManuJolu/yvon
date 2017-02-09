@@ -5,8 +5,15 @@
 <div class="tabs">
   <%= link_to "Meals", restaurant_meals_path(restaurant), class: "tab#{ ' active' if active == 'meals'}" %>
   <%= link_to "Orders", restaurant_orders_path(restaurant), class: "tab#{ ' active' if active == 'orders'}" %>
-  <%= link_to "Configure", restaurant_path(restaurant), class: "tab#{ ' active' if active == 'configure'}" %>
-  <%= link_to "Edit", restaurant_path(restaurant), class: "tab#{ ' active' if active == 'edit'}" %>
+  <% if controller_name == 'restaurants' %>
+    <% configure_path = "#" %>
+    <% edit_path = "#" %>
+  <% else %>
+    <% configure_path = restaurant_path(restaurant, tab: 'configure') %>
+    <% edit_path = restaurant_path(restaurant, tab: 'edit') %>
+  <% end %>
+  <%= link_to "Configure", configure_path, class: "tab#{ ' active' if @active == 'configure'}", data: {target: '#configure'} %>
+  <%= link_to "Edit", edit_path, class: "tab#{ ' active' if @active == 'edit'}", data: {target: '#edit'} %>
 </div>
 
 <% content_for :after_js do %>

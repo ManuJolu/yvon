@@ -33,6 +33,7 @@ gem 'uglifier'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
+gem "cocoon"
 gem 'autoprefixer-rails'
 gem "attachinary", github: "assembler/attachinary"
 gem "jquery-fileupload-rails"

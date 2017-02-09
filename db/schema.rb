@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170209122734) do
+ActiveRecord::Schema.define(version: 20170209145239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,21 +134,29 @@ ActiveRecord::Schema.define(version: 20170209122734) do
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
+  create_table "restaurant_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "restaurants", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
-    t.integer  "category",         default: 0
-    t.boolean  "on_duty",          default: false
+    t.integer  "category",               default: 0
+    t.boolean  "on_duty",                default: false
     t.string   "shift"
     t.string   "description"
     t.string   "photo"
     t.integer  "user_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "facebook_url"
     t.integer  "preparation_time"
+    t.integer  "restaurant_category_id"
+    t.index ["restaurant_category_id"], name: "index_restaurants_on_restaurant_category_id", using: :btree
     t.index ["user_id"], name: "index_restaurants_on_user_id", using: :btree
   end
 
@@ -194,5 +202,6 @@ ActiveRecord::Schema.define(version: 20170209122734) do
   add_foreign_key "ordered_meals", "orders"
   add_foreign_key "orders", "restaurants"
   add_foreign_key "orders", "users"
+  add_foreign_key "restaurants", "restaurant_categories"
   add_foreign_key "restaurants", "users"
 end

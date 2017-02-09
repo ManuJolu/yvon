@@ -4,7 +4,7 @@
   <%= f.input :position %>
   <%= f.input :name, label: "Meal name", error: "Meal name is mandatory, please specify one" %>
   <%= f.input :description %>
-  <%= f.association :options, as: :check_boxes %>
+  <%= f.association :options, as: :check_boxes, collection: meal.restaurant.options %>
   <%= f.input :price %>
   <%= f.input :tax_rate, collection: Meal.tax_rates.map {|k, v| [k, k]} %>
   <%= f.input :photo, as: :attachinary %>

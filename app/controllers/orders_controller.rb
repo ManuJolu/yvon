@@ -3,23 +3,24 @@ class OrdersController < ApplicationController
   before_action :set_restaurant, only: [:index]
 
   def index
-    @orders = @restaurant.orders.at_week
+    @orders = @restaurant.orders.at_today
   end
 
   def update
     @restaurant = @order.restaurant
+    @orders = @restaurant.orders.at_today
     if order_params[:ready_at]
       @order.ready_at = DateTime.now
       if @order.save
         OrderView.new.notify_ready(@order) if Rails.env.production?
         respond_to do |format|
-          format.html { redirect_to restaurant_path(@restaurant) }
+          format.html { redirect_to @orders }
           format.js { @ready = true }
         end
       else
         @meal = @restaurant.meals.new
         respond_to do |format|
-          format.html { render 'restaurants/show' }
+          format.html { render :index }
           format.js
         end
       end
@@ -28,22 +29,17 @@ class OrdersController < ApplicationController
       if @order.save
         OrderView.new.notify_delivered(@order) if Rails.env.production?
         respond_to do |format|
-          format.html { redirect_to restaurant_path(@restaurant) }
+          format.html { redirect_to @orders }
           format.js { }
         end
       else
         @meal = @restaurant.meals.new
         respond_to do |format|
-          format.html { render 'restaurants/show' }
+          format.html { render :index }
           format.js { }
         end
       end
     end
-  end
-
-  def pending
-    @restaurant = Restaurant.find(params[:restaurant_id])
-    respond_to :js
   end
 
   private
