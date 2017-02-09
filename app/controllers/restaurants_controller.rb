@@ -13,7 +13,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @active = params[:tab]
+    @active = params[:tab] || 'configure'
   end
 
   def new
