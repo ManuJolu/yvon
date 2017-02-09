@@ -1,6 +1,6 @@
 <% if @meal.errors.any? %>
-  $('#mealEditModalBody').html("<%= j render 'meals/form', meal: @meal %>");
+  $('#mealFormModalBody').html("<%= j render 'meals/form', restaurant: nil, meal: @meal %>");
 <% else %>
   $('#mealList').html("<%= j render 'meals/list', restaurant: @restaurant, meals: @meals %>");
-  $('#mealEditModal').modal('hide')
+  $('#mealFormModal').modal('hide')
 <% end %>

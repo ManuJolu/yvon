@@ -26,7 +26,7 @@
       display: block;
       content: "Off";
       text-transform: uppercase;
-      font-size: 12px;
+      font-size: 0.70rem;
       font-weight: 400;
       position: absolute;
       top: 1px;
@@ -72,7 +72,7 @@
   .switch-label {
     display: block;
     margin-left: 75px;
-    color: $white;
+    color: #3f4b56;
     line-height: 34px;
   }
 }

@@ -1,7 +1,3 @@
-<% content_for :title do %>
-  <% @restaurant.name %>
-<% end %>
-
 <%= render "restaurants/tabs", restaurant: @restaurant, active: 'configure' %>
 
 <div class="tab-content" id="configure">
@@ -12,17 +8,3 @@
 <div class="tab-content hidden" id="restaurant">
   <%= render 'restaurants/edit' %>
 </div>
-
-
-<script>
-  var restaurantId = <%= @restaurant.id %>;
-</script>
-
-<% content_for :after_js do %>
-  <script>
-    $(".input_active").change(function() {
-      $(this).closest('form').trigger('submit.rails');
-      // $(this).submit();
-    });
-  </script>
-<% end %>

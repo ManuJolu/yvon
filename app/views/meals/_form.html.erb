@@ -1,4 +1,4 @@
-<%= simple_form_for meal, remote: true do |f| %>
+<%= simple_form_for [restaurant, meal], remote: true do |f| %>
   <%= f.input :active %>
   <%= f.association :meal_category, collection: meal.restaurant.meal_categories %>
   <%= f.input :position %>

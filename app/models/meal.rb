@@ -5,8 +5,6 @@ class Meal < ApplicationRecord
   has_many :options, through: :meal_options
   has_many :order_elements, as: :element
 
-
-  validates :category, presence: true
   validates :name, presence: true
   validates :tax_rate, presence: true
   validates :photo, presence: true
@@ -18,12 +16,10 @@ class Meal < ApplicationRecord
   monetize :tax_cents
   monetize :pretax_price_cents
 
-  enum category: [ :starter, :main_course, :dessert, :drink ]
   enum tax_rate: [ "2.1", "5.5", "10", "20" ]
 
   has_attachment :photo
 
-  scope :by_category, -> { order(:category).order('lower(name)') }
   scope :is_active, -> { where(active: true) }
 
   def tax_cents

@@ -1,25 +1,31 @@
 <% restaurant.meal_categories.each do |meal_category| %>
   <div class="col-xs-12">
-    <div class="categorie">
-      <h4><%= meal_category.name %></h4>
-    </div>
+    <h3><%= meal_category.name %></h3>
+    <%= button_to new_restaurant_meal_path(restaurant), method: :get, class: 'btn btn-success btn-xs', data: {toggle: "modal", target: "#mealFormModal", action: "New"}, params: {meal_category_id: meal_category.id}, remote: true do %>
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    <% end %>
   </div>
   <% meals.where(meal_category: meal_category).each do |meal| %>
     <div class="product">
       <div class='product-upvote'>
-        <div class="product-arrow"></div>
-        <div class='product-count'>95</div>
+        <!-- <div class="product-arrow"></div> -->
+        <!-- <div class='product-count'>95</div> -->
+        <%= simple_form_for meal, remote: true do |f| %>
+          <%= f.input :active, label: false, input_html: { class: "meal-active-input" } %>
+        <% end %>
       </div>
       <%= cl_image_tag(meal.photo.path, height: 50, width: 100, crop: :fill, class: "product_image hidden-xs") %>
       <div class='product-body'>
         <h3><%= meal.name %></h3>
         <p><%= meal.description %> <%= meal.decorate.price %></p>
-        <p>Options : <%= meal.options.map { |option| option.name }.join(' - ') %></p>
+        <%= link_to meal_meal_options_path(meal), class: 'btn btn-default btn-sm', data: {toggle: "modal", target: "#mealOptionsModal", action: "Options"}, remote: true do %>
+          <p>Options : <%= meal.options.map { |option| option.name }.join(' - ') %></p>
+        <% end %>
       </div>
       <ul class="list-inline product-controls hidden-sm hidden-xs">
         <li><a href="" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a></li>
         <li>
-          <%= link_to edit_meal_path(meal), class: 'btn btn-primary btn-sm', data: {toggle: "modal", target: "#mealEditModal"}, remote: true do %>
+          <%= link_to edit_meal_path(meal), class: 'btn btn-primary btn-sm', data: {toggle: "modal", target: "#mealFormModal", action: "Edit"}, remote: true do %>
             <i class="fa fa-pencil"></i>
           <% end %>
         </li>
@@ -27,3 +33,4 @@
     </div>
   <% end %>
 <% end %>
+
