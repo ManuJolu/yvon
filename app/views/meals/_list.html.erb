@@ -1,10 +1,11 @@
 <% restaurant.meal_categories.each do |meal_category| %>
   <div class="col-xs-12">
-    <h4>
+    <h3>
       <%= meal_category.name %>
-      <%= link_to new_restaurant_meal_path(restaurant) %>
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    </h4>
+      <%= button_to new_restaurant_meal_path(restaurant), method: :get, class: 'btn btn-success btn-xs', data: {toggle: "modal", target: "#mealFormModal", action: "New"}, params: {meal_category_id: meal_category.id}, remote: true do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      <% end %>
+    </h3>
   </div>
   <% meals.where(meal_category: meal_category).each do |meal| %>
     <div class="product">
@@ -24,7 +25,7 @@
       <ul class="list-inline product-controls hidden-sm hidden-xs">
         <li><a href="" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a></li>
         <li>
-          <%= link_to edit_meal_path(meal), class: 'btn btn-primary btn-sm', data: {toggle: "modal", target: "#mealFormModal"}, remote: true do %>
+          <%= link_to edit_meal_path(meal), class: 'btn btn-primary btn-sm', data: {toggle: "modal", target: "#mealFormModal", action: "Edit"}, remote: true do %>
             <i class="fa fa-pencil"></i>
           <% end %>
         </li>

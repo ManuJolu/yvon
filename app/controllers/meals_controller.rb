@@ -8,6 +8,7 @@ class MealsController < ApplicationController
 
   def new
     @meal = @restaurant.meals.new
+    @meal.meal_category = MealCategory.find(params[:meal_category_id])
     respond_to do |format|
       format.html
       format.js
