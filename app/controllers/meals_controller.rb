@@ -66,6 +66,6 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:restaurant_id, :meal_category_id, :position, :name, :description, :price, :tax_rate, :photo, :active)
+    params.require(:meal).permit(:restaurant_id, :meal_category_id, {option_ids: []}, :position, :name, :description, :price, :tax_rate, :photo, :active)
   end
 end

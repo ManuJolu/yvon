@@ -18,9 +18,7 @@
       <div class='product-body'>
         <h3><%= meal.name %></h3>
         <p><%= meal.description %> <%= meal.decorate.price %></p>
-        <%= link_to meal_meal_options_path(meal), class: 'btn btn-default btn-sm', data: {toggle: "modal", target: "#mealOptionsModal", action: "Options"}, remote: true do %>
-          <p>Options : <%= meal.options.map { |option| option.name }.join(' - ') %></p>
-        <% end %>
+        <p>Options : <%= meal.options.map { |option| option.name }.join(' - ') %></p>
       </div>
       <ul class="list-inline product-controls hidden-sm hidden-xs">
         <li><a href="" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a></li>
