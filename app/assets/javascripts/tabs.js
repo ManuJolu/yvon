@@ -1,5 +1,4 @@
-$(function(){
-
+$(document).ready(function(){
   $(".tab").on("click", function(e){
     // Change active tab
     $('.tab').removeClass('active');
@@ -9,5 +8,4 @@ $(function(){
     // Show target tab-content (use class="hidden")
     $($(this).data('target')).removeClass('hidden');
   });
-
 });

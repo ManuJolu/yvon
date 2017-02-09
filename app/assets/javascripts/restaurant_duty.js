@@ -1,6 +1,5 @@
 $(document).ready(function() {
-
-  $('#switch input').change(function(e){
+  $('#restaurantDutySwitch input').change(function(e){
     var checked = $(this).is(":checked");
 
     var onDuty = "off";

@@ -1,16 +1,25 @@
 class MealsController < ApplicationController
   before_action :set_meal, only: [:edit, :update]
-  before_action :set_restaurant, only: [:index, :create]
+  before_action :set_restaurant, only: [:index, :new, :create]
 
   def index
     @meals = @restaurant.meals.order(:position)
   end
 
+  def new
+    @meal = @restaurant.meals.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def create
+    @meals = @restaurant.meals.order(:position)
     @meal = @restaurant.meals.new(meal_params)
     if @meal.save
       respond_to do |format|
-        format.html { redirect_to @restaurant }
+        format.html { redirect_to @meal }
         format.js
       end
     else

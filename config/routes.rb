@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         patch '/duty/:state' => "restaurants#duty"
       end
       resources :meal_categories, only: [:create, :update], shallow: true
-      resources :meals, only: [:index, :create, :edit, :update], shallow: true
+      resources :meals, only: [:index, :new, :create, :edit, :update], shallow: true
       resources :orders, only: [:index, :update], shallow: true
     end
   end
