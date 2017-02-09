@@ -5,8 +5,4 @@ class RestaurantDecorator < Draper::Decorator
   def address
     object.address.capitalize
   end
-
-  def turnover
-    humanized_money_with_symbol object.turnover
-  end
 end

@@ -1,6 +1,0 @@
-<%= simple_form_for meal_category, html: { class: 'form-inline' }, remote: true do |f| %>
-  <%= f.input :name, placeholder: "Category name", label: false %>
-  <%= f.input :timing, collection: MealCategory.timings.map {|k, v| [k, k]}, label: false %>
-  <%= f.input :position, placeholder: "Position", label: false %>
-  <%= f.submit class: 'btn btn-primary btn-sm' %>
-<% end %>

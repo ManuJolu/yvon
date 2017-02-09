@@ -16,8 +16,6 @@ class Restaurant < ApplicationRecord
   validates :photo, presence: true
   validates :preparation_time, presence: true
 
-  monetize :turnover_cents
-
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
@@ -29,9 +27,5 @@ class Restaurant < ApplicationRecord
 
   def on_duty?
     on_duty
-  end
-
-  def turnover_cents
-    orders.reduce(0) { |t, order| t + order.pretax_price_cents }
   end
 end
