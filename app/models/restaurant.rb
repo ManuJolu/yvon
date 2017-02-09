@@ -7,6 +7,8 @@ class Restaurant < ApplicationRecord
   has_many :ordered_meals, through: :orders
   has_many :options
 
+  accepts_nested_attributes_for :meal_categories, reject_if: :all_blank, allow_destroy: true
+
   validates :name, presence: true
   validates :address, presence: true
   validates :category, presence: true
