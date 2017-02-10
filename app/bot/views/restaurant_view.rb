@@ -20,7 +20,7 @@ class RestaurantView
           { width: 382, height: 180, crop: :fill },
           { overlay: 'one_pixel.png', effect: :colorize, color: "rgb:#{colors[(i + 1) % 8]}", width: 382, height: 20, y: -100 }
         ]),
-        subtitle: "#{(restaurant.distance_from(coordinates)*1000).round}m #{I18n.t('bot.restaurant.index.heading')} #{Geocoder::Calculations.compass_point(restaurant.bearing_from(coordinates))} - #{restaurant.category.capitalize}\n#{restaurant.description}",
+        subtitle: "#{(restaurant.distance_from(coordinates)*1000).round}m #{I18n.t('bot.restaurant.index.heading')} #{Geocoder::Calculations.compass_point(restaurant.bearing_from(coordinates))} - #{restaurant.restaurant_category.name}\n#{restaurant.description}",
         buttons: [
           {
             type: 'postback',

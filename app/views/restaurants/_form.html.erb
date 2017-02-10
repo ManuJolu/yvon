@@ -1,20 +1,10 @@
 <%= simple_form_for @restaurant, remote: true do |f| %>
   <%= f.input :name, label: "Restaurant's name", error: "Restaurant's name is mandatory, please specify one" %>
+  <%= f.association :restaurant_category %>
   <%= f.input :address, label: "Restaurant's address", error: "Restaurant's address is mandatory, please specify one" %>
-  <%= f.input :category, collection: Restaurant.categories.map {|k, v| [k, k]} %>
   <%= f.input :description %>
-  <h3>Meal categories</h3>
-  <div id="tasks">
-    <%= f.simple_fields_for :meal_categories do |meal_category| %>
-      <%= render 'meal_category_fields', f: meal_category %>
-    <% end %>
-    <div class="links">
-      <%= link_to_add_association 'add meal category', f, :meal_categories %>
-    </div>
-  </div>
   <%= f.input :shift %>
   <%= f.input :facebook_url %>
-  <%= f.input :preparation_time %>
   <%= f.input :photo, as: :attachinary %>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
