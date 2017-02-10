@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170209145239) do
+ActiveRecord::Schema.define(version: 20170210081429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,7 +143,6 @@ ActiveRecord::Schema.define(version: 20170209145239) do
   create_table "restaurants", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
-    t.integer  "category",               default: 0
     t.boolean  "on_duty",                default: false
     t.string   "shift"
     t.string   "description"
@@ -154,7 +153,7 @@ ActiveRecord::Schema.define(version: 20170209145239) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "facebook_url"
-    t.integer  "preparation_time"
+    t.integer  "preparation_time",       default: 15
     t.integer  "restaurant_category_id"
     t.index ["restaurant_category_id"], name: "index_restaurants_on_restaurant_category_id", using: :btree
     t.index ["user_id"], name: "index_restaurants_on_user_id", using: :btree
