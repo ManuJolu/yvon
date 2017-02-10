@@ -13,6 +13,8 @@ class Menu < ApplicationRecord
 
   scope :by_price, -> { order(price_cents: :desc) }
 
+  enum tax_rate: [ "2.1", "5.5", "10", "20" ]
+
   def tax_cents
     if price_cents.present? && tax_rate.present?
       price_cents * tax_rate.to_f / (100 + tax_rate.to_f)

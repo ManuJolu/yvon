@@ -1,0 +1,28 @@
+<%= simple_form_for restaurant, remote: true do |f| %>
+
+  <h3>Meal categories</h3>
+  <div id="mealCategories">
+    <%= f.simple_fields_for :meal_categories do |meal_category| %>
+      <%= render 'meal_category_fields', f: meal_category %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association f, :meal_categories do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <h3>Menus</h3>
+  <div id="menus">
+    <%= f.simple_fields_for :menus do |menu| %>
+      <%= render 'menu_fields', f: menu %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association f, :menus do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>

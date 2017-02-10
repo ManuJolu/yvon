@@ -1,2 +1,3 @@
-$('#editRestaurant').html("<%= j render 'restaurants/edit' %>");
+$('#editRestaurant').html("<%= j render 'restaurants/edit', restaurant: @restaurant  %>");
+$('#configureRestaurant').html("<%= render 'restaurants/configure', restaurant: @restaurant %>");
 $('#restaurantPreparationTime').html("<%= j render 'restaurants/preparation_time_form' %>");
