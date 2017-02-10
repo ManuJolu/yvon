@@ -4,6 +4,8 @@ class OrderedMeal < ApplicationRecord
   belongs_to :option
   has_one :meal_category, through: :meal
 
+  validates :quantity, numericality: { greater_than_or_equal_to: 0 }
+
   scope :by_category, -> { joins(:meal).merge(Meal.order(:category).includes(:meal).order('lower(name)')) }
 
   def self.at_timing(timing)

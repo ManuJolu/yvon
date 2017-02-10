@@ -1,8 +1,11 @@
 class Menu < ApplicationRecord
   belongs_to :restaurant, required: true
-  has_many :menu_meal_categories
+  has_many :menu_meal_categories, dependent: :destroy
   has_many :meal_categories, through: :menu_meal_categories
-  has_many :order_elements, as: :element
+  has_many :order_elements, as: :element, dependent: :restrict_with_exception
+
+  validates :name, presence: true
+  validates :tax_rate, presence: true
 
   monetize :price_cents, allow_nil: false, numericality: { greater_than_or_equal_to: 0 }
   monetize :tax_cents

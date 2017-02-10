@@ -1,11 +1,11 @@
 class Order < ApplicationRecord
   belongs_to :user, required: true
   belongs_to :restaurant
-  has_many :ordered_meals
+  has_many :ordered_meals, dependent: :restrict_with_exception
   has_many :meals, through: :ordered_meals
   has_many :options, through: :ordered_meals
   has_many :meal_categories, through: :ordered_meals
-  has_many :order_elements
+  has_many :order_elements, dependent: :restrict_with_exception
   has_many :elements, through: :order_elements
 
   monetize :price_cents
