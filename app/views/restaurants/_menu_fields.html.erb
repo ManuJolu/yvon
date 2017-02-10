@@ -1,8 +1,18 @@
 <div class="nested-fields form-inline">
   <%= f.input :name, label: false, placeholder: "Name"%>
-  <%= f.input :price, label: false, placeholder: "Price" %>
-  <%= f.input :tax_rate, label: false, collection: Menu.tax_rates.map {|k, v| [k, k]}, prompt: "Select tax rate" %>
+  <%= f.input :price, placeholder: "Price" %>
+  <%= f.input :tax_rate, collection: Menu.tax_rates.map {|k, v| [k, k]}, prompt: "Select tax rate" %>
   <%= link_to_remove_association f do %>
     <i class="fa fa-times" aria-hidden="true"></i>
   <% end %>
+
+  <div class="menu_meal_categories">
+    <%= f.simple_fields_for :menu_meal_categories do |menu_meal_category| %>
+      <%= render 'menu_meal_category_fields', f: menu_meal_category %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'add meal category', f, :menu_meal_categories %>
+    </div>
+  </div>
+
 </div>

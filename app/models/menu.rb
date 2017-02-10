@@ -4,6 +4,8 @@ class Menu < ApplicationRecord
   has_many :meal_categories, through: :menu_meal_categories
   has_many :order_elements, as: :element, dependent: :restrict_with_exception
 
+  accepts_nested_attributes_for :menu_meal_categories, reject_if: :all_blank, allow_destroy: true
+
   validates :name, presence: true
   validates :tax_rate, presence: true
 
