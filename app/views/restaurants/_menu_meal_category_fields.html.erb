@@ -1,6 +1,7 @@
 <div class="nested-fields form-inline">
+  <%= f.input :quantity, label: false, placeholder: 'Quantity' %>
+  <span>&times;</span>
   <%= f.association :meal_category, collection: @restaurant.meal_categories, label: false, prompt: "Select meal category" %>
-  <%= f.input :quantity, placeholder: 'Quantity' %>
   <%= link_to_remove_association f do %>
     <i class="fa fa-times" aria-hidden="true"></i>
   <% end %>

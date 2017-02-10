@@ -18,14 +18,15 @@
 
   <h3>Menus</h3>
   <div id="menus">
-    <%= f.simple_fields_for :menus do |menu| %>
-      <%= render 'menu_fields', f: menu %>
-    <% end %>
     <div class="links">
       <%= link_to_add_association f, :menus do %>
-        <i class="fa fa-plus" aria-hidden="true"></i>
+        <h4><i class="fa fa-plus" aria-hidden="true"></i></h4>
       <% end %>
     </div>
+    <%= f.simple_fields_for :menus do |menu| %>
+      <br>
+      <%= render 'menu_fields', f: menu %>
+    <% end %>
   </div>
 
   <%= f.submit class: 'btn btn-primary' %>

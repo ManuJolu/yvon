@@ -11,7 +11,9 @@
       <%= render 'menu_meal_category_fields', f: menu_meal_category %>
     <% end %>
     <div class="links">
-      <%= link_to_add_association 'add meal category', f, :menu_meal_categories %>
+      <%= link_to_add_association f, :menu_meal_categories do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      <% end %>
     </div>
   </div>
 
