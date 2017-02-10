@@ -28,9 +28,9 @@ class MealView
         }
       end
       meals << {
-        title: "No #{current_meal_category.name.downcase} for me",
+        title: I18n.t('bot.meal.index.no_thanks', current_category: current_meal_category.name.downcase),
         image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
-        subtitle: "\nI'd better watch my figure",
+        subtitle: I18n.t('bot.meal.index.no_thanks_message'),
         buttons: [
           {
             type: 'postback',
@@ -70,9 +70,9 @@ class MealView
         }
       end
       meals << {
-        title: "No #{current_meal_category.name.downcase} for me",
+        title: I18n.t('bot.meal.index.no_thanks', current_category: current_meal_category.name.downcase),
         image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
-        subtitle: "\nI'd better watch my figure",
+        subtitle: I18n.t('bot.meal.index.no_thanks_message'),
         buttons: [
           {
             type: 'postback',

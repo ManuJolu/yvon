@@ -66,6 +66,8 @@ en:
         pay: 'Pay'
         menu: '➥ Menu'
         next: "➥ %{next_category}"
+        no_thanks: "No %{current_category} for me"
+        no_thanks_message: "\nI'd better watch my figure"
       get_option:
         choose_option: "Choose your option:"
     order:
