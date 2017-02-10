@@ -42,10 +42,6 @@ class OrderController
         order.save
         order.create_elements
         order.reload
-        ActionCable.server.broadcast 'orders',
-          order: order.id,
-          user: order.user.last_name
-        head :ok
         @view.cart(postback, order.decorate, paid_at: order.paid_at.to_i)
       else
         @view.restaurant_closed(postback, order.restaurant)

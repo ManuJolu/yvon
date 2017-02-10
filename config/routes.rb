@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   mount Attachinary::Engine, at: 'attachinary'
   mount Facebook::Messenger::Server, at: 'bot'
-  mount ActionCable.server => '/cable'
 
   scope '(:locale)', locale: /fr|en/ do
     root to: 'pages#home'
