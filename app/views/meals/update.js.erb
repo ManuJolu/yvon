@@ -3,4 +3,5 @@
 <% else %>
   $('#mealList').html("<%= j render 'meals/list', restaurant: @restaurant, meals: @meals %>");
   $('#mealFormModal').modal('hide')
+  $('#mealFormModalBody').html("")
 <% end %>

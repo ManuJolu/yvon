@@ -10,6 +10,9 @@ class Meal < ApplicationRecord
   validates :photo, presence: true
   validates :meal_options, length: { maximum: 3 } # does not work
 
+  accepts_nested_attributes_for :options
+  accepts_nested_attributes_for :meal_options, allow_destroy: true
+
   acts_as_list scope: :meal_category
 
   monetize :price_cents, allow_nil: false, numericality: { greater_than_or_equal_to: 0 }

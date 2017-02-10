@@ -1,0 +1,9 @@
+<div class="nested-fields meal-option-fields form-inline">
+  <div class="option_from_list">
+    <%= f.association :option, collection: @restaurant.options, label: false, prompt: 'Select an existing option' %>
+  </div>
+  <%= link_to_add_association 'or create a new one', f, :option %>
+  <%= link_to_remove_association f do %>
+    <i class="fa fa-times" aria-hidden="true"></i>
+  <% end %>
+</div>

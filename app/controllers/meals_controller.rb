@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-  before_action :set_meal, only: [:edit, :update]
+  before_action :set_meal, only: [:edit, :update, :destroy]
   before_action :set_restaurant, only: [:index, :new, :create]
 
   def index
@@ -32,6 +32,7 @@ class MealsController < ApplicationController
   end
 
   def edit
+    @restaurant = @meal.restaurant
     respond_to do |format|
       format.html
       format.js
@@ -55,6 +56,16 @@ class MealsController < ApplicationController
     end
   end
 
+  def destroy
+    @restaurant = @meal.restaurant
+    @meals = @restaurant.meals.order(:position)
+    @meal.destroy
+    respond_to do |format|
+      format.html { redirect_to @meals }
+      format.js
+    end
+end
+
   private
 
   def set_meal
@@ -66,6 +77,9 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:restaurant_id, :meal_category_id, {option_ids: []}, :position, :name, :description, :price, :tax_rate, :photo, :active)
+    params.require(:meal).permit(
+      :restaurant_id, :meal_category_id, :position, :name, :description, :price, :tax_rate, :photo, :active,
+      meal_options_attributes: [:id, :_destroy, :option_id, option_attributes: [:id, :name, :restaurant_id, :_destroy]]
+    )
   end
 end
