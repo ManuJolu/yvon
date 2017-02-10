@@ -11,6 +11,10 @@
       <% end %>
     </div>
   </div>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
+
+<%= simple_form_for restaurant, remote: true do |f| %>
 
   <h3>Menus</h3>
   <div id="menus">
