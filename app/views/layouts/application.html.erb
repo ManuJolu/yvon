@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-
     <title><%= yield_with_default(holder: :title, default: t('.title')) %></title>
 
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => 'reload' %>
@@ -18,7 +16,6 @@
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
         ga('create', 'UA-91090965-1', 'auto');
-        ga('send', 'pageview');
       </script>
     <% end %>
 
@@ -33,11 +30,9 @@
     <meta property="og:image" content= <%= image_url("fb-pic.jpg") %>>
     <meta property="og:description" content="Save your time and order your lunch with Yvon ! Yvon is a bot to order in less than 1 min chrono in yours best restaurants. You will be impressed.">
     <meta property="og:site_name" content="Hello Yvon"/>
-
   </head>
 
   <body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
-
     <% if request.env['PATH_INFO'] == "/" || request.env['PATH_INFO'] == "/restaurants" %>
       <div class="navbar-fixed">
         <div class="background-custom"></div>
@@ -63,8 +58,6 @@
     <%= cloudinary_js_config %>
 
     <%= yield(:after_js) %>
-
   </body>
-
 </html>
 
