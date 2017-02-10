@@ -1,7 +1,8 @@
 <%= simple_form_for @restaurant, remote: true do |f| %>
-  <%= f.input :name, label: "Restaurant's name", error: "Restaurant's name is mandatory, please specify one" %>
+  <%= f.input :name %>
+  <%= f.input :slogan %>
   <%= f.association :restaurant_category %>
-  <%= f.input :address, label: "Restaurant's address", error: "Restaurant's address is mandatory, please specify one" %>
+  <%= f.input :address %>
   <%= f.input :description %>
   <%= f.input :shift %>
   <%= f.input :facebook_url %>
