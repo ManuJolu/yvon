@@ -21,7 +21,11 @@
         <p>Options : <%= meal.options.map { |option| option.name }.join(' - ') %></p>
       </div>
       <ul class="list-inline product-controls hidden-sm hidden-xs">
-        <li><a href="" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a></li>
+        <li>
+          <%= link_to meal, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm', remote: true do %>
+            <i class="fa fa-trash"></i>
+          <% end %>
+        </li>
         <li>
           <%= link_to edit_meal_path(meal), class: 'btn btn-primary btn-sm', data: {toggle: "modal", target: "#mealFormModal", action: "Edit"}, remote: true do %>
             <i class="fa fa-pencil"></i>
