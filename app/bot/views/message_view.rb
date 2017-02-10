@@ -36,4 +36,10 @@ class MessageView
       ]
     )
   end
+
+  def else(message)
+    message.reply(
+      text: I18n.t('bot.else')
+    )
+  end
 end

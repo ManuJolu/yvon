@@ -7,4 +7,5 @@
 //= require underscore
 //= require gmaps/google
 //= require cocoon
+//= require_tree ./channels
 //= require_tree .

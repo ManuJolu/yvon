@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210145231) do
+ActiveRecord::Schema.define(version: 20170210205301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,9 +34,9 @@ ActiveRecord::Schema.define(version: 20170210145231) do
     t.string   "name"
     t.integer  "restaurant_id"
     t.integer  "position"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "timing",        default: 1
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "timing"
     t.index ["restaurant_id"], name: "index_meal_categories_on_restaurant_id", using: :btree
   end
 

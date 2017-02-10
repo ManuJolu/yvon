@@ -3,7 +3,7 @@
   <%= f.input :name, label: "Meal name", error: "Meal name is mandatory, please specify one" %>
   <%= f.input :description %>
 
-  <h3>Options</h3>
+  <h4>Options</h4>
   <div id="options">
     <%= f.simple_fields_for :meal_options do |meal_option| %>
       <%= render 'meal_option_fields', f: meal_option %>

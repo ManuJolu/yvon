@@ -27,12 +27,10 @@ Bot.on :message do |message|
   when /bordeaux/i
     new_order = @order_controller.create(message, user, lat: '44.840715', lng: '-0.5721098')
     coordinates = [new_order.latitude, new_order.longitude]
-    @message_controller.no_restaurant unless @restaurant_controller.index(message, coordinates)
+    @message_controller.no_restaurant(message) unless @restaurant_controller.index(message, coordinates)
   else
     if message.text
-      message.reply(
-        text: "Say 'Hello' to start a new order"
-      )
+      @message_controller.else(message)
     end
   end
 end

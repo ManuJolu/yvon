@@ -14,4 +14,8 @@ class MessageController
   def no_restaurant_selected(postback)
     @view.no_restaurant_selected(postback)
   end
+
+  def else(message)
+    @view.else(message)
+  end
 end
