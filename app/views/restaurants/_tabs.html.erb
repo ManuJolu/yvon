@@ -16,8 +16,6 @@
   <%= link_to "Edit", edit_path, class: "tab#{ ' active' if @active == 'edit'}", data: {target: '#editRestaurant'} %>
 </div>
 
-<% content_for :after_js do %>
-  <script>
-    var restaurantId = <%= @restaurant.id %>;
-  </script>
-<% end %>
+<script>
+  var restaurantId = <%= @restaurant.id %>;
+</script>

@@ -7,15 +7,15 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @restaurant = @order.restaurant
-    @orders = @restaurant.orders.at_today
+    restaurant = @order.restaurant
+    @orders = restaurant.orders.at_today
     if order_params[:ready_at]
       @order.ready_at = DateTime.now
       if @order.save
         OrderView.new.notify_ready(@order) if Rails.env.production?
         respond_to do |format|
           format.html { redirect_to @orders }
-          format.js { @ready = true }
+          format.js
         end
       else
         @meal = @restaurant.meals.new
@@ -30,17 +30,27 @@ class OrdersController < ApplicationController
         OrderView.new.notify_delivered(@order) if Rails.env.production?
         respond_to do |format|
           format.html { redirect_to @orders }
-          format.js { }
+          format.js { @delivered = true }
         end
       else
         @meal = @restaurant.meals.new
         respond_to do |format|
           format.html { render :index }
-          format.js { }
+          format.js
         end
       end
     end
   end
+
+  def refresh
+    restaurant = Restaurant.find(params[:id])
+    @orders = restaurant.orders.at_today
+    respond_to do |format|
+      format.js { render :update }
+    end
+  end
+
+
 
   private
 
