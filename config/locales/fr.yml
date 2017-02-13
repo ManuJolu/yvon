@@ -41,6 +41,8 @@ fr:
       paid_at: "Payé à"
       ready_at: "Prêt à"
       delivered_at: "Livré à"
+    button_handled:
+      handled: "OK"
     button_ready:
       ready: "PRÊT"
     button_delivered:

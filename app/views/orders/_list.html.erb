@@ -47,7 +47,9 @@
             <%= order.decorate.paid_at %>
           </td>
           <td>
-            <% if order.ready_at.nil? %>
+            <% if order.handled_at.nil? %>
+              <%= render 'orders/button_handled', order: order %>
+            <% elsif order.ready_at.nil? %>
               <%= render 'orders/button_ready', order: order %>
             <% else %>
               <%= order.decorate.ready_at %>
