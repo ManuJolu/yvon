@@ -41,6 +41,8 @@ en:
       paid_at: "Paid at"
       ready_at: "Ready at"
       delivered_at: "Delivered at"
+    button_handled:
+      handled: "OK"
     button_ready:
       ready: "READY"
     button_delivered:

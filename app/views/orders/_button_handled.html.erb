@@ -1,0 +1,4 @@
+<%= simple_form_for order, remote: true do |f| %>
+  <%= f.hidden_field :handled_at, value: true %>
+  <%= f.button :submit, t('.handled'), class: 'btn btn-danger btn-sm' %>
+<% end %>

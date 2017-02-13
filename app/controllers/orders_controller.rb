@@ -9,7 +9,20 @@ class OrdersController < ApplicationController
   def update
     restaurant = @order.restaurant
     @orders = restaurant.orders.at_today
-    if order_params[:ready_at]
+    if order_params[:handled_at]
+      @order.handled_at = DateTime.now
+      if @order.save
+        respond_to do |format|
+          format.html { redirect_to @orders }
+          format.js
+        end
+      else
+        respond_to do |format|
+          format.html { render :index }
+          format.js
+        end
+      end
+    elsif order_params[:ready_at]
       @order.ready_at = DateTime.now
       if @order.save
         OrderView.new.notify_ready(@order) if Rails.env.production?
@@ -18,7 +31,6 @@ class OrdersController < ApplicationController
           format.js
         end
       else
-        @meal = @restaurant.meals.new
         respond_to do |format|
           format.html { render :index }
           format.js
@@ -33,7 +45,6 @@ class OrdersController < ApplicationController
           format.js { @delivered = true }
         end
       else
-        @meal = @restaurant.meals.new
         respond_to do |format|
           format.html { render :index }
           format.js
@@ -63,7 +74,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:ready_at, :delivered_at)
+    params.require(:order).permit(:handled_at, :ready_at, :delivered_at)
   end
 end
 
