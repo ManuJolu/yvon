@@ -4,7 +4,7 @@ $(document).ready(function() {
       received: function(data) {
         $.ajax({
           method: "get",
-          url: '/restaurants/'+ restaurantId + '/orders/refresh/' + data.delivered
+          url: '/restaurants/'+ restaurantId + '/orders/refresh/' + data.order_status
         });
       }
     });

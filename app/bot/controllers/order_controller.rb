@@ -52,7 +52,7 @@ class OrderController
         order.paid_at = Time.now
         order.save
         ActionCable.server.broadcast "restaurant_#{order.restaurant.id}",
-          order_id: order.id
+          order_status: "paid"
         @view.confirm(postback, order.decorate, paid_at: order.paid_at.to_i, program: 'beta')
       else
         @view.restaurant_closed(postback, order.restaurant)

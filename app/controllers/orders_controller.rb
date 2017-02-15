@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
           format.html { redirect_to @orders }
           format.js {
             ActionCable.server.broadcast "restaurant_#{restaurant.id}",
-              order_id: @order.id, delivered: false
+              order_status: "ready"
           }
         end
       else
@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
           format.html { redirect_to @orders }
           format.js {
             ActionCable.server.broadcast "restaurant_#{restaurant.id}",
-              order_id: @order.id, delivered: false
+              order_status: "ready"
           }
         end
       else
@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
           format.html { redirect_to @orders }
           format.js {
             ActionCable.server.broadcast "restaurant_#{restaurant.id}",
-              order_id: @order.id, delivered: true
+              order_status: "delivered"
           }
         end
       else
@@ -65,7 +65,7 @@ class OrdersController < ApplicationController
   def refresh
     restaurant = Restaurant.find(params[:id])
     @orders = restaurant.orders.at_today
-    @delivered = (params[:delivered] == "true" ? true : false)
+    @delivered = (params[:order_status] == 'delivered' ? true : false)
     respond_to do |format|
       format.js
     end

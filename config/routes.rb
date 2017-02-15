@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show]
     resources :restaurants, only: [:index, :show, :new, :create, :edit, :update] do
       member do
-          get '/orders/refresh/:delivered' => 'orders#refresh'
+          get '/orders/refresh/:order_status' => 'orders#refresh'
         patch '/duty/:state' => "restaurants#duty"
       end
       resources :meal_categories, only: [:create, :update], shallow: true
