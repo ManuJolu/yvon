@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
           format.html { redirect_to @orders }
           format.js {
             ActionCable.server.broadcast "restaurant_#{restaurant.id}",
-              order_status: "ready"
+              order_status: "handled"
           }
         end
       else

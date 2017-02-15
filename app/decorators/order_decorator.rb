@@ -31,6 +31,10 @@ class OrderDecorator < Draper::Decorator
     object.paid_at&.strftime('%-H:%M:%S')
   end
 
+  def ready_at_limit
+    (object.paid_at.try(:+, object.preparation_time.minutes))&.strftime('%-H:%M:%S')
+  end
+
   def ready_at
     object.ready_at&.strftime('%-H:%M:%S')
   end

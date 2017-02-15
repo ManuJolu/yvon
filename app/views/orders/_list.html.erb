@@ -7,10 +7,10 @@
         <th><%= t '.main_courses' %></th>
         <th><%= t '.desserts' %></th>
         <th><%= t '.drinks' %></th>
-        <th><%= t '.total_price' %></th>
-        <th><%= t '.paid_at' %></th>
-        <th><%= t '.ready_at' %></th>
-        <th><%= t '.delivered_at' %></th>
+        <th class="text-right"><%= t '.total_price' %></th>
+        <th class="text-center"><%= t '.paid_at' %></th>
+        <th class="text-center"><%= t '.ready_at' %></th>
+        <th class="text-center"><%= t '.delivered_at' %></th>
       </tr>
     </thead>
 
@@ -43,19 +43,25 @@
           <td class="text-right">
             <%= order.decorate.price %>
           </td>
-          <td>
+          <td class="text-center">
             <%= order.decorate.paid_at %>
           </td>
-          <td>
+          <td class="text-center">
             <% if order.handled_at.nil? %>
+              max <%= order.decorate.ready_at_limit %>
+              <br>
               <%= render 'orders/button_handled', order: order %>
             <% elsif order.ready_at.nil? %>
+              max <%= order.decorate.ready_at_limit %>
+              <br>
               <%= render 'orders/button_ready', order: order %>
             <% else %>
               <%= order.decorate.ready_at %>
+              <br>
+              max <%= order.decorate.ready_at_limit %>
             <% end %>
           </td>
-          <td>
+          <td class="text-center">
             <% if order.ready_at && order.delivered_at.nil? %>
               <%= render 'orders/button_delivered', order: order %>
             <% else %>
