@@ -14,7 +14,10 @@ class OrdersController < ApplicationController
       if @order.save
         respond_to do |format|
           format.html { redirect_to @orders }
-          format.js
+          format.js {
+            ActionCable.server.broadcast "restaurant_#{restaurant.id}",
+              order_id: @order.id, delivered: false
+          }
         end
       else
         respond_to do |format|
@@ -28,7 +31,10 @@ class OrdersController < ApplicationController
         OrderView.new.notify_ready(@order) if Rails.env.production?
         respond_to do |format|
           format.html { redirect_to @orders }
-          format.js
+          format.js {
+            ActionCable.server.broadcast "restaurant_#{restaurant.id}",
+              order_id: @order.id, delivered: false
+          }
         end
       else
         respond_to do |format|
@@ -42,7 +48,10 @@ class OrdersController < ApplicationController
         OrderView.new.notify_delivered(@order) if Rails.env.production?
         respond_to do |format|
           format.html { redirect_to @orders }
-          format.js { @delivered = true }
+          format.js {
+            ActionCable.server.broadcast "restaurant_#{restaurant.id}",
+              order_id: @order.id, delivered: true
+          }
         end
       else
         respond_to do |format|
@@ -51,13 +60,13 @@ class OrdersController < ApplicationController
         end
       end
     end
-    ActionCable.server.broadcast "restaurant_#{restaurant.id}",
-      order_id: @order.id
   end
 
   def refresh
     restaurant = Restaurant.find(params[:id])
     @orders = restaurant.orders.at_today
+    byebug
+    @delivered = (params[:delivered] == "true" ? true : false)
     respond_to do |format|
       format.js { render :update }
     end
