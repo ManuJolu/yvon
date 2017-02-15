@@ -59,6 +59,7 @@ fr:
         enter: "Entrer"
       menu:
         view_more: "Voir la suite"
+        compute: "Les formules sont calculées automatiquement à la commande :\n"
       restaurant_mismatch: "Désolé, ce menu appartient au %{restaurant_name}, voici le bon menu :"
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
     meal:

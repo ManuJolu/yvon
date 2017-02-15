@@ -104,9 +104,9 @@ class RestaurantView
       }
     )
 
-    if params[:page] == 0
-      text = "Les formules sont calculées automatiquement à la commande :\n"
-      text += restaurant.menus.map { |menu| "#{menu.name} - #{menu.price} €" }.join("\n")
+    if restaurant.menus.any? && params[:page] == 0
+      text = I18n.t('bot.restaurant.menu.compute')
+      text += restaurant.menus.decorate.join("\n")
       postback.reply(
         text: text
       )

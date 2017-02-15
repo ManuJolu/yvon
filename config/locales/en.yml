@@ -59,6 +59,7 @@ en:
         enter: "Enter"
       menu:
         view_more: "View more"
+        compute: "Menu prices are automatically computed on order:\n"
       restaurant_mismatch: "Sorry, this menu belongs to %{restaurant_name}, here is the right menu:"
       meal_restaurant_mismatch: "Sorry, this meal belongs to %{restaurant_name}, here is the right menu:"
     meal:
