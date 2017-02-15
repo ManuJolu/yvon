@@ -83,6 +83,9 @@ en:
         discounts: "Discounts"
         beta_code: "If you are part of the beta-test program, type your code to confirm the order, otherwise continue with the demo:"
         demo: "Demo"
+      confirm:
+        beta: 'Your code is correct, your order is confirmed.'
+        demo: 'You continue with the demo.'
         ready: "Your order will be ready in %{preparation_time}min at %{ready_time}."
         go_to: "Go to %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, your order at %{restaurant_name} is ready for pick-up!"

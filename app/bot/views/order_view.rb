@@ -94,8 +94,19 @@ class OrderView
       "&markers=size:mid%7Ccolor:0x#{colors[3]}%7Clabel:%7C#{order.restaurant.latitude},#{order.restaurant.longitude}"
     ]
 
+    if params[:program] == 'beta'
+      postback.reply(
+        text: I18n.t('bot.order.confirm.beta')
+      )
+    elsif params[:program] == 'demo'
+      postback.reply(
+        text: I18n.t('bot.order.confirm.demo')
+      )
+    end
+
+
     postback.reply(
-      text: I18n.t('bot.order.cart.ready', preparation_time: order.preparation_time, ready_time: (Time.now + order.preparation_time.minutes).strftime('%-H:%M'))
+      text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (Time.now + order.preparation_time.minutes).strftime('%-H:%M'))
     )
 
     postback.reply(
@@ -105,7 +116,7 @@ class OrderView
           template_type: "generic",
           elements: [
             {
-              title: I18n.t('bot.order.cart.go_to', restaurant_name: order.restaurant.name),
+              title: I18n.t('bot.order.confirm.go_to', restaurant_name: order.restaurant.name),
               image_url: url_array.join,
               item_url: "http://maps.apple.com/maps?q=#{order.restaurant.address}"
             }

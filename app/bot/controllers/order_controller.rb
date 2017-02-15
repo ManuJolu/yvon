@@ -53,7 +53,7 @@ class OrderController
         order.save
         ActionCable.server.broadcast "restaurant_#{order.restaurant.id}",
           order_id: order.id
-        @view.confirm(postback, order.decorate, paid_at: order.paid_at.to_i)
+        @view.confirm(postback, order.decorate, paid_at: order.paid_at.to_i, program: 'beta')
       else
         @view.restaurant_closed(postback, order.restaurant)
       end
@@ -68,7 +68,7 @@ class OrderController
       if order.restaurant.on_duty?
         order.preparation_time = order.restaurant.preparation_time
         order.save
-        @view.confirm(postback, order.decorate, paid_at: Time.now.to_i)
+        @view.confirm(postback, order.decorate, paid_at: Time.now.to_i, program: 'demo')
       else
         @view.restaurant_closed(postback, order.restaurant)
       end
