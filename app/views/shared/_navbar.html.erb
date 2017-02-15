@@ -19,11 +19,8 @@
   <% end %>
   </div>
 <!-- Right Navigation -->
-  <div class="navbar-wagon-right hidden-xs">
+  <div class="navbar-wagon-right">
 <!-- Different navigation if login or not -->
-
-    <%= link_to "Partners", restaurants_path, class: "navbar-wagon-item navbar-wagon-link"%>
-
     <% if user_signed_in? %>
       <% if @restaurant %>
         <div id="restaurantPreparationTime">

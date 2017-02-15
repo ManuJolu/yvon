@@ -163,8 +163,9 @@
 #logo h1 {
   font-family: $logo;
   color: $white;
-  font-size: 60px;
+  font-size: 40px;
   text-decoration: none !important;
+  margin-bottom: 0;
 }
 
 #slogan {
@@ -192,5 +193,6 @@
 }
 
 #restaurant_name h2 {
+  font-size: 24px;
   color: $white;
 }
