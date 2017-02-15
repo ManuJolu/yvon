@@ -103,6 +103,14 @@ class RestaurantView
         }
       }
     )
+
+    if restaurant.menus.any? && params[:page] == 0
+      text = I18n.t('bot.restaurant.menu.compute')
+      text += restaurant.menus.decorate.join("\n")
+      postback.reply(
+        text: text
+      )
+    end
   end
 
   def restaurant_mismatch(postback, restaurant_name)

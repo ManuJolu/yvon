@@ -3,7 +3,7 @@ class Restaurant < ApplicationRecord
   belongs_to :restaurant_category, required: true
   has_many :meals, dependent: :destroy
   has_many :meal_categories, -> { order(position: :asc) }, dependent: :destroy
-  has_many :menus, dependent: :destroy
+  has_many :menus, -> { order(position: :asc) }, dependent: :destroy
   has_many :orders, dependent: :restrict_with_exception
   has_many :ordered_meals, through: :orders
   has_many :options, dependent: :destroy
