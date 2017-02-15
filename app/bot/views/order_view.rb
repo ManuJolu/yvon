@@ -16,7 +16,7 @@ class OrderView
     )
   end
 
-  def cart(postback, order, params = {})
+  def cart(postback, order)
     elements = order.ordered_meals.map do |ordered_meal|
       {
         title: ordered_meal.meal.name,
@@ -36,15 +36,15 @@ class OrderView
           recipient_name: "#{order.user.name}",
           order_number: "#{order.id}",
           currency: "EUR",
-          payment_method: "Visa #{rand(1000..9999)}",
+          payment_method: I18n.t('bot.order.cart.payment_method'),
           order_url: "http://www.hello-yvon.com",
-          timestamp: params[:paid_at],
+          timestamp: Time.now.to_i,
           elements: elements,
           address: {
-            street_1: "Place de la Bourse",
+            street_1: "Quai de Bacalan",
             street_2: "",
             city: "Bordeaux",
-            postal_code: "33000",
+            postal_code: "33300",
             state: "NA",
             country: "FR"
           },
@@ -67,6 +67,20 @@ class OrderView
       }
     )
 
+    postback.reply(
+      text: I18n.t('bot.order.cart.beta_code'),
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: I18n.t('bot.order.cart.demo'),
+          payload: 'demo'
+        }
+      ]
+    )
+
+  end
+
+  def confirm(postback, order, params = {})
     colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
     url_array = [
       "http://maps.googleapis.com/maps/api/staticmap", # base

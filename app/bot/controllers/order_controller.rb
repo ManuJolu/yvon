@@ -36,15 +36,39 @@ class OrderController
   def cart(postback, user)
     if user.current_order&.meals.present?
       order = user.current_order
+      order.create_elements
+      order.reload
+      @view.cart(postback, order.decorate)
+    else
+      @view.no_meals(postback)
+    end
+  end
+
+  def confirm(postback, user)
+    if user.current_order&.meals.present?
+      order = user.current_order
       if order.restaurant.on_duty?
         order.preparation_time = order.restaurant.preparation_time
         order.paid_at = Time.now
         order.save
-        order.create_elements
-        order.reload
         ActionCable.server.broadcast "restaurant_#{order.restaurant.id}",
           order_id: order.id
-        @view.cart(postback, order.decorate, paid_at: order.paid_at.to_i)
+        @view.confirm(postback, order.decorate, paid_at: order.paid_at.to_i)
+      else
+        @view.restaurant_closed(postback, order.restaurant)
+      end
+    else
+      @view.no_meals(postback)
+    end
+  end
+
+  def demo(postback, user)
+    if user.current_order&.meals.present?
+      order = user.current_order
+      if order.restaurant.on_duty?
+        order.preparation_time = order.restaurant.preparation_time
+        order.save
+        @view.confirm(postback, order.decorate, paid_at: Time.now.to_i)
       else
         @view.restaurant_closed(postback, order.restaurant)
       end

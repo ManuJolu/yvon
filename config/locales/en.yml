@@ -64,9 +64,11 @@ en:
     meal:
       index:
         pick_pay: 'Pick & Pay'
+        pick_order: 'Pick & Order'
         pick_menu: 'Pick & ➥ Menu'
         pick_next: "Pick & ➥ %{next_category}"
         pay: 'Pay'
+        order: 'Order'
         menu: '➥ Menu'
         next: "➥ %{next_category}"
         no_thanks: "No %{current_category} for me"
@@ -77,7 +79,10 @@ en:
       no_meals: "Sorry, you have no meals to order yet!"
       restaurant_closed: "Woops, %{restaurant_name} has just closed... Can I help you find another restaurant?"
       cart:
+        payment_method: "Payment on pick-up"
         discounts: "Discounts"
+        beta_code: "If you are part of the beta-test program, type your code to confirm the order, otherwise continue with the demo:"
+        demo: "Demo"
         ready: "Your order will be ready in %{preparation_time}min at %{ready_time}."
         go_to: "Go to %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, your order at %{restaurant_name} is ready for pick-up!"
