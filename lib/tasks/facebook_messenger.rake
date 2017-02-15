@@ -30,8 +30,8 @@ namespace :fbm do
       call_to_actions: [
         {
           type: 'postback',
-          title: 'Payer',
-          payload: 'pay'
+          title: 'Commander',
+          payload: 'order'
         },
         {
           type: 'postback',
@@ -40,7 +40,7 @@ namespace :fbm do
         },
         {
           type: 'postback',
-          title: 'Hello',
+          title: 'Nouvelle commande',
           payload: 'start'
         },
         {

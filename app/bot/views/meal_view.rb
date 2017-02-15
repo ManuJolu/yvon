@@ -11,8 +11,8 @@ class MealView
           buttons: [
             {
               type: 'postback',
-              title: I18n.t('bot.meal.index.pick_pay'),
-              payload: "meal_#{meal.id}_pay"
+              title: I18n.t('bot.meal.index.pick_order'),
+              payload: "meal_#{meal.id}_cart"
             },
             {
               type: 'postback',
@@ -34,8 +34,8 @@ class MealView
         buttons: [
           {
             type: 'postback',
-            title: I18n.t('bot.meal.index.pay'),
-            payload: "pay"
+            title: I18n.t('bot.meal.index.order'),
+            payload: "cart"
           },
           {
             type: 'postback',
@@ -63,8 +63,8 @@ class MealView
             },
             {
               type: 'postback',
-              title: I18n.t('bot.meal.index.pick_pay'),
-              payload: "meal_#{meal.id}_pay"
+              title: I18n.t('bot.meal.index.pick_order'),
+              payload: "meal_#{meal.id}_cart"
             }
           ]
         }
@@ -81,8 +81,8 @@ class MealView
           },
           {
             type: 'postback',
-            title: I18n.t('bot.meal.index.pay'),
-            payload: "pay"
+            title: I18n.t('bot.meal.index.order'),
+            payload: "cart"
           }
         ]
       }

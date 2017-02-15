@@ -28,10 +28,22 @@ Bot.on :message do |message|
     new_order = @order_controller.create(message, user, lat: '44.840715', lng: '-0.5721098')
     coordinates = [new_order.latitude, new_order.longitude]
     @message_controller.no_restaurant(message) unless @restaurant_controller.index(message, coordinates)
-  else
-    if message.text
-      @message_controller.else(message)
+  when /cdiscount-beta/i
+    if user.current_order&.restaurant
+      @order_controller.confirm(message, user)
+    else
+      @message_controller.no_restaurant_selected(message)
     end
+  when /demo/i
+    if user.current_order&.restaurant
+      @order_controller.demo(message, user)
+    else
+      @message_controller.no_restaurant_selected(message)
+    end
+  # else
+  #   if message.text
+  #     @message_controller.else(message)
+  #   end
   end
 end
 
@@ -67,7 +79,7 @@ Bot.on :postback do |postback|
         when 'next'
           next_category = meal.meal_category.lower_item
           @meal_controller.index(postback, restaurant_id: meal.restaurant.id, meal_category_id: next_category.id)
-        when 'pay'
+        when 'cart'
           @order_controller.cart(postback, user)
         end
       end
@@ -86,7 +98,7 @@ Bot.on :postback do |postback|
       when 'next'
         next_category = meal.meal_category.lower_item
         @meal_controller.index(postback, restaurant_id: meal.restaurant.id, meal_category_id: next_category.id)
-      when 'pay'
+      when 'cart'
         @order_controller.cart(postback, user)
       end
     else
@@ -106,7 +118,7 @@ Bot.on :postback do |postback|
     else
       @message_controller.no_restaurant_selected(postback)
     end
-  when 'pay'
+  when 'cart'
     if user.current_order&.restaurant
       @order_controller.cart(postback, user)
     else

@@ -63,10 +63,12 @@ fr:
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
     meal:
       index:
-        pick_pay: '✔️️ & Payer'
-        pick_menu: '✔️️ & ➥ Menu'
-        pick_next: "✔️️ & ➥ %{next_category}"
+        pick_pay: '✔ & Payer'
+        pick_order: '✔ & Commander'
+        pick_menu: '✔ & ➥ Menu'
+        pick_next: "✔ & ➥ %{next_category}"
         pay: 'Payer'
+        order: 'Commander'
         menu: '➥ Menu'
         next: "➥ %{next_category}"
         no_thanks: "Pas de %{current_category} pour moi"
@@ -77,7 +79,10 @@ fr:
       no_meals: "Désolé, tu n'as pas encore de plat à commander !"
       restaurant_closed: "Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à trouver un autre restaurant ?"
       cart:
+        payment_method: "Paiement au comptoir"
         discounts: "Réductions"
+        beta_code: "Si tu fais partie du programme de béta-test, tapes ton code pour confirmer la commande, sinon continues sur la démo :"
+        demo: "Démo"
         ready: "Ta commande sera prête dans %{preparation_time}min à %{ready_time}."
         go_to: "Vas au %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
