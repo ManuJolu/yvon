@@ -40,7 +40,7 @@ Bot.on :message do |message|
   #   end
   end
 
-  case message.quick_reply&.payload
+  case message.quick_reply
   when /demo/i
     if user.current_order&.restaurant
       @order_controller.demo(message, user)
