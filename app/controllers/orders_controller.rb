@@ -65,10 +65,9 @@ class OrdersController < ApplicationController
   def refresh
     restaurant = Restaurant.find(params[:id])
     @orders = restaurant.orders.at_today
-    byebug
     @delivered = (params[:delivered] == "true" ? true : false)
     respond_to do |format|
-      format.js { render :update }
+      format.js
     end
   end
 
