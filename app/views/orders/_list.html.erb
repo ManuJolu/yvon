@@ -48,7 +48,7 @@
           </td>
           <td class="text-center">
             <% if order.handled_at.nil? %>
-              max <%= order.decorate.ready_at_limit %>
+              <strong>max <%= order.decorate.ready_at_limit %></strong>
               <br>
               <%= render 'orders/button_handled', order: order %>
             <% elsif order.ready_at.nil? %>
