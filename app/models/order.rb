@@ -52,7 +52,7 @@ class Order < ApplicationRecord
     ordered_meals.each do |ordered_meal|
       order_elements_array << order_elements.new(element: ordered_meal.meal, quantity: ordered_meal.quantity)
     end
-    restaurant.menus.by_price.each do |menu|
+    restaurant.menus.unscoped.by_price.each do |menu|
       order_elements_array = extract_menu_from_meal_elements(order_elements_array, menu)
     end
     #create order_elements

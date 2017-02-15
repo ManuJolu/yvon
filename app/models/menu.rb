@@ -11,7 +11,6 @@ class Menu < ApplicationRecord
 
   acts_as_list scope: :restaurant
 
-
   monetize :price_cents, allow_nil: false, numericality: { greater_than_or_equal_to: 0 }
   monetize :tax_cents
   monetize :pretax_price_cents

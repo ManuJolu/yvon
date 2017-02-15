@@ -82,7 +82,7 @@ fr:
       cart:
         payment_method: "Paiement au comptoir"
         discounts: "Réductions"
-        beta_code: "Si tu fais partie du programme de béta-test, tapes ton code pour confirmer la commande, sinon continues sur la démo :"
+        beta_code: "Si tu fais partie du programme de bêta-test, tapes ton code pour confirmer la commande, sinon continues sur la démo :"
         demo: "Démo"
       confirm:
         beta: 'Ton code est valide, ta commande est confirmée.'
