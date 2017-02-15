@@ -9,6 +9,9 @@ class Menu < ApplicationRecord
   validates :name, presence: true
   validates :tax_rate, presence: true
 
+  acts_as_list scope: :restaurant
+
+
   monetize :price_cents, allow_nil: false, numericality: { greater_than_or_equal_to: 0 }
   monetize :tax_cents
   monetize :pretax_price_cents

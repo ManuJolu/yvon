@@ -103,6 +103,14 @@ class RestaurantView
         }
       }
     )
+
+    if params[:page] == 0
+      text = "Les formules sont calculées automatiquement à la commande :\n"
+      text += restaurant.menus.map { |menu| "#{menu.name} - #{menu.price} €" }.join("\n")
+      postback.reply(
+        text: text
+      )
+    end
   end
 
   def restaurant_mismatch(postback, restaurant_name)
