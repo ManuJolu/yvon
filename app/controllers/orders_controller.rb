@@ -51,6 +51,8 @@ class OrdersController < ApplicationController
         end
       end
     end
+    ActionCable.server.broadcast "restaurant_#{restaurant.id}",
+      order_id: @order.id
   end
 
   def refresh

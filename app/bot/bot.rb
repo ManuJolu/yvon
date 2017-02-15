@@ -25,7 +25,7 @@ Bot.on :message do |message|
   when /hello/i
     @message_controller.hello(message, user)
   when /bordeaux/i
-    new_order = @order_controller.create(message, user, lat: '44.840715', lng: '-0.5721098')
+    new_order = @order_controller.create(message, user, lat: '44.8413522', lng: '-0.5810738')
     coordinates = [new_order.latitude, new_order.longitude]
     @message_controller.no_restaurant(message) unless @restaurant_controller.index(message, coordinates)
   when /cdiscount-beta/i
