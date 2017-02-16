@@ -3,8 +3,8 @@
 <% end %>
 
 <div class="tabs">
-  <%= link_to "Meals", restaurant_meals_path(restaurant), class: "tab#{ ' active' if active == 'meals'}" %>
-  <%= link_to "Orders", restaurant_orders_path(restaurant), class: "tab#{ ' active' if active == 'orders'}" %>
+  <%= link_to t('.meals'), restaurant_meals_path(restaurant), class: "tab#{ ' active' if active == 'meals'}" %>
+  <%= link_to t('.orders'), restaurant_orders_path(restaurant), class: "tab#{ ' active' if active == 'orders'}" %>
   <% if controller_name == 'restaurants' %>
     <% configure_path = "#" %>
     <% edit_path = "#" %>
@@ -12,8 +12,8 @@
     <% configure_path = restaurant_path(restaurant, tab: 'configure') %>
     <% edit_path = restaurant_path(restaurant, tab: 'edit') %>
   <% end %>
-  <%= link_to "Configure", configure_path, class: "tab#{ ' active' if @active == 'configure'}", data: {target: '#configureRestaurant'} %>
-  <%= link_to "Edit", edit_path, class: "tab#{ ' active' if @active == 'edit'}", data: {target: '#editRestaurant'} %>
+  <%= link_to t(".configure"), configure_path, class: "tab#{ ' active' if @active == 'configure'}", data: {target: '#configureRestaurant'} %>
+  <%= link_to t(".edit"), edit_path, class: "tab#{ ' active' if @active == 'edit'}", data: {target: '#editRestaurant'} %>
 </div>
 
 <script>

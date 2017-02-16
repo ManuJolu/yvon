@@ -3,4 +3,6 @@ class Option < ApplicationRecord
   has_many :meal_options, dependent: :destroy
 
   validates :name, presence: true
+
+  acts_as_list scope: :restaurant
 end

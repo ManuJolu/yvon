@@ -47,6 +47,22 @@ fr:
       ready: "PRÊT"
     button_delivered:
       delivered: "LIVRÉ"
+  restaurants:
+    configure_form:
+      meal_categories: "Catégories de plats"
+      menus: "Menus"
+      options: "Options"
+    meal_category_fields:
+      starter: "Entrée"
+      main_course: "Plat"
+      dessert: "Dessert"
+      drink: "Boisson"
+      select_timing: 'Choisir le timing'
+    tabs:
+      meals: "Plats"
+      orders: "Commandes"
+      configure: "Configurer"
+      edit: "Editer"
   bot:
     hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ?"
     no_restaurant: "Désolé, je n'ai pas trouvé de restaurant près de toi... Essaye un nouveau lieu, ou ma ville natale Bordeaux pour être sûr de trouver de bons restaurants !"

@@ -6,9 +6,10 @@ class Restaurant < ApplicationRecord
   has_many :menus, -> { order(position: :asc) }, dependent: :destroy
   has_many :orders, dependent: :restrict_with_exception
   has_many :ordered_meals, through: :orders
-  has_many :options, dependent: :destroy
+  has_many :options, -> { order(position: :asc) }, dependent: :destroy
 
   accepts_nested_attributes_for :meal_categories, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :options, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :menus, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true

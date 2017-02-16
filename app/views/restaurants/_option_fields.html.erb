@@ -1,6 +1,5 @@
 <div class="nested-fields form-inline">
   <%= f.input :name, label: false, placeholder: "Name" %>
-  <%= f.input :timing, collection: MealCategory.timings.map {|k, v| [t(".#{k}"), k]}, label:false, prompt: t('.select_timing') %>
   <%= f.input :position, label: false, placeholder: "Position" %>
   <%= link_to_remove_association f do %>
     <i class="fa fa-times" aria-hidden="true"></i>
