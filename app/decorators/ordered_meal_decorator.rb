@@ -3,8 +3,8 @@ class OrderedMealDecorator < Draper::Decorator
   decorates_association :meal
 
   def to_s
-    str = "#{object.quantity} x #{object.meal.name}"
+    str = "#{object.quantity} <span>&times;</span> #{object.meal.name}"
     str += " - #{object.option.name}" if object.option
-    str
+    str.html_safe
   end
 end
