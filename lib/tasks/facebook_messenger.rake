@@ -30,12 +30,12 @@ namespace :fbm do
       call_to_actions: [
         {
           type: 'postback',
-          title: 'Commander',
+          title: 'Envoyer la commande',
           payload: 'order'
         },
         {
           type: 'postback',
-          title: '➥ Menu',
+          title: '➥ Carte',
           payload: 'menu'
         },
         {
