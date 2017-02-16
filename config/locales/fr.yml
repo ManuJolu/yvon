@@ -65,15 +65,15 @@ fr:
     meal:
       index:
         pick_pay: '✔ & Payer'
-        pick_order: '✔ & Commander'
-        pick_menu: '✔ & ➥ Menu'
+        pick_order: '✔ & Envoyer'
+        pick_menu: '✔ & ➥ Carte'
         pick_next: "✔ & ➥ %{next_category}"
         pay: 'Payer'
-        order: 'Commander'
-        menu: '➥ Menu'
+        order: 'Envoyer'
+        menu: '➥ Carte'
         next: "➥ %{next_category}"
         no_thanks: "Pas de %{current_category} pour moi"
-        no_thanks_message: "\nJe surveille ma ligne"
+        no_thanks_message: "\nJe ferai mieux de surveiller ma ligne"
       get_option:
         choose_option: "Choisis ton option :"
     order:
@@ -85,9 +85,9 @@ fr:
         beta_code: "Si tu fais partie du programme de bêta-test, tapes ton code pour confirmer la commande, sinon continues sur la démo :"
         demo: "Démo"
       confirm:
-        beta: 'Ton code est valide, ta commande est confirmée.'
-        demo: 'Tu continues sur la démo.'
+        beta: 'Ton code est valide, ta commande est envoyée en cuisine !'
+        demo: 'Tu continues sur la démo, ta commande n'est pas vraiment en cours de préparation ;-).'
         ready: "Ta commande sera prête dans %{preparation_time} min à %{ready_time}."
         go_to: "Va au %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
-      notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}. Est-ce que je peux t'aider à nouveau ?"
+      notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}. Merci et à demain j'espère !"
