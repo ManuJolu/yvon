@@ -20,7 +20,7 @@
         <p><%= meal.description %> <%= meal.decorate.price %></p>
         <p>Options : <%= meal.options.map { |option| option.name }.join(' - ') %></p>
       </div>
-      <ul class="list-inline product-controls hidden-sm hidden-xs">
+      <ul class="list-inline product-controls">
         <li>
           <%= link_to meal, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm', remote: true do %>
             <i class="fa fa-trash"></i>
