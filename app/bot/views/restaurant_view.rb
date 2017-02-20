@@ -50,26 +50,24 @@ class RestaurantView
   end
 
   def menu(postback, restaurant, params = {})
-    elements = [
+    elements = []
+    element = {
+      title: restaurant.name,
+      image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),
+      subtitle: restaurant.slogan
+    }
+    buttons = [
       {
-        title: restaurant.name,
-        image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),
-        subtitle: restaurant.slogan
-        # buttons: [
-        #   {
-        #       title: "Pay",
-        #       type: "postback",
-        #       payload: "pay"
-        #   }
-        # ]
-        # default_action: {
-        #   type: "web_url",
-        #   url: "#{restaurant.facebook_url}"
-        # }
+        title: I18n.t('bot.restaurant.menu.order'),
+        type: "postback",
+        payload: "cart"
       }
     ]
-    start_index = params[:page] * 3
-    end_index = start_index + 2
+    element[:buttons] = buttons if params[:ordered_meals]
+    elements << element
+
+    start_index = params[:page] * 8
+    end_index = start_index + 7
     restaurant.meal_categories[start_index..end_index].each do |meal_category|
       elements << {
         title: meal_category.name,
@@ -85,21 +83,21 @@ class RestaurantView
       }
     end
 
-    button = [
-      {
-          title: I18n.t('bot.restaurant.menu.view_more'),
-          type: "postback",
-          payload: "restaurant_#{restaurant.id}_page_#{params[:next_page]}"
-      }
-    ] if params[:next_page]
+    # button = [
+    #   {
+    #       title: I18n.t('bot.restaurant.menu.view_more'),
+    #       type: "postback",
+    #       payload: "restaurant_#{restaurant.id}_page_#{params[:next_page]}"
+    #   }
+    # ] if params[:next_page]
 
     postback.reply(
       attachment: {
         type: 'template',
         payload: {
-          template_type: 'list',
-          elements: elements,
-          buttons: button
+          template_type: 'generic',
+          elements: elements
+          # buttons: button
         }
       }
     )

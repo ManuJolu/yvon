@@ -59,7 +59,7 @@ Bot.on :postback do |postback|
     restaurant_id = $LAST_MATCH_INFO['id'].to_i
     page = $LAST_MATCH_INFO['page'].to_i
     @order_controller.update(postback, user, restaurant_id: restaurant_id)
-    @restaurant_controller.menu(postback, restaurant_id: restaurant_id, page: page)
+    @restaurant_controller.menu(postback, user, restaurant_id: restaurant_id, page: page)
   when /\Arestaurant_(?<restaurant_id>\d+)_category_(?<meal_category_id>\w+)\z/
     restaurant_id = $LAST_MATCH_INFO['restaurant_id'].to_i
     meal_category_id = $LAST_MATCH_INFO['meal_category_id']
@@ -78,7 +78,7 @@ Bot.on :postback do |postback|
         @order_controller.add_meal(user, meal)
         case action
         when 'menu'
-          @restaurant_controller.menu(postback, restaurant_id: meal.restaurant.id)
+          @restaurant_controller.menu(postback, user, restaurant_id: meal.restaurant.id)
         when 'next'
           next_category = meal.meal_category.lower_item
           @meal_controller.index(postback, restaurant_id: meal.restaurant.id, meal_category_id: next_category.id)
@@ -97,7 +97,7 @@ Bot.on :postback do |postback|
       @order_controller.add_meal(user, meal, option)
       case action
       when 'menu'
-        @restaurant_controller.menu(postback, restaurant_id: meal.restaurant.id)
+        @restaurant_controller.menu(postback, user, restaurant_id: meal.restaurant.id)
       when 'next'
         next_category = meal.meal_category.lower_item
         @meal_controller.index(postback, restaurant_id: meal.restaurant.id, meal_category_id: next_category.id)
@@ -110,7 +110,7 @@ Bot.on :postback do |postback|
 
   when 'menu'
     if user.current_order&.restaurant
-      @restaurant_controller.menu(postback, restaurant_id: user.current_order.restaurant.id)
+      @restaurant_controller.menu(postback, user, restaurant_id: user.current_order.restaurant.id)
     else
       @message_controller.no_restaurant_selected(postback)
     end
