@@ -4,6 +4,7 @@
   <%= f.association :restaurant_category %>
   <%= f.input :address %>
   <%= f.input :description %>
+  <%= f.input :mode, collection: Restaurant.modes.map {|k, v| [t(".#{k}"), k]} %>
   <%= f.input :shift %>
   <%= f.input :facebook_url %>
   <%= f.input :photo, as: :attachinary %>

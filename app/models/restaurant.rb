@@ -17,11 +17,14 @@ class Restaurant < ApplicationRecord
   validates :address, presence: true
   validates :photo, presence: true
   validates :preparation_time, presence: true
+  validates :mode, presence: true
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
   has_attachment :photo
+
+  enum mode: [ :display_only, :order_acceptance ]
 
   scope :on_duty, -> { where(on_duty: true) }
 

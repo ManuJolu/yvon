@@ -34,6 +34,13 @@ Bot.on :message do |message|
     else
       @message_controller.no_restaurant_selected(message)
     end
+  when /talisbeta/i
+    if user.current_order&.restaurant
+      @order_controller.confirm(message, user)
+    else
+      @message_controller.no_restaurant_selected(message)
+    end
+
   # else
   #   if message.text
   #     @message_controller.else(message)
@@ -108,6 +115,9 @@ Bot.on :postback do |postback|
       @restaurant_controller.meal_restaurant_mismatch(postback, user, restaurant_id: meal.restaurant.id)
     end
 
+  when 'map'
+    coordinates = [user.current_order&.latitude, user.current_order&.longitude]
+    @message_controller.no_restaurant(postback) unless @restaurant_controller.index(postback, coordinates)
   when 'menu'
     if user.current_order&.restaurant
       @restaurant_controller.menu(postback, user, restaurant_id: user.current_order.restaurant.id)
