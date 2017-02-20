@@ -115,6 +115,9 @@ Bot.on :postback do |postback|
       @restaurant_controller.meal_restaurant_mismatch(postback, user, restaurant_id: meal.restaurant.id)
     end
 
+  when 'map'
+    coordinates = [user.current_order&.latitude, user.current_order&.longitude]
+    @message_controller.no_restaurant(postback) unless @restaurant_controller.index(postback, coordinates)
   when 'menu'
     if user.current_order&.restaurant
       @restaurant_controller.menu(postback, user, restaurant_id: user.current_order.restaurant.id)

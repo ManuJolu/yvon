@@ -74,6 +74,7 @@ fr:
     restaurant:
       index:
         ready_in: "prêt en"
+        display_only: "affichage uniquement"
         heading: "direction"
         enter: "Entrer"
       menu:
