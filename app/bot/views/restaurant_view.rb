@@ -76,7 +76,7 @@ class RestaurantView
     restaurant.meal_categories[start_index..end_index].each do |meal_category|
       elements << {
         title: meal_category.name,
-        image_url: (cl_image_path(restaurant.meals.is_active.where(meal_category: meal_category).first&.photo&.path, width: 100, height: 100, crop: :fill) if restaurant.meals.is_active.where(meal_category: meal_category).present?),
+        image_url: (cl_image_path(restaurant.meals.is_active.where(meal_category: meal_category).first&.photo&.path, width: 382, height: 200, crop: :fill) if restaurant.meals.is_active.where(meal_category: meal_category).present?),
         subtitle: "#{('Suggestion: ' + restaurant.meals.is_active.where(meal_category: meal_category).first.name) if restaurant.meals.is_active.where(meal_category: meal_category).present?}",
         buttons: [
           {
