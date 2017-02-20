@@ -34,6 +34,13 @@ Bot.on :message do |message|
     else
       @message_controller.no_restaurant_selected(message)
     end
+  when /talisbeta/i
+    if user.current_order&.restaurant
+      @order_controller.confirm(message, user)
+    else
+      @message_controller.no_restaurant_selected(message)
+    end
+
   # else
   #   if message.text
   #     @message_controller.else(message)

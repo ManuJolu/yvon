@@ -4,89 +4,123 @@ class MealView
     next_meal_category = params[:next_meal_category]
     if next_meal_category
       meals = meals.map do |meal|
-        {
-          title: meal.name,
-          image_url: cl_image_path(meal.photo.path, width: 382, height: 200, crop: :fill),
-          subtitle: "#{meal.description}\n#{meal.price}",
-          buttons: [
-            # {
-            #   type: 'postback',
-            #   title: I18n.t('bot.meal.index.pick_next', next_category: next_meal_category.name),
-            #   payload: "meal_#{meal.id}_next"
-            # },
-            {
-              type: 'postback',
-              title: I18n.t('bot.meal.index.pick_menu'),
-              payload: "meal_#{meal.id}_menu"
-            }
-            # {
-            #   type: 'postback',
-            #   title: I18n.t('bot.meal.index.pick_order'),
-            #   payload: "meal_#{meal.id}_cart"
-            # }
-          ]
-        }
-      end
-      meals << {
-        title: I18n.t('bot.meal.index.no_thanks', current_category: current_meal_category.name.downcase),
-        image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
-        subtitle: I18n.t('bot.meal.index.no_thanks_message'),
-        buttons: [
+        buttons = [
           # {
           #   type: 'postback',
-          #   title: I18n.t('bot.meal.index.next', next_category: next_meal_category.name),
-          #   payload: "category_#{next_meal_category.id}"
+          #   title: I18n.t('bot.meal.index.pick_next', next_category: next_meal_category.name),
+          #   payload: "meal_#{meal.id}_next"
           # },
           {
             type: 'postback',
-            title: I18n.t('bot.meal.index.menu'),
-            payload: "menu"
+            title: I18n.t('bot.meal.index.pick_menu'),
+            payload: "meal_#{meal.id}_menu"
           }
           # {
           #   type: 'postback',
-          #   title: I18n.t('bot.meal.index.order'),
-          #   payload: "cart"
+          #   title: I18n.t('bot.meal.index.pick_order'),
+          #   payload: "meal_#{meal.id}_cart"
           # }
         ]
-      }
-    else
-      meals = meals.map do |meal|
-        {
+        result = {
           title: meal.name,
           image_url: cl_image_path(meal.photo.path, width: 382, height: 200, crop: :fill),
-          subtitle: "#{meal.description}\n#{meal.price}",
+          subtitle: "#{meal.description}\n#{meal.price}"
+        }
+        result[:buttons] = buttons if params[:order_acceptance]
+        result
+      end
+      if params[:order_acceptance]
+        meals << {
+          title: I18n.t('bot.meal.index.no_thanks', current_category: current_meal_category.name.downcase),
+          image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
+          subtitle: I18n.t('bot.meal.index.no_thanks_message'),
           buttons: [
+            # {
+            #   type: 'postback',
+            #   title: I18n.t('bot.meal.index.next', next_category: next_meal_category.name),
+            #   payload: "category_#{next_meal_category.id}"
+            # },
             {
               type: 'postback',
-              title: I18n.t('bot.meal.index.pick_menu'),
-              payload: "meal_#{meal.id}_menu"
+              title: I18n.t('bot.meal.index.menu'),
+              payload: "menu"
             }
             # {
             #   type: 'postback',
-            #   title: I18n.t('bot.meal.index.pick_order'),
-            #   payload: "meal_#{meal.id}_cart"
+            #   title: I18n.t('bot.meal.index.order'),
+            #   payload: "cart"
             # }
           ]
         }
+      else
+        meals << {
+          title: I18n.t('bot.meal.index.back'),
+          image_url: cl_image_path("v1480520365/back.png", width: 382, height: 200, crop: :fill),
+          subtitle: I18n.t('bot.meal.index.back_message'),
+          buttons: [
+            {
+              type: 'postback',
+              title: I18n.t('bot.meal.index.menu'),
+              payload: "menu"
+            }
+          ]
+        }
+
       end
-      meals << {
-        title: I18n.t('bot.meal.index.no_thanks', current_category: current_meal_category.name.downcase),
-        image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
-        subtitle: I18n.t('bot.meal.index.no_thanks_message'),
-        buttons: [
+    else
+      meals = meals.map do |meal|
+        buttons = [
           {
             type: 'postback',
-            title: I18n.t('bot.meal.index.menu'),
-            payload: "menu"
+            title: I18n.t('bot.meal.index.pick_menu'),
+            payload: "meal_#{meal.id}_menu"
           }
           # {
           #   type: 'postback',
-          #   title: I18n.t('bot.meal.index.order'),
-          #   payload: "cart"
+          #   title: I18n.t('bot.meal.index.pick_order'),
+          #   payload: "meal_#{meal.id}_cart"
           # }
         ]
-      }
-
+        result = {
+          title: meal.name,
+          image_url: cl_image_path(meal.photo.path, width: 382, height: 200, crop: :fill),
+          subtitle: "#{meal.description}\n#{meal.price}"
+        }
+        result[:buttons] = buttons if params[:order_acceptance]
+        result
+      end
+      if params[:order_acceptance]
+        meals << {
+          title: I18n.t('bot.meal.index.no_thanks', current_category: current_meal_category.name.downcase),
+          image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
+          subtitle: I18n.t('bot.meal.index.no_thanks_message'),
+          buttons: [
+            {
+              type: 'postback',
+              title: I18n.t('bot.meal.index.menu'),
+              payload: "menu"
+            }
+            # {
+            #   type: 'postback',
+            #   title: I18n.t('bot.meal.index.order'),
+            #   payload: "cart"
+            # }
+          ]
+        }
+      else
+        meals << {
+          title: I18n.t('bot.meal.index.back', current_category: current_meal_category.name.downcase),
+          image_url: cl_image_path("v1480520365/back.png", width: 382, height: 200, crop: :fill),
+          subtitle: I18n.t('bot.meal.index.back_message'),
+          buttons: [
+            {
+              type: 'postback',
+              title: I18n.t('bot.meal.index.menu'),
+              payload: "menu"
+            }
+          ]
+        }
+      end
     end
 
     postback.reply(

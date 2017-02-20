@@ -52,6 +52,9 @@ fr:
       meal_categories: "Catégories de plats"
       menus: "Menus"
       options: "Options"
+    form:
+      display_only: 'Affichage uniquement'
+      order_acceptance: 'Prise de commande'
     meal_category_fields:
       starter: "Entrée"
       main_course: "Plat"
@@ -76,7 +79,7 @@ fr:
       menu:
         order: "Envoyer ma commande"
         view_more: "Voir la suite"
-        compute: "Les formules sont calculées automatiquement à la commande :\n"
+        compute: "Formules :\n"
       restaurant_mismatch: "Désolé, ce menu appartient au %{restaurant_name}, voici le bon menu :"
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
     meal:
@@ -91,6 +94,8 @@ fr:
         next: "➥ %{next_category}"
         no_thanks: "Pas de %{current_category} pour moi"
         no_thanks_message: "\nJe ferais mieux de surveiller ma ligne"
+        back: "Retour à la carte"
+        back_message: "\n "
       get_option:
         choose_option: "Choisis ton option :"
     order:
