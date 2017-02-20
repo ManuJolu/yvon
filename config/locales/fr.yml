@@ -74,6 +74,7 @@ fr:
         heading: "direction"
         enter: "Entrer"
       menu:
+        order: "Envoyer ma commande"
         view_more: "Voir la suite"
         compute: "Les formules sont calculées automatiquement à la commande :\n"
       restaurant_mismatch: "Désolé, ce menu appartient au %{restaurant_name}, voici le bon menu :"
@@ -82,7 +83,7 @@ fr:
       index:
         pick_pay: '✔ & Payer'
         pick_order: '✔ & Envoyer'
-        pick_menu: '✔ & ➥ Carte'
+        pick_menu: 'Commander'
         pick_next: "✔ & ➥ %{next_category}"
         pay: 'Payer'
         order: 'Envoyer'

@@ -8,11 +8,11 @@ class RestaurantController
     @view.index(message, coordinates, restaurants) if restaurants.present?
   end
 
-  def menu(postback, params = {})
+  def menu(postback, user, params = {})
     restaurant = Restaurant.find(params[:restaurant_id])
     page = params[:page] || 0
     next_page = (page + 1) if page < ((restaurant.meal_categories.size - 1) / 3)
-    @view.menu(postback, restaurant, page: page, next_page: next_page)
+    @view.menu(postback, restaurant, ordered_meals: user.current_order.ordered_meals.present?, page: page, next_page: next_page)
   end
 
   def check(user, params = {})
