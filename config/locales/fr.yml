@@ -83,7 +83,7 @@ fr:
       index:
         pick_pay: '✔ & Payer'
         pick_order: '✔ & Envoyer'
-        pick_menu: '✔ & ➥ Carte'
+        pick_menu: 'Commander'
         pick_next: "✔ & ➥ %{next_category}"
         pay: 'Payer'
         order: 'Envoyer'

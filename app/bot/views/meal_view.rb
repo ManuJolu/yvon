@@ -9,21 +9,21 @@ class MealView
           image_url: cl_image_path(meal.photo.path, width: 382, height: 200, crop: :fill),
           subtitle: "#{meal.description}\n#{meal.price}",
           buttons: [
-            {
-              type: 'postback',
-              title: I18n.t('bot.meal.index.pick_next', next_category: next_meal_category.name),
-              payload: "meal_#{meal.id}_next"
-            },
+            # {
+            #   type: 'postback',
+            #   title: I18n.t('bot.meal.index.pick_next', next_category: next_meal_category.name),
+            #   payload: "meal_#{meal.id}_next"
+            # },
             {
               type: 'postback',
               title: I18n.t('bot.meal.index.pick_menu'),
               payload: "meal_#{meal.id}_menu"
-            },
-            {
-              type: 'postback',
-              title: I18n.t('bot.meal.index.pick_order'),
-              payload: "meal_#{meal.id}_cart"
             }
+            # {
+            #   type: 'postback',
+            #   title: I18n.t('bot.meal.index.pick_order'),
+            #   payload: "meal_#{meal.id}_cart"
+            # }
           ]
         }
       end
@@ -32,21 +32,21 @@ class MealView
         image_url: cl_image_path("v1480520365/no_thanks.png", width: 382, height: 200, crop: :fill),
         subtitle: I18n.t('bot.meal.index.no_thanks_message'),
         buttons: [
-          {
-            type: 'postback',
-            title: I18n.t('bot.meal.index.next', next_category: next_meal_category.name),
-            payload: "category_#{next_meal_category.id}"
-          },
+          # {
+          #   type: 'postback',
+          #   title: I18n.t('bot.meal.index.next', next_category: next_meal_category.name),
+          #   payload: "category_#{next_meal_category.id}"
+          # },
           {
             type: 'postback',
             title: I18n.t('bot.meal.index.menu'),
             payload: "menu"
-          },
-          {
-            type: 'postback',
-            title: I18n.t('bot.meal.index.order'),
-            payload: "cart"
           }
+          # {
+          #   type: 'postback',
+          #   title: I18n.t('bot.meal.index.order'),
+          #   payload: "cart"
+          # }
         ]
       }
     else
@@ -60,12 +60,12 @@ class MealView
               type: 'postback',
               title: I18n.t('bot.meal.index.pick_menu'),
               payload: "meal_#{meal.id}_menu"
-            },
-            {
-              type: 'postback',
-              title: I18n.t('bot.meal.index.pick_order'),
-              payload: "meal_#{meal.id}_cart"
             }
+            # {
+            #   type: 'postback',
+            #   title: I18n.t('bot.meal.index.pick_order'),
+            #   payload: "meal_#{meal.id}_cart"
+            # }
           ]
         }
       end
@@ -78,12 +78,12 @@ class MealView
             type: 'postback',
             title: I18n.t('bot.meal.index.menu'),
             payload: "menu"
-          },
-          {
-            type: 'postback',
-            title: I18n.t('bot.meal.index.order'),
-            payload: "cart"
           }
+          # {
+          #   type: 'postback',
+          #   title: I18n.t('bot.meal.index.order'),
+          #   payload: "cart"
+          # }
         ]
       }
 
