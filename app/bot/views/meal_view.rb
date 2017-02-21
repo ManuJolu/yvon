@@ -65,7 +65,6 @@ class MealView
             }
           ]
         }
-
       end
     else
       meals = meals.map do |meal|

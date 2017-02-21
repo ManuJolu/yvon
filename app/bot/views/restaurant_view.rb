@@ -88,7 +88,7 @@ class RestaurantView
       }
     end
 
-    # button = [
+    # buttons = [
     #   {
     #       title: I18n.t('bot.restaurant.menu.view_more'),
     #       type: "postback",
@@ -102,7 +102,7 @@ class RestaurantView
         payload: {
           template_type: 'generic',
           elements: elements
-          # buttons: button
+          # buttons: buttons
         }
       }
     )
