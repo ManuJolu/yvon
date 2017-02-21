@@ -55,7 +55,7 @@ class MealView
       else
         meals << {
           title: I18n.t('bot.meal.index.back'),
-          image_url: cl_image_path("v1480520365/back.png", width: 382, height: 200, crop: :fill),
+          image_url: cl_image_path("v1487671740/n0sql1a0thjv2mcw13lp.jpg", width: 382, height: 200, crop: :fill),
           subtitle: I18n.t('bot.meal.index.back_message'),
           buttons: [
             {
@@ -109,7 +109,7 @@ class MealView
       else
         meals << {
           title: I18n.t('bot.meal.index.back', current_category: current_meal_category.name.downcase),
-          image_url: cl_image_path("v1480520365/back.png", width: 382, height: 200, crop: :fill),
+          image_url: cl_image_path("v1487671740/n0sql1a0thjv2mcw13lp.jpg", width: 382, height: 200, crop: :fill),
           subtitle: I18n.t('bot.meal.index.back_message'),
           buttons: [
             {
