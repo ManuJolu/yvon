@@ -9,10 +9,11 @@ fr:
       profile: "Profil"
       restaurants: "Restaurants"
   pages:
+    messenger_button:
+      call_to_action: "Je commande avec Yvon"
     home:
       slogan: "Ne perds plus ton temps à faire la queue"
-      tagline: "Laisse Yvon commander ton déjeuner et vas le récupérer quand c'est prêt"
-      call_to_action: "Je commande avec Yvon"
+      tagline: "Laisse Yvon commander ton déjeuner et vas le récupérer quand il est prêt"
       avant:
         tit1: "Simple d’utilisation"
         det1: "Pas d'application à installer, pas de compte à créer, commandez avec Yvon comme vous discutez avec un ami"

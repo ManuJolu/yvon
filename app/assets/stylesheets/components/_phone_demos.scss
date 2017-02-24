@@ -1,0 +1,10 @@
+.phone-demo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-gif {
+    position: absolute;
+    width: 210px;
+  }
+}
