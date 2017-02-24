@@ -135,6 +135,16 @@
   border-top: 1px solid #E6E6E6;
 }
 
+/* Custom styling */
+.navbar-wagon-middle {
+  font-size: 3rem;
+  color: $white;
+}
+
+.navbar-wagon-item .restaurant_preparation_time {
+  width: 90px;
+}
+
 .navbar-background-scroll{
   position: absolute;
   left: 0px;
@@ -156,26 +166,3 @@
   background-color: $brand-color;
 }
 
-#checkbox {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#switch {
-  margin-top:11px;
-}
-
-#checkbox h1 {
-  font-family: $logo-font;
-  color: $white;
-  font-size: 45px;
-  text-decoration: none !important;
-  margin-top:11px;
-}
-
-#restaurant_name h2 {
-  font-size: 3rem;
-  color: $white;
-}

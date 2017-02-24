@@ -1,5 +1,6 @@
-<div class="preparation_time_form">
-  <%= simple_form_for @restaurant, remote: true do |f| %>
-    <%= f.input :preparation_time, label: false, input_html: { class: "preparation-time-input" } %>
+<%= simple_form_for @restaurant, remote: true, html: { class: 'form-inline' } do |f| %>
+  <%= f.input :preparation_time, wrapper: :inline_input_group do %>
+    <%= f.input_field :preparation_time, class: "form-control input-sm" %>
+    <span class="input-group-addon input-sm">min</span>
   <% end %>
-</div>
+<% end %>
