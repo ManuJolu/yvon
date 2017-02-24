@@ -2,12 +2,10 @@
  * Fonts
  * ------------------------------------- */
 // Google fonts
-@import url("https://fonts.googleapis.com/css?family=Cabin+Sketch|Open+Sans+Condensed:300");
+@import url("https://fonts.googleapis.com/css?family=Cabin+Sketch|Open+Sans+Condensed:300|Roboto+Condensed:400,700");
 $base-font: 'Open Sans Condensed', 'sans-serif';
 $header-font: 'Open Sans Condensed', 'sans-serif';
-$logo: 'Cabin Sketch', 'cursive';
-
-
+$logo-font: 'Cabin Sketch', 'cursive';
 
 // Local fonts (uncomment following lines)
 // @font-face {
@@ -27,12 +25,12 @@ $base-height: 1.4;
  * Colors
  * ------------------------------------- */
 // Scheme
-$brand-color: #D23333;
+$brand-color: #292C3C;
 
 $red: #EE5F5B;
 $blue: #469AE0;
 $yellow: #DFCC9D;
 $orange: #E67E22;
 $green: #32B796;
-$gray: #292c3c;
+$gray: #414153;
 $white: #FFFFFF;

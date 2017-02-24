@@ -1,58 +1,64 @@
-<div class="navbar-wagon">
-  <div class="col-sm-4 ">
-    <%= link_to root_path do %>
-      <div id="logo"><h1>Yvon</h1></div>
-    <% end %>
-  </div>
+<% if path_info == root_path || path_info == restaurants_path %>
+  <div class="navbar-wagon navbar-wagon-fixed">
+    <div class="navbar-background-scroll"></div>
+<% else %>
+  <div class="navbar-wagon">
+    <div class="navbar-background-still"></div>
+<% end %>
 
-  <div class="col-sm-4">
-  <% if user_signed_in? %>
-    <div id="restaurant_name">
-      <% if @restaurant.nil? %>
-        <% %>
-      <% else %>
-        <div>
-          <h2><%=  @restaurant.name %></h2>
-        </div>
+    <!-- Logo -->
+    <div class="navbar-wagon-brand">
+      <%= link_to root_path do %>
+        Yvon
       <% end %>
     </div>
-  <% end %>
-  </div>
-<!-- Right Navigation -->
-  <div class="navbar-wagon-right">
-<!-- Different navigation if login or not -->
-    <% if user_signed_in? %>
-      <% if @restaurant %>
-        <div id="restaurantPreparationTime">
-          <%= render 'restaurants/preparation_time_form' %>
-        </div>
-        <div id="restaurantDutyCheckbox">
-          <%= render 'restaurants/duty_checkbox' %>
-        </div>
-      <% end %>
-<!-- Profile picture and dropdown -->
-      <div class="navbar-wagon-item">
-        <div class="dropdown">
-          <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
-          <%= image_tag avatar_url, class: 'avatar dropdown-toggle', id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-            <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-              <li>
-                <%= link_to current_user do %>
-                <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-                <% end %>
-              </li>
-            </ul>
-        </div>
-      </div>
-    <% else %>
-<!-- Login text link -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-    <% end %>
-  </div>
-</div>
 
+    <!-- Middle Display -->
+    <% if @restaurant %>
+      <div class="navbar-wagon-middle">
+        <%=  @restaurant.name %>
+      </div>
+    <% end %>
+
+    <!-- Right Navigation -->
+    <div class="navbar-wagon-right">
+      <!-- Different navigation if login or not -->
+      <% if user_signed_in? %>
+        <% if @restaurant %>
+          <div class='navbar-wagon-item' id="restaurantPreparationTime">
+            <%= render 'restaurants/preparation_time_form' %>
+          </div>
+          <div class='navbar-wagon-item' id="restaurantDutyCheckbox">
+            <%= render 'restaurants/duty_checkbox' %>
+          </div>
+        <% end %>
+        <!-- Profile picture and dropdown -->
+        <div class="navbar-wagon-item">
+          <div class="dropdown">
+            <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+            <%= image_tag avatar_url, class: 'avatar dropdown-toggle', id: 'navbar-wagon-menu', data: { toggle: 'dropdown' } %>
+              <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+                <li>
+                  <%= link_to current_user do %>
+                  <i class="fa fa-home"></i> <%= t(".profile") %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to restaurants_path do %>
+                    <i class="fa fa-cutlery"></i> <%= t(".restaurants") %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                  <i class="fa fa-sign-out"></i> <%= t(".sign_out") %>
+                  <% end %>
+                </li>
+              </ul>
+          </div>
+        </div>
+      <% else %>
+        <!-- Login text link -->
+        <%= link_to t(".sign_in"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <% end %>
+    </div>
+  </div>

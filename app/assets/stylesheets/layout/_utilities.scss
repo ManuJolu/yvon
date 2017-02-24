@@ -6,8 +6,8 @@
 
 // Paddings
 .padded {
-  padding-top: 5em;
-  padding-bottom: 5em;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 // Backgrounds
@@ -22,4 +22,8 @@
 }
 .bg-dark-blue {
   background: #3b5998;
+}
+
+.marged {
+  margin: 1rem;
 }
