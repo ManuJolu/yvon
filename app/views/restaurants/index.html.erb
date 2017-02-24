@@ -1,78 +1,15 @@
-<div class="index-body">
-
-  <div class="banner" style="background-image: linear-gradient(-225deg, rgba(41,44,60,0.6) 0%, rgba(80,78,100,0.5) 50%), url('http://res.cloudinary.com/da2krghvd/image/upload/c_fill,h_400,w_1500/v1480262045/banner_2_l43xir.jpg');">
-    <div class="banner-content">
-      <h1>Yvon knows that taste and time matter</h1>
-    </div>
-  </div>
-
-
-  <div class="carousel">
-    <div class="item"></div>
-    <div class="item"><img src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F22959116%2F167956706274%2F1%2Foriginal.jpg?h=200&w=450&rect=0%2C370%2C2200%2C1100&s=5d9ea50759ffab2d5fc54602a2b3f902"></div>
-    <div class="item"><img src="http://vanmag.com/wp-content/uploads/2016/10/cocktail_header-400x200.jpg"></div>
-    <div class="item"><img src="http://res.cloudinary.com/da2krghvd/image/upload/c_fill,h_200,w_400/v1480006128/service_fbgjym.jpg"></div>
-    <div class="item"><img src="https://img.evbuc.com/http%3A%2F%2Fcdn.evbuc.com%2Fimages%2F22929212%2F162592366924%2F1%2Foriginal.jpg?h=200&w=450&rect=130%2C0%2C740%2C370&s=f6fb14cf1f4e346d2a8941b07230344b"></div>
-    <div class="item"><img src="http://adamfirthphotography.com/wp-content/uploads/2015/08/A9O2239-400x200.jpg"></div>
-  </div>
-
-    <script>
-
-    var items, length, deg, z, move = 0 ;
-
-      function rotate(direction){
-        move += direction;
-
-        for(var i = 0; i < length ; i++){
-          items[i].style.transform = "rotateY("+(deg*(i+move))+"deg) translateZ("+z+"px)";
-        }
-      }
-    function load(){
-      items = document.getElementsByClassName('item');
-      length = items.length;
-
-      deg = 360 / length;
-      z = (items[0].offsetWidth / 2) / Math.tan((deg / 2) * (Math.PI / 180));
-
-      for(var i = 0; i < length; i++){
-        items[i].style.transform = "rotateY("+(deg*i)+"deg) translateZ("+z+"px)";
-          rand1 = Math.round(Math.random()*255);
-          rand2 = Math.round(Math.random()*255);
-          rand3 = Math.round(Math.random()*255);
-          rand4 = Math.round(Math.random()*255);
-          rand5 = Math.round(Math.random()*255);
-          rand6 = Math.round(Math.random()*255);
-          items[i].style.backgroundColor = "rgba("+rand1+", "+rand2+", "+rand3+", "+rand4+", "+rand5+", "+rand6+", 0.6)";
-      }
-    }
-    window.addEventListener('load', load);
-
-    </script>
-
-
-    <div class='container'>
-      <h4>We believe the highest level of engagement between consumers and brands happens when the moment is instantaneous and beautiful.</h4>
-      <div class="btn-group-1">
-        <button class="action" type="button" onclick = "rotate(1)">
-          Go left !
-        </button>
-        <button class="action" type="button" onclick = "rotate(-1)">
-          Go right!
-        </button>
-      </div>
-    </div>
-
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-push-1 col-sm-10">
-        <% @restaurants.each do |restaurant| %>
-          <div class="col-sm-6">
-            <%= render 'restaurant_card', restaurant: restaurant %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(41,44,60,0.6) 0%, rgba(80,78,100,0.5) 50%), url(<%= image_path 'banner_restaurants' %>);">
+  <div class="banner-content">
+    <h1>Yvon knows that taste and time matter</h1>
   </div>
 </div>
 
+<div class="container">
+  <div class="row">
+    <% @restaurants.each do |restaurant| %>
+      <div class="col-sm-4">
+        <%= render 'restaurant_card', restaurant: restaurant %>
+      </div>
+    <% end %>
+  </div>
+</div>

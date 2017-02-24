@@ -1,11 +1,11 @@
 .alert {
   margin: 0;
   text-align: center;
-  color: white;
+  color: $white;
 }
 .alert-info {
-  background: $green;
+  background: $brand-primary;
 }
 .alert-warning {
-  background: $red;
+  background: $brand-danger;
 }

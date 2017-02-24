@@ -1,11 +1,19 @@
-<div class="navbar-wagon">
-  <div class="col-sm-4 ">
+<% if path_info == root_path || path_info == restaurants_path %>
+  <div class="navbar-wagon navbar-wagon-fixed">
+    <div class="navbar-background-scroll"></div>
+<% else %>
+  <div class="navbar-wagon">
+    <div class="navbar-background-still"></div>
+<% end %>
+
+  <!-- Logo -->
+  <div class="navbar-wagon-brand">
     <%= link_to root_path do %>
-      <div id="logo"><h1>Yvon</h1></div>
+      Yvon
     <% end %>
   </div>
 
-  <div class="col-sm-4">
+  <div class="navbar-wagon-center">
   <% if user_signed_in? %>
     <div id="restaurant_name">
       <% if @restaurant.nil? %>
@@ -18,6 +26,7 @@
     </div>
   <% end %>
   </div>
+
 <!-- Right Navigation -->
   <div class="navbar-wagon-right">
 <!-- Different navigation if login or not -->
@@ -55,4 +64,3 @@
     <% end %>
   </div>
 </div>
-

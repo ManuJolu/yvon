@@ -4,7 +4,6 @@
     <title><%= yield_with_default(holder: :title, default: t('.title')) %></title>
 
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => 'reload' %>
-    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch|Open+Sans+Condensed:300|Roboto+Condensed:400,700" rel="stylesheet">
     <%= favicon_link_tag 'y.jpg' %>
 
     <!-- Google Analytics -->
@@ -35,23 +34,12 @@
   </head>
 
   <body class="<%= controller_name %> <%= action_name %>">
-    <% if request.env['PATH_INFO'] == "/" || request.env['PATH_INFO'] == "/restaurants" %>
-      <div class="navbar-fixed">
-        <div class="background-custom"></div>
-    <% else %>
-      <div>
-        <div class="background-dark"></div>
-    <% end %>
-        <%= render 'shared/navbar' %>
-    </div>
 
-    <div id="flashes">
-      <%= render 'shared/flashes' %>
-    </div>
+    <%= render 'shared/navbar', path_info: request.env['PATH_INFO'] %>
 
-    <main>
-      <%= yield %>
-    </main>
+    <%= render 'shared/flashes' %>
+
+    <%= yield %>
 
     <%= render 'shared/footer' %>
 
