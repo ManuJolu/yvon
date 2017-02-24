@@ -137,7 +137,9 @@
 
 /* Custom styling */
 .navbar-wagon-middle {
-  font-size: 2.5vw;
+  font-size: 3rem;
+  overflow: hidden;
+  white-space: nowrap;
   color: $white;
 }
 
