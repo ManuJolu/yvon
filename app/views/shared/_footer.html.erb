@@ -1,24 +1,21 @@
-<div class="footer">
+<div class="footer-fixed">
 
-  <div class="col-sm-4 text-left linked">
-      <a target="_blank" href="https://www.facebook.com/HelloYvon/">
-        <i class="fa fa-facebook fa-lg" ></i>
-      </a>
-      <a href="#">
-        <i class="fa fa-instagram fa-lg" ></i>
-      </a>
+  <div class="col-sm-2 text-left">
+    <%= link_to "https://www.facebook.com/HelloYvon/", target: :blank do %>
+      <i class="fa fa-facebook" ></i>
+    <% end %>
   </div>
 
-  <div class="col-sm-4" style="text-align: center">
-    <p>Made with <i class="fa fa-heart-o fa-lg" ></i> by a <%= link_to "dedicated team" %></p>
+  <div class="col-sm-6 text-center">
+    Made with <i class="fa fa-heart-o fa-lg" ></i> by a <%= link_to "dedicated team" %>
   </div>
 
-  <div class="col-sm-2 linked" style="text-align: right">
-    <p><%= link_to "Privacy policy", privacy_path %></p>
+  <div class="col-sm-2 text-right">
+    <%= link_to "Privacy policy", privacy_path %>
   </div>
 
-  <div class="col-sm-2" style="text-align: right">
-    <p>&copy; 2017 | Yvon</p>
+  <div class="col-sm-2 text-right">
+    &copy; 2017 | Yvon
   </div>
 
 </div>
