@@ -20,6 +20,7 @@ gem 'rest-client'
 gem "gmaps4rails"
 gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
+gem 'rails_admin-i18n'
 gem 'money-rails'
 gem 'acts_as_list'
 
