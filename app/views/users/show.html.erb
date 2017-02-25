@@ -6,7 +6,7 @@
     <% @user.restaurants.each do |restaurant| %>
       <div class="row">
         <div class="col-xs-12 col-sm-4 col-sm-offset-1">
-          <%= render 'users/user_restaurant_card', restaurant: restaurant %>
+          <%= render 'users/restaurant_card', restaurant: restaurant %>
         </div>
       </div>
     <% end %>

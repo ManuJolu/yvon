@@ -1,5 +1,5 @@
 <div class="results">
-  <div class="card" style="background-image: linear-gradient(rgba(41,44,60,0.6) 0%, rgba(80,78,100,0.5) 50%), url(<%= cl_image_path restaurant.photo.path, height: 400, width: 700, crop: :fill %>);">
+  <div class="card" style="background-image: linear-gradient(rgba(41,44,60,0.6) 0%, rgba(80,78,100,0.5) 50%), url(<%= cl_image_path restaurant.photo.path, height: 300, width: 400, crop: :fill %>);">
     <div class="card-category">
       <h2><%= restaurant.name %></h2>
     </div>
@@ -9,7 +9,7 @@
     </div>
     <% avatar_url = restaurant.user.facebook_picture_url || "http://placehold.it/30x30"  %>
     <%= image_tag avatar_url, class: 'card-user avatar' %>
-    <%= link_to restaurant.name, restaurant, class: 'card-link' %>
+    <%= link_to '', restaurant_meals_path(restaurant), class: 'card-link' %>
   </div>
 </div>
 
