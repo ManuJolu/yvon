@@ -3,7 +3,8 @@ class RestaurantsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index ]
 
   def index
-    @restaurants = Restaurant.where.not(latitude: nil, longitude: nil)
+
+    @restaurants = policy_scope(Restaurant).where.not(latitude: nil, longitude: nil)
 
     @hash = Gmaps4rails.build_markers(@restaurants) do |restaurant, marker|
       marker.lat restaurant.latitude
@@ -18,14 +19,12 @@ class RestaurantsController < ApplicationController
 
   def new
     @restaurant = Restaurant.new
+    authorize @restaurant
   end
 
   def create
     @restaurant = current_user.restaurants.new(restaurant_params)
-    # pundit approval
-    # authorize @restaurant
-    # @restaurant = Restaurant.new(restaurant_params)
-    # @restaurant.user = current_user
+    authorize @restaurant
     if @restaurant.save
       respond_to do |format|
         format.html { redirect_to @restaurant }
@@ -67,6 +66,7 @@ class RestaurantsController < ApplicationController
 
   def set_restaurant
     @restaurant = Restaurant.find(params[:id])
+    authorize @restaurant
   end
 
   def restaurant_params

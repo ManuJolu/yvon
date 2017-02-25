@@ -34,12 +34,10 @@ class User < ApplicationRecord
       end
     end
 
-
     return user
   end
 
   def current_order
     orders.last if orders.last.paid_at.nil?
   end
-
 end
