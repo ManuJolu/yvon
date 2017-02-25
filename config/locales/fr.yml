@@ -1,7 +1,7 @@
 fr:
   layouts:
     application:
-      title: "Yvon - Ne faites plus la queue"
+      title: "Yvon - Ne fais plus la queue"
   shared:
     navbar:
       sign_in: "Connexion"
@@ -9,10 +9,11 @@ fr:
       profile: "Profil"
       restaurants: "Restaurants"
   pages:
+    messenger_button:
+      call_to_action: "Je commande avec Yvon"
     home:
-      slogan: "Ne perdez plus votre temps à faire la queue"
-      tagline: "Laissez Yvon commander votre déjeuner et allez le récupérer quand il est prêt"
-      call_to_action: "Commandez avec Yvon"
+      slogan: "Ne perds plus ton temps à faire la queue"
+      tagline: "Laisse Yvon commander ton déjeuner et vas le récupérer quand il est prêt"
       avant:
         tit1: "Simple d’utilisation"
         det1: "Pas d'application à installer, pas de compte à créer, commandez avec Yvon comme vous discutez avec un ami"
