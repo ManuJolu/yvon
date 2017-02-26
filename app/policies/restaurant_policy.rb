@@ -1,23 +1,27 @@
 class RestaurantPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.where(user: user)
+      scope
     end
   end
 
   def show?
-    true  # Anyone can view a restaurant
+    true
   end
 
   def create?
-    true  # Anyone can create a restaurant
+    true
+  end
+
+  def edit?
+    record.user == user || user.admin
   end
 
   def update?
-    record.user == user  # Only restaurant creator can update it
+    record.user == user || user.admin
   end
 
   def duty?
-    record.user == user  # Only restaurant creator can update it
+    record.user == user || user.admin
   end
 end
