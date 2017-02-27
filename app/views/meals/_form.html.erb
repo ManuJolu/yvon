@@ -1,6 +1,6 @@
 <%= simple_form_for [restaurant, meal], remote: true do |f| %>
   <%= f.association :meal_category, collection: meal.restaurant.meal_categories %>
-  <%= f.input :name, label: "Meal name", error: "Meal name is mandatory, please specify one" %>
+  <%= f.input :name %>
   <%= f.input :description %>
 
   <h4>Options</h4>

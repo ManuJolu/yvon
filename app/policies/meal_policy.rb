@@ -6,14 +6,14 @@ class MealPolicy < ApplicationPolicy
   end
 
   def edit?
-    record.restaurant_user == user || user.admin
+    record.restaurant.user == user || user.admin
   end
 
   def update?
-    record.restaurant_user == user || user.admin
+    record.restaurant.user == user || user.admin
   end
 
   def destroy?
-    record.restaurant_user == user || user.admin
+    record.restaurant.user == user || user.admin
   end
 end
