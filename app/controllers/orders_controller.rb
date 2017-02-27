@@ -64,6 +64,7 @@ class OrdersController < ApplicationController
 
   def refresh
     restaurant = Restaurant.find(params[:id])
+    authorize restaurant, :edit?
     @orders = restaurant.orders.at_today
     @delivered = (params[:order_status] == 'delivered' ? true : false)
     respond_to do |format|
