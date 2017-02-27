@@ -1,6 +1,6 @@
-class RestaurantController
+class YvonBot::RestaurantsController
   def initialize
-    @view = RestaurantView.new
+    @view = YvonBot::RestaurantsView.new
   end
 
   def index(message, coordinates)

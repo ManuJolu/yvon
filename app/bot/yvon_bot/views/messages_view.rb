@@ -1,4 +1,4 @@
-class MessageView
+class YvonBot::MessagesView
   def hello(message, user)
     message.reply(
       text: I18n.t('bot.hello', username: user.first_name.capitalize),

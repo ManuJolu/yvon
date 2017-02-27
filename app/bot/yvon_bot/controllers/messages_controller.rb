@@ -1,6 +1,6 @@
-class MessageController
+class YvonBot::MessagesController
   def initialize
-    @view = MessageView.new
+    @view = YvonBot::MessagesView.new
   end
 
   def hello(message, user)

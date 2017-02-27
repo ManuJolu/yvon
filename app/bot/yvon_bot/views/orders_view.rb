@@ -1,4 +1,4 @@
-class OrderView
+class YvonBot::OrdersView
   def no_meals(postback)
     postback.reply(
       text: I18n.t('bot.order.no_meals')
@@ -134,7 +134,7 @@ class OrderView
       message: {
         text: I18n.t('bot.order.notify_ready', user_first_name: order.user.first_name,restaurant_name: order.restaurant.name)
       }},
-      access_token: ENV['ACCESS_TOKEN']
+      access_token: ENV['YVON_ACCESS_TOKEN']
     )
   end
 
@@ -146,7 +146,7 @@ class OrderView
       message: {
         text: I18n.t('bot.order.notify_delivered', user_first_name: order.user.first_name,restaurant_name: order.restaurant.name)
       }},
-      access_token: ENV['ACCESS_TOKEN']
+      access_token: ENV['YVON_ACCESS_TOKEN']
     )
   end
 end
