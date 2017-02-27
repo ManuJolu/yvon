@@ -1,4 +1,8 @@
-class AlineRouter
+class BotAline::Router
+  def initialize(user)
+    @user = user
+  end
+
   def handle_message(message)
     # Handle user authentification
     # user = @user_controller.match_user(message)

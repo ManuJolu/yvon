@@ -1,4 +1,4 @@
-class YvonBot::OrdersView
+class BotYvon::OrdersView
   def no_meals(postback)
     postback.reply(
       text: I18n.t('bot.order.no_meals')

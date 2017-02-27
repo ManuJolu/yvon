@@ -1,6 +1,6 @@
-class YvonBot::OrdersController
+class BotYvon::OrdersController
   def initialize
-    @view = YvonBot::OrdersView.new
+    @view = BotYvon::OrdersView.new
   end
 
   def create(message, user, params = {})

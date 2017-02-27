@@ -1,6 +1,6 @@
-class YvonBot::MealsController
+class BotYvon::MealsController
   def initialize
-    @view = YvonBot::MealsView.new
+    @view = BotYvon::MealsView.new
   end
 
   def index(postback, params = {})

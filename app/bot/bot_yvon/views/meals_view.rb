@@ -1,4 +1,4 @@
-class YvonBot::MealsView
+class BotYvon::MealsView
   def index(postback, meals, params = {})
     current_meal_category = params[:current_meal_category]
     next_meal_category = params[:next_meal_category]
