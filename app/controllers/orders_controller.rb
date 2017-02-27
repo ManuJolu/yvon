@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     elsif order_params[:ready_at]
       @order.ready_at = DateTime.now
       if @order.save
-        OrderView.new.notify_ready(@order) if Rails.env.production?
+        YvonBot::OrdersView.new.notify_ready(@order) if Rails.env.production?
         respond_to do |format|
           format.html { redirect_to @orders }
           format.js {
@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
     elsif order_params[:delivered_at]
       @order.update(delivered_at: Time.now)
       if @order.save
-        OrderView.new.notify_delivered(@order) if Rails.env.production?
+        YvonBot::OrdersView.new.notify_delivered(@order) if Rails.env.production?
         respond_to do |format|
           format.html { redirect_to @orders }
           format.js {
