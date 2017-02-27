@@ -1,16 +1,17 @@
 namespace :fbm do
   desc "Welcome"
-  task :welcome do
+  task :yvon_welcome do
     Facebook::Messenger::Thread.set({
       setting_type: 'greeting',
       greeting: {
         text: "Salut {{user_first_name}}, je m'appelle Yvon.\nNe perds plus ton temps à faire la queue.\nCommande ton repas avec moi !\nDit 'Hello' à tout moment pour trouver des restaurants autour de toi."
       },
-    }, access_token: ENV['ACCESS_TOKEN'])
+    }, access_token: ENV['YVON_ACCESS_TOKEN'])
+    puts "Yvon welcome message set."
   end
 
   desc "Hello"
-  task :start do
+  task :yvon_start do
     Facebook::Messenger::Thread.set({
       setting_type: 'call_to_actions',
       thread_state: 'new_thread',
@@ -19,11 +20,12 @@ namespace :fbm do
           payload: 'start'
         }
       ]
-    }, access_token: ENV['ACCESS_TOKEN'])
+    }, access_token: ENV['YVON_ACCESS_TOKEN'])
+    puts "Yvon start call to action set."
   end
 
   desc "Persistant menu"
-  task :persistant do
+  task :yvon_persistant do
     Facebook::Messenger::Thread.set({
       setting_type: 'call_to_actions',
       thread_state: 'existing_thread',
@@ -44,6 +46,7 @@ namespace :fbm do
           url: 'http://www.hello-yvon.com'
         }
       ]
-    }, access_token: ENV['ACCESS_TOKEN'])
+    }, access_token: ENV['YVON_ACCESS_TOKEN'])
+    puts "Yvon persistant menu set."
   end
 end
