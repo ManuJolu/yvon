@@ -2,7 +2,7 @@ class Meal < ApplicationRecord
   belongs_to :restaurant, required: true
   belongs_to :meal_category
   has_many :meal_options, dependent: :destroy
-  has_many :options, through: :meal_options
+  has_many :options, -> { order(position: :asc) }, through: :meal_options
   has_many :order_elements, as: :element, dependent: :restrict_with_exception
 
   validates :name, presence: true

@@ -5,7 +5,23 @@ class RestaurantPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
+
   def create?
-    return true
+    true
+  end
+
+  def edit?
+    record.user == user || user.admin
+  end
+
+  def update?
+    record.user == user || user.admin
+  end
+
+  def duty?
+    record.user == user || user.admin
   end
 end

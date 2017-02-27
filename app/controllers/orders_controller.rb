@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_restaurant, only: [:index]
 
   def index
-    @orders = @restaurant.orders.at_today
+    @orders = policy_scope(@restaurant.orders).at_today
   end
 
   def update
@@ -71,16 +71,16 @@ class OrdersController < ApplicationController
     end
   end
 
-
-
   private
 
   def set_order
     @order = Order.find(params[:id])
+    authorize @order
   end
 
   def set_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
+    authorize @restaurant, :edit?
   end
 
   def order_params

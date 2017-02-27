@@ -3,7 +3,7 @@ class MealsController < ApplicationController
   before_action :set_restaurant, only: [:index, :new, :create]
 
   def index
-    @meals = @restaurant.meals.order(:position)
+    @meals = policy_scope(@restaurant.meals).order(:position)
   end
 
   def new
@@ -70,10 +70,12 @@ end
 
   def set_meal
     @meal = Meal.find(params[:id])
+    authorize @meal
   end
 
   def set_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
+    authorize @restaurant, :edit?
   end
 
   def meal_params
