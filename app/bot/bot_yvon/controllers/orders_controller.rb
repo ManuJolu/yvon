@@ -51,6 +51,7 @@ class BotYvon::OrdersController
         order.preparation_time = order.restaurant.preparation_time
         order.paid_at = Time.now
         order.save
+        BotAline::NotificationsController.new.notify_order(order)
         ActionCable.server.broadcast "restaurant_#{order.restaurant.id}",
           order_status: "paid"
         @view.confirm(postback, order.decorate, paid_at: order.paid_at.to_i, program: 'beta')
