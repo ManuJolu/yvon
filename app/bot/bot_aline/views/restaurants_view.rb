@@ -4,6 +4,12 @@ class BotAline::RestaurantsView
     @user = user
   end
 
+  def logged_in(restaurant)
+    message.reply(
+      text: "Tu es connecté au #{restaurant.name}, tu vas recevoir les commandes.",
+    )
+  end
+
   def index(coordinates, restaurants)
     colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
 
@@ -30,7 +36,7 @@ class BotAline::RestaurantsView
         buttons: [
           {
             type: 'postback',
-            title: I18n.t('bot.restaurant.index.enter'),
+            title: "Connexion",
             payload: "restaurant_#{restaurant.id}"
           }
         ]
@@ -56,38 +62,41 @@ class BotAline::RestaurantsView
     )
   end
 
-  def login(restaurant)
+  def duty(restaurant)
+    if restaurant.on_duty?
+      text = "Service OUVERT"
+      buttons = [{ type: 'postback', title: 'Fermer', payload: "restaurant_#{restaurant.id}_duty_off" }]
+    else
+      text = "Service FERMÉ"
+      buttons = [{ type: 'postback', title: 'Ouvrir', payload: "restaurant_#{restaurant.id}_duty_on" }]
+    end
+
     message.reply(
-      text: "Tu vas recevoir les commandes",
-      quick_replies: [
-        {
-          content_type: 'text',
-          title: 'Commandes en cours',
-          payload: 'pending_orders'
-        },
-        {
-          content_type: 'text',
-          title: 'Service on/off',
-          payload: 'duty'
-        },
-        {
-          content_type: 'text',
-          title: 'Temps de préparation',
-          payload: 'preparation_time'
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: text,
+          buttons: buttons
         }
-      ]
+      }
     )
   end
 
-  def logout(logout_user, restaurant, user)
-    Facebook::Messenger::Bot.deliver({
-      recipient: {
-        id: user.messenger_aline_id
-      },
-      message: {
-        text: "#{logout_user.first_name}, you have been disconnected from #{restaurant.name} by #{user.decorate.name}"
-      }},
-      access_token: ENV['ALINE_ACCESS_TOKEN']
+  def preparation_time(restaurant)
+    text = "#{restaurant.preparation_time} min\nSélectionne pour modifier :"
+    preparation_times = ((restaurant.preparation_time - 5...restaurant.preparation_time + 6).to_a - [restaurant.preparation_time])
+    quick_replies = preparation_times.map do |preparation_time|
+      {
+        content_type: 'text',
+        title: "#{preparation_time}",
+        payload: "restaurant_#{restaurant.id}_preparation_time_#{preparation_time}"
+      }
+    end
+
+    message.reply(
+      text: text,
+      quick_replies: quick_replies
     )
   end
 

@@ -1,10 +1,16 @@
 class BotAline::OrdersController
   def initialize(message, user)
+    @user = user
     @view = BotAline::OrdersView.new(message, user)
   end
 
   def index
-    orders = user.restaurant
+    orders = user.messenger_restaurant.orders.at_today.pending.reverse_order
+    if orders.any?
+      view.index(orders.decorate)
+    else
+      view.no_order(user.messenger_restaurant)
+    end
   end
 
   def update(order_id, action)
@@ -32,5 +38,5 @@ class BotAline::OrdersController
 
   private
 
-  attr_reader :view
+  attr_reader :user, :view
 end

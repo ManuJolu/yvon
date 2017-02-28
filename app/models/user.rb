@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :restaurants
   has_many :ordered_meals, through: :orders
+  has_one :messenger_restaurant, class_name: 'Restaurant', foreign_key: :messenger_user_id
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.to_h.slice(:provider, :uid)

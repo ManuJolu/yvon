@@ -4,8 +4,13 @@ class BotAline::NotificationsController
   end
 
   def notify_order(order)
-    user_messenger_id = order.restaurant.messenger_user&.messenger_aline_id
-    view.notify_order(order.decorate, user_messenger_id) if user_messenger_id
+    user = order.restaurant.messenger_user
+    view.notify_order(order.decorate, user) if user
+  end
+
+  def logged_out(restaurant, user)
+    logged_out_user = restaurant.messenger_user
+    view.logged_out(logged_out_user, restaurant, user)
   end
 
   private

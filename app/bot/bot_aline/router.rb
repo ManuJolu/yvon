@@ -30,6 +30,14 @@ class BotAline::Router
     when /hello/i
       messages_controller.hello
     end
+
+    case message.quick_reply
+    when /\Arestaurant_(?<id>\d+)_preparation_time_(?<preparation_time>\d+)\z/
+      restaurant_id = $LAST_MATCH_INFO['id'].to_i
+      preparation_time = $LAST_MATCH_INFO['preparation_time'].to_i
+      restaurants_controller.update_preparation_time(restaurant_id, preparation_time)
+    end
+
   end
 
   def handle_postback
@@ -39,7 +47,16 @@ class BotAline::Router
     when /\Arestaurant_(?<id>\d+)\z/
       restaurant_id = $LAST_MATCH_INFO['id'].to_i
       restaurants_controller.login(restaurant_id)
+    when 'duty'
+      restaurants_controller.duty
+    when /\Arestaurant_(?<id>\d+)_duty_(?<duty>\D+)\z/
+      restaurant_id = $LAST_MATCH_INFO['id'].to_i
+      duty = $LAST_MATCH_INFO['duty']
+      restaurants_controller.update_duty(restaurant_id, duty)
+    when 'preparation_time'
+      restaurants_controller.preparation_time
     when 'orders'
+      #verify that user has messenger_restaurant
       orders_controller.index
     when /\Aorder_(?<id>\d+)_(?<action>\D+)\z/
       order_id = $LAST_MATCH_INFO['id'].to_i

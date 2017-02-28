@@ -1,14 +1,14 @@
 class BotAline::NotificationsView
-  def notify_order(order, user_messenger_id)
+  def notify_order(order, user)
     order_array = ["Commande de #{order.user.name} :"]
     order_array << order.ordered_meals.map { |ordered_meal| ordered_meal }
-    order_array << "Prix : #{order.price} - paiement au comptoir"
-    order_array << "Prêt avant #{order.ready_at_limit}."
+    order_array << "Paiement au comptoir : #{order.price}"
+    order_array << "Prêt : max #{order.ready_at_limit}"
 
     Bot.deliver(
       {
         recipient: {
-          id: user_messenger_id
+          id: user.messenger_aline_id
         },
         message: {
           attachment: {
@@ -27,4 +27,20 @@ class BotAline::NotificationsView
       access_token: ENV['ALINE_ACCESS_TOKEN']
     )
   end
+
+  def logged_out(logged_out_user, restaurant, user)
+    Bot.deliver(
+      {
+        recipient: {
+          id: logged_out_user.messenger_aline_id
+        },
+        message: {
+          text: "#{logged_out_user.first_name}, tu as été déconnecté de #{restaurant.name} par #{user.decorate.name}"
+        }
+      },
+      access_token: ENV['ALINE_ACCESS_TOKEN']
+    )
+  end
+
+
 end

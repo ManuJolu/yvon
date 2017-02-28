@@ -6,7 +6,7 @@ class BotAline::MessagesView
 
   def hello
     message.reply(
-      text: I18n.t('bot.hello', username: user.first_name.capitalize),
+      text: "Salut #{user.first_name.capitalize}, où se situe ton restaurant ?",
       quick_replies: [
         {
           content_type: 'location'
@@ -17,7 +17,7 @@ class BotAline::MessagesView
 
   def no_restaurant
     message.reply(
-      text: I18n.t('bot.no_restaurant'),
+      text: "Je ne le trouve pas, es-tu sûr de m'avoir indiqué le bon endroit ?",
       quick_replies: [
         {
           content_type: 'location'
