@@ -7,9 +7,9 @@ Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
   case message.recipient['id']
   when ENV['YVON_PAGE_ID']
-    YvonRouter.new.handle_message(message)
+    BotYvon::Router.new(message)
   when ENV['ALINE_PAGE_ID']
-    AlineRouter.new.handle_message(message)
+    BotAline::Router.new(message)
   end
 end
 
@@ -17,9 +17,9 @@ Bot.on :postback do |postback|
   puts "Received '#{postback.inspect}' from #{postback.sender}"
   case postback.recipient['id']
   when ENV['YVON_PAGE_ID']
-    YvonRouter.new.handle_postback(postback)
+    BotYvon::Router.new(postback)
   when ENV['ALINE_PAGE_ID']
-    AlineRouter.new.handle_postback(postback)
+    BotAline::Router.new(postback)
   end
 end
 

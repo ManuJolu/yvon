@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220162443) do
+ActiveRecord::Schema.define(version: 20170228104301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,8 @@ ActiveRecord::Schema.define(version: 20170220162443) do
     t.integer  "restaurant_category_id"
     t.string   "slogan"
     t.integer  "mode",                   default: 0
+    t.integer  "messenger_user_id"
+    t.index ["messenger_user_id"], name: "index_restaurants_on_messenger_user_id", using: :btree
     t.index ["restaurant_category_id"], name: "index_restaurants_on_restaurant_category_id", using: :btree
     t.index ["user_id"], name: "index_restaurants_on_user_id", using: :btree
   end
@@ -187,6 +189,7 @@ ActiveRecord::Schema.define(version: 20170220162443) do
     t.datetime "token_expiry"
     t.string   "facebook_picture_check"
     t.boolean  "admin",                  default: false, null: false
+    t.string   "messenger_aline_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -208,4 +211,5 @@ ActiveRecord::Schema.define(version: 20170220162443) do
   add_foreign_key "orders", "users"
   add_foreign_key "restaurants", "restaurant_categories"
   add_foreign_key "restaurants", "users"
+  add_foreign_key "restaurants", "users", column: "messenger_user_id"
 end

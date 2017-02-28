@@ -1,4 +1,4 @@
-class YvonBot::RestaurantsView
+class BotYvon::RestaurantsView
   def index(message, coordinates, restaurants)
     colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
     url_array = [

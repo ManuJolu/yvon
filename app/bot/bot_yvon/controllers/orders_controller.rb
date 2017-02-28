@@ -1,6 +1,6 @@
-class YvonBot::OrdersController
+class BotYvon::OrdersController
   def initialize
-    @view = YvonBot::OrdersView.new
+    @view = BotYvon::OrdersView.new
   end
 
   def create(message, user, params = {})
@@ -51,6 +51,7 @@ class YvonBot::OrdersController
         order.preparation_time = order.restaurant.preparation_time
         order.paid_at = Time.now
         order.save
+        BotAline::NotificationsController.new.notify_order(order)
         ActionCable.server.broadcast "restaurant_#{order.restaurant.id}",
           order_status: "paid"
         @view.confirm(postback, order.decorate, paid_at: order.paid_at.to_i, program: 'beta')
