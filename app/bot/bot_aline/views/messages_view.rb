@@ -26,6 +26,16 @@ class BotAline::MessagesView
     )
   end
 
+  def no_restaurant_connected
+    message.reply(
+      text: "Tu n'es pas encore connecté, où se situe ton restaurant ?",
+      quick_replies: [
+        {
+          content_type: 'location'
+        }
+      ]
+    )
+  end
 
   private
 

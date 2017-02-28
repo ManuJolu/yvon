@@ -7,8 +7,10 @@ class BotAline::RestaurantsController
 
   def login(restaurant_id)
     restaurant = Restaurant.find(restaurant_id)
+    user.messenger_restaurant&.update(messenger_user: nil) # strange to have to do this, need to investigate on has_one
     BotAline::NotificationsController.new.logged_out(restaurant, user) if restaurant.messenger_user
     restaurant.update(messenger_user: user)
+    user.reload
     view.logged_in(restaurant)
     BotAline::OrdersController.new(message, user).index
   end

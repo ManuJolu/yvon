@@ -11,6 +11,10 @@ class BotAline::MessagesController
     view.no_restaurant
   end
 
+  def no_restaurant_connected
+    view.no_restaurant_connected
+  end
+
   private
 
   attr_reader :view

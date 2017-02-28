@@ -47,21 +47,28 @@ class BotAline::Router
     when /\Arestaurant_(?<id>\d+)\z/
       restaurant_id = $LAST_MATCH_INFO['id'].to_i
       restaurants_controller.login(restaurant_id)
-    when 'duty'
-      restaurants_controller.duty
-    when /\Arestaurant_(?<id>\d+)_duty_(?<duty>\D+)\z/
-      restaurant_id = $LAST_MATCH_INFO['id'].to_i
-      duty = $LAST_MATCH_INFO['duty']
-      restaurants_controller.update_duty(restaurant_id, duty)
-    when 'preparation_time'
-      restaurants_controller.preparation_time
-    when 'orders'
-      #verify that user has messenger_restaurant
-      orders_controller.index
-    when /\Aorder_(?<id>\d+)_(?<action>\D+)\z/
-      order_id = $LAST_MATCH_INFO['id'].to_i
-      action = $LAST_MATCH_INFO['action']
-      orders_controller.update(order_id, action)
+    end
+
+    if user.messenger_restaurant
+      case postback.payload
+      when 'duty'
+        restaurants_controller.duty
+      when /\Arestaurant_(?<id>\d+)_duty_(?<duty>\D+)\z/
+        restaurant_id = $LAST_MATCH_INFO['id'].to_i
+        duty = $LAST_MATCH_INFO['duty']
+        restaurants_controller.update_duty(restaurant_id, duty)
+      when 'preparation_time'
+        restaurants_controller.preparation_time
+      when 'orders'
+        #verify that user has messenger_restaurant
+        orders_controller.index
+      when /\Aorder_(?<id>\d+)_(?<action>\D+)\z/
+        order_id = $LAST_MATCH_INFO['id'].to_i
+        action = $LAST_MATCH_INFO['action']
+        orders_controller.update(order_id, action)
+      end
+    else
+      messages_controller.no_restaurant_connected
     end
   end
 end
