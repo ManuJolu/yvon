@@ -2,7 +2,7 @@ class BotAline::NotificationsView
   def notify_order(order, user_messenger_id)
     order_array = ["Commande de #{order.user.name} :"]
     order_array << order.ordered_meals.map { |ordered_meal| ordered_meal }
-    order_array << "Prix : #{order.price} - non payé"
+    order_array << "Prix : #{order.price} - paiement au comptoir"
     order_array << "Prêt avant #{order.ready_at_limit}."
 
     Bot.deliver(
@@ -17,9 +17,8 @@ class BotAline::NotificationsView
               template_type: 'button',
               text: order_array.join("\n"),
               buttons: [
-                { type: 'postback', title: 'OK', payload: 'handled' },
-                { type: 'postback', title: 'Prêt', payload: 'ready' },
-                { type: 'postback', title: 'Livré', payload: 'delivered' }
+                { type: 'postback', title: 'Prêt', payload: "order_#{order.id}_ready" },
+                { type: 'postback', title: 'Livré', payload: "order_#{order.id}_delivered" }
               ]
             }
           }

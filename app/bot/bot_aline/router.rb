@@ -29,10 +29,6 @@ class BotAline::Router
     case message.text
     when /hello/i
       messages_controller.hello
-    else
-      message.reply(
-        text: "Aline asking: Did you say '#{message.text}'?"
-      )
     end
   end
 
@@ -43,6 +39,12 @@ class BotAline::Router
     when /\Arestaurant_(?<id>\d+)\z/
       restaurant_id = $LAST_MATCH_INFO['id'].to_i
       restaurants_controller.login(restaurant_id)
+    when 'orders'
+      orders_controller.index
+    when /\Aorder_(?<id>\d+)_(?<action>\D+)\z/
+      order_id = $LAST_MATCH_INFO['id'].to_i
+      action = $LAST_MATCH_INFO['action']
+      orders_controller.update(order_id, action)
     end
   end
 end
