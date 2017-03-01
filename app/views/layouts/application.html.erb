@@ -2,6 +2,7 @@
 <html>
   <head>
     <title><%= yield_with_default(holder: :title, default: t('.title')) %></title>
+    <%= render 'application/favicon' %>
 
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => 'reload' %>
     <%= favicon_link_tag 'y.jpg' %>
