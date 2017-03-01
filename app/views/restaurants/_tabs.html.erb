@@ -9,8 +9,8 @@
     <% configure_path = "#" %>
     <% edit_path = "#" %>
   <% else %>
-    <% configure_path = restaurant_path(restaurant, tab: 'configure') %>
-    <% edit_path = restaurant_path(restaurant, tab: 'edit') %>
+    <% configure_path = edit_restaurant_path(restaurant, tab: 'configure') %>
+    <% edit_path = edit_restaurant_path(restaurant, tab: 'edit') %>
   <% end %>
   <%= link_to t(".configure"), configure_path, class: "tab#{ ' active' if @active == 'configure'}", data: {target: '#configureRestaurant'} %>
   <%= link_to t(".edit"), edit_path, class: "tab#{ ' active' if @active == 'edit'}", data: {target: '#editRestaurant'} %>

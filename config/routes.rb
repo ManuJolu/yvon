@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     root to: 'pages#home'
     get '/privacy', to: 'pages#privacy_policy'
     resources :users, only: [:show]
-    resources :restaurants, only: [:index, :show, :new, :create, :edit, :update] do
+    resources :restaurants, only: [:index, :new, :create, :edit, :update] do
       member do
           get '/orders/refresh/:order_status' => 'orders#refresh'
         patch '/duty/:state' => "restaurants#duty"

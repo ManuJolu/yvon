@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update, :duty]
+  before_action :set_restaurant, only: [:edit, :update, :duty]
   skip_before_action :authenticate_user!, only: [ :index ]
 
   def index
@@ -11,10 +11,6 @@ class RestaurantsController < ApplicationController
       marker.lng restaurant.longitude
       # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
-  end
-
-  def show
-    @active = params[:tab] || 'configure'
   end
 
   def new
@@ -39,6 +35,7 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
+    @active = params[:tab] || 'configure'
   end
 
   def update
