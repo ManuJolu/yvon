@@ -28,18 +28,18 @@ class OrderDecorator < Draper::Decorator
   end
 
   def paid_at
-    object.paid_at&.strftime('%-H:%M:%S')
+    object.paid_at&.strftime('%H:%M:%S')
   end
 
   def ready_at_limit
-    (object.paid_at.try(:+, object.preparation_time.minutes))&.strftime('%-H:%M:%S')
+    (object.paid_at.try(:+, object.preparation_time.minutes))&.strftime('%H:%M:%S')
   end
 
   def ready_at
-    object.ready_at&.strftime('%-H:%M:%S')
+    object.ready_at&.strftime('%H:%M:%S')
   end
 
   def delivered_at
-    object.delivered_at&.strftime('%-H:%M:%S')
+    object.delivered_at&.strftime('%H:%M:%S')
   end
 end

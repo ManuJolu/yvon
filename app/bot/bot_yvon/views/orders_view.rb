@@ -106,7 +106,7 @@ class BotYvon::OrdersView
 
 
     postback.reply(
-      text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (Time.now + order.preparation_time.minutes).strftime('%-H:%M'))
+      text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (Time.now + order.preparation_time.minutes).strftime('%H:%M'))
     )
 
     postback.reply(
