@@ -89,7 +89,7 @@ class BotAline::RestaurantsView
     quick_replies = preparation_times.map do |preparation_time|
       {
         content_type: 'text',
-        title: "#{preparation_time}",
+        title: "#{preparation_time} min",
         payload: "restaurant_#{restaurant.id}_preparation_time_#{preparation_time}"
       }
     end
