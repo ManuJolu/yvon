@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:edit, :update, :refresh, :duty, :preparation_time_update]
+  before_action :set_restaurant, only: [:edit, :update, :duty_update, :preparation_time_update, :refresh]
   skip_before_action :authenticate_user!, only: [ :index ]
 
   def index
@@ -57,16 +57,10 @@ class RestaurantsController < ApplicationController
     end
   end
 
-  def refresh
-    @update = params[:update]
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def duty
+  def duty_update
     @restaurant.on_duty = (params[:state] == "on" ? true : false)
     if @restaurant.save
+      BotAline::NotificationsController.new.notify_duty(@restaurant)
       ActionCable.server.broadcast "restaurant_#{@restaurant.id}",
         update: "duty"
     end
@@ -75,6 +69,7 @@ class RestaurantsController < ApplicationController
   def preparation_time_update
     @restaurant.update(restaurant_params)
     if @restaurant.save
+      BotAline::NotificationsController.new.notify_preparation_time(@restaurant)
       respond_to do |format|
         format.html { redirect_to restaurant_orders_path(@restaurant) }
         format.js {
@@ -82,6 +77,13 @@ class RestaurantsController < ApplicationController
             update: "preparation_time"
         }
       end
+    end
+  end
+
+  def refresh
+    @update = params[:update]
+    respond_to do |format|
+      format.js
     end
   end
 

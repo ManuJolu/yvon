@@ -25,7 +25,7 @@ class RestaurantPolicy < ApplicationPolicy
     edit?
   end
 
-  def duty?
+  def duty_update?
     edit?
   end
 

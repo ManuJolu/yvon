@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     $.ajax({
       method: "patch",
-      url: '/restaurants/'+ restaurantId + '/duty/' + onDuty
+      url: '/restaurants/'+ restaurantId + '/duty_update/' + onDuty
     });
   });
 });
