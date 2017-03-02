@@ -65,7 +65,10 @@ class RestaurantsController < ApplicationController
 
   def duty
     @restaurant.on_duty = (params[:state] == "on" ? true : false)
-    @restaurant.save
+    if @restaurant.save
+      ActionCable.server.broadcast "restaurant_#{@restaurant.id}",
+        action: "refresh"
+    end
   end
 
   private
