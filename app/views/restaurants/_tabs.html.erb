@@ -2,7 +2,7 @@
   <% @restaurant.name %>
 <% end %>
 
-<div class="tabs">
+<div class="tabs" id="restaurantTabs">
   <%= link_to t('.meals'), restaurant_meals_path(restaurant), class: "tab#{ ' active' if active == 'meals'}" %>
   <%= link_to t('.orders'), restaurant_orders_path(restaurant), class: "tab#{ ' active' if active == 'orders'}" %>
   <% if controller_name == 'restaurants' %>

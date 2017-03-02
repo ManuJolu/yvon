@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:edit, :update, :duty]
+  before_action :set_restaurant, only: [:edit, :update, :duty, :refresh]
   skip_before_action :authenticate_user!, only: [ :index ]
 
   def index
@@ -43,7 +43,10 @@ class RestaurantsController < ApplicationController
     if @restaurant.save
       respond_to do |format|
         format.html { redirect_to @restaurant }
-        format.js
+        format.js {
+          ActionCable.server.broadcast "restaurant_#{@restaurant.id}",
+            action: "refresh"
+        }
       end
     else
       @new_meal = @restaurant.meals.new
@@ -51,6 +54,12 @@ class RestaurantsController < ApplicationController
         format.html { render :show }
         format.js
       end
+    end
+  end
+
+  def refresh
+    respond_to do |format|
+      format.js
     end
   end
 

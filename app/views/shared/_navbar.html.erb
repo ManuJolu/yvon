@@ -26,7 +26,7 @@
       <% if user_signed_in? %>
         <% if @restaurant %>
           <div class='navbar-wagon-item' id="restaurantPreparationTime">
-            <%= render 'restaurants/preparation_time_form' %>
+            <%= render 'restaurants/preparation_time_form', restaurant: @restaurant %>
           </div>
           <div class='navbar-wagon-item' id="restaurantDutyCheckbox">
             <%= render 'restaurants/duty_checkbox' %>
