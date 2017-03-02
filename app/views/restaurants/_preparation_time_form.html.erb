@@ -1,4 +1,4 @@
-<%= simple_form_for restaurant, remote: true, html: { class: 'form-inline' } do |f| %>
+<%= simple_form_for restaurant, url: preparation_time_update_restaurant_path(restaurant), remote: true, html: { class: 'form-inline' } do |f| %>
   <%= f.input :preparation_time, wrapper: :inline_input_group do %>
     <%= f.input_field :preparation_time, class: "form-control input-sm" %>
     <span class="input-group-addon input-sm">min</span>

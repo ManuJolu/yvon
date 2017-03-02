@@ -33,7 +33,7 @@ class BotAline::RestaurantsController
     restaurant.on_duty = (duty == 'on' ? true : false)
     restaurant.save
     ActionCable.server.broadcast "restaurant_#{restaurant.id}",
-      action: "refresh"
+      update: "duty"
   end
 
   def preparation_time
@@ -46,7 +46,7 @@ class BotAline::RestaurantsController
     restaurant.preparation_time = preparation_time
     restaurant.save
     ActionCable.server.broadcast "restaurant_#{restaurant.id}",
-      action: "refresh"
+      update: "preparation_time"
   end
 
   private

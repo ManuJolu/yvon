@@ -28,4 +28,8 @@ class RestaurantPolicy < ApplicationPolicy
   def duty?
     edit?
   end
+
+  def preparation_time_update?
+    edit?
+  end
 end

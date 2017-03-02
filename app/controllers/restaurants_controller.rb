@@ -1,16 +1,16 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:edit, :update, :duty, :refresh]
+  before_action :set_restaurant, only: [:edit, :update, :refresh, :duty, :preparation_time_update]
   skip_before_action :authenticate_user!, only: [ :index ]
 
   def index
 
     @restaurants = policy_scope(Restaurant).where.not(latitude: nil, longitude: nil)
 
-    @hash = Gmaps4rails.build_markers(@restaurants) do |restaurant, marker|
-      marker.lat restaurant.latitude
-      marker.lng restaurant.longitude
-      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
-    end
+    # @hash = Gmaps4rails.build_markers(@restaurants) do |restaurant, marker|
+    #   marker.lat restaurant.latitude
+    #   marker.lng restaurant.longitude
+    #   # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    # end
   end
 
   def new
@@ -42,10 +42,10 @@ class RestaurantsController < ApplicationController
     @restaurant.update(restaurant_params)
     if @restaurant.save
       respond_to do |format|
-        format.html { redirect_to @restaurant }
+        format.html { redirect_to restaurant_orders_path(@restaurant) }
         format.js {
           ActionCable.server.broadcast "restaurant_#{@restaurant.id}",
-            action: "refresh"
+            update: "restaurant"
         }
       end
     else
@@ -58,6 +58,7 @@ class RestaurantsController < ApplicationController
   end
 
   def refresh
+    @update = params[:update]
     respond_to do |format|
       format.js
     end
@@ -67,7 +68,20 @@ class RestaurantsController < ApplicationController
     @restaurant.on_duty = (params[:state] == "on" ? true : false)
     if @restaurant.save
       ActionCable.server.broadcast "restaurant_#{@restaurant.id}",
-        action: "refresh"
+        update: "duty"
+    end
+  end
+
+  def preparation_time_update
+    @restaurant.update(restaurant_params)
+    if @restaurant.save
+      respond_to do |format|
+        format.html { redirect_to restaurant_orders_path(@restaurant) }
+        format.js {
+          ActionCable.server.broadcast "restaurant_#{@restaurant.id}",
+            update: "preparation_time"
+        }
+      end
     end
   end
 

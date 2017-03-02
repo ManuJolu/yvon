@@ -1,4 +1,9 @@
-$('#editRestaurant').html("<%= j render 'restaurants/edit', restaurant: @restaurant  %>");
-$('#configureRestaurant').html("<%= j render 'restaurants/configure', restaurant: @restaurant %>");
-$('#restaurantPreparationTime').html("<%= j render 'restaurants/preparation_time_form', restaurant: @restaurant %>");
-$('#restaurantDutyCheckbox').html("<%= j render 'restaurants/duty_checkbox', restaurant: @restaurant %>");
+<% case @update %>
+<% when 'restaurant' %>
+  $('#editRestaurant').html("<%= j render 'restaurants/edit', restaurant: @restaurant  %>");
+  $('#configureRestaurant').html("<%= j render 'restaurants/configure', restaurant: @restaurant %>");
+<% when 'duty' %>
+  $('#restaurantDutyCheckbox').html("<%= j render 'restaurants/duty_checkbox', restaurant: @restaurant %>");
+<% when 'preparation_time' %>
+  $('#restaurantPreparationTime').html("<%= j render 'restaurants/preparation_time_form', restaurant: @restaurant %>");
+<% end %>
