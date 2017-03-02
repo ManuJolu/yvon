@@ -4,9 +4,42 @@ class BotAline::RestaurantsView
     @user = user
   end
 
+  def password(restaurant_id, params)
+    if params[:step] == 1
+      text = "Mot de passe :"
+      quick_replies = (0..9).map do |i|
+        {
+          content_type: 'text',
+          title: "i",
+          payload: "restaurant_#{restaurant.id}_password_#{i}"
+        }
+      end
+    else
+      text = "..."
+      quick_replies = (0..9).map do |i|
+        {
+          content_type: 'text',
+          title: "i",
+          payload: "restaurant_#{restaurant.id}_password_#{params[:p1]}#{i}"
+        }
+      end
+    end
+
+    message.reply(
+      text: text,
+      quick_replies: quick_replies
+    )
+  end
+
+  def wrong_password
+    message.reply(
+      text: "Identification échouée."
+    )
+  end
+
   def logged_in(restaurant)
     message.reply(
-      text: "Tu es connecté au #{restaurant.name}, tu vas recevoir les commandes.",
+      text: "Tu es connecté au #{restaurant.name}, tu vas recevoir les commandes."
     )
   end
 

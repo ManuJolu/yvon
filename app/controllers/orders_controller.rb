@@ -64,7 +64,7 @@ class OrdersController < ApplicationController
 
   def refresh
     restaurant = Restaurant.find(params[:id])
-    authorize restaurant, :edit?
+    authorize restaurant, :update?
     @orders = restaurant.orders.at_today
     @delivered = (params[:order_status] == 'delivered' ? true : false)
     respond_to do |format|
@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
 
   def set_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
-    authorize @restaurant, :edit?
+    authorize @restaurant, :update?
   end
 
   def order_params

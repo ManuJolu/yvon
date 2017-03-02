@@ -7,6 +7,8 @@
   <%= f.input :mode, collection: Restaurant.modes.map {|k, v| [t(".#{k}"), k]} %>
   <%= f.input :shift %>
   <%= f.input :facebook_url %>
+  <%= f.input :messenger_password %>
+  <%= f.input :messenger_password_confirmation %>
   <%= f.input :photo, as: :attachinary %>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

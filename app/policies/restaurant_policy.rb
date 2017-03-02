@@ -14,22 +14,22 @@ class RestaurantPolicy < ApplicationPolicy
   end
 
   def edit?
-    record.user == user || user.admin
+    update?
   end
 
   def update?
-    edit?
+    record.user == user || user.admin
   end
 
   def refresh?
-    edit?
+    update?
   end
 
   def duty_update?
-    edit?
+    update?
   end
 
   def preparation_time_update?
-    edit?
+    update?
   end
 end

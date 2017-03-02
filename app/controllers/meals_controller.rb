@@ -42,8 +42,7 @@ class MealsController < ApplicationController
   def update
     @restaurant = @meal.restaurant
     @meals = @restaurant.meals.order(:position)
-    @meal.update(meal_params)
-    if @meal.save
+    if @meal.update(meal_params)
       respond_to do |format|
         format.html { redirect_to @meal }
         format.js
@@ -75,7 +74,7 @@ end
 
   def set_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
-    authorize @restaurant, :edit?
+    authorize @restaurant, :update?
   end
 
   def meal_params

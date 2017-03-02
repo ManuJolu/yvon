@@ -32,6 +32,14 @@ class BotAline::Router
     end
 
     case message.quick_reply
+    when /\Arestaurant_(?<id>\d+)_password_(?<p1>\d)\z/
+      restaurant_id = $LAST_MATCH_INFO['id'].to_i
+      p1 = $LAST_MATCH_INFO['p1']
+      restaurants_controller.password(restaurant_id, step: 2, p1: p1)
+    when /\Arestaurant_(?<id>\d+)_password_(?<password>\d{2})\z/
+      restaurant_id = $LAST_MATCH_INFO['id'].to_i
+      password = $LAST_MATCH_INFO['password']
+      restaurants_controller.login(restaurant_id, password)
     when /\Arestaurant_(?<id>\d+)_preparation_time_(?<preparation_time>\d+)\z/
       restaurant_id = $LAST_MATCH_INFO['id'].to_i
       preparation_time = $LAST_MATCH_INFO['preparation_time'].to_i
@@ -46,7 +54,7 @@ class BotAline::Router
       messages_controller.hello
     when /\Arestaurant_(?<id>\d+)\z/
       restaurant_id = $LAST_MATCH_INFO['id'].to_i
-      restaurants_controller.login(restaurant_id)
+      restaurants_controller.password(restaurant_id, step: 1)
     end
 
     if user.messenger_restaurant

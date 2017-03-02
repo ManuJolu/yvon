@@ -39,8 +39,8 @@ class RestaurantsController < ApplicationController
   end
 
   def update
-    @restaurant.update(restaurant_params)
-    if @restaurant.save
+    if @restaurant.update(restaurant_params)
+      byebug
       respond_to do |format|
         format.html { redirect_to restaurant_orders_path(@restaurant) }
         format.js {
@@ -67,8 +67,7 @@ class RestaurantsController < ApplicationController
   end
 
   def preparation_time_update
-    @restaurant.update(restaurant_params)
-    if @restaurant.save
+    if @restaurant.update(restaurant_params)
       BotAline::NotificationsController.new.notify_preparation_time(@restaurant)
       respond_to do |format|
         format.html { redirect_to restaurant_orders_path(@restaurant) }
@@ -96,7 +95,7 @@ class RestaurantsController < ApplicationController
 
   def restaurant_params
     params.require(:restaurant).permit(
-      :name, :slogan, :user_id, :restaurant_category_id, :address, :on_duty, :shift, :photo, :description, :preparation_time, :facebook_url, :mode,
+      :name, :slogan, :user_id, :restaurant_category_id, :address, :on_duty, :shift, :photo, :description, :preparation_time, :facebook_url, :mode, :messenger_password,
       meal_categories_attributes: [:id, :name, :position, :timing, :_destroy],
       options_attributes: [:id, :name, :position, :_destroy],
       menus_attributes: [:id, :name, :price, :tax_rate, :position, :_destroy,

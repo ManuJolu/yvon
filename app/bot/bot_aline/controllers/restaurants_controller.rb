@@ -5,14 +5,22 @@ class BotAline::RestaurantsController
     @view = BotAline::RestaurantsView.new(message, user)
   end
 
-  def login(restaurant_id)
+  def password(restaurant_id, params = {})
+    view.password(restaurant_id, params)
+  end
+
+  def login(restaurant_id, password)
     restaurant = Restaurant.find(restaurant_id)
-    user.messenger_restaurant&.update(messenger_user: nil) # strange to have to do this, need to investigate on has_one
-    BotAline::NotificationsController.new.logged_out(restaurant, user) if restaurant.messenger_user
-    restaurant.update(messenger_user: user)
-    user.reload
-    view.logged_in(restaurant)
-    BotAline::OrdersController.new(message, user).index
+    if password == restaurant.messenger_password
+      user.messenger_restaurant&.update(messenger_user: nil)
+      BotAline::NotificationsController.new.logged_out(restaurant, user) if restaurant.messenger_user
+      restaurant.update(messenger_user: user)
+      user.reload
+      view.logged_in(restaurant)
+      BotAline::OrdersController.new(message, user).index
+    else
+      view.wrong_password
+    end
   end
 
   def index
