@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
         end
       end
     elsif order_params[:delivered_at]
-      @order.update(delivered_at: Time.now)
+      @order.delivered_at = DateTime.now
       if @order.save
         BotYvon::OrdersView.new.notify_delivered(@order) if Rails.env.production?
         respond_to do |format|
