@@ -5,21 +5,26 @@ class BotAline::RestaurantsController
     @view = BotAline::RestaurantsView.new(message, user)
   end
 
-  def password(restaurant_id, params = {})
-    view.password(restaurant_id, params)
+  def pass(restaurant_id, params = {})
+    if params[:attempt].size < 4
+      view.pass(restaurant_id, params)
+    else
+      view.wrong_pass
+    end
   end
 
-  def login(restaurant_id, password)
+  def verify_login(restaurant_id, params)
     restaurant = Restaurant.find(restaurant_id)
-    if password == restaurant.messenger_password
+    if params[:attempt] == restaurant.messenger_pass
       user.messenger_restaurant&.update(messenger_user: nil)
+      restaurant.reload
       BotAline::NotificationsController.new.logged_out(restaurant, user) if restaurant.messenger_user
       restaurant.update(messenger_user: user)
       user.reload
       view.logged_in(restaurant)
       BotAline::OrdersController.new(message, user).index
     else
-      view.wrong_password
+      view.pass(restaurant_id, params)
     end
   end
 

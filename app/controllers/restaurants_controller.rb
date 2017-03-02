@@ -40,7 +40,6 @@ class RestaurantsController < ApplicationController
 
   def update
     if @restaurant.update(restaurant_params)
-      byebug
       respond_to do |format|
         format.html { redirect_to restaurant_orders_path(@restaurant) }
         format.js {
@@ -49,10 +48,10 @@ class RestaurantsController < ApplicationController
         }
       end
     else
-      @new_meal = @restaurant.meals.new
+      @update = "restaurant"
       respond_to do |format|
-        format.html { render :show }
-        format.js
+        format.html { render :edit }
+        format.js { render :refresh }
       end
     end
   end
@@ -95,7 +94,7 @@ class RestaurantsController < ApplicationController
 
   def restaurant_params
     params.require(:restaurant).permit(
-      :name, :slogan, :user_id, :restaurant_category_id, :address, :on_duty, :shift, :photo, :description, :preparation_time, :facebook_url, :mode, :messenger_password,
+      :name, :slogan, :user_id, :restaurant_category_id, :address, :on_duty, :shift, :photo, :description, :preparation_time, :facebook_url, :mode, :messenger_pass,
       meal_categories_attributes: [:id, :name, :position, :timing, :_destroy],
       options_attributes: [:id, :name, :position, :_destroy],
       menus_attributes: [:id, :name, :price, :tax_rate, :position, :_destroy,

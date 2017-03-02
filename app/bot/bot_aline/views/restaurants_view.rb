@@ -4,14 +4,14 @@ class BotAline::RestaurantsView
     @user = user
   end
 
-  def password(restaurant_id, params)
-    if params[:step] == 1
+  def pass(restaurant_id, params)
+    if params[:step] == 0
       text = "Mot de passe :"
       quick_replies = (0..9).map do |i|
         {
           content_type: 'text',
-          title: "i",
-          payload: "restaurant_#{restaurant.id}_password_#{i}"
+          title: "#{i}",
+          payload: "restaurant_#{restaurant_id}_pass_#{i}"
         }
       end
     else
@@ -19,8 +19,8 @@ class BotAline::RestaurantsView
       quick_replies = (0..9).map do |i|
         {
           content_type: 'text',
-          title: "i",
-          payload: "restaurant_#{restaurant.id}_password_#{params[:p1]}#{i}"
+          title: "#{i}",
+          payload: "restaurant_#{restaurant_id}_pass_#{params[:attempt]}#{i}"
         }
       end
     end
@@ -31,7 +31,7 @@ class BotAline::RestaurantsView
     )
   end
 
-  def wrong_password
+  def wrong_pass
     message.reply(
       text: "Identification échouée."
     )

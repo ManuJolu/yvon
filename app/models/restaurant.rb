@@ -19,7 +19,7 @@ class Restaurant < ApplicationRecord
   validates :photo, presence: true
   validates :preparation_time, presence: true
   validates :mode, presence: true
-  validates :messenger_password, format: { with: /\A\d{2}\z/,
+  validates :messenger_pass, format: { with: /\A\d{2}\z/,
     message: "2 chiffres" }, allow_nil: true
 
   geocoded_by :address

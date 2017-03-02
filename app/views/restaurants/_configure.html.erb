@@ -1,7 +1,20 @@
 <div class="container">
   <div class="row">
+
+    <div class="col-sm-10 col-sm-offset-1">
+      <h4>Utilisateur Facebook Messenger recevant les commandes</h4>
+      <p>
+        <% if @restaurant.messenger_user %>
+          <%= @restaurant.messenger_user.decorate.name %>
+        <% else %>
+          Aucun utilisateur connecté
+        <% end %>
+      </p>
+    </div>
+
     <div class="col-sm-10 col-sm-offset-1">
       <%= render 'configure_form', restaurant: @restaurant %>
     </div>
+
   </div>
 </div>
