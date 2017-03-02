@@ -11,8 +11,10 @@ Rails.application.routes.draw do
     resources :users, only: [:show]
     resources :restaurants, only: [:index, :new, :create, :edit, :update] do
       member do
-          get '/orders/refresh/:order_status' => 'orders#refresh'
-        patch '/duty/:state' => "restaurants#duty"
+        get '/refresh/:update' => 'restaurants#refresh'
+        patch '/duty_update/:state' => "restaurants#duty_update"
+        patch '/preparation_time_update/' => 'restaurants#preparation_time_update'
+        get '/orders/refresh/:order_status' => 'orders#refresh'
       end
       resources :meal_categories, only: [:create, :update], shallow: true
       resources :meals, only: [:index, :new, :create, :edit, :update, :destroy], shallow: true do

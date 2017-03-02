@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
         respond_to do |format|
           format.html { redirect_to @orders }
           format.js {
-            ActionCable.server.broadcast "restaurant_#{restaurant.id}",
+            ActionCable.server.broadcast "restaurant_orders_#{restaurant.id}",
               order_status: "handled"
           }
         end
@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
         respond_to do |format|
           format.html { redirect_to @orders }
           format.js {
-            ActionCable.server.broadcast "restaurant_#{restaurant.id}",
+            ActionCable.server.broadcast "restaurant_orders_#{restaurant.id}",
               order_status: "ready"
           }
         end
@@ -43,13 +43,13 @@ class OrdersController < ApplicationController
         end
       end
     elsif order_params[:delivered_at]
-      @order.update(delivered_at: Time.now)
+      @order.delivered_at = DateTime.now
       if @order.save
         BotYvon::OrdersView.new.notify_delivered(@order) if Rails.env.production?
         respond_to do |format|
           format.html { redirect_to @orders }
           format.js {
-            ActionCable.server.broadcast "restaurant_#{restaurant.id}",
+            ActionCable.server.broadcast "restaurant_orders_#{restaurant.id}",
               order_status: "delivered"
           }
         end

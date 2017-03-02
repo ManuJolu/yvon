@@ -1,10 +1,10 @@
 $(document).ready(function() {
-  if ($(".orders.index").length > 0) {
-    App.orders = App.cable.subscriptions.create({ channel: "RestaurantChannel", restaurant_id: restaurantId }, {
+  if ($("#restaurantTabs").length > 0) {
+    App.restaurant = App.cable.subscriptions.create({ channel: "RestaurantChannel", restaurant_id: restaurantId }, {
       received: function(data) {
         $.ajax({
           method: "get",
-          url: '/restaurants/'+ restaurantId + '/orders/refresh/' + data.order_status
+          url: '/restaurants/'+ restaurantId + '/refresh/' + data.update
         });
       }
     });

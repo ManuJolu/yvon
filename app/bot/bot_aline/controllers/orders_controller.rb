@@ -21,7 +21,7 @@ class BotAline::OrdersController
       order.handled_at ||= order.ready_at
       if order.changed? && order.save
         BotYvon::OrdersView.new.notify_ready(order) # if Rails.env.production?
-        ActionCable.server.broadcast "restaurant_#{order.restaurant.id}",
+        ActionCable.server.broadcast "restaurant_orders_#{order.restaurant.id}",
           order_status: "ready"
       end
     when 'delivered'
@@ -30,7 +30,7 @@ class BotAline::OrdersController
       order.handled_at ||= order.ready_at
       if order.changed? && order.save
         BotYvon::OrdersView.new.notify_delivered(order) # if Rails.env.production?
-        ActionCable.server.broadcast "restaurant_#{order.restaurant.id}",
+        ActionCable.server.broadcast "restaurant_orders_#{order.restaurant.id}",
           order_status: "ready"
       end
     end

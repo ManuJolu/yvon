@@ -32,7 +32,8 @@ class BotAline::RestaurantsController
     restaurant = Restaurant.find(restaurant_id)
     restaurant.on_duty = (duty == 'on' ? true : false)
     restaurant.save
-    # Actioncable broadcast here in the future
+    ActionCable.server.broadcast "restaurant_#{restaurant.id}",
+      update: "duty"
   end
 
   def preparation_time
@@ -44,7 +45,8 @@ class BotAline::RestaurantsController
     restaurant = Restaurant.find(restaurant_id)
     restaurant.preparation_time = preparation_time
     restaurant.save
-    # Actioncable broadcast here in the future
+    ActionCable.server.broadcast "restaurant_#{restaurant.id}",
+      update: "preparation_time"
   end
 
   private

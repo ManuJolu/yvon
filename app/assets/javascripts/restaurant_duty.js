@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('#restaurantDutySwitch input').change(function(e){
+  $('#restaurantDutyCheckbox').on('change', "input", function(){
     var checked = $(this).is(":checked");
 
     var onDuty = "off";
@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     $.ajax({
       method: "patch",
-      url: '/restaurants/'+ restaurantId + '/duty/' + onDuty
+      url: '/restaurants/'+ restaurantId + '/duty_update/' + onDuty
     });
   });
 });

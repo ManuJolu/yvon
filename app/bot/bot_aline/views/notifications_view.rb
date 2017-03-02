@@ -28,6 +28,34 @@ class BotAline::NotificationsView
     )
   end
 
+  def notify_duty(user, duty)
+    Bot.deliver(
+      {
+        recipient: {
+          id: user.messenger_aline_id
+        },
+        message: {
+          text: "Le service a été modifié : #{duty}"
+        }
+      },
+      access_token: ENV['ALINE_ACCESS_TOKEN']
+    )
+  end
+
+  def notify_preparation_time(user, preparation_time)
+    Bot.deliver(
+      {
+        recipient: {
+          id: user.messenger_aline_id
+        },
+        message: {
+          text: "Le temps de préparation à été modifié : #{preparation_time} min"
+        }
+      },
+      access_token: ENV['ALINE_ACCESS_TOKEN']
+    )
+  end
+
   def logged_out(logged_out_user, restaurant, user)
     Bot.deliver(
       {
