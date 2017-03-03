@@ -24,8 +24,8 @@ namespace :fbm do
     puts "Yvon start call to action set."
   end
 
-  desc "Yvon Persistant menu"
-  task :yvon_persistant do
+  desc "Yvon Persistent menu"
+  task :yvon_persistent do
     Facebook::Messenger::Thread.set({
       setting_type: 'call_to_actions',
       thread_state: 'existing_thread',
@@ -47,7 +47,7 @@ namespace :fbm do
         }
       ]
     }, access_token: ENV['YVON_ACCESS_TOKEN'])
-    puts "Yvon persistant menu set."
+    puts "Yvon persistent menu set."
   end
 
   desc "Aline Welcome"
@@ -75,8 +75,8 @@ namespace :fbm do
     puts "Aline start call to action set."
   end
 
-  desc "Aline Persistant menu"
-  task :aline_persistant do
+  desc "Aline Persistent menu"
+  task :aline_persistent do
     Facebook::Messenger::Thread.set({
       setting_type: 'call_to_actions',
       thread_state: 'existing_thread',
@@ -103,6 +103,6 @@ namespace :fbm do
         }
       ]
     }, access_token: ENV['ALINE_ACCESS_TOKEN'])
-    puts "Aline persistant menu set."
+    puts "Aline persistent menu set."
   end
 end
