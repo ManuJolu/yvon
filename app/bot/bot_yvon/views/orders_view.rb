@@ -1,12 +1,17 @@
 class BotYvon::OrdersView
-  def no_meals(postback)
-    postback.reply(
+  def initialize(message, user)
+    @message = message
+    @user = user
+  end
+
+  def no_meals
+    message.reply(
       text: I18n.t('bot.order.no_meals')
     )
   end
 
-  def restaurant_closed(postback, restaurant)
-    postback.reply(
+  def restaurant_closed(restaurant)
+    message.reply(
       text: I18n.t('bot.order.restaurant_closed', restaurant_name: restaurant.name),
       quick_replies: [
         {
@@ -16,7 +21,7 @@ class BotYvon::OrdersView
     )
   end
 
-  def cart(postback, order)
+  def cart(order)
     elements = order.ordered_meals.map do |ordered_meal|
       {
         title: ordered_meal.meal.name,
@@ -28,7 +33,7 @@ class BotYvon::OrdersView
       }
     end
 
-    postback.reply(
+    message.reply(
       attachment: {
         type: "template",
         payload: {
@@ -67,7 +72,7 @@ class BotYvon::OrdersView
       }
     )
 
-    postback.reply(
+    message.reply(
       text: I18n.t('bot.order.cart.beta_code'),
       quick_replies: [
         {
@@ -80,7 +85,7 @@ class BotYvon::OrdersView
 
   end
 
-  def confirm(postback, order, params = {})
+  def confirm(order, params = {})
     colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
     url_array = [
       "http://maps.googleapis.com/maps/api/staticmap", # base
@@ -95,21 +100,21 @@ class BotYvon::OrdersView
     ]
 
     if params[:program] == 'beta'
-      postback.reply(
+      message.reply(
         text: I18n.t('bot.order.confirm.beta')
       )
     elsif params[:program] == 'demo'
-      postback.reply(
+      message.reply(
         text: I18n.t('bot.order.confirm.demo')
       )
     end
 
 
-    postback.reply(
+    message.reply(
       text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (Time.now + order.preparation_time.minutes).strftime('%H:%M'))
     )
 
-    postback.reply(
+    message.reply(
       attachment: {
         type: "template",
         payload: {
@@ -126,27 +131,7 @@ class BotYvon::OrdersView
     )
   end
 
-  def notify_ready(order)
-    Facebook::Messenger::Bot.deliver({
-      recipient: {
-        id: order.user.messenger_id
-      },
-      message: {
-        text: I18n.t('bot.order.notify_ready', user_first_name: order.user.first_name,restaurant_name: order.restaurant.name)
-      }},
-      access_token: ENV['YVON_ACCESS_TOKEN']
-    )
-  end
+  private
 
-  def notify_delivered(order)
-    Facebook::Messenger::Bot.deliver({
-      recipient: {
-        id: order.user.messenger_id
-      },
-      message: {
-        text: I18n.t('bot.order.notify_delivered', user_first_name: order.user.first_name,restaurant_name: order.restaurant.name)
-      }},
-      access_token: ENV['YVON_ACCESS_TOKEN']
-    )
-  end
+  attr_reader :message, :user
 end

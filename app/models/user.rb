@@ -35,10 +35,10 @@ class User < ApplicationRecord
       end
     end
 
-    return user
+    user
   end
 
   def current_order
-    orders.last if orders.last.paid_at.nil?
+    orders.last if (orders.last.paid_at.nil? && (orders.last.updated_at > (Time.now - 30.minutes)))
   end
 end

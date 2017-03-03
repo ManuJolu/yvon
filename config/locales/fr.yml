@@ -82,7 +82,7 @@ fr:
       index:
         ready_in: "prêt en"
         display_only: "consultation uniquement"
-        heading: "direction"
+        heading: "au"
         enter: "Entrer"
       menu:
         order: "Envoyer ma commande"
@@ -100,7 +100,7 @@ fr:
         order: 'Envoyer'
         menu: '➥ Carte'
         next: "➥ %{next_category}"
-        no_thanks: "Pas de %{current_category} pour moi"
+        no_thanks: "Pas de %{meal_category} pour moi"
         no_thanks_message: "\nJe ferais mieux de surveiller ma ligne"
         back: "Retour à la carte"
         back_message: "\n "

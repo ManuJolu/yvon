@@ -1,5 +1,10 @@
 class BotYvon::RestaurantsView
-  def index(message, coordinates, restaurants)
+  def initialize(message, user)
+    @message = message
+    @user = user
+  end
+
+  def index(coordinates, restaurants)
     colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
     url_array = [
       "http://maps.googleapis.com/maps/api/staticmap", # base
@@ -11,6 +16,7 @@ class BotYvon::RestaurantsView
       "&key=#{ENV['GOOGLE_API_KEY']}", # key
       "&markers=size:mid%7Ccolor:0x#{colors[0]}%7Clabel:%7C#{coordinates[0]},#{coordinates[1]}" # user_marker
     ]
+
     elements = restaurants.map.with_index do |restaurant, i|
       url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 8]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},#{restaurant.longitude}"
       if restaurant.order_acceptance?
@@ -30,11 +36,12 @@ class BotYvon::RestaurantsView
           {
             type: 'postback',
             title: I18n.t('bot.restaurant.index.enter'),
-            payload: "restaurant_#{restaurant.id}_page_0"
+            payload: "restaurant_#{restaurant.id}"
           }
         ]
       }
     end
+
     message.reply(
       attachment: {
         type: 'image',
@@ -43,6 +50,7 @@ class BotYvon::RestaurantsView
         }
       }
     )
+
     message.reply(
       attachment: {
         type: 'template',
@@ -54,7 +62,7 @@ class BotYvon::RestaurantsView
     )
   end
 
-  def menu(postback, restaurant, params = {})
+  def menu(restaurant, params = {})
     elements = []
     element = {
       title: restaurant.name,
@@ -68,16 +76,14 @@ class BotYvon::RestaurantsView
         payload: "cart"
       }
     ]
-    element[:buttons] = buttons if params[:ordered_meals]
+    element[:buttons] = buttons if params[:ordered_meals?]
     elements << element
 
-    start_index = params[:page] * 8
-    end_index = start_index + 7
-    restaurant.meal_categories[start_index..end_index].each do |meal_category|
+    restaurant.meal_categories.limit(9).each do |meal_category|
       elements << {
         title: meal_category.name,
-        image_url: (cl_image_path(restaurant.meals.is_active.where(meal_category: meal_category).first&.photo&.path, width: 382, height: 200, crop: :fill) if restaurant.meals.is_active.where(meal_category: meal_category).present?),
-        subtitle: "#{('Suggestion: ' + restaurant.meals.is_active.where(meal_category: meal_category).first.name) if restaurant.meals.is_active.where(meal_category: meal_category).present?}",
+        image_url: (cl_image_path(restaurant.meals.is_active.find_by(meal_category: meal_category)&.photo&.path, width: 382, height: 200, crop: :fill) if restaurant.meals.is_active.find_by(meal_category: meal_category).present?),
+        subtitle: "#{('Suggestion: ' + restaurant.meals.is_active.find_by(meal_category: meal_category).name) if restaurant.meals.is_active.find_by(meal_category: meal_category).present?}",
         buttons: [
           {
               title: "➥ #{meal_category.name}",
@@ -88,43 +94,38 @@ class BotYvon::RestaurantsView
       }
     end
 
-    # buttons = [
-    #   {
-    #       title: I18n.t('bot.restaurant.menu.view_more'),
-    #       type: "postback",
-    #       payload: "restaurant_#{restaurant.id}_page_#{params[:next_page]}"
-    #   }
-    # ] if params[:next_page]
-
-    postback.reply(
+    message.reply(
       attachment: {
         type: 'template',
         payload: {
           template_type: 'generic',
           elements: elements
-          # buttons: buttons
         }
       }
     )
 
-    if restaurant.menus.any? && params[:page] == 0
+    if restaurant.menus.any?
       text = I18n.t('bot.restaurant.menu.compute')
       text += restaurant.menus.decorate.join("\n")
-      postback.reply(
+      message.reply(
         text: text
       )
     end
   end
 
-  def restaurant_mismatch(postback, restaurant_name)
-    postback.reply(
+  def user_restaurant_mismatch(restaurant_name)
+    message.reply(
       text: I18n.t('bot.restaurant.restaurant_mismatch', restaurant_name: restaurant_name),
     )
   end
 
-  def meal_restaurant_mismatch(postback, restaurant_name)
-    postback.reply(
+  def meal_user_restaurant_mismatch(restaurant_name)
+    message.reply(
       text: I18n.t('bot.restaurant.meal_restaurant_mismatch', restaurant_name: restaurant_name),
     )
   end
+
+  private
+
+  attr_reader :message, :user
 end
