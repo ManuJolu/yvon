@@ -5,14 +5,35 @@ class BotYvon::MessagesView
   end
 
   def hello
-    message.reply(
-      text: I18n.t('bot.hello', username: user.first_name.capitalize),
-      quick_replies: [
-        {
-          content_type: 'location'
+  message.reply(
+    text: I18n.t('bot.hello',),
+    quick_replies: [
+      {
+        content_type: 'location'
+      }
+    ]
+  )
+  end
+
+  def share
+  message.reply(
+    attachment: {
+      type: 'template',
+      payload: {
+        template_type: 'generic',
+        elements: {
+          title: "Salut, essaye Yvon pour commander tes plats le midi !",
+          image_url: cl_image_path(Restaurant.last.photo.path),
+          subtitle: "sous-titre",
+          # buttons: [
+          #   {
+          #     type: 'element_share',
+          #   }
+          # ]
         }
-      ]
-    )
+      }
+    }
+  )
   end
 
   def no_restaurant

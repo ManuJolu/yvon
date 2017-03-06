@@ -7,6 +7,10 @@ class BotYvon::MessagesController
     view.hello
   end
 
+  def share
+    view.share
+  end
+
   def no_restaurant
     view.no_restaurant
   end
