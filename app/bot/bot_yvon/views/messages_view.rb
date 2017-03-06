@@ -6,7 +6,7 @@ class BotYvon::MessagesView
 
   def hello
   message.reply(
-    text: I18n.t('bot.hello',),
+    text: I18n.t('bot.hello', username: user.first_name.capitalize),
     quick_replies: [
       {
         content_type: 'location'
