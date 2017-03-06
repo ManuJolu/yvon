@@ -30,6 +30,7 @@ class Restaurant < ApplicationRecord
   enum mode: [ :display_only, :order_acceptance ]
 
   scope :on_duty, -> { where(on_duty: true) }
+  scope :by_orders, -> { joins(:orders).group('restaurants.id').order('count(restaurants.id) DESC') }
 
   def on_duty?
     on_duty

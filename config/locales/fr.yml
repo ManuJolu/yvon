@@ -73,6 +73,10 @@ fr:
       orders: "Commandes"
       configure: "Configurer"
       edit: "Editer"
+  users:
+    show:
+      my_restaurants: "Mes restaurants"
+      add_restaurant: "Ajouter un restaurant"
   bot:
     hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ?"
     share: "Salut, essaye Yvon pour commander ton repas le midi !"
