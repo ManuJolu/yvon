@@ -96,7 +96,7 @@ class RestaurantsController < ApplicationController
     params.require(:restaurant).permit(
       :name, :slogan, :user_id, :restaurant_category_id, :address, :on_duty, :shift, :photo, :description, :preparation_time, :facebook_url, :mode, :messenger_pass,
       meal_categories_attributes: [:id, :name, :position, :timing, :_destroy],
-      options_attributes: [:id, :name, :position, :_destroy],
+      options_attributes: [:id, :active, :name, :position, :_destroy],
       menus_attributes: [:id, :name, :price, :tax_rate, :position, :_destroy,
         menu_meal_categories_attributes:[:id, :menu_id, :meal_category_id, :quantity, :_destroy]
       ]
