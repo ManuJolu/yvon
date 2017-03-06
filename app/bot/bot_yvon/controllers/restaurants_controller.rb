@@ -1,36 +1,44 @@
 class BotYvon::RestaurantsController
-  def initialize
-    @view = BotYvon::RestaurantsView.new
+  def initialize(message, user)
+    @user = user
+    @view = BotYvon::RestaurantsView.new(message, user)
   end
 
-  def index(message, coordinates)
+  def index(coordinates)
     restaurants = Restaurant.on_duty.where.not(latitude: nil, longitude: nil).near(coordinates, 1).limit(10)
-    @view.index(message, coordinates, restaurants) if restaurants.present?
+    view.index(coordinates, restaurants) if restaurants.present?
   end
 
-  def menu(postback, user, params = {})
-    restaurant = Restaurant.find(params[:restaurant_id])
-    page = params[:page] || 0
-    next_page = (page + 1) if page < ((restaurant.meal_categories.size - 1) / 3)
-    @view.menu(postback, restaurant, ordered_meals: user.current_order.ordered_meals.present?, page: page, next_page: next_page)
+  def menu(restaurant_id)
+    restaurant = Restaurant.find(restaurant_id)
+    view.menu(restaurant, ordered_meals?: user.current_order.ordered_meals.present?)
   end
 
-  def check(user, params = {})
-    restaurant = Restaurant.find(params[:restaurant_id])
+  def display_menus(restaurant_id)
+    restaurant = Restaurant.find(restaurant_id)
+    view.display_menus(restaurant)
+  end
+
+  def user_restaurant_match?(restaurant_id)
+    restaurant = Restaurant.find(restaurant_id)
     user.current_order.restaurant == restaurant
   end
 
-  def restaurant_mismatch(postback, user, params = {})
-    wrong_restaurant = Restaurant.find(params[:restaurant_id])
+  def user_restaurant_mismatch(restaurant_id)
+    wrong_restaurant = Restaurant.find(restaurant_id)
     right_restaurant = user.current_order.restaurant
-    @view.restaurant_mismatch(postback, wrong_restaurant.name)
-    @view.menu(postback, right_restaurant)
+    view.user_restaurant_mismatch(wrong_restaurant.name)
+    view.menu(right_restaurant, ordered_meals: user.current_order.ordered_meals.present?)
   end
 
-  def meal_restaurant_mismatch(postback, user, params = {})
-    wrong_restaurant = Restaurant.find(params[:restaurant_id])
+  def meal_user_restaurant_mismatch(restaurant_id)
+    wrong_restaurant = Restaurant.find(restaurant_id)
     right_restaurant = user.current_order.restaurant
-    @view.meal_restaurant_mismatch(postback, wrong_restaurant.name)
-    @view.menu(postback, right_restaurant)
+    view.meal_user_restaurant_mismatch(wrong_restaurant.name)
+    view.menu(right_restaurant, ordered_meals: user.current_order.ordered_meals.present?)
   end
+
+  private
+
+  attr_reader :user, :view
 end

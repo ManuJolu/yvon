@@ -1,21 +1,29 @@
 class BotYvon::MessagesController
-  def initialize
-    @view = BotYvon::MessagesView.new
+  def initialize(message, user)
+    @view = BotYvon::MessagesView.new(message, user)
   end
 
-  def hello(message, user)
-    @view.hello(message, user)
+  def hello
+    view.hello
   end
 
-  def no_restaurant(message)
-    @view.no_restaurant(message)
+  def share
+    view.share
   end
 
-  def no_restaurant_selected(postback)
-    @view.no_restaurant_selected(postback)
+  def no_restaurant
+    view.no_restaurant
   end
 
-  def else(message)
-    @view.else(message)
+  def no_restaurant_selected
+    view.no_restaurant_selected
   end
+
+  def else
+    view.else
+  end
+
+  private
+
+  attr_reader :view
 end

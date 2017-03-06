@@ -77,17 +77,19 @@ fr:
     hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ?"
     no_restaurant: "Désolé, je n'ai pas trouvé de restaurant près de toi... Essaye un nouveau lieu, ou ma ville natale Bordeaux pour être sûr de trouver de bons restaurants !"
     no_restaurant_selected: "Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider à en trouver un ?"
-    else: "Dites 'Hello' pour commencer une nouvelle commande"
+    else: "Dis 'Hello' pour commencer une nouvelle commande"
     restaurant:
       index:
         ready_in: "prêt en"
         display_only: "consultation uniquement"
-        heading: "direction"
+        heading: "au"
         enter: "Entrer"
       menu:
+        back_to_map: "◁ Liste"
+        menus: "Formules"
         order: "Envoyer ma commande"
         view_more: "Voir la suite"
-        compute: "Formules :\n"
+        compute: "Les formules sont calculées automatiquement à la commande :\n"
       restaurant_mismatch: "Désolé, ce menu appartient au %{restaurant_name}, voici le bon menu :"
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
     meal:
@@ -98,11 +100,11 @@ fr:
         pick_next: "✔ & ➥ %{next_category}"
         pay: 'Payer'
         order: 'Envoyer'
-        menu: '➥ Carte'
+        menu: '◁ Carte'
         next: "➥ %{next_category}"
-        no_thanks: "Pas de %{current_category} pour moi"
+        no_thanks: "Pas de %{meal_category} pour moi"
         no_thanks_message: "\nJe ferais mieux de surveiller ma ligne"
-        back: "Retour à la carte"
+        back: "◁ Carte"
         back_message: "\n "
       get_option:
         choose_option: "Choisis ton option :"

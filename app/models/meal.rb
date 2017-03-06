@@ -8,7 +8,6 @@ class Meal < ApplicationRecord
   validates :name, presence: true
   validates :tax_rate, presence: true
   validates :photo, presence: true
-  validates :meal_options, length: { maximum: 3 } # does not work
 
   accepts_nested_attributes_for :options
   accepts_nested_attributes_for :meal_options, allow_destroy: true

@@ -32,17 +32,17 @@ namespace :fbm do
       call_to_actions: [
         {
           type: 'postback',
-          title: '➥ Liste des restaurants',
-          payload: 'map'
-        },
-        {
-          type: 'postback',
           title: 'Nouvelle commande',
           payload: 'start'
         },
         {
+          type: 'postback',
+          title: 'Partage Yvon avec tes amis',
+          payload: 'share'
+        },
+        {
           type: 'web_url',
-          title: 'hello-yvon.com',
+          title: 'www.hello-yvon.com',
           url: 'http://www.hello-yvon.com'
         }
       ]
@@ -55,7 +55,7 @@ namespace :fbm do
     Facebook::Messenger::Thread.set({
       setting_type: 'greeting',
       greeting: {
-        text: "Salut {{user_first_name}}, je m'appelle Aline.\nConnecte toi à ton restaurant et je t'envoie les commandes passées par tes clients avec Yvon - @HelloYvon.\nN'oublies pas le menu en bas à gauche pour modifier les paramètres de ton restaurant, et bon service !"
+        text: "Salut {{user_first_name}}, je m'appelle Aline.\nConnecte toi à ton restaurant et je t'envoie les commandes passées par tes clients avec Yvon - @HelloYvon.\nN'oublies pas le menu du bas pour modifier les paramètres de ton restaurant, et bon service !"
       },
     }, access_token: ENV['ALINE_ACCESS_TOKEN'])
     puts "Aline welcome message set."

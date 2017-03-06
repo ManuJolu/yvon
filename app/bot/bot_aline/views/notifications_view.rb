@@ -69,6 +69,4 @@ class BotAline::NotificationsView
       access_token: ENV['ALINE_ACCESS_TOKEN']
     )
   end
-
-
 end
