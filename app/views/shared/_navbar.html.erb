@@ -24,7 +24,7 @@
     <div class="navbar-wagon-right">
       <!-- Different navigation if login or not -->
       <% if user_signed_in? %>
-        <% if @restaurant %>
+        <% if @restaurant.persisted? %>
           <div class='navbar-wagon-item' id="restaurantPreparationTime">
             <%= render 'restaurants/preparation_time_form', restaurant: @restaurant %>
           </div>
