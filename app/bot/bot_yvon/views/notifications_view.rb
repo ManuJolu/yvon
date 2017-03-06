@@ -21,5 +21,37 @@ class BotYvon::NotificationsView
       }},
       access_token: ENV['YVON_ACCESS_TOKEN']
     )
+
+    Bot.deliver({
+      recipient: {
+        id: user.messenger_id
+      },
+      message: {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'generic',
+            elements: [
+              {
+                title: I18n.t('bot.share'),
+                image_url: cl_image_path("t4uhx134eenpqtmrm82y.jpg"),
+                # image_aspect_ratio: 'square',
+                buttons: [
+                  {
+                    type: 'web_url',
+                    title: "Hello Yvon",
+                    url: "http://m.me/HelloYvon?ref=shared"
+                  },
+                  {
+                    type: 'element_share'
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }},
+      access_token: ENV['YVON_ACCESS_TOKEN']
+    )
   end
 end

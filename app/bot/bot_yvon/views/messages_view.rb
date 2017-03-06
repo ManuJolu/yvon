@@ -21,16 +21,23 @@ class BotYvon::MessagesView
       type: 'template',
       payload: {
         template_type: 'generic',
-        elements: {
-          title: "Salut, essaye Yvon pour commander tes plats le midi !",
-          image_url: cl_image_path(Restaurant.last.photo.path),
-          subtitle: "sous-titre",
-          # buttons: [
-          #   {
-          #     type: 'element_share',
-          #   }
-          # ]
-        }
+        elements: [
+          {
+            title: I18n.t('bot.share'),
+            image_url: cl_image_path("t4uhx134eenpqtmrm82y.jpg"),
+            # image_aspect_ratio: 'square',
+            buttons: [
+              {
+                type: 'web_url',
+                title: "Hello Yvon",
+                url: "http://m.me/HelloYvon?ref=shared"
+              },
+              {
+                type: 'element_share'
+              }
+            ]
+          }
+        ]
       }
     }
   )

@@ -75,6 +75,7 @@ fr:
       edit: "Editer"
   bot:
     hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ?"
+    share: "Salut, essaye Yvon pour commander ton repas le midi !"
     no_restaurant: "Désolé, je n'ai pas trouvé de restaurant près de toi... Essaye un nouveau lieu, ou ma ville natale Bordeaux pour être sûr de trouver de bons restaurants !"
     no_restaurant_selected: "Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider à en trouver un ?"
     else: "Dis 'Hello' pour commencer une nouvelle commande"
@@ -122,4 +123,4 @@ fr:
         ready: "Ta commande sera prête dans %{preparation_time} min à %{ready_time}."
         go_to: "Va au %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
-      notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}. Merci et à demain j'espère !"
+      notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}. Merci et n'hésite pas à me partager avec tes amis :"
