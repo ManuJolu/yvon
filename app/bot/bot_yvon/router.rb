@@ -37,33 +37,33 @@ class BotYvon::Router
       coordinates = [order.latitude, order.longitude]
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
     else
-      messages_controller.else if user.current_order.nil?
-    end
-
-    if user.current_order&.restaurant
-      case message.text
-      when /cdsbeta/i
-        orders_controller.confirm
-      when /talisbeta/i
-        orders_controller.confirm
-      end
-
-      case message.quick_reply
-      when /demo/i
-        orders_controller.demo
-      when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
-        meal = Meal.find($LAST_MATCH_INFO['meal_id'])
-        option = Option.find($LAST_MATCH_INFO['option_id'])
-        action = $LAST_MATCH_INFO['action']
-        if orders_controller.meal_match_user_restaurant?(meal)
-          orders_controller.add_meal(meal, option)
-          case action
-          when 'menu'
-            restaurants_controller.menu(meal.restaurant.id)
-          end
-        else
-          restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
+      if user.current_order&.restaurant
+        case message.text
+        when /cdsbeta/i
+          orders_controller.confirm
+        when /talisbeta/i
+          orders_controller.confirm
         end
+
+        case message.quick_reply
+        when /demo/i
+          orders_controller.demo
+        when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
+          meal = Meal.find($LAST_MATCH_INFO['meal_id'])
+          option = Option.find($LAST_MATCH_INFO['option_id'])
+          action = $LAST_MATCH_INFO['action']
+          if orders_controller.meal_match_user_restaurant?(meal)
+            orders_controller.add_meal(meal, option)
+            case action
+            when 'menu'
+              restaurants_controller.menu(meal.restaurant.id)
+            end
+          else
+            restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
+          end
+        end
+      else
+        messages_controller.else if user.current_order.nil?
       end
     end
   end
