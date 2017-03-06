@@ -14,6 +14,11 @@ class BotYvon::RestaurantsController
     view.menu(restaurant, ordered_meals?: user.current_order.ordered_meals.present?)
   end
 
+  def display_menus(restaurant_id)
+    restaurant = Restaurant.find(restaurant_id)
+    view.display_menus(restaurant)
+  end
+
   def user_restaurant_match?(restaurant_id)
     restaurant = Restaurant.find(restaurant_id)
     user.current_order.restaurant == restaurant

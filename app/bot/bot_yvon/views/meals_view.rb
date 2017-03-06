@@ -64,20 +64,14 @@ class BotYvon::MealsView
   def get_option(options, params = {})
     options = options.map do |option|
       {
-        type: 'postback',
+        content_type: 'text',
         title: option.name.capitalize,
         payload: "meal_#{params[:meal_id]}_option_#{option.id}_#{params[:action]}"
       }
     end
     message.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'button',
-          text: I18n.t('bot.meal.get_option.choose_option'),
-          buttons: options
-        }
-      }
+      text: I18n.t('bot.meal.get_option.choose_option'),
+      quick_replies: options
     )
   end
 

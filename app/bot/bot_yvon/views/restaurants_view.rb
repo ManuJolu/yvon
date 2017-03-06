@@ -69,14 +69,28 @@ class BotYvon::RestaurantsView
       image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),
       subtitle: restaurant.slogan
     }
-    buttons = [
-      {
-        title: I18n.t('bot.restaurant.menu.order'),
-        type: "postback",
-        payload: "cart"
-      }
-    ]
-    element[:buttons] = buttons if params[:ordered_meals?]
+
+    buttons = []
+    back_button = {
+      title: I18n.t('bot.restaurant.menu.back_to_map'),
+      type: "postback",
+      payload: "map"
+    }
+    menu_button = {
+      title: I18n.t('bot.restaurant.menu.menus'),
+      type: "postback",
+      payload: "restaurant_#{restaurant.id}_menus"
+    }
+    order_button = {
+      title: I18n.t('bot.restaurant.menu.order'),
+      type: "postback",
+      payload: "cart"
+    }
+    buttons << back_button unless params[:ordered_meals?]
+    buttons << menu_button
+    buttons << order_button if params[:ordered_meals?]
+    element[:buttons] = buttons
+
     elements << element
 
     restaurant.meal_categories.limit(9).each do |meal_category|
@@ -103,14 +117,14 @@ class BotYvon::RestaurantsView
         }
       }
     )
+  end
 
-    if restaurant.menus.any?
-      text = I18n.t('bot.restaurant.menu.compute')
-      text += restaurant.menus.decorate.join("\n")
-      message.reply(
-        text: text
-      )
-    end
+  def display_menus(restaurant)
+    text = I18n.t('bot.restaurant.menu.compute')
+    text += restaurant.menus.decorate.join("\n")
+    message.reply(
+      text: text
+    )
   end
 
   def user_restaurant_mismatch(restaurant_name)
