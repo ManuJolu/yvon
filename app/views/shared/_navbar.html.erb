@@ -1,4 +1,4 @@
-<% if path_info == root_path || path_info == restaurants_path %>
+<% if path_info == root_path %>
   <div class="navbar-wagon navbar-wagon-fixed">
     <div class="navbar-background-scroll"></div>
 <% else %>
@@ -25,10 +25,10 @@
       <!-- Different navigation if login or not -->
       <% if user_signed_in? %>
         <% if @restaurant&.persisted? %>
-          <div class='navbar-wagon-item' id="restaurantPreparationTime">
+          <div class='navbar-wagon-item hidden-xs' id="restaurantPreparationTime">
             <%= render 'restaurants/preparation_time_form', restaurant: @restaurant %>
           </div>
-          <div class='navbar-wagon-item' id="restaurantDutyCheckbox">
+          <div class='navbar-wagon-item hidden-xs' id="restaurantDutyCheckbox">
             <%= render 'restaurants/duty_checkbox', restaurant: @restaurant %>
           </div>
         <% end %>

@@ -34,7 +34,7 @@ class BotYvon::NotificationsView
             elements: [
               {
                 title: I18n.t('bot.share'),
-                image_url: cl_image_path("t4uhx134eenpqtmrm82y.jpg"),
+                image_url: cl_image_path("yvon_messenger_code.png", width: 382, height: 200, crop: :fill),
                 # image_aspect_ratio: 'square',
                 buttons: [
                   {

@@ -5,4 +5,6 @@ class Option < ApplicationRecord
   validates :name, presence: true
 
   acts_as_list scope: :restaurant
+
+  scope :is_active, -> { where(active: true) }
 end

@@ -11,7 +11,7 @@ class BotYvon::MealsController
   end
 
   def get_option(meal, params = {})
-    options = meal.options.limit(10)
+    options = meal.options.is_active.limit(10)
     view.get_option(options, meal_id: meal.id, action: params[:action])
   end
 

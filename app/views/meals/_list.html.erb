@@ -18,7 +18,7 @@
       <div class='product-body'>
         <h3><%= meal.name %></h3>
         <p><%= meal.description %> <%= meal.decorate.price %></p>
-        <p>Options : <%= meal.options.map { |option| option.name }.join(' - ') %></p>
+        <p>Options : <%= meal.options.map { |option| option.decorate }.join(' - ') %></p>
       </div>
       <ul class="list-inline product-controls">
         <li>
