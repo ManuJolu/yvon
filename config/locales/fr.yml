@@ -81,13 +81,15 @@ fr:
     else: "Dis 'Hello' pour commencer une nouvelle commande"
     restaurant:
       index:
-        ready_in: "prêt en"
         display_only: "consultation uniquement"
+        display_order: "consultation et commande"
+        ready_in: "prêt en"
         heading: "au"
         enter: "Entrer"
       menu:
+        swipe_right: "Swipe à droite pour voir la carte ▷"
         back_to_map: "◁ Liste"
-        menus: "Formules"
+        menus: "▽ Formules"
         order: "Envoyer ma commande"
         view_more: "Voir la suite"
         compute: "Les formules sont calculées automatiquement à la commande :\n"

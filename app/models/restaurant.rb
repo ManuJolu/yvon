@@ -34,4 +34,8 @@ class Restaurant < ApplicationRecord
   def on_duty?
     on_duty
   end
+
+  def star_rating
+    ("★" * 4) + ("☆" * 1)
+  end
 end

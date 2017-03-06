@@ -20,18 +20,17 @@ class BotYvon::RestaurantsView
     elements = restaurants.map.with_index do |restaurant, i|
       url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 8]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},#{restaurant.longitude}"
       if restaurant.order_acceptance?
-        title = "#{i + 1} - #{I18n.t('bot.restaurant.index.ready_in')} #{restaurant.preparation_time}min - #{restaurant.name}"
+        title = "#{i + 1} - #{I18n.t('bot.restaurant.index.display_order').upcase} - #{restaurant.name}"
       else
-        title = "#{i + 1} - #{I18n.t('bot.restaurant.index.display_only')} - #{restaurant.name}"
+        title = "#{i + 1} - #{I18n.t('bot.restaurant.index.display_only').upcase} - #{restaurant.name}"
       end
       {
         title: title,
-        item_url: restaurant.facebook_url,
         image_url: cl_image_path(restaurant.photo.path, transformation: [
           { width: 382, height: 180, crop: :fill },
           { overlay: 'one_pixel.png', effect: :colorize, color: "rgb:#{colors[(i + 1) % 8]}", width: 382, height: 20, y: -100 }
         ]),
-        subtitle: "#{(restaurant.distance_from(coordinates)*1000).round}m #{I18n.t('bot.restaurant.index.heading')} #{Geocoder::Calculations.compass_point(restaurant.bearing_from(coordinates))} - #{restaurant.restaurant_category.name}\n#{restaurant.slogan}",
+        subtitle: "#{restaurant.star_rating}\n#{restaurant.restaurant_category.name}\n#{restaurant.slogan}",
         buttons: [
           {
             type: 'postback',
@@ -67,7 +66,7 @@ class BotYvon::RestaurantsView
     element = {
       title: restaurant.name,
       image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),
-      subtitle: restaurant.slogan
+      subtitle: "#{restaurant.star_rating}\n#{restaurant.restaurant_category.name}\n#{I18n.t('bot.restaurant.menu.swipe_right')}"
     }
 
     buttons = []
@@ -100,7 +99,7 @@ class BotYvon::RestaurantsView
         subtitle: "#{('Suggestion: ' + restaurant.meals.is_active.find_by(meal_category: meal_category).name) if restaurant.meals.is_active.find_by(meal_category: meal_category).present?}",
         buttons: [
           {
-              title: "➥ #{meal_category.name}",
+              title: "#{meal_category.name} ▷",
               type: "postback",
               payload: "restaurant_#{restaurant.id}_category_#{meal_category.id}"
           }
