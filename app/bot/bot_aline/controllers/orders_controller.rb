@@ -31,7 +31,7 @@ class BotAline::OrdersController
       if order.changed? && order.save
         BotYvon::NotificationsController.new.notify_delivered(order) # if Rails.env.production?
         ActionCable.server.broadcast "restaurant_orders_#{order.restaurant.id}",
-          order_status: "ready"
+          order_status: "delivered"
       end
     end
   end
