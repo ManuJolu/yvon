@@ -1,7 +1,7 @@
 class BotAline::NotificationsView
   def notify_order(order, user)
     order_array = ["Commande de #{order.user.name} :"]
-    order_array << order.ordered_meals.map { |ordered_meal| ordered_meal }
+    order_array << order.ordered_meals.by_meal_category.map { |ordered_meal| ordered_meal }
     order_array << "Paiement au comptoir : #{order.price}"
     order_array << "Prêt : max #{order.ready_at_limit}"
 

@@ -6,11 +6,9 @@ class OrderedMeal < ApplicationRecord
 
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
 
-  scope :by_category, -> { joins(:meal).merge(Meal.order(:category).includes(:meal).order('lower(name)')) }
+  scope :by_meal_category, -> { joins(:meal_category).order('meal_categories.position', 'meals.position') }
 
   def self.at_timing(timing)
-    # select { |ordered_meal| ordered_meal.meal_category.timing == timing }
-    # includes(:meal).includes(:meal_category).where('meal.meal_category.timing = ?', timing)
-    joins(:meal_category).merge(MealCategory.where(timing: timing))
+    joins(:meal_category).where(meal_categories: {timing: timing}).order('meals.position')
   end
 end
