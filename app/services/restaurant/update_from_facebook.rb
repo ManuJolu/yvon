@@ -12,8 +12,10 @@ class Restaurant::UpdateFromFacebook
         page_ref = page_id.present? ? page_id : page_name
       end
       p page_ref
+      p "https://graph.facebook.com/v2.8/#{page_ref}?fields=name,about,description,price_range,fan_count,overall_star_rating,rating_count,location&access_token=#{restaurant.user.token}"
 
       restaurant_data_json = RestClient.get("https://graph.facebook.com/v2.8/#{page_ref}?fields=name,about,description,price_range,fan_count,overall_star_rating,rating_count,location&access_token=#{restaurant.user.token}")
+      p restaurant_data_json
       restaurant_data = JSON.parse restaurant_data_json
       p restaurant_data
       restaurant.fb_page_id = restaurant_data['id']
