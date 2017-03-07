@@ -30,7 +30,7 @@ class BotYvon::RestaurantsView
           { width: 382, height: 180, crop: :fill },
           { overlay: 'one_pixel.png', effect: :colorize, color: "rgb:#{colors[(i + 1) % 8]}", width: 382, height: 20, y: -100 }
         ]),
-        subtitle: "#{restaurant.star_rating}\n#{restaurant.restaurant_category.name}\n#{restaurant.slogan}",
+        subtitle: "#{restaurant.star_rating}\n#{restaurant.restaurant_category.name}\n#{restaurant.about}",
         buttons: [
           {
             type: 'postback',

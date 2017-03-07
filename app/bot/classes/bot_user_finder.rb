@@ -3,7 +3,7 @@ class BotUserFinder
     user = User.find_by(messenger_field => message.sender['id'])
     # Could implement refresh of facebook_picture_check here, or better make a cron tab for that every day?
     unless user
-      user_data_json = RestClient.get("https://graph.facebook.com/v2.6/#{message.sender['id']}?access_token=#{access_token}")
+      user_data_json = RestClient.get("https://graph.facebook.com/v2.8/#{message.sender['id']}?access_token=#{access_token}")
       user_data = JSON.parse user_data_json
       facebook_picture_check = user_data['profile_pic'].match(/\/\d+_(\d+)_\d+/)[1]
       user = User.find_by(facebook_picture_check: facebook_picture_check)

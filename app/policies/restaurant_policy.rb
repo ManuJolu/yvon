@@ -32,4 +32,8 @@ class RestaurantPolicy < ApplicationPolicy
   def preparation_time_update?
     update?
   end
+
+  def facebook_update?
+    update?
+  end
 end

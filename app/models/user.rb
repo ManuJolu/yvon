@@ -14,12 +14,12 @@ class User < ApplicationRecord
     user_params.merge! auth.info.slice(:email, :first_name, :last_name)
     user_params[:facebook_picture_url] = auth.info.image
     user_params[:token] = auth.credentials.token
-    user_params[:token_expiry] = Time.at(auth.credentials.expires_at) rescue Time.now + 30.days
+    user_params[:token_expiry] = Time.at(auth.credentials.expires_at) rescue 30.days.from_now
 
     user = User.where(provider: auth.provider, uid: auth.uid).first
     user ||= User.where(email: auth.info.email).first # User did a regular sign up in the past.
 
-    user_data_json = RestClient.get("https://graph.facebook.com/v2.6/me?fields=picture&access_token=#{user_params[:token]}")
+    user_data_json = RestClient.get("https://graph.facebook.com/v2.8/me?fields=picture&access_token=#{user_params[:token]}")
     user_data = JSON.parse user_data_json
     user_params[:facebook_picture_check] = user_data['picture']['data']['url'].match(/\/\d+_(\d+)_\d+/)[1]
 
@@ -39,6 +39,6 @@ class User < ApplicationRecord
   end
 
   def current_order
-    orders.last if (orders.last.paid_at.nil? && (orders.last.updated_at > (Time.now - 30.minutes)))
+    orders.last if (orders.last.paid_at.nil? && (orders.last.updated_at > (30.minutes.ago)))
   end
 end

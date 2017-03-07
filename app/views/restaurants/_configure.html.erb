@@ -13,6 +13,12 @@
     </div>
 
     <div class="col-sm-10 col-sm-offset-1">
+      <h4>Données importées de Facebook</h4>
+      <p><%= "#{@restaurant.fb_overall_star_rating} #{@restaurant.star_rating} - #{@restaurant.fb_fan_count} fans - #{@restaurant.fb_price_range}" if @restaurant.fb_overall_star_rating.present? %></p>
+      <%= link_to "Mettre à jour depuis Facebook", facebook_update_restaurant_path(@restaurant), class: "btn btn-danger" %>
+    </div>
+
+    <div class="col-sm-10 col-sm-offset-1">
       <%= render 'configure_form', restaurant: @restaurant %>
     </div>
 

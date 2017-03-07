@@ -14,9 +14,8 @@ class Restaurant < ApplicationRecord
   accepts_nested_attributes_for :menus, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true
-  validates :slogan, presence: true
+  validates :about, presence: true
   validates :address, presence: true
-  validates :photo, presence: true
   validates :preparation_time, presence: true
   validates :mode, presence: true
   validates :messenger_pass, format: { with: /\A\d{2}\z/,
@@ -37,6 +36,6 @@ class Restaurant < ApplicationRecord
   end
 
   def star_rating
-    ("★" * 4) + ("☆" * 1)
+    (("★" * fb_overall_star_rating.round) + ("☆" * (5 - fb_overall_star_rating.round))) if fb_overall_star_rating.present?
   end
 end
