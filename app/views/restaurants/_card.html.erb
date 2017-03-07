@@ -2,6 +2,17 @@
   <div class="card-category">
     <%= "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans" if restaurant.fb_overall_star_rating %>
   </div>
+  <div class="card-user">
+    <% if restaurant.on_duty? %>
+      <% if restaurant.order_acceptance? %>
+        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+      <% else %>
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      <% end %>
+    <% else %>
+      <i class="fa fa-power-off" aria-hidden="true" style="color: red;"></i>
+    <% end %>
+  </div>
   <div class="card-description">
     <h3><%= restaurant.name %></h3>
     <p><%= restaurant&.description&.truncate(60) %><p>
