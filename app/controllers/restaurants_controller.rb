@@ -22,6 +22,7 @@ class RestaurantsController < ApplicationController
     @restaurant = current_user.restaurants.new(restaurant_params)
     authorize @restaurant
     if Restaurant::UpdateFromFacebook.new(@restaurant).call
+      flash[:alert] = nil
       respond_to do |format|
         format.html { redirect_to edit_restaurant_path(@restaurant, tab: 'configure') }
         format.js
