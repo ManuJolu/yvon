@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307125509) do
+ActiveRecord::Schema.define(version: 20170307152008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,11 @@ ActiveRecord::Schema.define(version: 20170307125509) do
     t.integer  "mode",                   default: 0
     t.integer  "messenger_user_id"
     t.string   "messenger_pass"
+    t.float    "fb_overall_star_rating"
+    t.integer  "fb_fan_count"
+    t.integer  "fb_rating_count"
+    t.string   "fb_price_range"
+    t.bigint   "fb_page_id"
     t.index ["messenger_user_id"], name: "index_restaurants_on_messenger_user_id", using: :btree
     t.index ["restaurant_category_id"], name: "index_restaurants_on_restaurant_category_id", using: :btree
     t.index ["user_id"], name: "index_restaurants_on_user_id", using: :btree

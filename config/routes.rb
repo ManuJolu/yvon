@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         get '/refresh/:update' => 'restaurants#refresh'
         patch '/duty_update/:state' => "restaurants#duty_update"
         patch '/preparation_time_update/' => 'restaurants#preparation_time_update'
+        get '/facebook_update/' => 'restaurants#facebook_update'
         get '/orders/refresh/:order_status' => 'orders#refresh'
       end
       resources :meal_categories, only: [:create, :update], shallow: true

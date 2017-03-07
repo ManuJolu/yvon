@@ -68,6 +68,9 @@ fr:
       dessert: "Dessert"
       drink: "Boisson"
       select_timing: 'Choisir le timing'
+    new_form:
+      display_only: 'Affichage uniquement'
+      order_acceptance: 'Prise de commande'
     tabs:
       meals: "Plats"
       orders: "Commandes"

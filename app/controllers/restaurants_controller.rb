@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:edit, :update, :duty_update, :preparation_time_update, :refresh]
+  before_action :set_restaurant, only: [:edit, :update, :duty_update, :preparation_time_update, :facebook_update, :refresh]
   skip_before_action :authenticate_user!, only: [ :index ]
 
   def index
@@ -21,9 +21,9 @@ class RestaurantsController < ApplicationController
   def create
     @restaurant = current_user.restaurants.new(restaurant_params)
     authorize @restaurant
-    if @restaurant.save
+    if Restaurant::UpdateFromFacebook.new(@restaurant).call
       respond_to do |format|
-        format.html { redirect_to @restaurant }
+        format.html { redirect_to edit_restaurant_path(@restaurant, tab: 'configure') }
         format.js
       end
     else
@@ -76,6 +76,15 @@ class RestaurantsController < ApplicationController
         }
       end
     end
+  end
+
+  def facebook_update
+    if Restaurant::UpdateFromFacebook.new(@restaurant).call
+      flash[:notice] = "Mise à jour effectuée."
+    else
+      flash[:alert] = "Mise à jour impossible, vérifiez votre adresse de page Facebook."
+    end
+      redirect_to edit_restaurant_path(@restaurant, tab: 'configure')
   end
 
   def refresh
