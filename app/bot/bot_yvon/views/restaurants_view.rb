@@ -24,13 +24,16 @@ class BotYvon::RestaurantsView
       else
         title = "#{i + 1} - #{I18n.t('bot.restaurant.index.display_only').upcase} - #{restaurant.name}"
       end
+      subtitle = ""
+      subtitle += "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans\n" if restaurant.fb_overall_star_rating.present?
+      subtitle += "#{restaurant.restaurant_category.name}\n#{restaurant.about}"
       {
         title: title,
         image_url: cl_image_path(restaurant.photo.path, transformation: [
           { width: 382, height: 180, crop: :fill },
           { overlay: 'one_pixel.png', effect: :colorize, color: "rgb:#{colors[(i + 1) % 8]}", width: 382, height: 20, y: -100 }
         ]),
-        subtitle: "#{restaurant.star_rating}\n#{restaurant.restaurant_category.name}\n#{restaurant.about}",
+        subtitle: subtitle,
         buttons: [
           {
             type: 'postback',
@@ -63,10 +66,13 @@ class BotYvon::RestaurantsView
 
   def menu(restaurant, params = {})
     elements = []
+    subtitle = ""
+    subtitle += "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans\n" if restaurant.fb_overall_star_rating.present?
+    subtitle += "#{restaurant.restaurant_category.name}\n#{I18n.t('bot.restaurant.menu.swipe_right')}"
     element = {
       title: restaurant.name,
       image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),
-      subtitle: "#{restaurant.star_rating}\n#{restaurant.restaurant_category.name}\n#{I18n.t('bot.restaurant.menu.swipe_right')}"
+      subtitle: subtitle
     }
 
     buttons = []

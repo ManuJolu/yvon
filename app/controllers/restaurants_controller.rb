@@ -27,6 +27,7 @@ class RestaurantsController < ApplicationController
         format.js
       end
     else
+      flash[:alert] = "Mise à jour impossible, vérifiez votre adresse de page Facebook."
       respond_to do |format|
         format.html { render :new }
         format.js

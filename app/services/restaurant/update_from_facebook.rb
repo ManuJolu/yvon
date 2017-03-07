@@ -16,7 +16,7 @@ class Restaurant::UpdateFromFacebook
       restaurant_data = JSON.parse restaurant_data_json
       restaurant.fb_page_id = restaurant_data['id']
       restaurant.name ||= restaurant_data['name']
-      restaurant.about = restaurant_data['about'] || restaurant_data['description']
+      restaurant.about = restaurant_data['about'] || restaurant_data['description'] || restaurant_data['name']
       restaurant.description = restaurant_data['description']
       restaurant.fb_price_range = restaurant_data['price_range']
       restaurant.fb_fan_count = restaurant_data['fan_count']
