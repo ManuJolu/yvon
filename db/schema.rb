@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170306221328) do
+ActiveRecord::Schema.define(version: 20170307125509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 20170306221328) do
     t.string   "facebook_url"
     t.integer  "preparation_time",       default: 15
     t.integer  "restaurant_category_id"
-    t.string   "slogan"
+    t.string   "about"
     t.integer  "mode",                   default: 0
     t.integer  "messenger_user_id"
     t.string   "messenger_pass"

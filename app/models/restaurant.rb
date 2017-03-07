@@ -14,7 +14,7 @@ class Restaurant < ApplicationRecord
   accepts_nested_attributes_for :menus, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true
-  validates :slogan, presence: true
+  validates :about, presence: true
   validates :address, presence: true
   validates :photo, presence: true
   validates :preparation_time, presence: true
