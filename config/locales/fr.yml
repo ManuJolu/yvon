@@ -12,26 +12,12 @@ fr:
     messenger_button:
       call_to_action: "Je commande avec Yvon"
     home:
-      slogan: "Ne perds plus ton temps à faire la queue"
-      tagline: "Laisse Yvon commander ton déjeuner et vas le récupérer quand il est prêt"
-      avant:
-        tit1: "Simple d’utilisation"
-        det1: "Pas d'application à installer, pas de compte à créer, commandez avec Yvon comme vous discutez avec un ami"
-        tit2: "Rapide"
-        det2: "Commandez votre déjeuner en 1 minute et gagnez jusqu’à 20 minutes"
-        tit3: "Aucun surcoût"
-        det3: "Payez le même prix qu'en restaurant"
-        tit4: "Espace dédié"
-        det4: "Retrouver tous vos reçus et factures facilement"
-      fonc:
-        titre1: "Yvon géolocalise les meilleurs restaurants autour de vous"
-        det1: "et vous indique les temps d’attente de chacun"
-        titre2: "Yvon vous apporte le menu"
-        det2: ""
-        titre3: "Commandez en 1 clic avec Yvon"
-        det3: ""
-        titre4: "Yvon vous prévient lorsque votre commande est prête"
-        det4: "Vous n’avez plus qu’à la récupérer sans faire la queue"
+      slogan: "Commande ton repas avec Yvon"
+      tagline: "Vas le récupérer quand il est prêt"
+      action_1: "Yvon géolocalise les restaurants autour de toi"
+      action_2: "Il t'apporte le menu"
+      action_3: "Il prend ta commande et l'envoie en cuisine"
+      action_4: "Yvon te prévient quand elle est prête"
   orders:
     index:
       pending: "En cours"
@@ -94,8 +80,8 @@ fr:
         heading: "au"
         enter: "Entrer"
       menu:
-        swipe_right: "Swipe à droite pour voir la carte ▷"
-        back_to_map: "◁ Liste"
+        swipe_right: "Fait défiler à droite pour voir la carte ▷"
+        back_to_map: "◁ Restaurants"
         menus: "▽ Formules"
         order: "Envoyer ma commande"
         view_more: "Voir la suite"

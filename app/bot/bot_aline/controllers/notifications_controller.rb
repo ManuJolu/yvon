@@ -5,7 +5,7 @@ class BotAline::NotificationsController
 
   def notify_order(order)
     user = order.restaurant.messenger_user
-    view.notify_order(order.decorate, user) if user
+    view.notify_order(order, user) if user
   end
 
   def notify_duty(restaurant)

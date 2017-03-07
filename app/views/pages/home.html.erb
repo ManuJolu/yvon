@@ -6,78 +6,34 @@
   </div>
 </div>
 
-<!-- Avantage Yvon -->
-<div class="bg-gray">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-md-4">
-        <h3><%= t('.avant.tit1') %></h3>
-        <p><%= t('.avant.det1') %></p>
-        <br>
-        <h3><%= t('.avant.tit3') %></h3>
-        <p><%= t('.avant.det3') %></p>
-      </div>
-
-      <div class="col-md-4">
-          <%= image_tag 'yvon_avatar.png', class: 'avatar-xl' %>
-      </div>
-
-      <div class="col-md-4">
-        <h3><%= t('.avant.tit2') %></h3>
-        <p><%= t('.avant.det2') %></p>
-        <br>
-        <h3><%= t('.avant.tit4') %></h3>
-        <p><%= t('.avant.det4') %></p>
-      </div>
+<div class="container text-center">
+  <div class="row row-md-flex-center">
+    <div class="col-md-3">
+      <%= image_tag "map.png", width: 50, height: 50 %>
+      <h3><%= t('.action_1') %></h3>
+      <br>
+        <%= image_tag "pay.png", width: 50, height: 50 %>
+      <h3><%= t('.action_3') %></h3>
     </div>
-  </div>
-</div>
 
-<!-- fonctionnement Yvon -->
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-
-      <div class="product" id="first">
-        <%= image_tag "map.png", width: 70, height: 70, class: 'product-image product-image-70' %>
-
-        <div class='product-body'>
-          <h3><%= t('.fonc.titre1') %></h3>
-          <p><%= t('.fonc.det1') %></p>
-        </div>
-      </div>
-
-      <div class="product">
-        <%= image_tag "store.png", width: 70, height: 70, class: 'product-image product-image-70' %>
-        <div class='product-body'>
-          <h3><%= t('.fonc.titre2') %></h3>
-          <p><%= t('.fonc.det2') %></p>
-        </div>
-      </div>
-
-      <div class="product">
-        <%= image_tag "pay.png", width: 70, height: 70, class: 'product-image product-image-70' %>
-        <div class='product-body'>
-          <h3><%= t('.fonc.titre3') %></h3>
-          <p><%= t('.fonc.det3') %></p>
-        </div>
-      </div>
-
-      <div class="product">
-        <%= image_tag "takeaway.png", width: 70, height: 70, class: 'product-image product-image-70' %>
-        <div class='product-body'>
-          <h3><%= t('.fonc.titre4') %></h3>
-          <p><%= t('.fonc.det4') %></p>
-        </div>
-      </div>
-
+    <div class="col-md-3">
+      <%= image_tag 'yvon_avatar.png', class: 'avatar-xl' %>
     </div>
-    <div class="col-md-4">
+
+    <div class="col-md-3">
+        <%= image_tag "store.png", width: 50, height: 50 %>
+      <h3><%= t('.action_2') %></h3>
+      <br>
+        <%= image_tag "takeaway.png", width: 50, height: 50 %>
+      <h3><%= t('.action_4') %></h3>
+    </div>
+
+    <div class="col-md-3">
       <%= render 'phone_demo' %>
     </div>
   </div>
 
-  <div class="row text-center">
+  <div class="row">
     <div class="col">
       <%= render 'messenger_button' %>
     </div>

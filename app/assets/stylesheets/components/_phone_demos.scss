@@ -1,10 +1,11 @@
 .phone-demo {
-  position: relative;
+  width: 253px;
+  height: 501px;
+  background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
-  &-gif {
-    position: absolute;
+  img {
     width: 210px;
   }
 }
