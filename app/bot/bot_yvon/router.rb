@@ -39,9 +39,9 @@ class BotYvon::Router
     else
       if user.current_order&.restaurant
         case message.text
-        when /cdsbeta/i
+        when /cds/i
           orders_controller.confirm
-        when /talisbeta/i
+        when /talis/i
           orders_controller.confirm
         end
 
