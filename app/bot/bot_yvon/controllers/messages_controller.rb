@@ -19,6 +19,10 @@ class BotYvon::MessagesController
     view.no_restaurant_selected
   end
 
+  def no_current_order
+    view.no_current_order
+  end
+
   def else
     view.else
   end

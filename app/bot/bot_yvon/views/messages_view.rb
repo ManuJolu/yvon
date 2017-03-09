@@ -70,6 +70,17 @@ class BotYvon::MessagesView
     )
   end
 
+  def no_current_order
+    message.reply(
+      text: I18n.t('bot.no_current_order'),
+      quick_replies: [
+        {
+          content_type: 'location'
+        }
+      ]
+    )
+  end
+
   def else
     message.reply(
       text: I18n.t('bot.else')

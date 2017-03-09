@@ -32,17 +32,17 @@ namespace :fbm do
       call_to_actions: [
         {
           type: 'postback',
-          title: 'Nouvelle commande',
+          title: '🍴 Nouvelle commande',
           payload: 'start'
         },
         {
           type: 'postback',
-          title: 'Partage Yvon avec tes amis',
+          title: '🎁 Partage Yvon avec tes amis',
           payload: 'share'
         },
         {
           type: 'web_url',
-          title: 'www.hello-yvon.com',
+          title: '🌍 www.hello-yvon.com',
           url: 'http://www.hello-yvon.com'
         }
       ]

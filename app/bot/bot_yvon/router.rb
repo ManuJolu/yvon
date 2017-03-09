@@ -72,11 +72,14 @@ class BotYvon::Router
     case postback.payload
     when 'start'
       messages_controller.hello
+      return
     when 'share'
       messages_controller.share
+      return
     when 'map'
       coordinates = [user.current_order&.latitude, user.current_order&.longitude]
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
+      return
     end
 
     if user.current_order
@@ -125,6 +128,8 @@ class BotYvon::Router
           messages_controller.no_restaurant_selected
         end
       end
+    else
+      messages_controller.no_current_order
     end
   end
 end

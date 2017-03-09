@@ -68,7 +68,7 @@ class BotYvon::RestaurantsView
     elements = []
     subtitle = ""
     subtitle += "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans\n" if restaurant.fb_overall_star_rating.present?
-    subtitle += "#{restaurant.restaurant_category.name}\n#{I18n.t('bot.restaurant.menu.swipe_right')}"
+    subtitle += "#{restaurant.restaurant_category.name} - #{I18n.t('bot.restaurant.ready_in')} #{restaurant.preparation_time} min\n#{I18n.t('bot.restaurant.menu.swipe_right')}"
     element = {
       title: restaurant.name,
       image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),

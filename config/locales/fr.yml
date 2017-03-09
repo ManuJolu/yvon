@@ -71,16 +71,17 @@ fr:
     share: "Essaye Yvon pour commander ton repas le midi !"
     no_restaurant: "Désolé, je n'ai pas trouvé de restaurant près de toi... Essaye un nouveau lieu, ou ma ville natale Bordeaux pour être sûr de trouver de bons restaurants !"
     no_restaurant_selected: "Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider à en trouver un ?"
+    no_current_order: "Désolé, tu n'as plus de commande en cours. Donne moi ta position pour en commencer une nouvelle :"
     else: "Dis 'Hello' pour commencer une nouvelle commande"
     restaurant:
+      ready_in: "prêt en"
       index:
-        display_only: "consultation uniquement"
-        display_order: "consultation et commande"
-        ready_in: "prêt en"
+        display_only: "📖 consultation"
+        display_order: "📖 + 📝 commande"
         heading: "au"
         enter: "Entrer"
       menu:
-        swipe_right: "Fait défiler à droite pour voir la carte ▷"
+        swipe_right: "Regarder la carte ▷"
         back_to_map: "◁ Restaurants"
         menus: "▽ Formules"
         order: "Envoyer ma commande"
