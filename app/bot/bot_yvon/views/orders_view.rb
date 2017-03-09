@@ -86,18 +86,18 @@ class BotYvon::OrdersView
   end
 
   def confirm(order, params = {})
-    colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
-    url_array = [
-      "http://maps.googleapis.com/maps/api/staticmap", # base
-      "?center=#{order.restaurant.latitude},+#{order.restaurant.longitude}", # center
-      # "&zoom=15", zoom
-      "&scale=2", # scale
-      "&size=382x382", # size
-      "&maptype=roadmap&format=png&visual_refresh=true", # format
-      "&key=#{ENV['GOOGLE_API_KEY']}", # key
-      # "&markers=size:mid%7Ccolor:0x#{colors[0]}%7Clabel:%7C#{coordinates[0]},#{coordinates[1]}", # user_marker
-      "&markers=size:mid%7Ccolor:0x#{colors[3]}%7Clabel:%7C#{order.restaurant.latitude},#{order.restaurant.longitude}"
-    ]
+    # colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
+    # url_array = [
+    #   "http://maps.googleapis.com/maps/api/staticmap", # base
+    #   "?center=#{order.restaurant.latitude},+#{order.restaurant.longitude}", # center
+    #   # "&zoom=15", zoom
+    #   "&scale=2", # scale
+    #   "&size=382x382", # size
+    #   "&maptype=roadmap&format=png&visual_refresh=true", # format
+    #   "&key=#{ENV['GOOGLE_API_KEY']}", # key
+    #   # "&markers=size:mid%7Ccolor:0x#{colors[0]}%7Clabel:%7C#{coordinates[0]},#{coordinates[1]}", # user_marker
+    #   "&markers=size:mid%7Ccolor:0x#{colors[3]}%7Clabel:%7C#{order.restaurant.latitude},#{order.restaurant.longitude}"
+    # ]
 
     if params[:program] == 'beta'
       message.reply(
@@ -114,21 +114,21 @@ class BotYvon::OrdersView
       text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (Time.now + order.preparation_time.minutes).strftime('%H:%M'))
     )
 
-    message.reply(
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          elements: [
-            {
-              title: I18n.t('bot.order.confirm.go_to', restaurant_name: order.restaurant.name),
-              image_url: url_array.join,
-              item_url: "http://maps.apple.com/maps?q=#{order.restaurant.address}"
-            }
-          ]
-        }
-      }
-    )
+    # message.reply(
+    #   attachment: {
+    #     type: "template",
+    #     payload: {
+    #       template_type: "generic",
+    #       elements: [
+    #         {
+    #           title: I18n.t('bot.order.confirm.go_to', restaurant_name: order.restaurant.name),
+    #           image_url: url_array.join,
+    #           item_url: "http://maps.apple.com/maps?q=#{order.restaurant.address}"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # )
   end
 
   private

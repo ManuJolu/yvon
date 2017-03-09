@@ -92,7 +92,7 @@ class BotYvon::RestaurantsView
       payload: "cart"
     }
     buttons << back_button unless params[:ordered_meals?]
-    buttons << menu_button
+    buttons << menu_button if restaurant.menus.any?
     buttons << order_button if params[:ordered_meals?]
     element[:buttons] = buttons
 
