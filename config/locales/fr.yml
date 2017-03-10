@@ -76,8 +76,8 @@ fr:
     restaurant:
       ready_in: "prêt en"
       index:
-        display_only: "📖 consultation"
-        display_order: "📖 + 📝 commande"
+        display_only: "⚪ consultation"
+        display_order: "🔵 commande"
         heading: "au"
         enter: "Entrer"
       menu:

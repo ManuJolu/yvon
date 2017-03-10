@@ -4,7 +4,7 @@ namespace :fbm do
     Facebook::Messenger::Thread.set({
       setting_type: 'greeting',
       greeting: {
-        text: "Salut {{user_first_name}}, je m'appelle Yvon.\nNe perds plus ton temps à faire la queue.\nCommande ton repas avec moi !\nDit 'Hello' à tout moment pour trouver des restaurants autour de toi."
+        text: "Salut {{user_first_name}}, je m'appelle Yvon.\nNe perds plus ton temps à faire la queue.\nCommande ton repas avec moi !\nDis 'Hello' à tout moment pour trouver des restaurants autour de toi."
       },
     }, access_token: ENV['YVON_ACCESS_TOKEN'])
     puts "Yvon welcome message set."
