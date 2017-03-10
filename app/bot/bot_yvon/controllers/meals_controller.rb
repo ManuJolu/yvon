@@ -6,8 +6,9 @@ class BotYvon::MealsController
   def index(restaurant_id, meal_category_id)
     restaurant = Restaurant.find(restaurant_id)
     meal_category = MealCategory.find(meal_category_id)
+    next_meal_category = meal_category.lower_item
     meals = restaurant.meals.is_active.where(meal_category: meal_category).limit(9)
-    view.index(meals.decorate, order_acceptance: restaurant.order_acceptance?, meal_category: meal_category)
+    view.index(meals.decorate, order_acceptance: restaurant.order_acceptance?, meal_category: meal_category, next_meal_category: next_meal_category)
   end
 
   def get_option(meal, params = {})

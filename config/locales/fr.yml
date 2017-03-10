@@ -91,14 +91,10 @@ fr:
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
     meal:
       index:
-        pick_pay: '✔ & Payer'
-        pick_order: '✔ & Envoyer'
         pick_menu: 'Commander'
-        pick_next: "✔ & ➥ %{next_category}"
-        pay: 'Payer'
-        order: 'Envoyer'
+        pick_next: "Cmd & ▷ %{next_meal_category}"
         menu: '◁ Carte'
-        next: "➥ %{next_category}"
+        next: "▷ %{next_meal_category}"
         no_thanks: "Pas de %{meal_category} pour moi"
         no_thanks_message: "\nJe ferais mieux de surveiller ma ligne"
         back: "◁ Carte"

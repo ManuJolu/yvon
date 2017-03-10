@@ -13,6 +13,11 @@ class BotYvon::MealsView
           payload: "meal_#{meal.id}_menu"
         }
       ]
+      buttons << {
+        type: 'postback',
+        title: I18n.t('bot.meal.index.pick_next', next_meal_category: params[:next_meal_category].name),
+        payload: "meal_#{meal.id}_next"
+      } if params[:next_meal_category]
       result = {
         title: meal.name,
         image_url: cl_image_path(meal.photo.path, width: 382, height: 200, crop: :fill),

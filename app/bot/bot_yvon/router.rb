@@ -57,6 +57,8 @@ class BotYvon::Router
             case action
             when 'menu'
               restaurants_controller.menu(meal.restaurant.id)
+            when 'next'
+              meals_controller.index(meal.restaurant.id, meal.meal_category.lower_item.id)
             end
           else
             restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
@@ -110,6 +112,8 @@ class BotYvon::Router
             case action
             when 'menu'
               restaurants_controller.menu(meal.restaurant.id)
+            when 'next'
+              meals_controller.index(meal.restaurant.id, meal.meal_category.lower_item.id)
             end
           end
         else
