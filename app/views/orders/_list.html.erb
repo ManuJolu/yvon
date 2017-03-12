@@ -8,7 +8,7 @@
         <th><%= t '.desserts' %></th>
         <th><%= t '.drinks' %></th>
         <th class="text-right"><%= t '.total_price' %></th>
-        <th class="text-center"><%= t '.paid_at' %></th>
+        <th class="text-center"><%= t '.sent_at' %></th>
         <th class="text-center"><%= t '.ready_at' %></th>
         <th class="text-center"><%= t '.delivered_at' %></th>
       </tr>
@@ -44,7 +44,7 @@
             <%= order.decorate.price %>
           </td>
           <td class="text-center">
-            <%= order.decorate.paid_at %>
+            <%= order.decorate.sent_at %>
           </td>
           <td class="text-center">
             <% if order.handled_at.nil? %>

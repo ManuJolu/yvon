@@ -51,12 +51,12 @@ class BotYvon::OrdersController
       order = user.current_order
       if order.restaurant.on_duty?
         order.preparation_time = order.restaurant.preparation_time
-        order.paid_at = Time.now
+        order.sent_at = Time.now
         order.save
         BotAline::NotificationsController.new.notify_order(order)
         ActionCable.server.broadcast "restaurant_orders_#{order.restaurant.id}",
-          order_status: "paid"
-        view.confirm(order.decorate, paid_at: order.paid_at.to_i, program: 'beta')
+          order_status: "sent"
+        view.confirm(order.decorate, sent_at: order.sent_at.to_i, program: 'beta')
       else
         view.restaurant_closed(order.restaurant)
       end
@@ -70,13 +70,13 @@ class BotYvon::OrdersController
       order = user.current_order
       if order.restaurant.on_duty?
         order.preparation_time = order.restaurant.preparation_time
-        order.paid_at = Time.now
+        order.sent_at = Time.now
         order.restaurant = Restaurant.find(1)
         order.save
         BotAline::NotificationsController.new.notify_order(order)
         ActionCable.server.broadcast "restaurant_orders_#{order.restaurant.id}",
-          order_status: "paid"
-        view.confirm(order.decorate, paid_at: Time.now.to_i, program: 'demo')
+          order_status: "sent"
+        view.confirm(order.decorate, sent_at: Time.now.to_i, program: 'demo')
       else
         view.restaurant_closed(order.restaurant)
       end

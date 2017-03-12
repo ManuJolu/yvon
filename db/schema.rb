@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307152008) do
+ActiveRecord::Schema.define(version: 20170312151748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20170307152008) do
     t.integer  "restaurant_id"
     t.integer  "user_rating"
     t.string   "user_comment"
-    t.datetime "paid_at"
+    t.datetime "sent_at"
     t.datetime "ready_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false

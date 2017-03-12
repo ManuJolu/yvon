@@ -27,12 +27,12 @@ class OrderDecorator < Draper::Decorator
     format '%.2f', object.discount
   end
 
-  def paid_at
-    object.paid_at&.strftime('%H:%M:%S')
+  def sent_at
+    object.sent_at&.strftime('%H:%M:%S')
   end
 
   def ready_at_limit
-    (object.paid_at.try(:+, object.preparation_time.minutes))&.strftime('%H:%M:%S')
+    (object.sent_at.try(:+, object.preparation_time.minutes))&.strftime('%H:%M:%S')
   end
 
   def ready_at

@@ -38,7 +38,7 @@ en:
       desserts: "Desserts"
       drinks: "Drinks"
       total_price: "Total price"
-      paid_at: "Paid at"
+      sent_at: "Ordered at"
       ready_at: "Ready at"
       delivered_at: "Delivered at"
     button_handled:
