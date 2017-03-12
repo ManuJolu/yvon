@@ -14,6 +14,8 @@ class Order < ApplicationRecord
   monetize :alacarte_price_cents
   monetize :discount_cents
 
+  enum state: [ :pending, :paid, :password_confirmed, :demo ]
+
   scope :at_today, -> { where('sent_at > ?', Date.today.to_time).order(sent_at: :desc) }
   scope :pending, -> { where('sent_at IS NOT NULL').where(delivered_at: nil).order(sent_at: :desc) }
   scope :delivered, -> { where('delivered_at IS NOT NULL').order(delivered_at: :desc) }

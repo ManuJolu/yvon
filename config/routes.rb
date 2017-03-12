@@ -21,7 +21,9 @@ Rails.application.routes.draw do
       resources :meals, only: [:index, :new, :create, :edit, :update, :destroy], shallow: true do
         resources :meal_options, only: [:index], shallow: true
       end
-      resources :orders, only: [:index, :update], shallow: true
+      resources :orders, only: [:index, :update], shallow: true do
+        resources :payments, only: [:new, :create]
+      end
     end
   end
 end

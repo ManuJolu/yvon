@@ -8,4 +8,8 @@ class OrderPolicy < ApplicationPolicy
   def update?
     record.restaurant.user == user || user.admin
   end
+
+  def pay?
+    record.user == user || user.admin
+  end
 end
