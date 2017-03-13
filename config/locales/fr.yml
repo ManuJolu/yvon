@@ -108,7 +108,7 @@ fr:
         order_pending: "En attente"
         discounts: "Réductions"
         ask_payment_method: "Comment souhaites-tu confirmer ta commande ? (entre ton code si tu fais partie du programme de bêta-test)"
-        pay: "Payer en ligne"
+        pay: "Payer avec ma carte"
         password: "Payer au comptoir"
         demo: "Continuer en démo"
         ask_password: "Quel est ton code ?"

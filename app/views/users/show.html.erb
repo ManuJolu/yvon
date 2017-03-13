@@ -1,16 +1,33 @@
 <div class="container">
   <h3 class="text-right"><%= @user.decorate.name %></h3>
-  <h4><%= t ".my_restaurants" %></h4>
-  <div class="row">
-    <% @user.restaurants.each do |restaurant| %>
-      <div class="col-xs-12 col-sm-4">
-        <%= render 'restaurants/card', restaurant: restaurant %>
-      </div>
-    <% end %>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <%= link_to t(".add_restaurant", default: "Add a restaurant"), new_restaurant_path, class: "btn btn-danger marged" %>
+
+  <h4>Ma carte bancaire</h4>
+
+  <%= form_tag @user do %>
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+      data-name="Yvon"
+      data-image=<%= image_path 'yvon_avatar_128.png' %>
+      data-email="<%= current_user.email %>"
+      data-label="Mettre à jour ma carte"
+      data-panel-label="Mettre à jour ma carte"
+      data-allow-remember-me=false
+      data-locale="auto"></script>
+  <% end %>
+
+  <% if User.roles[@user.role] > 0 %>
+    <h4><%= t ".my_restaurants" %></h4>
+    <div class="row">
+      <% @user.restaurants.each do |restaurant| %>
+        <div class="col-xs-12 col-sm-4">
+          <%= render 'restaurants/card', restaurant: restaurant %>
+        </div>
+      <% end %>
     </div>
-  </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= link_to t(".add_restaurant", default: "Add a restaurant"), new_restaurant_path, class: "btn btn-danger marged" %>
+      </div>
+    </div>
+  <% end %>
 </div>

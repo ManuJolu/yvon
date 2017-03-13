@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   scope '(:locale)', locale: /fr|en/ do
     root to: 'pages#home'
     get '/privacy', to: 'pages#privacy_policy'
-    resources :users, only: [:show]
+    resources :users, only: [:show, :update]
     resources :restaurants, only: [:index, :new, :create, :edit, :update] do
       member do
         get '/refresh/:update' => 'restaurants#refresh'
