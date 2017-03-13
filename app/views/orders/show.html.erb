@@ -16,11 +16,10 @@
 <script>
   window.extAsyncInit = function() {
     // the Messenger Extensions JS SDK is done loading
-    alert("js sdk finished loading")
     MessengerExtensions.requestCloseBrowser(function success() {
-      alert('closing')
+
     }, function error(err) {
-      alert(err)
+
     });
   };
 </script>

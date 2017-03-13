@@ -84,9 +84,9 @@ class BotYvon::OrdersView
               url: order.payment_url,
               title: I18n.t('bot.order.cart.pay'),
               webview_height_ratio: 'tall',
+              webview_share_button: 'hide',
               messenger_extensions: true,
-              fallback_url: 'http://www.hello-yvon.com', # replace with fallback url for Windows Phone
-              webview_share_button: 'hide'
+              fallback_url: 'http://www.hello-yvon.com/'
             },
             {
               type: 'postback',
