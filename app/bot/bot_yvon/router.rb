@@ -39,15 +39,13 @@ class BotYvon::Router
     else
       if user.current_order&.restaurant
         case message.text
-        when /cds/i
-          orders_controller.confirm
-        when /talis/i
-          orders_controller.confirm
+        when /\Acds\z/i
+          orders_controller.password_confirm
+        when /\Atalis\z/i
+          orders_controller.password_confirm
         end
 
         case message.quick_reply
-        when /demo/i
-          orders_controller.demo
         when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
           meal = Meal.find($LAST_MATCH_INFO['meal_id'])
           option = Option.find($LAST_MATCH_INFO['option_id'])
@@ -131,6 +129,10 @@ class BotYvon::Router
         else
           messages_controller.no_restaurant_selected
         end
+      when 'password'
+        orders_controller.ask_password
+      when 'demo'
+        orders_controller.demo
       end
     else
       messages_controller.no_current_order

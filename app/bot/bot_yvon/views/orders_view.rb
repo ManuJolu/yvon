@@ -41,18 +41,18 @@ class BotYvon::OrdersView
           recipient_name: "#{order.user.name}",
           order_number: "#{order.id}",
           currency: "EUR",
-          payment_method: I18n.t('bot.order.cart.payment_method'),
-          order_url: "http://www.hello-yvon.com",
+          payment_method: I18n.t('bot.order.cart.order_pending'),
+          # order_url: order.payment_url,
           timestamp: Time.now.to_i,
           elements: elements,
-          address: {
-            street_1: "Quai de Bacalan",
-            street_2: "",
-            city: "Bordeaux",
-            postal_code: "33300",
-            state: "NA",
-            country: "FR"
-          },
+          # address: {
+          #   street_1: "Quai de Bacalan",
+          #   street_2: "",
+          #   city: "Bordeaux",
+          #   postal_code: "33300",
+          #   state: "NA",
+          #   country: "FR"
+          # },
           summary: {
             subtotal: order.pretax_price_num,
             total_tax: order.tax_num,
@@ -73,19 +73,41 @@ class BotYvon::OrdersView
     )
 
     message.reply(
-      text: I18n.t('bot.order.cart.beta_code'),
-      quick_replies: [
-        {
-          content_type: 'text',
-          title: I18n.t('bot.order.cart.demo'),
-          payload: 'demo'
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: I18n.t('bot.order.cart.ask_payment_method'),
+          buttons: [
+            {
+              type: 'web_url',
+              url: order.payment_url,
+              title: I18n.t('bot.order.cart.pay'),
+              webview_height_ratio: 'tall'
+            },
+            {
+              type: 'postback',
+              title: I18n.t('bot.order.cart.password'),
+              payload: 'password'
+            },
+            {
+              type: 'postback',
+              title: I18n.t('bot.order.cart.demo'),
+              payload: 'demo'
+            }
+          ]
         }
-      ]
+      }
     )
-
   end
 
-  def confirm(order, params = {})
+  def ask_password
+    message.reply(
+      text: I18n.t('bot.order.cart.ask_password')
+    )
+  end
+
+  def confirm(order)
     # colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
     # url_array = [
     #   "http://maps.googleapis.com/maps/api/staticmap", # base
@@ -99,19 +121,18 @@ class BotYvon::OrdersView
     #   "&markers=size:mid%7Ccolor:0x#{colors[3]}%7Clabel:%7C#{order.restaurant.latitude},#{order.restaurant.longitude}"
     # ]
 
-    if params[:program] == 'beta'
+    if order.password_confirmed?
       message.reply(
-        text: I18n.t('bot.order.confirm.beta')
+        text: I18n.t('bot.order.confirm.password')
       )
-    elsif params[:program] == 'demo'
+    elsif order.demo?
       message.reply(
         text: I18n.t('bot.order.confirm.demo')
       )
     end
 
-
     message.reply(
-      text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (Time.now + order.preparation_time.minutes).strftime('%H:%M'))
+      text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (order.sent_at + order.preparation_time.minutes).strftime('%H:%M'))
     )
 
     # message.reply(

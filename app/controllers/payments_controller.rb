@@ -2,7 +2,7 @@ class PaymentsController < ApplicationController
 before_action :set_order, only: [:new, :create]
 
   def new
-    @order.decorate
+    @order
   end
 
   def create

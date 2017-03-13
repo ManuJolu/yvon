@@ -1,17 +1,19 @@
-<h1>Commande <%= @order.id %></h1>
+<h3>Commande <%= @order.id %></h3>
+
 <%= form_tag order_payments_path(@order) do %>
   <article>
-    <label class="amount">
-      <span>Amount: <%= @order.price %></span>
+    <label class="price">
+      <span>Prix : <%= @order.decorate.price %></span>
     </label>
   </article>
 
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
     data-name="Yvon"
-    data-image=<%= image_path 'yvon_avatar.png' %>
+    data-image=<%= image_path 'yvon_avatar_128.png' %>
     data-email="<%= current_user.email %>"
-    data-description="Order <%= @order.id %>"
+    data-label="Payer par carte bancaire"
+    data-description="Commande <%= @order.id %>"
     data-locale="auto"
     data-amount="<%= @order.price_cents %>"
     data-currency="<%= @order.price.currency %>"></script>
