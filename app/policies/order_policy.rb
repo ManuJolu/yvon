@@ -5,11 +5,11 @@ class OrderPolicy < ApplicationPolicy
     end
   end
 
-  def update?
-    record.restaurant.user == user || user.admin
+  def show?
+    record.user == user || user.admin
   end
 
-  def pay?
-    record.user == user || user.admin
+  def update?
+    record.restaurant.user == user || user.admin
   end
 end

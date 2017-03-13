@@ -51,7 +51,7 @@ class OrderDecorator < Draper::Decorator
 
   def payment_url_options
     {
-      host: 'https://yvon.herokuapp.com/',
+      host: 'http://www.hello-yvon.com/',
       locale: I18n.locale == I18n.default_locale ? nil : I18n.locale
     }
   end

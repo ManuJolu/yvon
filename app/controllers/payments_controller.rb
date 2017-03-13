@@ -2,7 +2,7 @@ class PaymentsController < ApplicationController
 before_action :set_order, only: [:new, :create]
 
   def new
-    @order
+    redirect_to @order unless @order.pending?
   end
 
   def create
@@ -24,7 +24,7 @@ before_action :set_order, only: [:new, :create]
     )
 
     @order.update(payment: charge.to_json, state: :paid)
-    redirect_to root_path
+    redirect_to @order
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
@@ -34,7 +34,7 @@ before_action :set_order, only: [:new, :create]
 private
 
   def set_order
-    @order = Order.where(state: :pending).find(params[:order_id])
-    authorize @order, :pay?
+    @order = Order.find(params[:order_id])
+    authorize @order, :show?
   end
 end

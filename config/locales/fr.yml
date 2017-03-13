@@ -1,7 +1,7 @@
 fr:
   layouts:
     application:
-      title: "Yvon - Ne fais plus la queue"
+      title: "Yvon - Commande ton repas avec moi !"
   shared:
     navbar:
       sign_in: "Connexion"
@@ -13,7 +13,7 @@ fr:
       call_to_action: "Je commande avec Yvon"
     home:
       slogan: "Commande ton repas avec Yvon"
-      tagline: "Vas le récupérer quand il est prêt"
+      tagline: "Passe le récupérer quand il est prêt"
       action_1: "Yvon géolocalise les restaurants autour de toi"
       action_2: "Il t'apporte le menu"
       action_3: "Il prend ta commande et l'envoie en cuisine"
@@ -91,8 +91,8 @@ fr:
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
     meal:
       index:
-        pick_menu: '✅ Commander'
-        pick_next: "✅ & ▷ %{next_meal_category}"
+        pick_menu: 'Commander'
+        pick_next: "Commander & suite"
         menu: '◁ Carte'
         next: "▷ %{next_meal_category}"
         no_thanks: "Pas de %{meal_category} pour moi"
@@ -108,9 +108,9 @@ fr:
         order_pending: "En attente"
         discounts: "Réductions"
         ask_payment_method: "Comment souhaites-tu confirmer ta commande ? (entre ton code si tu fais partie du programme de bêta-test)"
-        pay: "Payer"
-        password: "Entrer un code"
-        demo: "Continuer la démo"
+        pay: "Payer en ligne"
+        password: "Payer au comptoir"
+        demo: "Continuer en démo"
         ask_password: "Quel est ton code ?"
       confirm:
         password: "Ton code est valide, ta commande est envoyée en cuisine !"

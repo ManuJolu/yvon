@@ -83,7 +83,8 @@ class BotYvon::OrdersView
               type: 'web_url',
               url: order.payment_url,
               title: I18n.t('bot.order.cart.pay'),
-              webview_height_ratio: 'tall'
+              webview_height_ratio: 'tall',
+              webview_share_button: 'hide'
             },
             {
               type: 'postback',
