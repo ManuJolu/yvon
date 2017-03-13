@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :credit_card_update]
 
   def show
-    byebug
     @update = params[:update]
   end
 
