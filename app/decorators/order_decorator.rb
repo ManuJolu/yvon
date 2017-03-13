@@ -3,6 +3,8 @@ class OrderDecorator < Draper::Decorator
   decorates_association :user
   decorates_association :ordered_meals
 
+  delegate :url_helpers, to: 'Rails.application.routes'
+
   def price
     humanized_money_with_symbol object.price
   end
@@ -27,19 +29,30 @@ class OrderDecorator < Draper::Decorator
     format '%.2f', object.discount
   end
 
-  def paid_at
-    object.paid_at&.strftime('%H:%M:%S')
+  def sent_at
+    object.sent_at&.strftime('%H:%M')
   end
 
   def ready_at_limit
-    (object.paid_at.try(:+, object.preparation_time.minutes))&.strftime('%H:%M:%S')
+    (object.sent_at.try(:+, object.preparation_time.minutes))&.strftime('%H:%M')
   end
 
   def ready_at
-    object.ready_at&.strftime('%H:%M:%S')
+    object.ready_at&.strftime('%H:%M')
   end
 
   def delivered_at
-    object.delivered_at&.strftime('%H:%M:%S')
+    object.delivered_at&.strftime('%H:%M')
+  end
+
+  def payment_url
+    url_helpers.new_order_payment_url(self, payment_url_options)
+  end
+
+  def payment_url_options
+    {
+      host: 'https://yvon.herokuapp.com/',
+      locale: I18n.locale == I18n.default_locale ? nil : I18n.locale
+    }
   end
 end

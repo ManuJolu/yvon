@@ -39,6 +39,6 @@ class User < ApplicationRecord
   end
 
   def current_order
-    orders.last if (orders.any? && orders.last.paid_at.nil? && (orders.last.updated_at > (30.minutes.ago)))
+    orders.last if (orders.any? && orders.last.pending? && (orders.last.updated_at > (30.minutes.ago)))
   end
 end

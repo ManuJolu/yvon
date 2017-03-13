@@ -31,7 +31,7 @@ fr:
       desserts: "Desserts"
       drinks: "Boissons"
       total_price: "Prix total"
-      paid_at: "Payé à"
+      sent_at: "Commandé à"
       ready_at: "Prêt à"
       delivered_at: "Livré à"
     button_handled:
@@ -105,12 +105,15 @@ fr:
       no_meals: "Désolé, tu n'as pas encore de plat à commander !"
       restaurant_closed: "Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à trouver un autre restaurant ?"
       cart:
-        payment_method: "Paiement au comptoir"
+        order_pending: "En attente"
         discounts: "Réductions"
-        beta_code: "Si tu fais partie du programme de bêta-test, tapes ton code pour confirmer la commande, sinon continues sur la démo :"
-        demo: "Démo"
+        ask_payment_method: "Comment souhaites-tu confirmer ta commande ? (entre ton code si tu fais partie du programme de bêta-test)"
+        pay: "Payer"
+        password: "Entrer un code"
+        demo: "Continuer la démo"
+        ask_password: "Quel est ton code ?"
       confirm:
-        beta: "Ton code est valide, ta commande est envoyée en cuisine !"
+        password: "Ton code est valide, ta commande est envoyée en cuisine !"
         demo: "Tu continues sur la démo, ta commande n'est pas vraiment en cours de préparation ;-)."
         ready: "Ta commande sera prête dans %{preparation_time} min à %{ready_time}."
         go_to: "Va au %{restaurant_name}"

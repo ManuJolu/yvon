@@ -14,12 +14,14 @@ class Order < ApplicationRecord
   monetize :alacarte_price_cents
   monetize :discount_cents
 
-  scope :at_today, -> { where('paid_at > ?', Date.today.to_time).order(paid_at: :desc) }
-  scope :pending, -> { where('paid_at IS NOT NULL').where(delivered_at: nil).order(paid_at: :desc) }
+  enum state: [ :pending, :paid, :password_confirmed, :demo ]
+
+  scope :at_today, -> { where('sent_at > ?', Date.today.to_time).order(sent_at: :desc) }
+  scope :pending, -> { where('sent_at IS NOT NULL').where(delivered_at: nil).order(sent_at: :desc) }
   scope :delivered, -> { where('delivered_at IS NOT NULL').order(delivered_at: :desc) }
 
   # def self.pending
-  #   select { |order| order.paid_at && order.delivered_at.nil? }
+  #   select { |order| order.sent_at && order.delivered_at.nil? }
   # end
 
   # def self.delivered
