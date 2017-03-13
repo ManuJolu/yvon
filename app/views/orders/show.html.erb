@@ -14,9 +14,12 @@
 </script>
 
 <script>
-  MessengerExtensions.requestCloseBrowser(function success() {
+  window.extAsyncInit = function() {
+    // the Messenger Extensions JS SDK is done loading
+    MessengerExtensions.requestCloseBrowser(function success() {
 
-  }, function error(err) {
+    }, function error(err) {
 
-  });
+    });
+  };
 </script>
