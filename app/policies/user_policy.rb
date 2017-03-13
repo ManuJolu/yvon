@@ -9,7 +9,7 @@ class UserPolicy < ApplicationPolicy
     record == user || user.admin?
   end
 
-  def update?
+  def credit_card_update?
     show?
   end
 end

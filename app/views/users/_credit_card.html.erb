@@ -1,0 +1,31 @@
+<% if user.stripe_customer_id %>
+
+    <p><%= user.stripe_default_source %></p>
+    <%= form_tag credit_card_update_user_path(user), method: :patch, remote: true do %>
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+        data-name="Yvon"
+        data-image=<%= image_path 'yvon_avatar_128.png' %>
+        data-email="<%= user.email %>"
+        data-label="Mettre à jour ma carte"
+        data-panel-label="Mettre à jour ma carte"
+        data-allow-remember-me=false
+        data-locale="auto"></script>
+    <% end %>
+
+  <% else %>
+
+    <p>Pas de carte enregistrée</p>
+    <%= form_tag credit_card_update_user_path(user), method: :patch, remote: true do %>
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+        data-name="Yvon"
+        data-image=<%= image_path 'yvon_avatar_128.png' %>
+        data-email="<%= user.email %>"
+        data-label="Ajouter ma carte"
+        data-panel-label="Ajouter ma carte"
+        data-allow-remember-me=false
+        data-locale="auto"></script>
+    <% end %>
+
+  <% end %>

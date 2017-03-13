@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   scope '(:locale)', locale: /fr|en/ do
     root to: 'pages#home'
     get '/privacy', to: 'pages#privacy_policy'
-    resources :users, only: [:show, :update]
+    resources :users, only: [:show] do
+      member do
+        patch '/credit_card_update/' => 'users#credit_card_update'
+      end
+    end
     resources :restaurants, only: [:index, :new, :create, :edit, :update] do
       member do
         get '/refresh/:update' => 'restaurants#refresh'

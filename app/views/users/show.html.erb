@@ -3,17 +3,10 @@
 
   <h4>Ma carte bancaire</h4>
 
-  <%= form_tag @user do %>
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-      data-name="Yvon"
-      data-image=<%= image_path 'yvon_avatar_128.png' %>
-      data-email="<%= current_user.email %>"
-      data-label="Mettre à jour ma carte"
-      data-panel-label="Mettre à jour ma carte"
-      data-allow-remember-me=false
-      data-locale="auto"></script>
-  <% end %>
+  <div id="creditCard">
+    <%= render 'users/credit_card', user: @user.decorate %>
+  </div>
+
 
   <% if User.roles[@user.role] > 0 %>
     <h4><%= t ".my_restaurants" %></h4>
@@ -31,3 +24,22 @@
     </div>
   <% end %>
 </div>
+
+<% if @update == 'cc' %>
+  <script>
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+
+    window.extAsyncInit = function() {
+      // the Messenger Extensions JS SDK is done loading
+      MessengerExtensions.requestCloseBrowser(function success() {
+      }, function error(err) {
+      });
+    };
+  </script>
+<% end %>
