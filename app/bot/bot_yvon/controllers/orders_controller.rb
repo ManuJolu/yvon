@@ -58,6 +58,10 @@ class BotYvon::OrdersController
     view.update_card
   end
 
+  def menu_update_card
+    view.menu_update_card
+  end
+
   def pay_card
     if user.current_order.meals.present?
       order = user.current_order

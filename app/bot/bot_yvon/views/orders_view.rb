@@ -137,6 +137,29 @@ class BotYvon::OrdersView
     )
   end
 
+  def menu_update_card
+    message.reply(
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: I18n.t('bot.order.menu_update_card.text'),
+          buttons: [
+            {
+              type: 'web_url',
+              url: user.decorate.show_url,
+              title: I18n.t('bot.order.menu_update_card.update_card'),
+              webview_height_ratio: 'tall',
+              webview_share_button: 'hide',
+              messenger_extensions: true,
+              fallback_url: 'http://www.hello-yvon.com/'
+            }
+          ]
+        }
+      }
+    )
+  end
+
   def card_error(error_message)
     message.reply(
       attachment: {
