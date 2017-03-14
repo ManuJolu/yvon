@@ -7,11 +7,19 @@ module ApplicationHelper
     end
   end
 
+  def cl_image_tag_with_default(photo_path, options = {})
+    if photo_path
+      cl_image_tag(photo_path, options)
+    else
+      cl_image_tag('yvon_avatar.png', options)
+    end
+  end
+
   def cl_image_path_with_default(photo_path, options = {})
     if photo_path
       cl_image_path(photo_path, options)
     else
-      cl_image_path('yvon_messenger_code.png', options)
+      cl_image_path('yvon_avatar.png', options)
     end
   end
 end

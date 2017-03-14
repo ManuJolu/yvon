@@ -14,7 +14,7 @@
           <%= f.input :active, label: false, input_html: { class: "meal-active-input" } %>
         <% end %>
       </div>
-      <%= cl_image_tag(meal.photo&.path, height: 75, width: 100, crop: :fill, class: "product-image product-image-100 hidden-xs") %>
+      <%= cl_image_tag_with_default(meal.photo&.path, height: 75, width: 100, crop: :fill, class: "product-image product-image-100 hidden-xs") %>
       <div class='product-body'>
         <h3><%= meal.name %></h3>
         <p><%= meal.description %> <%= meal.decorate.price %></p>
