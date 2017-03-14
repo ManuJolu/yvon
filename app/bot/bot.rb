@@ -4,6 +4,7 @@ include Facebook::Messenger
 include CloudinaryHelper
 
 Bot.on :message do |message|
+  message.type
   puts "Received '#{message.inspect}' from #{message.sender}"
   case message.recipient['id']
   when ENV['YVON_PAGE_ID']

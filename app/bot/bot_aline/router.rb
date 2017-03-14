@@ -67,7 +67,6 @@ class BotAline::Router
         when 'preparation_time'
           restaurants_controller.preparation_time
         when 'orders'
-          #verify that user has messenger_restaurant
           orders_controller.index
         when /\Aorder_(?<id>\d+)_(?<action>\D+)\z/
           order_id = $LAST_MATCH_INFO['id'].to_i
