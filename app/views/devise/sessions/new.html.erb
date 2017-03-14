@@ -1,13 +1,16 @@
 <div class="container">
-  <h2><%= t(".sign_in") %></h2>
+  <h3><%= t(".sign_in") %></h3>
 
   <p>
     <%= link_to omniauth_authorize_path(resource_name, 'facebook'), class: "btn btn-social btn-facebook" do %>
       <i class="fa fa-facebook"></i><%= t('devise.shared.links.sign_in_with_provider', provider: 'Facebook') %>
     <% end %>
   </p>
+  <p>La connexion avec Facebook permet de faire le lien avec votre Facebook Messenger</p>
 
-  <p>ou</p>
+  <br>
+  <br>
+  <h4>Pour restaurateurs uniquement :</h4>
 
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-inputs">
