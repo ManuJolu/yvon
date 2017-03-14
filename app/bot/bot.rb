@@ -1,6 +1,7 @@
 require 'facebook/messenger'
 
 include Facebook::Messenger
+include ApplicationHelper
 include CloudinaryHelper
 
 Bot.on :message do |message|

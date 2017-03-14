@@ -20,7 +20,7 @@ class BotYvon::MealsView
       } if params[:next_meal_category]
       result = {
         title: meal.name,
-        image_url: cl_image_path(meal.photo&.path, width: 382, height: 200, crop: :fill),
+        image_url: cl_image_path_with_default(meal.photo&.path, width: 382, height: 200, crop: :fill),
         subtitle: "#{meal.description}\n#{meal.price}"
       }
       result[:buttons] = buttons if params[:on_duty]
