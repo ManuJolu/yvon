@@ -10,7 +10,7 @@ class RestaurantPolicy < ApplicationPolicy
   end
 
   def create?
-    user.restaurant_owner?
+    user.restaurant_owner? || user.admin?
   end
 
   def edit?

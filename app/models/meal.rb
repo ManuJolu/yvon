@@ -7,7 +7,7 @@ class Meal < ApplicationRecord
 
   validates :name, presence: true
   validates :tax_rate, presence: true
-  validates :photo, presence: true
+  # validates :photo, presence: true
 
   accepts_nested_attributes_for :options
   accepts_nested_attributes_for :meal_options, allow_destroy: true

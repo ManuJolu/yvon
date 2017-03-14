@@ -29,7 +29,7 @@ class BotYvon::OrdersView
         quantity: ordered_meal.quantity,
         price: ordered_meal.meal.price_num,
         currency: "EUR",
-        image_url: cl_image_path(ordered_meal.meal.photo.path, width: 100, height: 100, crop: :fill)
+        image_url: cl_image_path(ordered_meal.meal.photo&.path, width: 100, height: 100, crop: :fill)
       }
     end
 
