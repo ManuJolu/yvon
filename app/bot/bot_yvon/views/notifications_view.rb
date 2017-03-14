@@ -17,35 +17,36 @@ class BotYvon::NotificationsView
         id: user.messenger_id
       },
       message: {
-        text: I18n.t('bot.order.notify_delivered', user_first_name: user.first_name,restaurant_name: order.restaurant.name)
-      }},
-      access_token: ENV['YVON_ACCESS_TOKEN']
-    )
-
-    Bot.deliver({
-      recipient: {
-        id: user.messenger_id
-      },
-      message: {
         attachment: {
           type: 'template',
           payload: {
-            template_type: 'generic',
-            elements: [
+            template_type: 'button',
+            text: I18n.t('bot.order.notify_delivered', user_first_name: user.first_name,restaurant_name: order.restaurant.name),
+            buttons: [
               {
-                title: I18n.t('bot.share'),
-                image_url: cl_image_path("yvon_messenger_code.png", width: 382, height: 200, crop: :fill),
-                # image_aspect_ratio: 'square',
-                buttons: [
-                  {
-                    type: 'web_url',
-                    title: "Hello Yvon",
-                    url: "http://m.me/HelloYvon?ref=shared"
-                  },
-                  {
-                    type: 'element_share'
+                type: 'element_share',
+                share_contents: {
+                  attachment: {
+                    type: 'template',
+                    payload: {
+                      template_type: 'generic',
+                      image_aspect_ratio: 'square',
+                      elements: [
+                        {
+                          title: I18n.t('bot.share'),
+                          image_url: cl_image_path("yvon_messenger_code.png", width: 400, height: 400, crop: :fill),
+                          buttons: [
+                            {
+                              type: 'web_url',
+                              title: "Hello Yvon",
+                              url: "http://m.me/HelloYvon?ref=shared"
+                            }
+                          ]
+                        }
+                      ]
+                    }
                   }
-                ]
+                }
               }
             ]
           }

@@ -21,19 +21,36 @@ class BotYvon::MessagesView
       type: 'template',
       payload: {
         template_type: 'generic',
+        image_aspect_ratio: 'square',
         elements: [
           {
             title: I18n.t('bot.share'),
-            image_url: cl_image_path("yvon_messenger_code.png", width: 382, height: 200, crop: :fill),
-            # image_aspect_ratio: 'square',
+            image_url: cl_image_path("yvon_messenger_code.png", width: 400, height: 400, crop: :fill),
             buttons: [
               {
-                type: 'web_url',
-                title: "Hello Yvon",
-                url: "http://m.me/HelloYvon?ref=shared"
-              },
-              {
-                type: 'element_share'
+                type: 'element_share',
+                share_contents: {
+                  attachment: {
+                    type: 'template',
+                    payload: {
+                      template_type: 'generic',
+                      image_aspect_ratio: 'square',
+                      elements: [
+                        {
+                          title: I18n.t('bot.share'),
+                          image_url: cl_image_path("yvon_messenger_code.png", width: 400, height: 400, crop: :fill),
+                          buttons: [
+                            {
+                              type: 'web_url',
+                              title: "Hello Yvon",
+                              url: "http://m.me/HelloYvon?ref=shared"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
               }
             ]
           }
