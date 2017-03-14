@@ -143,12 +143,12 @@ class BotYvon::OrdersView
         type: "template",
         payload: {
           template_type: "button",
-          text: I18n.t('bot.order.menu_update_card.text'),
+          text: I18n.t('bot.order.menu_update_card.go_to_account'),
           buttons: [
             {
               type: 'web_url',
               url: user.decorate.show_url,
-              title: I18n.t('bot.order.menu_update_card.update_card'),
+              title: I18n.t('bot.order.menu_update_card.my_account'),
               webview_height_ratio: 'tall',
               webview_share_button: 'hide',
               messenger_extensions: true,

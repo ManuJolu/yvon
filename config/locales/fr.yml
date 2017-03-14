@@ -116,8 +116,8 @@ fr:
         update_card: "Ajouter ma carte"
         pay: "Payer"
       menu_update_card:
-        text: "Mets à jour ta carte :"
-        update_card: "Mettre à jour ma carte"
+        go_to_account: "Accède à ton compte pour mettre à jour ta carte :"
+        my_account: "Mon compte"
       card_error:
         message: "Oups, il y a eu une erreur : %{error_message}.\nVeux tu mettre à jour ta carte ?"
         udpate_card: "Mettre à jour ma carte"
