@@ -90,13 +90,13 @@ class BotYvon::OrdersView
             # },
             {
               type: 'postback',
-              title: I18n.t('bot.order.cart.pay_card'),
-              payload: 'check_card'
+              title: I18n.t('bot.order.cart.pay_counter'),
+              payload: 'check_counter'
             },
             {
               type: 'postback',
-              title: I18n.t('bot.order.cart.pay_counter'),
-              payload: 'check_counter'
+              title: I18n.t('bot.order.cart.pay_card'),
+              payload: 'check_card'
             },
             {
               type: 'postback',

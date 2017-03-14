@@ -107,12 +107,12 @@ fr:
       cart:
         order_pending: "En attente"
         discounts: "Réductions"
-        ask_payment_method: "Comment souhaites-tu confirmer ta commande ? (entre ton code si tu fais partie du programme de bêta-test)"
-        pay_card: "Payer avec ma carte"
-        pay_counter: "Payer au comptoir"
+        ask_payment_method: "Comment souhaites-tu payer ta commande ? (choisis 'Au comptoir' si tu fais partie du programme de bêta-test)"
+        pay_card: "Avec ma carte démo"
+        pay_counter: "Au comptoir"
         demo: "Continuer en démo"
       update_card:
-        no_card: "Tu n'as pas de carte à jour, ajoutes-en une avant payer :"
+        no_card: "Tu n'as pas de carte à jour, ajoutes-en une avant de payer :"
         update_card: "Ajouter ma carte"
         pay: "Payer"
       card_error:
