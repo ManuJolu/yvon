@@ -3,8 +3,8 @@
     <%= "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans" if restaurant.fb_overall_star_rating %>
   </div>
   <div class="card-user">
-    <% if restaurant.on_duty? %>
-      <% if restaurant.order_acceptance? %>
+    <% if restaurant.active? %>
+      <% if restaurant.on_duty? %>
         <i class="fa fa-shopping-bag" aria-hidden="true"></i>
       <% else %>
         <i class="fa fa-eye" aria-hidden="true"></i>

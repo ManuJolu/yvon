@@ -19,8 +19,8 @@ class BotYvon::RestaurantsView
 
     elements = restaurants.map.with_index do |restaurant, i|
       url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 8]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},#{restaurant.longitude}"
-      if restaurant.order_acceptance?
-        title = "#{i + 1} - #{I18n.t('bot.restaurant.index.display_order').upcase} - #{restaurant.name}"
+      if restaurant.on_duty?
+        title = "#{i + 1} - #{I18n.t('bot.restaurant.index.on_duty').upcase} - #{restaurant.name}"
       else
         title = "#{i + 1} - #{I18n.t('bot.restaurant.index.display_only').upcase} - #{restaurant.name}"
       end

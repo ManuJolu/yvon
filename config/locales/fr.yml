@@ -46,8 +46,8 @@ fr:
       menus: "Menus"
       options: "Options"
     form:
-      display_only: 'Affichage uniquement'
-      order_acceptance: 'Prise de commande'
+      inactive: 'Inactif'
+      active: 'Actif'
     meal_category_fields:
       starter: "Entrée"
       main_course: "Plat"
@@ -55,8 +55,8 @@ fr:
       drink: "Boisson"
       select_timing: 'Choisir le timing'
     new_form:
-      display_only: 'Affichage uniquement'
-      order_acceptance: 'Prise de commande'
+      inactive: 'Inactif'
+      active: 'Actif'
     tabs:
       meals: "Plats"
       orders: "Commandes"
@@ -77,7 +77,7 @@ fr:
       ready_in: "prêt en"
       index:
         display_only: "⚪ consultation"
-        display_order: "🔵 commande"
+        on_duty: "🔵 en service"
         heading: "au"
         enter: "Entrer"
       menu:

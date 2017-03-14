@@ -26,9 +26,9 @@ class Restaurant < ApplicationRecord
 
   has_attachment :photo
 
-  enum mode: [ :display_only, :order_acceptance ]
+  enum mode: [ :inactive, :active ]
 
-  scope :on_duty, -> { where(on_duty: true) }
+  scope :active, -> { where(mode: 'active') }
   scope :by_orders, -> { joins(:orders).group('restaurants.id').order('count(restaurants.id) DESC') }
 
   def on_duty?

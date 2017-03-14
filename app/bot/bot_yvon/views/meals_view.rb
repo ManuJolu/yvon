@@ -23,11 +23,11 @@ class BotYvon::MealsView
         image_url: cl_image_path(meal.photo&.path, width: 382, height: 200, crop: :fill),
         subtitle: "#{meal.description}\n#{meal.price}"
       }
-      result[:buttons] = buttons if params[:order_acceptance]
+      result[:buttons] = buttons if params[:on_duty]
       result
     end
 
-    if params[:order_acceptance]
+    if params[:on_duty]
       meals << {
         title: I18n.t('bot.meal.index.no_thanks', meal_category: params[:meal_category].name.downcase),
         image_url: cl_image_path("no_thanks.png", width: 382, height: 200, crop: :fill),
