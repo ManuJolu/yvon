@@ -108,11 +108,19 @@ fr:
         order_pending: "En attente"
         discounts: "Réductions"
         ask_payment_method: "Comment souhaites-tu confirmer ta commande ? (entre ton code si tu fais partie du programme de bêta-test)"
-        pay: "Payer avec ma carte"
-        password: "Payer au comptoir"
+        pay_card: "Payer avec ma carte"
+        pay_counter: "Payer au comptoir"
         demo: "Continuer en démo"
-        ask_password: "Quel est ton code ?"
+      update_card:
+        no_card: "Tu n'as pas de carte à jour, ajoutes-en une avant payer :"
+        update_card: "Ajouter ma carte"
+        pay: "Payer"
+      card_error:
+        message: "Oups, il y a eu une erreur : %{error_message}.\nVeux tu mettre à jour ta carte ?"
+        udpate_card: "Mettre à jour ma carte"
+      ask_password: "Quel est ton code ?"
       confirm:
+        paid: "Ta commande est payée, elle part en cuisine !"
         password: "Ton code est valide, ta commande est envoyée en cuisine !"
         demo: "Tu continues sur la démo, ta commande n'est pas vraiment en cours de préparation ;-)."
         ready: "Ta commande sera prête dans %{preparation_time} min à %{ready_time}."

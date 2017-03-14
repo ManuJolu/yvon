@@ -46,11 +46,57 @@ class BotYvon::OrdersController
     end
   end
 
+  def check_card
+    if user.stripe_customer_id
+      pay_card
+    else
+      update_card
+    end
+  end
+
+  def update_card
+    view.update_card
+  end
+
+  def pay_card
+    if user.current_order.meals.present?
+      order = user.current_order
+      if order.restaurant.on_duty?
+
+        begin
+        charge = Stripe::Charge.create(
+          customer:     user.stripe_customer_id,
+          description:  "restaurant_#{order.restaurant.id}_order_#{order.id} - #{order.restaurant.name}",
+          amount:       order.price_cents,
+          currency:     order.price.currency
+        )
+        rescue Stripe::CardError => e
+          view.card_error(e.message)
+        end
+
+        order.update(
+          payment: charge.to_json,
+          state: :paid,
+          preparation_time: order.restaurant.preparation_time,
+          sent_at: Time.now
+        )
+        BotAline::NotificationsController.new.notify_order(order)
+        ActionCable.server.broadcast "restaurant_orders_#{order.restaurant.id}",
+          order_status: "sent"
+        view.confirm(order)
+      else
+        view.restaurant_closed(order.restaurant)
+      end
+    else
+      view.no_meals
+    end
+  end
+
   def ask_password
     view.ask_password
   end
 
-  def password_confirm
+  def pay_counter
     if user.current_order.meals.present?
       order = user.current_order
       if order.restaurant.on_duty?

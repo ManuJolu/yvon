@@ -40,9 +40,9 @@ class BotYvon::Router
       if user.current_order&.restaurant
         case message.text
         when /\Acds\z/i
-          orders_controller.password_confirm
+          orders_controller.pay_counter
         when /\Atalis\z/i
-          orders_controller.password_confirm
+          orders_controller.pay_counter
         end
 
         case message.quick_reply
@@ -129,7 +129,11 @@ class BotYvon::Router
         else
           messages_controller.no_restaurant_selected
         end
-      when 'password'
+      when 'check_card'
+        orders_controller.check_card
+      when 'update_card'
+        orders_controller.update_card
+      when 'check_counter'
         orders_controller.ask_password
       when 'demo'
         orders_controller.demo

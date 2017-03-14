@@ -8,7 +8,14 @@ class BotAline::OrdersView
     orders.each do |order|
       order_array = ["Commande de #{order.user.name} :"]
       order_array << order.ordered_meals.map { |ordered_meal| ordered_meal }
-      order_array << "Paiement au comptoir : #{order.price}"
+      case order.state
+      when 'paid'
+        order_array << "Payé : #{order.price}"
+      when 'password_confirmed'
+        order_array << "Paiement au comptoir : #{order.price}"
+      when 'demo'
+        order_array << "Démo : #{order.price}"
+      end
 
       buttons = []
 

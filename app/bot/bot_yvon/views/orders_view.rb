@@ -79,19 +79,24 @@ class BotYvon::OrdersView
           template_type: "button",
           text: I18n.t('bot.order.cart.ask_payment_method'),
           buttons: [
+            # {
+            #   type: 'web_url',
+            #   url: order.payment_url,
+            #   title: I18n.t('bot.order.cart.pay_card'),
+            #   webview_height_ratio: 'tall',
+            #   webview_share_button: 'hide',
+            #   messenger_extensions: true,
+            #   fallback_url: 'http://www.hello-yvon.com/'
+            # },
             {
-              type: 'web_url',
-              url: order.payment_url,
-              title: I18n.t('bot.order.cart.pay'),
-              webview_height_ratio: 'tall',
-              webview_share_button: 'hide',
-              messenger_extensions: true,
-              fallback_url: 'http://www.hello-yvon.com/'
+              type: 'postback',
+              title: I18n.t('bot.order.cart.pay_card'),
+              payload: 'check_card'
             },
             {
               type: 'postback',
-              title: I18n.t('bot.order.cart.password'),
-              payload: 'password'
+              title: I18n.t('bot.order.cart.pay_counter'),
+              payload: 'check_counter'
             },
             {
               type: 'postback',
@@ -104,27 +109,65 @@ class BotYvon::OrdersView
     )
   end
 
+  def update_card
+    message.reply(
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: I18n.t('bot.order.update_card.no_card'),
+          buttons: [
+            {
+              type: 'web_url',
+              url: user.decorate.show_url,
+              title: I18n.t('bot.order.update_card.update_card'),
+              webview_height_ratio: 'tall',
+              webview_share_button: 'hide',
+              messenger_extensions: true,
+              fallback_url: 'http://www.hello-yvon.com/'
+            },
+            {
+              type: 'postback',
+              title: I18n.t('bot.order.update_card.pay'),
+              payload: 'check_card'
+            }
+          ]
+        }
+      }
+    )
+  end
+
+  def card_error(error_message)
+    message.reply(
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: I18n.t('bot.order.card_error.message', error_message: error_message),
+          buttons: [
+            {
+              type: 'postback',
+              title: I18n.t('bot.order.card_error.update_card'),
+              payload: 'update_card'
+            }
+          ]
+        }
+      }
+    )
+  end
+
   def ask_password
     message.reply(
-      text: I18n.t('bot.order.cart.ask_password')
+      text: I18n.t('bot.order.ask_password')
     )
   end
 
   def confirm(order)
-    # colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
-    # url_array = [
-    #   "http://maps.googleapis.com/maps/api/staticmap", # base
-    #   "?center=#{order.restaurant.latitude},+#{order.restaurant.longitude}", # center
-    #   # "&zoom=15", zoom
-    #   "&scale=2", # scale
-    #   "&size=382x382", # size
-    #   "&maptype=roadmap&format=png&visual_refresh=true", # format
-    #   "&key=#{ENV['GOOGLE_API_KEY']}", # key
-    #   # "&markers=size:mid%7Ccolor:0x#{colors[0]}%7Clabel:%7C#{coordinates[0]},#{coordinates[1]}", # user_marker
-    #   "&markers=size:mid%7Ccolor:0x#{colors[3]}%7Clabel:%7C#{order.restaurant.latitude},#{order.restaurant.longitude}"
-    # ]
-
-    if order.password_confirmed?
+    if order.paid?
+      message.reply(
+        text: I18n.t('bot.order.confirm.paid')
+      )
+    elsif order.password_confirmed?
       message.reply(
         text: I18n.t('bot.order.confirm.password')
       )
@@ -138,6 +181,18 @@ class BotYvon::OrdersView
       text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (order.sent_at + order.preparation_time.minutes).strftime('%H:%M'))
     )
 
+    # colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
+    # url_array = [
+    #   "http://maps.googleapis.com/maps/api/staticmap", # base
+    #   "?center=#{order.restaurant.latitude},+#{order.restaurant.longitude}", # center
+    #   # "&zoom=15", zoom
+    #   "&scale=2", # scale
+    #   "&size=382x382", # size
+    #   "&maptype=roadmap&format=png&visual_refresh=true", # format
+    #   "&key=#{ENV['GOOGLE_API_KEY']}", # key
+    #   # "&markers=size:mid%7Ccolor:0x#{colors[0]}%7Clabel:%7C#{coordinates[0]},#{coordinates[1]}", # user_marker
+    #   "&markers=size:mid%7Ccolor:0x#{colors[3]}%7Clabel:%7C#{order.restaurant.latitude},#{order.restaurant.longitude}"
+    # ]
     # message.reply(
     #   attachment: {
     #     type: "template",

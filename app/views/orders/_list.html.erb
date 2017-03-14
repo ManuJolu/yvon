@@ -41,6 +41,15 @@
             <% end %>
           </td>
           <td class="text-right">
+            <% case order.state %>
+            <% when 'paid' %>
+              Payé
+            <% when 'password_confirmed' %>
+              <strong>Comptoir</strong>
+            <% when 'demo' %>
+              Démo
+            <% end %>
+            <br>
             <%= order.decorate.price %>
           </td>
           <td class="text-center">

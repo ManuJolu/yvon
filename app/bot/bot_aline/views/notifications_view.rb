@@ -2,12 +2,13 @@ class BotAline::NotificationsView
   def notify_order(order, user)
     order_array = ["Commande de #{order.user.decorate.name} :"]
     order_array << order.ordered_meals.by_meal_category.decorate.map { |ordered_meal| ordered_meal }
-    if order.password_confirmed?
-      order_array << "Paiement au comptoir : #{order.decorate.price}"
-    elsif order.demo?
-      order_array << "Démo : #{order.decorate.price}"
-    elsif order.paid?
+    case order.state
+    when 'paid'
       order_array << "Payé : #{order.decorate.price}"
+    when 'password_confirmed'
+      order_array << "Paiement au comptoir : #{order.decorate.price}"
+    when 'demo'
+      order_array << "Démo : #{order.decorate.price}"
     end
     order_array << "Prêt : max #{order.decorate.ready_at_limit}"
 
