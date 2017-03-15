@@ -5,10 +5,10 @@ include ApplicationHelper
 include CloudinaryHelper
 
 Bot.on :message do |message|
-  message.type
   puts "Received '#{message.inspect}' from #{message.sender}"
   case message.recipient['id']
   when ENV['YVON_PAGE_ID']
+    message.type
     BotYvon::Router.new(message)
   when ENV['ALINE_PAGE_ID']
     BotAline::Router.new(message)
