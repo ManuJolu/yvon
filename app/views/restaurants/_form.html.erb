@@ -1,4 +1,7 @@
 <%= simple_form_for restaurant, remote: true do |f| %>
+  <% if current_user.admin? %>
+    <%= f.association :user, collection: User.restaurant_owner, label_method: lambda { |user| "#{user.id} | #{user.last_name} #{user.first_name}" } %>
+  <% end %>
   <%= f.input :facebook_url %>
   <%= f.association :restaurant_category %>
   <%= f.input :mode, collection: Restaurant.modes.map {|k, v| [t(".#{k}"), k]} %>
