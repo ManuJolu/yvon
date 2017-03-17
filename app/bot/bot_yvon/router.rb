@@ -54,7 +54,7 @@ class BotYvon::Router
             orders_controller.add_meal(meal, option)
             case action
             when 'menu'
-              restaurants_controller.menu(meal.restaurant.id)
+              restaurants_controller.show(meal.restaurant.id)
             when 'next'
               meals_controller.index(meal.restaurant.id, meal.meal_category.lower_item.id)
             end
@@ -90,10 +90,10 @@ class BotYvon::Router
       when /\Arestaurant_(?<id>\d+)\z/
         restaurant_id = $LAST_MATCH_INFO['id'].to_i
         orders_controller.update(restaurant_id: restaurant_id)
-        restaurants_controller.menu(restaurant_id)
+        restaurants_controller.show(restaurant_id)
       when /\Arestaurant_(?<id>\d+)_menus\z/
         restaurant_id = $LAST_MATCH_INFO['id'].to_i
-        restaurants_controller.display_menus(restaurant_id)
+        restaurants_controller.menus(restaurant_id)
       when /\Arestaurant_(?<restaurant_id>\d+)_category_(?<meal_category_id>\w+)\z/
         restaurant_id = $LAST_MATCH_INFO['restaurant_id'].to_i
         meal_category_id = $LAST_MATCH_INFO['meal_category_id']
@@ -112,7 +112,7 @@ class BotYvon::Router
             orders_controller.add_meal(meal)
             case action
             when 'menu'
-              restaurants_controller.menu(meal.restaurant.id)
+              restaurants_controller.show(meal.restaurant.id)
             when 'next'
               meals_controller.index(meal.restaurant.id, meal.meal_category.lower_item.id)
             end
@@ -122,7 +122,7 @@ class BotYvon::Router
         end
       when 'menu'
         if user.current_order&.restaurant
-          restaurants_controller.menu(user.current_order.restaurant.id)
+          restaurants_controller.show(user.current_order.restaurant.id)
         else
           messages_controller.no_restaurant_selected
         end

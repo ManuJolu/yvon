@@ -5,18 +5,18 @@ class BotYvon::RestaurantsController
   end
 
   def index(coordinates)
-    restaurants = Restaurant.active.where.not(latitude: nil, longitude: nil).near(coordinates, 1).limit(10)
+    restaurants = Restaurant.active.by_duty.where.not(latitude: nil, longitude: nil).near(coordinates, 1).limit(10)
     view.index(coordinates, restaurants) if restaurants.present?
   end
 
-  def menu(restaurant_id)
+  def show(restaurant_id)
     restaurant = Restaurant.find(restaurant_id)
-    view.menu(restaurant, ordered_meals?: user.current_order.ordered_meals.present?)
+    view.show(restaurant, ordered_meals?: user.current_order.ordered_meals.present?)
   end
 
-  def display_menus(restaurant_id)
+  def menus(restaurant_id)
     restaurant = Restaurant.find(restaurant_id)
-    view.display_menus(restaurant)
+    view.menus(restaurant)
   end
 
   def user_restaurant_match?(restaurant_id)

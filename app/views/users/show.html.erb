@@ -1,17 +1,19 @@
 <div class="container">
-  <h3 class="text-right"><%= @user.decorate.name %></h3>
-  <p class="text-right"><%= @user.email %></p>
 
-  <h4>Ma carte bancaire</h4>
+  <h3><%= t '.my_card' %></h3>
+  <p><%= @user.email %></p>
 
   <div id="creditCard">
     <%= render 'users/credit_card', user: @user.decorate %>
   </div>
 
+  <h3><%= t '.messenger' %></h3>
+  <%= render 'pages/messenger_button' %>
+
   <% if User.roles[@user.role] > 0 %>
-    <h4><%= t ".my_restaurants" %></h4>
+    <h3><%= t ".my_restaurants" %></h3>
     <div class="row">
-      <% @user.restaurants.each do |restaurant| %>
+      <% @user.restaurants.by_duty.each do |restaurant| %>
         <div class="col-xs-12 col-sm-4">
           <%= render 'restaurants/card', restaurant: restaurant %>
         </div>

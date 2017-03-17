@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <% @restaurants.reverse_order.each do |restaurant| %>
+    <% @restaurants.each do |restaurant| %>
       <div class="col-sm-4">
         <%= render 'card', restaurant: restaurant %>
       </div>

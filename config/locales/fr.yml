@@ -20,7 +20,7 @@ fr:
       action_2: "Te propose l'ensemble de la carte"
       action_3: "Prend ta commande et la transmet en cuisine"
       action_4: "Te prévient quand elle est prête"
-      simple: "C'est posey !"
+      cool: "C'est posey !"
   orders:
     index:
       pending: "En cours"
@@ -67,6 +67,8 @@ fr:
       edit: "Editer"
   users:
     show:
+      my_card: "Ma carte bancaire"
+      messenger: "Messenger"
       my_restaurants: "Mes restaurants"
       add_restaurant: "Ajouter un restaurant"
   bot:

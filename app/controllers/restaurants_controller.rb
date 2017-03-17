@@ -4,7 +4,7 @@ class RestaurantsController < ApplicationController
 
   def index
 
-    @restaurants = policy_scope(Restaurant).where.not(latitude: nil, longitude: nil)
+    @restaurants = policy_scope(Restaurant).by_duty.where.not(latitude: nil, longitude: nil)
 
     # @hash = Gmaps4rails.build_markers(@restaurants) do |restaurant, marker|
     #   marker.lat restaurant.latitude

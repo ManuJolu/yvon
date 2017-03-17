@@ -29,7 +29,7 @@ class BotYvon::RestaurantsView
       subtitle += "#{restaurant.restaurant_category.name}\n#{restaurant.about}"
       {
         title: title,
-        image_url: cl_image_path(restaurant.photo.path, transformation: [
+        image_url: cl_image_path_with_default(restaurant.photo&.path, transformation: [
           { width: 382, height: 180, crop: :fill },
           { overlay: 'one_pixel.png', effect: :colorize, color: "rgb:#{colors[(i + 1) % 8]}", width: 382, height: 20, y: -100 }
         ]),
@@ -64,14 +64,14 @@ class BotYvon::RestaurantsView
     )
   end
 
-  def menu(restaurant, params = {})
+  def show(restaurant, params = {})
     elements = []
     subtitle = ""
     subtitle += "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans\n" if restaurant.fb_overall_star_rating.present?
     subtitle += "#{restaurant.restaurant_category.name} - #{I18n.t('bot.restaurant.ready_in')} #{restaurant.preparation_time} min\n#{I18n.t('bot.restaurant.menu.swipe_right')}"
     element = {
       title: restaurant.name,
-      image_url: cl_image_path(restaurant.photo.path, width: 382, height: 200, crop: :fill),
+      image_url: cl_image_path_with_default(restaurant.photo&.path, width: 382, height: 200, crop: :fill),
       subtitle: subtitle
     }
 
@@ -98,7 +98,7 @@ class BotYvon::RestaurantsView
 
     elements << element
 
-    restaurant.meal_categories.limit(9).each do |meal_category|
+    restaurant.meal_categories.limit(8).each do |meal_category|
       elements << {
         title: meal_category.name,
         image_url: (cl_image_path_with_default(restaurant.meals.is_active.find_by(meal_category: meal_category)&.photo&.path, width: 382, height: 200, crop: :fill) if restaurant.meals.is_active.find_by(meal_category: meal_category).present?),
@@ -136,7 +136,7 @@ class BotYvon::RestaurantsView
     )
   end
 
-  def display_menus(restaurant)
+  def menus(restaurant)
     text = I18n.t('bot.restaurant.menu.compute')
     text += restaurant.menus.decorate.join("\n")
     message.reply(

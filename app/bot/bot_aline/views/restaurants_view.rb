@@ -62,7 +62,7 @@ class BotAline::RestaurantsView
       title = "#{i + 1} - #{restaurant.name}"
       {
         title: title,
-        image_url: cl_image_path(restaurant.photo.path, transformation: [
+        image_url: cl_image_path_with_default(restaurant.photo&.path, transformation: [
           { width: 382, height: 180, crop: :fill },
           { overlay: 'one_pixel.png', effect: :colorize, color: "rgb:#{colors[(i + 1) % 8]}", width: 382, height: 20, y: -100 }
         ]),
