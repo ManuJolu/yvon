@@ -1,23 +1,26 @@
 fr:
   layouts:
     application:
-      title: "Yvon - Commande ton repas avec moi !"
+      title: "Yvon - Commande à emporter via Messenger"
   shared:
     navbar:
       sign_in: "Connexion"
       sign_out: "Déconnexion"
       profile: "Profil"
       restaurants: "Restaurants"
+    footer:
+      legal: "Mentions légales"
+      privacy: "Confidentialité"
   pages:
     messenger_button:
-      call_to_action: "Je commande avec Yvon"
+      call_to_action_html: "Je commande avec <span class='yvon-logo'>YVON</span>"
     home:
-      slogan: "Commande ton repas avec Yvon"
-      tagline: "Passe le récupérer quand il est prêt"
-      action_1: "Yvon géolocalise les restaurants autour de toi"
-      action_2: "Il t'apporte le menu"
-      action_3: "Il prend ta commande et l'envoie en cuisine"
-      action_4: "Yvon te prévient quand elle est prête"
+      slogan_html: "Contacte <span class='yvon-logo'>YVON</span> et commande à emporter via Messenger"
+      action_1: "Géolocalise le fooding autour de toi"
+      action_2: "Te propose l'ensemble de la carte"
+      action_3: "Prend ta commande et la transmet en cuisine"
+      action_4: "Te prévient quand elle est prête"
+      simple: "C'est posey !"
   orders:
     index:
       pending: "En cours"

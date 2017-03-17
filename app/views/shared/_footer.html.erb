@@ -1,21 +1,24 @@
 <div class="footer-fixed">
 
-  <div class="col-sm-2 text-left">
+  <div class="col-sm-3 text-left">
     <%= link_to "https://www.facebook.com/HelloYvon/", target: :blank do %>
       <i class="fa fa-facebook" ></i>
     <% end %>
   </div>
 
-  <div class="hidden-xs col-sm-6 text-center">
-    Made with <i class="fa fa-heart-o fa-lg" ></i> by a <%= link_to "dedicated team" %>
+  <div class="col-sm-6 text-center">
+    <ul class="list-inline no-margin">
+      <li>
+        <%= link_to t('.legal'), legal_path %>
+      </li>
+      <li>
+        <%= link_to t('.privacy'), privacy_path %>
+      </li>
+    </ul>
   </div>
 
-  <div class="col-sm-2 text-right">
-    <%= link_to "Privacy policy", privacy_path %>
-  </div>
-
-  <div class="hidden-xs col-sm-2 text-right">
-    &copy; 2017 | Yvon
+  <div class="hidden-xs col-sm-3 text-right">
+    &copy; 2017 <span class="yvon-logo">YVON</span>
   </div>
 
 </div>

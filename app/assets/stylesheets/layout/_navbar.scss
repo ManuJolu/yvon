@@ -41,16 +41,15 @@
   flex: 0 1 auto;
   cursor: pointer;
   padding: 0px 20px;
+  color: $white;
 }
 
 /* Navbar standard link */
 .navbar-wagon-link {
-  color: $white;
-  font-size: 14px;
-}
-.navbar-wagon-link:hover {
-  color: $brand-color;
-  text-decoration: none;
+  &:hover {
+    color: $white;
+    text-decoration: none;
+  }
 }
 
 /* Navbar right button */

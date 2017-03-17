@@ -2,10 +2,10 @@
  * Fonts
  * ------------------------------------- */
 // Google fonts
-@import url("https://fonts.googleapis.com/css?family=Cabin+Sketch|Open+Sans+Condensed:300|Roboto+Condensed:400,700");
+@import url("https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans+Condensed:300|Roboto+Condensed:400,700");
 $base-font: 'Open Sans Condensed', 'sans-serif';
 $header-font: 'Open Sans Condensed', 'sans-serif';
-$logo-font: 'Cabin Sketch', 'cursive';
+$logo-font: 'Fredoka One', 'sans-serif';
 
 // Local fonts (uncomment following lines)
 // @font-face {
@@ -34,3 +34,8 @@ $orange: #E67E22;
 $green: #32B796;
 $gray: #414153;
 $white: #FFFFFF;
+
+$facebook-blue: #3B5998;
+$messenger-blue: #0084FF;
+$messenger-bright-blue: #00C6FF;
+$messenger-dark-blue: #0068FF;

@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   scope '(:locale)', locale: /fr|en/ do
     root to: 'pages#home'
-    get '/privacy', to: 'pages#privacy_policy'
+    get '/legal', to: 'pages#legal'
+    get '/privacy', to: 'pages#privacy'
     resources :users, only: [:show] do
       member do
         patch '/credit_card_update/' => 'users#credit_card_update'
