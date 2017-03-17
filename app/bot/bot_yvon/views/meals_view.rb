@@ -30,7 +30,7 @@ class BotYvon::MealsView
     if params[:on_duty]
       meals << {
         title: I18n.t('bot.meal.index.no_thanks', meal_category: params[:meal_category].name.downcase),
-        image_url: cl_image_path("no_thanks.png", width: 382, height: 200, crop: :fill),
+        image_url: cl_image_path("background.png", overlay:"text:Fredoka%20One_40:#{I18n.t('bot.meal.index.no_thanks_image')}", color: "#292C3C"),
         subtitle: I18n.t('bot.meal.index.no_thanks_message'),
         buttons: [
           {
@@ -43,7 +43,7 @@ class BotYvon::MealsView
     else
       meals << {
         title: I18n.t('bot.meal.index.back'),
-        image_url: cl_image_path("back.png", width: 382, height: 200, crop: :fill),
+        image_url: cl_image_path("background.png", overlay:"text:Fredoka%20One_40:#{I18n.t('bot.meal.index.back_image')}", color: "#292C3C"),
         subtitle: I18n.t('bot.meal.index.back_message'),
         buttons: [
           {

@@ -86,6 +86,8 @@ fr:
       menu:
         swipe_right: "Regarder la carte ▷"
         back_to_map: "◁ Restaurants"
+        display_menus: "Afficher les formules"
+        menus_image: "formules"
         menus: "▽ Formules"
         order: "Envoyer ma commande"
         view_more: "Voir la suite"
@@ -98,8 +100,10 @@ fr:
         pick_next: "Commander & suite"
         menu: '◁ Carte'
         next: "▷ %{next_meal_category}"
+        no_thanks_image: "non%20merci"
         no_thanks: "Pas de %{meal_category} pour moi"
         no_thanks_message: "\nJe ferais mieux de surveiller ma ligne"
+        back_image: "retour"
         back: "◁ Carte"
         back_message: "\n "
       get_option:

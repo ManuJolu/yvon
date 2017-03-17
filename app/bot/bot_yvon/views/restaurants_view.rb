@@ -81,18 +81,18 @@ class BotYvon::RestaurantsView
       type: "postback",
       payload: "map"
     }
-    menu_button = {
-      title: I18n.t('bot.restaurant.menu.menus'),
-      type: "postback",
-      payload: "restaurant_#{restaurant.id}_menus"
-    }
+    # menu_button = {
+    #   title: I18n.t('bot.restaurant.menu.menus'),
+    #   type: "postback",
+    #   payload: "restaurant_#{restaurant.id}_menus"
+    # }
     order_button = {
       title: I18n.t('bot.restaurant.menu.order'),
       type: "postback",
       payload: "cart"
     }
     buttons << back_button unless params[:ordered_meals?]
-    buttons << menu_button if restaurant.menus.any?
+    # buttons << menu_button if restaurant.menus.any?
     buttons << order_button if params[:ordered_meals?]
     element[:buttons] = buttons
 
@@ -112,6 +112,18 @@ class BotYvon::RestaurantsView
         ]
       }
     end
+
+    elements << {
+      title: I18n.t('bot.restaurant.menu.display_menus'),
+      image_url: cl_image_path("background.png", overlay:"text:Fredoka%20One_40:#{I18n.t('bot.restaurant.menu.menus_image')}", color: "#292C3C"),
+      buttons: [
+        {
+            title: I18n.t('bot.restaurant.menu.menus'),
+            type: "postback",
+            payload: "restaurant_#{restaurant.id}_menus"
+        }
+      ]
+    } if restaurant.menus.any?
 
     message.reply(
       attachment: {
