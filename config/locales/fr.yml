@@ -16,10 +16,11 @@ fr:
       call_to_action_html: "Je commande avec <span class='yvon-logo'>YVON</span>"
     home:
       slogan_html: "Contacte <span class='yvon-logo'>YVON</span> et commande à emporter via Messenger"
-      action_1: "géolocalise le fooding autour de toi"
-      action_2: "te propose la carte"
-      action_3: "prend ta commande et la transmet en cuisine"
-      action_4: "te prévient quand elle est prête"
+      action_1: "Géolocalise le fooding autour de toi"
+      action_2: "Te propose l'ensemble de la carte"
+      action_3: "Prend ta commande et la transmet en cuisine"
+      action_4: "Te prévient quand elle est prête"
+      simple: "C'est posey !"
   orders:
     index:
       pending: "En cours"

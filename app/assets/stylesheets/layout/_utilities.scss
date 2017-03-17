@@ -8,17 +8,20 @@
 .yvon-logo {
   font-family: $logo-font;
   &-white {
+    font-family: $logo-font;
     color: $white;
   }
-  &-blue {
-    color: $messenger-bright-blue;
+  &-home {
+    font-family: $logo-font;
+    color: $messenger-blue;
+    font-size: 6rem;
   }
 }
 
 // Paddings
 .padded {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 // Backgrounds
