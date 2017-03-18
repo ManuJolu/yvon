@@ -11,7 +11,7 @@ module ApplicationHelper
     if photo_path
       cl_image_tag(photo_path, options)
     else
-      cl_image_tag('YVON.png', options)
+      cl_image_tag('YVON_382_200.png', options)
     end
   end
 
@@ -19,7 +19,7 @@ module ApplicationHelper
     if photo_path
       cl_image_path(photo_path, options)
     else
-      cl_image_path('YVON.png', options)
+      cl_image_path('YVON_382_200.png', options)
     end
   end
 end

@@ -109,7 +109,7 @@ class BotYvon::RestaurantsView
 
     elements << {
       title: I18n.t('bot.restaurant.menu.display_menus'),
-      image_url: cl_image_path("background.png", overlay:"text:Fredoka%20One_40:#{I18n.t('bot.restaurant.menu.menus_image')}", color: "#292C3C"),
+      image_url: cl_image_path("background_white_382_200.png", overlay:"text:Fredoka%20One_40:#{I18n.t('bot.restaurant.menu.menus_image')}", color: "#292C3C"),
       buttons: [
         {
             title: I18n.t('bot.restaurant.menu.menus'),
