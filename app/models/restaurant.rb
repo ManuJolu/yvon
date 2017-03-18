@@ -26,7 +26,7 @@ class Restaurant < ApplicationRecord
 
   has_attachment :photo
 
-  enum mode: [ :inactive, :active ]
+  enum mode: [ :inactive, :votable, :active ]
 
   scope :are_active, -> { where(mode: 'active') }
   scope :by_duty, -> { order(mode: :desc, on_duty: :desc) }
