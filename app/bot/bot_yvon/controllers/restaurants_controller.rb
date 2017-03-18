@@ -14,6 +14,12 @@ class BotYvon::RestaurantsController
     view.show(restaurant, ordered_meals?: user.current_order.ordered_meals.present?)
   end
 
+  def upvote(restaurant_id)
+    restaurant = Restaurant.find(restaurant_id)
+    restaurant.upvote_from user, duplicate: true
+    view.upvote(restaurant)
+  end
+
   def menus(restaurant_id)
     restaurant = Restaurant.find(restaurant_id)
     view.menus(restaurant)

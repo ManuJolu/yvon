@@ -92,6 +92,9 @@ fr:
           other: "%{count} votes"
         enter: "Entrer"
         upvote: "+ 1 vote !"
+      upvote:
+        text: "Ton vote est pris en compte, invites aussi tes amis à voter pour %{restaurant} !"
+        share: "Vote pour commander chez %{restaurant} avec Yvon !"
       menu:
         swipe_right: "Regarder la carte ▷"
         back_to_map: "◁ Restaurants"

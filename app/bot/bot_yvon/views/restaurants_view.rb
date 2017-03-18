@@ -37,7 +37,7 @@ class BotYvon::RestaurantsView
         ]
       elsif restaurant.votable?
         title = "#{i + 1} - #{I18n.t('bot.restaurant.index.votable').upcase} - #{restaurant.name}"
-        subtitle = I18n.t('bot.restaurant.index.votes', count: restaurant.find_votes_for(vote_scope: 'rank').sum(:vote_weight))
+        subtitle = I18n.t('bot.restaurant.index.votes', count: restaurant.get_upvotes.sum(:vote_weight))
         buttons = [
           {
             type: 'postback',
@@ -139,6 +139,45 @@ class BotYvon::RestaurantsView
         payload: {
           template_type: 'generic',
           elements: elements
+        }
+      }
+    )
+  end
+
+  def upvote(restaurant)
+    message.reply(
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: I18n.t('bot.restaurant.upvote.text', restaurant: restaurant.name),
+          buttons: [
+            {
+              type: 'element_share',
+              share_contents: {
+                attachment: {
+                  type: 'template',
+                  payload: {
+                    template_type: 'generic',
+                    image_aspect_ratio: 'square',
+                    elements: [
+                      {
+                        title: I18n.t('bot.restaurant.upvote.share', restaurant: restaurant.name),
+                        image_url: cl_image_path_with_default(restaurant.photo&.path, width: 400, height: 400, crop: :fill),
+                        buttons: [
+                          {
+                            type: 'web_url',
+                            title: "Hello Yvon",
+                            url: "http://m.me/HelloYvon?ref=shared_vote"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     )

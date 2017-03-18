@@ -93,6 +93,9 @@ class BotYvon::Router
         restaurant_id = $LAST_MATCH_INFO['id'].to_i
         orders_controller.update(restaurant_id: restaurant_id)
         restaurants_controller.show(restaurant_id)
+      when /\Arestaurant_(?<id>\d+)_upvote\z/
+        restaurant_id = $LAST_MATCH_INFO['id'].to_i
+        restaurants_controller.upvote(restaurant_id)
       when /\Arestaurant_(?<id>\d+)_menus\z/
         restaurant_id = $LAST_MATCH_INFO['id'].to_i
         restaurants_controller.menus(restaurant_id)
