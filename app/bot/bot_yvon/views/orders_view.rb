@@ -22,12 +22,12 @@ class BotYvon::OrdersView
   end
 
   def cart(order)
-    elements = order.ordered_meals.map do |ordered_meal|
+    elements = order.ordered_meals.by_meal_category.map do |ordered_meal|
       {
         title: ordered_meal.meal.name,
         subtitle: "#{(ordered_meal.option.name + ' - ') if ordered_meal.option}#{ordered_meal.meal.description}",
         quantity: ordered_meal.quantity,
-        price: ordered_meal.meal.price_num,
+        price: ordered_meal.meal.decorate.price_num,
         currency: "EUR",
         image_url: cl_image_path_with_default(ordered_meal.meal.photo&.path, width: 100, height: 100, crop: :fill)
       }
@@ -38,30 +38,21 @@ class BotYvon::OrdersView
         type: "template",
         payload: {
           template_type: "receipt",
-          recipient_name: "#{order.user.name}",
+          recipient_name: "#{order.user.decorate.name}",
           order_number: "#{order.id}",
           currency: "EUR",
           payment_method: I18n.t('bot.order.cart.order_pending'),
-          # order_url: order.payment_url,
           timestamp: Time.now.to_i,
           elements: elements,
-          # address: {
-          #   street_1: "Quai de Bacalan",
-          #   street_2: "",
-          #   city: "Bordeaux",
-          #   postal_code: "33300",
-          #   state: "NA",
-          #   country: "FR"
-          # },
           summary: {
-            subtotal: order.pretax_price_num,
-            total_tax: order.tax_num,
-            total_cost: order.price_num
+            subtotal: order.decorate.pretax_price_num,
+            total_tax: order.decorate.tax_num,
+            total_cost: order.decorate.price_num
           },
           adjustments: [
             {
               name: I18n.t('bot.order.cart.discounts'),
-              amount: order.discount_num
+              amount: order.decorate.discount_num
             }
             # {
             #   name: "Welcome coupon",
@@ -79,15 +70,6 @@ class BotYvon::OrdersView
           template_type: "button",
           text: I18n.t('bot.order.cart.ask_payment_method'),
           buttons: [
-            # {
-            #   type: 'web_url',
-            #   url: order.payment_url,
-            #   title: I18n.t('bot.order.cart.pay_card'),
-            #   webview_height_ratio: 'tall',
-            #   webview_share_button: 'hide',
-            #   messenger_extensions: true,
-            #   fallback_url: 'http://www.hello-yvon.com/'
-            # },
             {
               type: 'postback',
               title: I18n.t('bot.order.cart.pay_counter'),

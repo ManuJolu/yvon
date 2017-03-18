@@ -40,7 +40,7 @@ class BotYvon::OrdersController
       order = user.current_order
       order.create_elements
       order.reload
-      view.cart(order.decorate)
+      view.cart(order)
     else
       view.no_meals
     end
