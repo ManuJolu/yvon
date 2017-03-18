@@ -26,6 +26,8 @@ class Restaurant < ApplicationRecord
 
   has_attachment :photo
 
+  acts_as_votable
+
   enum mode: [ :inactive, :votable, :active ]
 
   scope :are_active, -> { where(mode: 'active') }

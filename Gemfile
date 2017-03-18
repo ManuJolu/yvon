@@ -24,6 +24,7 @@ gem 'rails_admin', '>= 1.0.0.rc'
 gem 'rails_admin-i18n'
 gem 'money-rails'
 gem 'acts_as_list'
+gem 'acts_as_votable', '~> 0.10.0'
 gem 'stripe'
 
 source 'https://rails-assets.org' do
