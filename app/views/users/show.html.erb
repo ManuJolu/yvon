@@ -8,7 +8,7 @@
   </div>
 
   <h3><%= t '.messenger' %></h3>
-  <%= render 'pages/messenger_button' %>
+  <%= render 'pages/messenger_button', ref: "profile" %>
 
   <% if User.roles[@user.role] > 0 %>
     <h3><%= t ".my_restaurants" %></h3>

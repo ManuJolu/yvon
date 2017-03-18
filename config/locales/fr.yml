@@ -88,12 +88,12 @@ fr:
       menu:
         swipe_right: "Regarder la carte ▷"
         back_to_map: "◁ Restaurants"
-        display_menus: "Afficher les formules"
+        display_menus: "Les formules sont calculées automatiquement à la commande"
         menus_image: "formules"
-        menus: "▽ Formules"
+        menus: "▽ Voir les formules"
+        menus_back: "\n\nSélectionnez vos plats directement dans les catégories."
         order: "Envoyer ma commande"
         view_more: "Voir la suite"
-        compute: "Les formules sont calculées automatiquement à la commande :\n"
       restaurant_mismatch: "Désolé, ce menu appartient au %{restaurant_name}, voici le bon menu :"
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
     meal:

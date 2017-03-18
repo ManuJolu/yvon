@@ -137,8 +137,9 @@ class BotYvon::RestaurantsView
   end
 
   def menus(restaurant)
-    text = I18n.t('bot.restaurant.menu.compute')
+    text = ""
     text += restaurant.menus.decorate.join("\n")
+    text += I18n.t('bot.restaurant.menu.menus_back')
     message.reply(
       text: text
     )
