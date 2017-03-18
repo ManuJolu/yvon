@@ -83,10 +83,15 @@ fr:
     restaurant:
       ready_in: "prêt en"
       index:
-        display_only: "⚪ consultation"
         on_duty: "🔵 en service"
-        heading: "au"
+        off_duty: "⚪ consultation"
+        votable: "🗳 en ballotage"
+        votes:
+          zero: "Sois le premier à voter !"
+          one: "1 vote"
+          other: "%{count} votes"
         enter: "Entrer"
+        upvote: "+ 1 vote !"
       menu:
         swipe_right: "Regarder la carte ▷"
         back_to_map: "◁ Restaurants"

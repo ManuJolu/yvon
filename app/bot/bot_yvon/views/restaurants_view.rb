@@ -19,14 +19,34 @@ class BotYvon::RestaurantsView
 
     elements = restaurants.map.with_index do |restaurant, i|
       url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 8]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},#{restaurant.longitude}"
-      if restaurant.on_duty?
-        title = "#{i + 1} - #{I18n.t('bot.restaurant.index.on_duty').upcase} - #{restaurant.name}"
-      else
-        title = "#{i + 1} - #{I18n.t('bot.restaurant.index.display_only').upcase} - #{restaurant.name}"
+      if restaurant.active?
+        if restaurant.on_duty?
+          title = "#{i + 1} - #{I18n.t('bot.restaurant.index.on_duty').upcase} - #{restaurant.name}"
+        else
+          title = "#{i + 1} - #{I18n.t('bot.restaurant.index.off_duty').upcase} - #{restaurant.name}"
+        end
+        subtitle = ""
+        subtitle += "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans\n" if restaurant.fb_overall_star_rating.present?
+        subtitle += "#{restaurant.restaurant_category.name}\n#{restaurant.about}"
+        buttons = [
+          {
+          type: 'postback',
+          title: I18n.t('bot.restaurant.index.enter'),
+          payload: "restaurant_#{restaurant.id}"
+          }
+        ]
+      elsif restaurant.votable?
+        title = "#{i + 1} - #{I18n.t('bot.restaurant.index.votable').upcase} - #{restaurant.name}"
+        subtitle = I18n.t('bot.restaurant.index.votes', count: restaurant.find_votes_for(vote_scope: 'rank').sum(:vote_weight))
+        buttons = [
+          {
+            type: 'postback',
+            title: I18n.t('bot.restaurant.index.upvote'),
+            payload: "restaurant_#{restaurant.id}_upvote"
+          }
+        ]
       end
-      subtitle = ""
-      subtitle += "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans\n" if restaurant.fb_overall_star_rating.present?
-      subtitle += "#{restaurant.restaurant_category.name}\n#{restaurant.about}"
+
       {
         title: title,
         image_url: cl_image_path_with_default(restaurant.photo&.path, transformation: [
@@ -34,13 +54,7 @@ class BotYvon::RestaurantsView
           { overlay: 'one_pixel.png', effect: :colorize, color: "rgb:#{colors[(i + 1) % 8]}", width: 382, height: 20, y: -100 }
         ]),
         subtitle: subtitle,
-        buttons: [
-          {
-            type: 'postback',
-            title: I18n.t('bot.restaurant.index.enter'),
-            payload: "restaurant_#{restaurant.id}"
-          }
-        ]
+        buttons: buttons
       }
     end
 

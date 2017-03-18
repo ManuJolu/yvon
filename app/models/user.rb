@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   enum role: { customer: 0, restaurant_owner: 1, admin: 9 }
 
-  scope :restaurant_owner_plus, -> { where('role > 0') }
+  scope :are_restaurant_owner_plus, -> { where('role > 0') }
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.to_h.slice(:provider, :uid)
