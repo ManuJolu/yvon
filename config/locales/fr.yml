@@ -77,6 +77,7 @@ fr:
     no_restaurant: "Désolé, je n'ai pas trouvé de restaurant près de toi... Essaye un nouveau lieu, ou ma ville natale Bordeaux pour être sûr de trouver de bons restaurants !"
     no_restaurant_selected: "Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider à en trouver un ?"
     no_current_order: "Désolé, tu n'as plus de commande en cours. Donne moi ta position pour en commencer une nouvelle :"
+    no_comprendo: "Désolé, no comprendo 😕"
     else: "Dis 'Hello' pour commencer une nouvelle commande"
     restaurant:
       ready_in: "prêt en"

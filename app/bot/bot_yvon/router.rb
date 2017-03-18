@@ -43,23 +43,25 @@ class BotYvon::Router
           orders_controller.pay_counter
         when /\Atalis\z/i
           orders_controller.pay_counter
-        end
-
-        case message.quick_reply
-        when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
-          meal = Meal.find($LAST_MATCH_INFO['meal_id'])
-          option = Option.find($LAST_MATCH_INFO['option_id'])
-          action = $LAST_MATCH_INFO['action']
-          if orders_controller.meal_match_user_restaurant?(meal)
-            orders_controller.add_meal(meal, option)
-            case action
-            when 'menu'
-              restaurants_controller.show(meal.restaurant.id)
-            when 'next'
-              meals_controller.index(meal.meal_category.lower_item.id)
+        else
+          case message.quick_reply
+          when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
+            meal = Meal.find($LAST_MATCH_INFO['meal_id'])
+            option = Option.find($LAST_MATCH_INFO['option_id'])
+            action = $LAST_MATCH_INFO['action']
+            if orders_controller.meal_match_user_restaurant?(meal)
+              orders_controller.add_meal(meal, option)
+              case action
+              when 'menu'
+                restaurants_controller.show(meal.restaurant.id)
+              when 'next'
+                meals_controller.index(meal.meal_category.lower_item.id)
+              end
+            else
+              restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
             end
           else
-            restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
+            messages_controller.no_comprendo if message.quick_reply.nil?
           end
         end
       else

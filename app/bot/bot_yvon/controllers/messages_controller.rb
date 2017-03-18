@@ -23,6 +23,10 @@ class BotYvon::MessagesController
     view.no_current_order
   end
 
+  def no_comprendo
+    view.no_comprendo
+  end
+
   def else
     view.else
   end

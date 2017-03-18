@@ -98,6 +98,12 @@ class BotYvon::MessagesView
     )
   end
 
+  def no_comprendo
+    message.reply(
+      text: I18n.t('bot.no_comprendo')
+    )
+  end
+
   def else
     message.reply(
       text: I18n.t('bot.else')
