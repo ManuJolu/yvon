@@ -116,7 +116,7 @@ fr:
       cart:
         order_pending: "En attente"
         discounts: "Réductions"
-        ask_payment_method: "Comment souhaites-tu payer ta commande ? (choisis 'Au comptoir' si tu fais partie du programme de bêta-test)"
+        ask_payment_method: "Comment souhaites-tu payer ta commande ?"
         pay_card: "Avec ma carte démo"
         pay_counter: "Au comptoir"
         demo: "Continuer en démo"

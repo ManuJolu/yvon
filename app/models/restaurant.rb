@@ -2,8 +2,8 @@ class Restaurant < ApplicationRecord
   belongs_to :user, required: true
   belongs_to :restaurant_category, required: true
   belongs_to :messenger_user, class_name: 'User'
-  has_many :meals, dependent: :destroy
-  has_many :meal_categories, -> { order(position: :asc) }, dependent: :destroy
+  has_many :meal_categories, -> { order(timing: :asc, position: :asc) }, dependent: :destroy
+  has_many :meals, through: :meal_categories
   has_many :menus, -> { order(position: :asc) }, dependent: :destroy
   has_many :orders, dependent: :restrict_with_exception
   has_many :ordered_meals, through: :orders
@@ -30,7 +30,7 @@ class Restaurant < ApplicationRecord
 
   scope :are_active, -> { where(mode: 'active') }
   scope :by_duty, -> { order(mode: :desc, on_duty: :desc) }
-  scope :by_orders, -> { joins(:orders).group('restaurants.id').order('count(restaurants.id) DESC') }
+  # scope :by_orders, -> { joins(:orders).group('restaurants.id').order('count(restaurants.id) DESC') }
 
   def on_duty?
     on_duty

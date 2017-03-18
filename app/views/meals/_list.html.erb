@@ -5,7 +5,7 @@
       <i class="fa fa-plus" aria-hidden="true"></i>
     <% end %>
   </div>
-  <% meals.where(meal_category: meal_category).each do |meal| %>
+  <% meal_category.meals.by_position.each do |meal| %>
     <div class="product">
       <div class='product-upvote'>
         <!-- <div class="product-arrow"></div> -->

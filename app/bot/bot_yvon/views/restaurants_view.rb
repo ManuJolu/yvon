@@ -95,13 +95,13 @@ class BotYvon::RestaurantsView
     restaurant.meal_categories.limit(8).each do |meal_category|
       elements << {
         title: meal_category.name,
-        image_url: (cl_image_path_with_default(restaurant.meals.are_active.find_by(meal_category: meal_category)&.photo&.path, width: 382, height: 200, crop: :fill) if restaurant.meals.are_active.find_by(meal_category: meal_category).present?),
-        subtitle: "#{('Suggestion: ' + restaurant.meals.are_active.find_by(meal_category: meal_category).name) if restaurant.meals.are_active.find_by(meal_category: meal_category).present?}",
+        image_url: (cl_image_path_with_default(meal_category.meals.are_active.first.photo&.path, width: 382, height: 200, crop: :fill) if meal_category.meals.are_active.any?),
+        subtitle: "#{('Suggestion: ' + meal_category.meals.are_active.first.name) if meal_category.meals.are_active.any?}",
         buttons: [
           {
               title: "#{meal_category.name} ▷",
               type: "postback",
-              payload: "restaurant_#{restaurant.id}_category_#{meal_category.id}"
+              payload: "meal_category_#{meal_category.id}"
           }
         ]
       }

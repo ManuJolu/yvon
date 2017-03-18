@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_restaurant, only: [:index]
 
   def index
-    @orders = policy_scope(@restaurant.orders).at_today
+    @orders = policy_scope(@restaurant.orders.at_today)
   end
 
   def show

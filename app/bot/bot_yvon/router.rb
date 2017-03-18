@@ -56,7 +56,7 @@ class BotYvon::Router
             when 'menu'
               restaurants_controller.show(meal.restaurant.id)
             when 'next'
-              meals_controller.index(meal.restaurant.id, meal.meal_category.lower_item.id)
+              meals_controller.index(meal.meal_category.lower_item.id)
             end
           else
             restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
@@ -94,13 +94,12 @@ class BotYvon::Router
       when /\Arestaurant_(?<id>\d+)_menus\z/
         restaurant_id = $LAST_MATCH_INFO['id'].to_i
         restaurants_controller.menus(restaurant_id)
-      when /\Arestaurant_(?<restaurant_id>\d+)_category_(?<meal_category_id>\w+)\z/
-        restaurant_id = $LAST_MATCH_INFO['restaurant_id'].to_i
+      when /\Ameal_category_(?<meal_category_id>\w+)\z/
         meal_category_id = $LAST_MATCH_INFO['meal_category_id']
-        if restaurants_controller.user_restaurant_match?(restaurant_id)
-          meals_controller.index(restaurant_id, meal_category_id)
+        if restaurants_controller.user_restaurant_match?(meal_category_id)
+          meals_controller.index(meal_category_id)
         else
-          restaurants_controller.user_restaurant_mismatch(restaurant_id)
+          restaurants_controller.user_restaurant_mismatch(meal_category_id)
         end
       when /\Ameal_(?<id>\d+)_(?<action>\D+)\z/
         meal = Meal.find($LAST_MATCH_INFO['id'])
@@ -114,7 +113,7 @@ class BotYvon::Router
             when 'menu'
               restaurants_controller.show(meal.restaurant.id)
             when 'next'
-              meals_controller.index(meal.restaurant.id, meal.meal_category.lower_item.id)
+              meals_controller.index(meal.meal_category.lower_item.id)
             end
           end
         else

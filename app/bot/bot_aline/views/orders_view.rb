@@ -6,24 +6,24 @@ class BotAline::OrdersView
 
   def index(orders)
     orders.each do |order|
-      order_array = ["Commande de #{order.user.name} :"]
-      order_array << order.ordered_meals.map { |ordered_meal| ordered_meal }
+      order_array = ["Commande de #{order.user.decorate.name} :"]
+      order_array << order.ordered_meals.by_meal_category.decorate.map { |ordered_meal| ordered_meal }
       case order.state
       when 'paid'
-        order_array << "Payé : #{order.price}"
+        order_array << "Payé : #{order.decorate.price}"
       when 'password_confirmed'
-        order_array << "Paiement au comptoir : #{order.price}"
+        order_array << "Paiement au comptoir : #{order.decorate.price}"
       when 'demo'
-        order_array << "Démo : #{order.price}"
+        order_array << "Démo : #{order.decorate.price}"
       end
 
       buttons = []
 
       if order.ready_at.nil?
-        order_array << "Prêt : max #{order.ready_at_limit}"
+        order_array << "Prêt : max #{order.decorate.ready_at_limit}"
         buttons << { type: 'postback', title: 'Prêt', payload: "order_#{order.id}_ready" }
       else
-        order_array << "Prêt à #{order.ready_at} (max #{order.ready_at_limit})"
+        order_array << "Prêt à #{order.decorate.ready_at} (max #{order.decorate.ready_at_limit})"
       end
 
       buttons << { type: 'postback', title: 'Livré', payload: "order_#{order.id}_delivered" }

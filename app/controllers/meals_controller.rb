@@ -3,7 +3,7 @@ class MealsController < ApplicationController
   before_action :set_restaurant, only: [:index, :new, :create]
 
   def index
-    @meals = policy_scope(@restaurant.meals).order(:position)
+    @restaurant = policy_scope(@restaurant)
   end
 
   def new
@@ -16,7 +16,6 @@ class MealsController < ApplicationController
   end
 
   def create
-    @meals = @restaurant.meals.order(:position)
     @meal = @restaurant.meals.new(meal_params)
     if @meal.save
       respond_to do |format|
@@ -41,7 +40,6 @@ class MealsController < ApplicationController
 
   def update
     @restaurant = @meal.restaurant
-    @meals = @restaurant.meals.order(:position)
     if @meal.update(meal_params)
       respond_to do |format|
         format.html { redirect_to @meal }
@@ -57,7 +55,6 @@ class MealsController < ApplicationController
 
   def destroy
     @restaurant = @meal.restaurant
-    @meals = @restaurant.meals.order(:position)
     @meal.destroy
     respond_to do |format|
       format.html { redirect_to @meals }

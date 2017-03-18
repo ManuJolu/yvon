@@ -1,13 +1,12 @@
 class Meal < ApplicationRecord
-  belongs_to :restaurant, required: true
   belongs_to :meal_category
+  has_one :restaurant, through: :meal_category
   has_many :meal_options, dependent: :destroy
   has_many :options, -> { order(position: :asc) }, through: :meal_options
   has_many :order_elements, as: :element, dependent: :restrict_with_exception
 
   validates :name, presence: true
   validates :tax_rate, presence: true
-  # validates :photo, presence: true
 
   accepts_nested_attributes_for :options
   accepts_nested_attributes_for :meal_options, allow_destroy: true
@@ -22,7 +21,8 @@ class Meal < ApplicationRecord
 
   has_attachment :photo
 
-  scope :are_active, -> { where(active: true) }
+  scope :by_position, -> { order(position: :asc) }
+  scope :are_active, -> { by_position.where(active: true) }
 
   def tax_cents
     if price_cents.present? && tax_rate.present?
