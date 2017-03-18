@@ -50,6 +50,7 @@ fr:
       options: "Options"
     form:
       inactive: 'Inactif'
+      votable: 'Votable'
       active: 'Actif'
     meal_category_fields:
       starter: "Entrée"
