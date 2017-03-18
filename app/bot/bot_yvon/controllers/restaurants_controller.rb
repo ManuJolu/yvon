@@ -16,7 +16,7 @@ class BotYvon::RestaurantsController
 
   def upvote(restaurant_id)
     restaurant = Restaurant.find(restaurant_id)
-    restaurant.upvote_from user, duplicate: true
+    restaurant.upvote_from user
     view.upvote(restaurant)
   end
 
