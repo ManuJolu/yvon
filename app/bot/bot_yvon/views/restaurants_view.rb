@@ -81,18 +81,12 @@ class BotYvon::RestaurantsView
       type: "postback",
       payload: "map"
     }
-    # menu_button = {
-    #   title: I18n.t('bot.restaurant.menu.menus'),
-    #   type: "postback",
-    #   payload: "restaurant_#{restaurant.id}_menus"
-    # }
     order_button = {
       title: I18n.t('bot.restaurant.menu.order'),
       type: "postback",
       payload: "cart"
     }
     buttons << back_button unless params[:ordered_meals?]
-    # buttons << menu_button if restaurant.menus.any?
     buttons << order_button if params[:ordered_meals?]
     element[:buttons] = buttons
 
@@ -101,8 +95,8 @@ class BotYvon::RestaurantsView
     restaurant.meal_categories.limit(8).each do |meal_category|
       elements << {
         title: meal_category.name,
-        image_url: (cl_image_path_with_default(restaurant.meals.is_active.find_by(meal_category: meal_category)&.photo&.path, width: 382, height: 200, crop: :fill) if restaurant.meals.is_active.find_by(meal_category: meal_category).present?),
-        subtitle: "#{('Suggestion: ' + restaurant.meals.is_active.find_by(meal_category: meal_category).name) if restaurant.meals.is_active.find_by(meal_category: meal_category).present?}",
+        image_url: (cl_image_path_with_default(restaurant.meals.are_active.find_by(meal_category: meal_category)&.photo&.path, width: 382, height: 200, crop: :fill) if restaurant.meals.are_active.find_by(meal_category: meal_category).present?),
+        subtitle: "#{('Suggestion: ' + restaurant.meals.are_active.find_by(meal_category: meal_category).name) if restaurant.meals.are_active.find_by(meal_category: meal_category).present?}",
         buttons: [
           {
               title: "#{meal_category.name} ▷",

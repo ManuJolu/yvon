@@ -5,7 +5,7 @@ class BotAline::OrdersController
   end
 
   def index
-    orders = user.messenger_restaurant.orders.at_today.pending.reverse_order
+    orders = user.messenger_restaurant.orders.at_today.to_deliver.reverse_order
     if orders.any?
       view.index(orders.decorate)
     else

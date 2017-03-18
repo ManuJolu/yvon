@@ -6,5 +6,5 @@ class Option < ApplicationRecord
 
   acts_as_list scope: :restaurant
 
-  scope :is_active, -> { where(active: true) }
+  scope :are_active, -> { where(active: true) }
 end

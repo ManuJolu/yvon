@@ -9,8 +9,8 @@
   </span>
 </button>
 <div class="collapse in" id="pending">
-  <% if @orders.pending.any? %>
-    <%= render 'orders/list', orders: @orders.pending %>
+  <% if @orders.to_deliver.any? %>
+    <%= render 'orders/list', orders: @orders.to_deliver %>
   <% else %>
     <p class="marged"><%= t '.no_pending' %></p>
   <% end %>
@@ -28,8 +28,8 @@
 
 </button>
 <div class="collapse" id="delivered">
-  <% if @orders.delivered.any? %>
-    <%= render 'orders/list', orders: @orders.delivered %>
+  <% if @orders.are_delivered.any? %>
+    <%= render 'orders/list', orders: @orders.are_delivered %>
   <% else %>
     <p class="marged"><%= t '.no_delivered' %></p>
   <% end %>

@@ -17,8 +17,8 @@ class Order < ApplicationRecord
   enum state: [ :pending, :paid, :password_confirmed, :demo ]
 
   scope :at_today, -> { where('sent_at > ?', Date.today.to_time).order(sent_at: :desc) }
-  scope :pending, -> { where('sent_at IS NOT NULL').where(delivered_at: nil).order(sent_at: :desc) }
-  scope :delivered, -> { where('delivered_at IS NOT NULL').order(delivered_at: :desc) }
+  scope :to_deliver, -> { where('sent_at IS NOT NULL').where(delivered_at: nil).order(sent_at: :desc) }
+  scope :are_delivered, -> { where('delivered_at IS NOT NULL').order(delivered_at: :desc) }
 
   # def self.pending
   #   select { |order| order.sent_at && order.delivered_at.nil? }

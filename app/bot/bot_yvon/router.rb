@@ -106,7 +106,7 @@ class BotYvon::Router
         meal = Meal.find($LAST_MATCH_INFO['id'])
         action = $LAST_MATCH_INFO['action']
         if orders_controller.meal_match_user_restaurant?(meal)
-          if meal.options.is_active.any?
+          if meal.options.are_active.any?
             meals_controller.get_option(meal, action: action)
           else
             orders_controller.add_meal(meal)

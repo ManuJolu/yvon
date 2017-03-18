@@ -22,7 +22,7 @@ class Meal < ApplicationRecord
 
   has_attachment :photo
 
-  scope :is_active, -> { where(active: true) }
+  scope :are_active, -> { where(active: true) }
 
   def tax_cents
     if price_cents.present? && tax_rate.present?
