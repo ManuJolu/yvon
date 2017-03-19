@@ -37,7 +37,9 @@ class BotYvon::RestaurantsView
         ]
       elsif restaurant.votable?
         title = "#{i + 1} - #{I18n.t('bot.restaurant.index.votable').upcase} - #{restaurant.name}"
-        subtitle = I18n.t('bot.restaurant.index.vote_invitation')
+        subtitle = ""
+        subtitle += "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans\n" if restaurant.fb_overall_star_rating.present?
+        subtitle += I18n.t('bot.restaurant.index.vote_invitation')
         subtitle += I18n.t('bot.restaurant.index.votes', count: restaurant.get_upvotes.sum(:vote_weight))
         buttons = [
           {

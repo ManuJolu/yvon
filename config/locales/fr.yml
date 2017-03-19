@@ -73,7 +73,7 @@ fr:
       my_restaurants: "Mes restaurants"
       add_restaurant: "Ajouter un restaurant"
   bot:
-    hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ? Envoie moi un lieu ou cherche directement à Bordeaux, ma ville natale !"
+    hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ? Envoie un emplacement ou cherche à Bordeaux, ma ville natale !"
     share: "Essaye Yvon pour commander à emporter via Messenger !"
     no_restaurant: "Désolé, je n'ai pas trouvé de restaurant près de toi... Essaye un nouveau lieu, ou ma ville natale Bordeaux pour être sûr de trouver de bons restaurants !"
     no_restaurant_selected: "Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider à en trouver un ?"
@@ -88,7 +88,7 @@ fr:
         votable: "🗳 en ballotage"
         vote_invitation: "Vote pour pouvoir commander ici bientôt !\n"
         votes:
-          zero: "Sois le premier à voter !"
+          zero: "0 votes"
           one: "1 vote"
           other: "%{count} votes"
         enter: "Entrer"
