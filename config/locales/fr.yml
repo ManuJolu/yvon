@@ -73,7 +73,7 @@ fr:
       my_restaurants: "Mes restaurants"
       add_restaurant: "Ajouter un restaurant"
   bot:
-    hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ?"
+    hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ? Envoie moi un lieu ou cherche directement à Bordeaux, ma ville natale !"
     share: "Essaye Yvon pour commander à emporter via Messenger !"
     no_restaurant: "Désolé, je n'ai pas trouvé de restaurant près de toi... Essaye un nouveau lieu, ou ma ville natale Bordeaux pour être sûr de trouver de bons restaurants !"
     no_restaurant_selected: "Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider à en trouver un ?"
@@ -86,14 +86,15 @@ fr:
         on_duty: "🔵 en service"
         off_duty: "⚪ consultation"
         votable: "🗳 en ballotage"
+        vote_invitation: "Vote pour pouvoir commander ici bientôt !\n"
         votes:
           zero: "Sois le premier à voter !"
           one: "1 vote"
           other: "%{count} votes"
         enter: "Entrer"
-        upvote: "+ 1 vote !"
+        upvote: "+ 1 vote"
       upvote:
-        text: "Ton vote est pris en compte, invites aussi tes amis à voter pour %{restaurant} !"
+        text: "A voté !\nInvite tes amis à voter pour %{restaurant} :"
         share: "Vote pour commander chez %{restaurant} avec Yvon !"
       menu:
         swipe_right: "Regarder la carte ▷"
@@ -101,8 +102,8 @@ fr:
         display_menus: "Les formules sont calculées automatiquement à la commande"
         menus_image: "formules"
         menus: "▽ Voir les formules"
-        menus_back: "\n\nSélectionnez vos plats directement dans les catégories."
-        order: "Envoyer ma commande"
+        menus_back: "\nSélectionne tes plats directement dans les catégories."
+        order: "J'envoie ma commande"
         view_more: "Voir la suite"
       restaurant_mismatch: "Désolé, ce menu appartient au %{restaurant_name}, voici le bon menu :"
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"

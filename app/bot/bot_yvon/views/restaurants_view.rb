@@ -37,7 +37,8 @@ class BotYvon::RestaurantsView
         ]
       elsif restaurant.votable?
         title = "#{i + 1} - #{I18n.t('bot.restaurant.index.votable').upcase} - #{restaurant.name}"
-        subtitle = I18n.t('bot.restaurant.index.votes', count: restaurant.get_upvotes.sum(:vote_weight))
+        subtitle = I18n.t('bot.restaurant.index.vote_invitation')
+        subtitle += I18n.t('bot.restaurant.index.votes', count: restaurant.get_upvotes.sum(:vote_weight))
         buttons = [
           {
             type: 'postback',

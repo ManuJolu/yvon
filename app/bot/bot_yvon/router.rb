@@ -33,7 +33,7 @@ class BotYvon::Router
     when /hello/i
       messages_controller.hello
     when /bordeaux/i
-      order = orders_controller.create(latitude: '44.8413522', longitude: '-0.5810738')
+      order = orders_controller.create(latitude: '44.840715', longitude: '-0.5721098')
       coordinates = [order.latitude, order.longitude]
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
     else
