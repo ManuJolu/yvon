@@ -17,7 +17,7 @@ class Meal < ApplicationRecord
   monetize :tax_cents
   monetize :pretax_price_cents
 
-  enum tax_rate: [ "2.1", "5.5", "10", "20" ]
+  enum tax_rate: [ '10', '20' ]
 
   has_attachment :photo
 

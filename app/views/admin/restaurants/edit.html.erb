@@ -1,0 +1,16 @@
+<%= render "restaurants/tabs", restaurant: @restaurant, active: 'admin' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="marged">
+        <%= render 'form', restaurant: @restaurant %>
+      </div>
+    </div>
+
+    <div class="col-sm-10 col-sm-offset-1">
+      <h4>Import de données Deliveroo</h4>
+      <%= link_to "Créer le menu depuis Delivroo", admin_restaurant_deliveroo_update_path(@restaurant), class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>

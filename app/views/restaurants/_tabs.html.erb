@@ -5,7 +5,7 @@
 <div class="tabs" id="restaurantTabs">
   <%= link_to t('.meals'), restaurant_meals_path(restaurant), class: "tab#{ ' active' if active == 'meals'}" %>
   <%= link_to t('.orders'), restaurant_orders_path(restaurant), class: "tab#{ ' active' if active == 'orders'}" %>
-  <% if controller_name == 'restaurants' %>
+  <% if controller_path == 'restaurants' %>
     <% configure_path = "#" %>
     <% edit_path = "#" %>
   <% else %>
@@ -14,6 +14,7 @@
   <% end %>
   <%= link_to t(".configure"), configure_path, class: "tab#{ ' active' if @active == 'configure'}", data: {target: '#configureRestaurant'} %>
   <%= link_to t(".edit"), edit_path, class: "tab#{ ' active' if @active == 'edit'}", data: {target: '#editRestaurant'} %>
+  <%= link_to(t(".admin"), edit_admin_restaurant_path(restaurant), class: "tab#{ ' active' if active == 'admin'}") if current_user.admin? %>
 </div>
 
 <%= javascript_tag do %>

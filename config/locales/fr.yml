@@ -8,6 +8,7 @@ fr:
       sign_out: "Déconnexion"
       profile: "Profil"
       restaurants: "Restaurants"
+      new_restaurant: "Ajouter un restaurant"
     footer:
       legal: "Mentions légales"
       privacy: "Confidentialité"
@@ -66,6 +67,7 @@ fr:
       orders: "Commandes"
       configure: "Configurer"
       edit: "Editer"
+      admin: "Admin"
   users:
     show:
       my_card: "Ma carte bancaire"

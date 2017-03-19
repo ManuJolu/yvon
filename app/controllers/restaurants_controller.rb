@@ -80,20 +80,20 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def refresh
+    @update = params[:update]
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def facebook_update
     if Restaurant::UpdateFromFacebook.new(@restaurant).call
       flash[:notice] = "Mise à jour effectuée."
     else
       flash[:alert] = "Mise à jour impossible, vérifiez votre adresse de page Facebook."
     end
-      redirect_to edit_restaurant_path(@restaurant, tab: 'configure')
-  end
-
-  def refresh
-    @update = params[:update]
-    respond_to do |format|
-      format.js
-    end
+    redirect_to edit_restaurant_path(@restaurant, tab: 'configure')
   end
 
   private
@@ -113,5 +113,4 @@ class RestaurantsController < ApplicationController
       ]
     )
   end
-
 end

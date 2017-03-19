@@ -6,7 +6,7 @@ class Menu < ApplicationRecord
 
   accepts_nested_attributes_for :menu_meal_categories, reject_if: :all_blank, allow_destroy: true
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :restaurant }
   validates :tax_rate, presence: true
 
   acts_as_list scope: :restaurant
@@ -17,7 +17,7 @@ class Menu < ApplicationRecord
 
   scope :by_price, -> { order(price_cents: :desc) }
 
-  enum tax_rate: [ "2.1", "5.5", "10", "20" ]
+  enum tax_rate: [ '10', '20' ]
 
   def tax_cents
     if price_cents.present? && tax_rate.present?

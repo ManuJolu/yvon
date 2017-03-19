@@ -58,6 +58,13 @@
                   <% end %>
                 </li>
               <% end %>
+              <% if current_user.admin? %>
+                <li>
+                  <%= link_to new_restaurant_path do %>
+                    <i class="fa fa-plus"></i> <%= t(".new_restaurant") %>
+                  <% end %>
+                </li>
+              <% end %>
               <li>
                 <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-sign-out"></i> <%= t(".sign_out") %>

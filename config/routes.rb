@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   mount Attachinary::Engine, at: 'attachinary'
@@ -28,6 +28,11 @@ Rails.application.routes.draw do
       end
       resources :orders, only: [:index, :show, :update], shallow: true do
         resources :payments, only: [:new, :create]
+      end
+    end
+    namespace :admin do
+      resources :restaurants, only: [:edit, :update] do
+        get '/deliveroo_update/' => 'restaurants#deliveroo_update'
       end
     end
   end
