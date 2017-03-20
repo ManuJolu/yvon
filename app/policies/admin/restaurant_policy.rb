@@ -11,6 +11,10 @@ class Admin::RestaurantPolicy < ApplicationPolicy
     update?
   end
 
+  def foodora_update?
+    update?
+  end
+
   def ubereats_update?
     update?
   end

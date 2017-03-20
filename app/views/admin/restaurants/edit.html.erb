@@ -8,14 +8,25 @@
       </div>
     </div>
 
-    <div class="col-sm-10 col-sm-offset-1">
-      <h4>Import de données Deliveroo</h4>
-      <%= link_to "Créer le menu depuis Delivroo", admin_restaurant_deliveroo_update_path(@restaurant), class: "btn btn-danger" %>
-    </div>
+    <% if @restaurant.deliveroo_url.present? %>
+      <div class="col-sm-10 col-sm-offset-1">
+        <h4>Import de données Deliveroo</h4>
+        <%= link_to "Créer le menu depuis Deliveroo", admin_restaurant_deliveroo_update_path(@restaurant), class: "btn btn-danger" %>
+      </div>
+    <% end %>
 
-    <div class="col-sm-10 col-sm-offset-1">
-      <h4>Import de données UberEATS</h4>
-      <%= link_to "Créer le menu depuis UberEATS", admin_restaurant_ubereats_update_path(@restaurant), class: "btn btn-danger" %>
-    </div>
+    <% if @restaurant.foodora_url.present? %>
+      <div class="col-sm-10 col-sm-offset-1">
+        <h4>Import de données Foodora</h4>
+        <%= link_to "Créer le menu depuis Foodora", admin_restaurant_foodora_update_path(@restaurant), class: "btn btn-danger" %>
+      </div>
+    <% end %>
+
+    <% if @restaurant.ubereats_url.present? %>
+      <div class="col-sm-10 col-sm-offset-1">
+        <h4>Import de données UberEATS</h4>
+        <%= link_to "Créer le menu depuis UberEATS", admin_restaurant_ubereats_update_path(@restaurant), class: "btn btn-danger" %>
+      </div>
+    <% end %>
   </div>
 </div>

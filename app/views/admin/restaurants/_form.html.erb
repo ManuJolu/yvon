@@ -1,6 +1,7 @@
 <%= simple_form_for [:admin, @restaurant] do |f| %>
   <%= f.association :user, collection: User.are_restaurant_owner_plus, label_method: lambda { |user| "#{user.id} | #{user.last_name} #{user.first_name}" } %>
   <%= f.input :deliveroo_url %>
+  <%= f.input :foodora_url %>
   <%= f.input :ubereats_url %>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

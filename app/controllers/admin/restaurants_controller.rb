@@ -28,6 +28,18 @@ class Admin::RestaurantsController < ApplicationController
     redirect_to edit_admin_restaurant_path(@restaurant)
   end
 
+  def foodora_update
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    authorize [:admin, @restaurant]
+
+    if Restaurant::CreateMenuFromFoodora.new(@restaurant).call
+      flash[:notice] = "Mise à jour Foodora effectuée."
+    else
+      flash[:alert] = "Mise à jour Foodora impossible."
+    end
+    redirect_to edit_admin_restaurant_path(@restaurant)
+  end
+
   def ubereats_update
     @restaurant = Restaurant.find(params[:restaurant_id])
     authorize [:admin, @restaurant]
@@ -48,7 +60,7 @@ class Admin::RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:user_id, :deliveroo_url, :ubereats_url)
+    params.require(:restaurant).permit(:user_id, :deliveroo_url, :foodora_url, :ubereats_url)
   end
 
 end
