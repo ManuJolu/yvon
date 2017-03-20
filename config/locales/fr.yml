@@ -9,6 +9,7 @@ fr:
       profile: "Profil"
       restaurants: "Restaurants"
       new_restaurant: "Ajouter un restaurant"
+      rails_admin: "Admin"
     footer:
       legal: "Mentions légales"
       privacy: "Confidentialité"
@@ -156,4 +157,4 @@ fr:
         ready: "Ta commande sera prête dans %{preparation_time} min à %{ready_time}."
         go_to: "Va au %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
-      notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}. Merci et n'hésite pas à me partager avec tes amis :"
+      notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}, bon appétit ! N'hésite pas à me partager avec tes amis :"

@@ -4,7 +4,7 @@ namespace :scrap do
   desc "resto"
   task :lafourchette do
 
-    user =User.find_by(last_name: "LaFourchette")
+    user = User.find_by(last_name: "LaFourchette")
     if user.blank?
       puts "LaFourchette creation"
       user = User.new(last_name:"LaFourchette", email: "lafourchette@hello-yvon.com", password: "123456")

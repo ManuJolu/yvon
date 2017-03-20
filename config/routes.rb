@@ -11,15 +11,15 @@ Rails.application.routes.draw do
     get '/privacy', to: 'pages#privacy'
     resources :users, only: [:show] do
       member do
-        patch '/credit_card_update/' => 'users#credit_card_update'
+        patch '/credit_card_update' => 'users#credit_card_update'
       end
     end
     resources :restaurants, only: [:index, :new, :create, :edit, :update] do
       member do
         get '/refresh/:update' => 'restaurants#refresh'
         patch '/duty_update/:state' => "restaurants#duty_update"
-        patch '/preparation_time_update/' => 'restaurants#preparation_time_update'
-        get '/facebook_update/' => 'restaurants#facebook_update'
+        patch '/preparation_time_update' => 'restaurants#preparation_time_update'
+        get '/facebook_update' => 'restaurants#facebook_update'
         get '/orders/refresh/:order_status' => 'orders#refresh'
       end
       resources :meal_categories, only: [:create, :update], shallow: true
@@ -32,9 +32,9 @@ Rails.application.routes.draw do
     end
     namespace :admin do
       resources :restaurants, only: [:edit, :update] do
-        get '/deliveroo_update/' => 'restaurants#deliveroo_update'
-        get '/foodora_update/' => 'restaurants#foodora_update'
-        get '/ubereats_update/' => 'restaurants#ubereats_update'
+        get '/deliveroo_update' => 'restaurants#deliveroo_update'
+        get '/foodora_update' => 'restaurants#foodora_update'
+        get '/ubereats_update' => 'restaurants#ubereats_update'
       end
     end
   end
