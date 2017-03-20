@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319230512) do
+ActiveRecord::Schema.define(version: 20170320082936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,8 @@ ActiveRecord::Schema.define(version: 20170319230512) do
     t.string   "fb_price_range"
     t.bigint   "fb_page_id"
     t.string   "deliveroo_url"
+    t.string   "ubereats_url"
+    t.string   "foodora_url"
     t.index ["messenger_user_id"], name: "index_restaurants_on_messenger_user_id", using: :btree
     t.index ["restaurant_category_id"], name: "index_restaurants_on_restaurant_category_id", using: :btree
     t.index ["user_id"], name: "index_restaurants_on_user_id", using: :btree

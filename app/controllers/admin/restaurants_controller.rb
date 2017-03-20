@@ -21,9 +21,21 @@ class Admin::RestaurantsController < ApplicationController
     authorize [:admin, @restaurant]
 
     if Restaurant::CreateMenuFromDeliveroo.new(@restaurant).call
-      flash[:notice] = "Mise à jour effectuée."
+      flash[:notice] = "Mise à jour Deliveroo effectuée."
     else
-      flash[:alert] = "Mise à jour impossible."
+      flash[:alert] = "Mise à jour Deliveroo impossible."
+    end
+    redirect_to edit_admin_restaurant_path(@restaurant)
+  end
+
+  def ubereats_update
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    authorize [:admin, @restaurant]
+
+    if Restaurant::CreateMenuFromUbereats.new(@restaurant).call
+      flash[:notice] = "Mise à jour UberEATS effectuée."
+    else
+      flash[:alert] = "Mise à jour UberEATS impossible."
     end
     redirect_to edit_admin_restaurant_path(@restaurant)
   end
@@ -36,7 +48,7 @@ class Admin::RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:user_id, :deliveroo_url)
+    params.require(:restaurant).permit(:user_id, :deliveroo_url, :ubereats_url)
   end
 
 end

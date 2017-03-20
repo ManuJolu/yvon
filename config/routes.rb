@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :restaurants, only: [:edit, :update] do
         get '/deliveroo_update/' => 'restaurants#deliveroo_update'
+        get '/ubereats_update/' => 'restaurants#ubereats_update'
       end
     end
   end

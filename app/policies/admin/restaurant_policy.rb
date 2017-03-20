@@ -10,4 +10,8 @@ class Admin::RestaurantPolicy < ApplicationPolicy
   def deliveroo_update?
     update?
   end
+
+  def ubereats_update?
+    update?
+  end
 end
