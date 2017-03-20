@@ -87,7 +87,7 @@ fr:
       index:
         on_duty: "🔵 en service"
         off_duty: "⚪ consultation"
-        votable: "🗳 en campagne électorale"
+        votable: "🗳 vote pour moi"
         vote_invitation: "Vote pour pouvoir commander ici bientôt !\n"
         vote_share: "\nA voté ! Invite tes amis à voter"
         votes:
