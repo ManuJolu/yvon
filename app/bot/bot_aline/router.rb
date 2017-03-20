@@ -66,6 +66,8 @@ class BotAline::Router
           restaurants_controller.update_duty(restaurant_id, duty)
         when 'preparation_time'
           restaurants_controller.preparation_time
+        when 'meals'
+          restaurants_controller.meals
         when 'orders'
           orders_controller.index
         when /\Aorder_(?<id>\d+)_(?<action>\D+)\z/

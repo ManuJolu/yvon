@@ -133,6 +133,29 @@ class BotAline::RestaurantsView
     )
   end
 
+  def meals(restaurant)
+    message.reply(
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: "button",
+          text: 'Accède à ton compte pour mettre à jour les plats :',
+          buttons: [
+            {
+              type: 'web_url',
+              url: restaurant.decorate.meals_url,
+              title: 'Mon compte',
+              webview_height_ratio: 'full',
+              webview_share_button: 'hide',
+              messenger_extensions: true,
+              fallback_url: 'http://www.hello-yvon.com/'
+            }
+          ]
+        }
+      }
+    )
+  end
+
   private
 
   attr_reader :message, :user

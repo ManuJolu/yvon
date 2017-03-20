@@ -62,6 +62,11 @@ class BotAline::RestaurantsController
       update: "preparation_time"
   end
 
+  def meals
+    restaurant = user.messenger_restaurant
+    view.meals(restaurant)
+  end
+
   private
 
   attr_reader :message, :user, :view
