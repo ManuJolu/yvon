@@ -63,6 +63,7 @@ class BotYvon::Router
           end
         end
       else
+        # message.type_off
         messages_controller.else if user.current_order.nil?
       end
     end
@@ -139,7 +140,7 @@ class BotYvon::Router
       when 'update_card'
         orders_controller.update_card
       when 'check_counter'
-        orders_controller.ask_password
+        orders_controller.check_counter
       when 'demo'
         orders_controller.demo
       end

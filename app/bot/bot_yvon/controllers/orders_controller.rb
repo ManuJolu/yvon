@@ -58,12 +58,8 @@ class BotYvon::OrdersController
     view.update_card
   end
 
-  def menu_update_card
-    view.menu_update_card
-  end
-
   def pay_card
-    if user.current_order.meals.present?
+    if user.current_order.order_elements.present?
       order = user.current_order
       if order.restaurant.on_duty?
 
@@ -96,12 +92,20 @@ class BotYvon::OrdersController
     end
   end
 
-  def ask_password
-    view.ask_password
+  def check_counter
+    if user.stripe_customer_id
+      pay_counter
+    else
+      update_card_counter
+    end
+  end
+
+  def update_card_counter
+    view.update_card_counter
   end
 
   def pay_counter
-    if user.current_order.meals.present?
+    if user.current_order.order_elements.present?
       order = user.current_order
       if order.restaurant.on_duty?
         order.preparation_time = order.restaurant.preparation_time
@@ -121,7 +125,7 @@ class BotYvon::OrdersController
   end
 
   def demo
-    if user.current_order.meals.present?
+    if user.current_order.order_elements.present?
       order = user.current_order
       if order.restaurant.on_duty?
         order.preparation_time = order.restaurant.preparation_time
@@ -139,6 +143,10 @@ class BotYvon::OrdersController
     else
       view.no_meals
     end
+  end
+
+  def menu_update_card
+    view.menu_update_card
   end
 
   private

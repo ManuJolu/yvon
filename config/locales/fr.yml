@@ -125,7 +125,7 @@ fr:
       get_option:
         choose_option: "Choisis ton option :"
     order:
-      no_meals: "Désolé, tu n'as pas encore de plat à commander !"
+      no_meals: "Désolé, tu n'as pas encore de plats à commander !"
       restaurant_closed: "Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à trouver un autre restaurant ?"
       cart:
         order_pending: "En attente"
@@ -138,7 +138,10 @@ fr:
       update_card:
         no_card: "Tu n'as pas de carte à jour, ajoutes-en une avant de payer :"
         update_card: "Ajouter ma carte"
-        pay: "Payer"
+        pay: "puis Payer"
+      update_card_counter:
+        no_card: "Tu dois avoir une carte à jour pour pouvoir commander avec paiement au comptoir.\nAjoutes-en une avant de confirmer la commande :"
+        pay: "puis Confirmer"
       menu_update_card:
         go_to_account: "Accède à ton compte pour mettre à jour ta carte :"
         my_account: "Mon compte"
@@ -148,8 +151,8 @@ fr:
       ask_password: "Quel est ton code ?"
       confirm:
         paid: "Ta commande est payée, elle part en cuisine !"
-        password: "Ton code est valide, ta commande est envoyée en cuisine !"
-        demo: "Tu continues sur la démo, ta commande n'est pas vraiment en cours de préparation ;-)."
+        password: "Ta commande est envoyée en cuisine, n'oublies pas de payer au comptoir 😉 !"
+        demo: "Tu continues sur la démo, ta commande n'est pas vraiment en cours de préparation 😉."
         ready: "Ta commande sera prête dans %{preparation_time} min à %{ready_time}."
         go_to: "Va au %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
