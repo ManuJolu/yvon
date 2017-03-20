@@ -2,6 +2,7 @@ namespace :fb_update do
   desc "Update from Yvon bot"
   task yvon: :environment do
     User.where.not(messenger_id: nil).each do |user|
+      p user
       user_data_json = RestClient.get("https://graph.facebook.com/v2.8/#{user.messenger_id}?access_token=#{ENV['YVON_ACCESS_TOKEN']}")
       user_data = JSON.parse user_data_json
       facebook_picture_check = user_data['profile_pic'].match(/\/(\w+).jpg/)[1]
