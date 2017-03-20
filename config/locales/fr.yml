@@ -87,8 +87,9 @@ fr:
       index:
         on_duty: "🔵 en service"
         off_duty: "⚪ consultation"
-        votable: "🗳 en ballotage"
+        votable: "🗳 en campagne électorale"
         vote_invitation: "Vote pour pouvoir commander ici bientôt !\n"
+        vote_share: "\nA voté ! Invite tes amis à voter"
         votes:
           zero: "0 votes"
           one: "1 vote"
@@ -97,7 +98,7 @@ fr:
         upvote: "+ 1 vote"
       upvote:
         text: "A voté !\nInvite tes amis à voter pour %{restaurant} :"
-        share: "Vote pour commander chez %{restaurant} avec Yvon !"
+        share: "Vote pour commander à emporter chez %{restaurant} avec Yvon !"
       menu:
         swipe_right: "Regarder la carte ▷"
         back_to_map: "◁ Restaurants"
