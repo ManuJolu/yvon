@@ -15,7 +15,7 @@ class Restaurant::CreateMenuFromDeliveroo
           meal_category.meals.create(
             name: menu_item.css('.list-item-title').text.strip,
             description: menu_item.css('.list-item-description').text.strip,
-            price: menu_item.css('.item-price').text.strip.to_f
+            price: menu_item.css('.item-price').text.strip.gsub(',', '.').to_f
           )
         end
       end
