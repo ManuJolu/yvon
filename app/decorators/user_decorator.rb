@@ -9,7 +9,12 @@ class UserDecorator < Draper::Decorator
   end
 
   def stripe_default_source
-    "<i class='fa fa-cc-#{stripe_default_source_brand.downcase}' aria-hidden='true'></i> •••• #{stripe_default_source_last4}".html_safe
+    if stripe_default_source_brand == "American Express"
+      brand = 'amex'
+    else
+      brand = stripe_default_source_brand.downcase
+    end
+    "<i class='fa fa-cc-#{brand}' aria-hidden='true'></i> •••• #{stripe_default_source_last4}".html_safe
   end
 
   def show_url
