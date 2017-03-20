@@ -5,7 +5,7 @@ class BotYvon::RestaurantsController
   end
 
   def index(coordinates)
-    restaurants = Restaurant.are_votable_plus.by_duty.where.not(latitude: nil, longitude: nil).near(coordinates, 1).limit(10)
+    restaurants = Restaurant.are_votable_plus.by_duty.where.not(latitude: nil, longitude: nil).near(coordinates, 0.5).limit(10)
     view.index(coordinates, restaurants) if restaurants.present?
   end
 
