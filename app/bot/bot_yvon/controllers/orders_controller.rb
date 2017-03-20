@@ -80,7 +80,7 @@ class BotYvon::OrdersController
 
         order.update(
           payment: charge.to_json,
-          state: :paid,
+          payment_method: :credit_card,
           preparation_time: order.restaurant.preparation_time,
           sent_at: Time.now
         )
@@ -106,7 +106,7 @@ class BotYvon::OrdersController
       if order.restaurant.on_duty?
         order.preparation_time = order.restaurant.preparation_time
         order.sent_at = Time.now
-        order.password_confirmed!
+        order.counter!
         order.save
         BotAline::NotificationsController.new.notify_order(order)
         ActionCable.server.broadcast "restaurant_orders_#{order.restaurant.id}",

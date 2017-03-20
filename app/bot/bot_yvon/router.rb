@@ -41,8 +41,6 @@ class BotYvon::Router
         case message.text
         when /\Acds\z/i
           orders_controller.pay_counter
-        when /\Atalis\z/i
-          orders_controller.pay_counter
         else
           case message.quick_reply
           when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/

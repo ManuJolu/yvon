@@ -23,7 +23,7 @@ before_action :set_order, only: [:new, :create]
       currency:     @order.price.currency
     )
 
-    @order.update(payment: charge.to_json, state: :paid)
+    @order.update(payment: charge.to_json, payment_method: :credit_card)
     redirect_to @order
 
   rescue Stripe::CardError => e

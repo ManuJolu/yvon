@@ -63,6 +63,12 @@ class BotYvon::OrdersView
       }
     )
 
+    if order.user.stripe_customer_id.present?
+      card_payment = I18n.t('bot.order.cart.pay_card', last4: order.user.stripe_default_source_last4)
+    else
+      card_payment = I18n.t('bot.order.cart.pay_no_card')
+    end
+
     message.reply(
       attachment: {
         type: "template",
@@ -72,13 +78,13 @@ class BotYvon::OrdersView
           buttons: [
             {
               type: 'postback',
-              title: I18n.t('bot.order.cart.pay_counter'),
-              payload: 'check_counter'
+              title: card_payment,
+              payload: 'check_card'
             },
             {
               type: 'postback',
-              title: I18n.t('bot.order.cart.pay_card'),
-              payload: 'check_card'
+              title: I18n.t('bot.order.cart.pay_counter'),
+              payload: 'check_counter'
             },
             {
               type: 'postback',
@@ -168,11 +174,11 @@ class BotYvon::OrdersView
   end
 
   def confirm(order)
-    if order.paid?
+    if order.credit_card?
       message.reply(
         text: I18n.t('bot.order.confirm.paid')
       )
-    elsif order.password_confirmed?
+    elsif order.counter?
       message.reply(
         text: I18n.t('bot.order.confirm.password')
       )

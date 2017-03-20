@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320082936) do
+ActiveRecord::Schema.define(version: 20170320151332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 20170320082936) do
     t.float    "longitude"
     t.integer  "preparation_time"
     t.datetime "handled_at"
-    t.integer  "state",            default: 0
+    t.integer  "payment_method",   default: 0
     t.json     "payment"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree

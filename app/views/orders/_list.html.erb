@@ -41,10 +41,10 @@
             <% end %>
           </td>
           <td class="text-right">
-            <% case order.state %>
-            <% when 'paid' %>
+            <% case order.payment_method %>
+            <% when 'credit_card' %>
               Payé
-            <% when 'password_confirmed' %>
+            <% when 'counter' %>
               <strong>Comptoir</strong>
             <% when 'demo' %>
               Démo

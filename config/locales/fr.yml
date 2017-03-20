@@ -131,7 +131,8 @@ fr:
         order_pending: "En attente"
         discounts: "Réductions"
         ask_payment_method: "Comment souhaites-tu payer ta commande ?"
-        pay_card: "Avec ma carte démo"
+        pay_card: "Par carte ••••%{last4}"
+        pay_no_card: "Par carte bancaire"
         pay_counter: "Au comptoir"
         demo: "Continuer en démo"
       update_card:
