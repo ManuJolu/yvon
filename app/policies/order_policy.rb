@@ -6,6 +6,6 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def update?
-    record.restaurant.user == user || user.admin?
+    record.restaurant.user == user || record.restaurant.messenger_user == user || user.admin?
   end
 end
