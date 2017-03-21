@@ -62,28 +62,30 @@ class BotYvon::OrdersController
     if user.current_order.order_elements.present?
       order = user.current_order
       if order.restaurant.on_duty?
+        order.sent_at = Time.now
+        order.save # fastest possible remove of current_order
 
         begin
-        charge = Stripe::Charge.create(
-          customer:     user.stripe_customer_id,
-          description:  "restaurant_#{order.restaurant.id}_order_#{order.id} - #{order.restaurant.name}",
-          amount:       order.price_cents,
-          currency:     order.price.currency
-        )
+          charge = Stripe::Charge.create(
+            customer:     user.stripe_customer_id,
+            description:  "restaurant_#{order.restaurant.id}_order_#{order.id} - #{order.restaurant.name}",
+            amount:       order.price_cents,
+            currency:     order.price.currency
+          )
+          order.update(
+            payment: charge.to_json,
+            payment_method: :credit_card,
+            preparation_time: order.restaurant.preparation_time,
+          )
+          BotAline::NotificationsController.new.notify_order(order)
+          ActionCable.server.broadcast "restaurant_orders_#{order.restaurant.id}",
+            order_status: "sent"
+          view.confirm(order)
         rescue Stripe::CardError => e
+          order.sent_at = nil
+          order.save
           view.card_error(e.message)
         end
-
-        order.update(
-          payment: charge.to_json,
-          payment_method: :credit_card,
-          preparation_time: order.restaurant.preparation_time,
-          sent_at: Time.now
-        )
-        BotAline::NotificationsController.new.notify_order(order)
-        ActionCable.server.broadcast "restaurant_orders_#{order.restaurant.id}",
-          order_status: "sent"
-        view.confirm(order)
       else
         view.restaurant_closed(order.restaurant)
       end
@@ -108,8 +110,9 @@ class BotYvon::OrdersController
     if user.current_order.order_elements.present?
       order = user.current_order
       if order.restaurant.on_duty?
-        order.preparation_time = order.restaurant.preparation_time
         order.sent_at = Time.now
+        order.save # fastest possible remove of current_order
+        order.preparation_time = order.restaurant.preparation_time
         order.counter!
         order.save
         BotAline::NotificationsController.new.notify_order(order)
