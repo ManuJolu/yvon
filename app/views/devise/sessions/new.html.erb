@@ -8,25 +8,40 @@
   </p>
   <p><%= t '.fbm_link' %></p>
 
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <h4>Pour restaurateurs uniquement :</h4>
+  <div id="restaurantLoginForm">
+    <br>
+    <br>
+    <h4>Pour restaurateurs uniquement :</h4>
 
-  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-inputs">
-      <%= f.input :email, required: false %>
-      <%= f.input :password, required: false %>
-      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-    </div>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :email, required: false %>
+        <%= f.input :password, required: false %>
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
 
-    <div class="form-actions">
-      <%= f.button :submit, t(".sign_in") %>
-    </div>
-  <% end %>
+      <div class="form-actions">
+        <%= f.button :submit, t(".sign_in") %>
+      </div>
+    <% end %>
 
-  <%= render "devise/shared/links" %>
+    <%= render "devise/shared/links" %>
+  </div>
 </div>
+
+<script>
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'Messenger'));
+
+  window.extAsyncInit = function() {
+    MessengerExtensions.getSupportedFeatures(function success(result) {
+      $('#restaurantLoginForm').hide();
+    }, function error(err) {
+    });
+  };
+</script>

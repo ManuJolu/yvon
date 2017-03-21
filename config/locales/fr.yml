@@ -141,11 +141,11 @@ fr:
         pay_counter: "Au comptoir"
         demo: "Continuer en démo"
       update_card:
-        no_card: "Tu n'as pas de carte à jour, ajoutes-en une avant de payer :"
+        no_card: "Tu n'as pas de carte à jour, ajoutes-en une sur mon site avant de payer :"
         update_card: "Ajouter ma carte"
         pay: "puis Payer"
       update_card_counter:
-        no_card: "Tu dois avoir une carte à jour pour pouvoir commander avec paiement au comptoir.\nAjoutes-en une avant de confirmer la commande :"
+        no_card: "Tu dois avoir une carte à jour pour pouvoir commander avec paiement au comptoir.\nAjoutes-en une sur mon site avant de confirmer la commande :"
         pay: "puis Confirmer"
       menu_update_card:
         go_to_account: "Accède à ton compte pour mettre à jour ta carte :"
