@@ -1,12 +1,15 @@
 .alert {
+  height: 50px;
   margin: 0;
   padding: 5px 30px;
-  text-align: center;
   color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .alert-info {
   background: $brand-primary;
 }
-.alert-warning {
+.alert-danger {
   background: $brand-danger;
 }

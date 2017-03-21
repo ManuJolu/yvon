@@ -162,8 +162,5 @@ fr:
         go_to: "Va au %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
       notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}, bon appétit ! N'hésite pas à me partager avec tes amis :"
-  devise:
-    sessions:
-      new:
-        fbm_link: "Faire le lien avec Messenger"
-
+  pundit:
+    user_not_authorized: "Vous n'êtes pas autorisé à accéder à cette page"

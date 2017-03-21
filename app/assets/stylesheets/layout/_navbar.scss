@@ -51,6 +51,10 @@
     color: $white;
     text-decoration: none;
   }
+  &:focus {
+    color: $white;
+    text-decoration: none;
+  }
 }
 
 /* Navbar right button */
