@@ -28,10 +28,10 @@
   <% end %>
 </div>
 
-<% if @update == 'cc' %>
-  <script>
-    window.extAsyncInit = function() {
-      MessengerExtensions.requestCloseBrowser();
-    };
-  </script>
+<%= javascript_tag do %>
+  <% if @update == 'cc' %>
+    var update = 'cc';
+  <% else %>
+    var update = 'nil';
+  <% end %>
 <% end %>

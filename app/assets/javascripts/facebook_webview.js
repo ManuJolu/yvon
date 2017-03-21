@@ -27,6 +27,12 @@ $(document).ready(function() {
     }(document, 'script', 'Messenger'));
 
     window.extAsyncInit = function() {
+      if (update === 'cc') {
+        MessengerExtensions.requestCloseBrowser(function success() {
+        }, function error(err) {
+        });
+      };
+
       MessengerExtensions.getSupportedFeatures(function success() {
       }, function error(err) {
         $('#messengerButton').show();
