@@ -64,11 +64,6 @@
                     <i class="fa fa-plus"></i> <%= t(".new_restaurant") %>
                   <% end %>
                 </li>
-                <li>
-                  <%= link_to (rails_admin_path + '/user') do %>
-                    <i class="fa fa-lock"></i> <%= t(".rails_admin") %>
-                  <% end %>
-                </li>
               <% end %>
               <li>
                 <%= link_to destroy_user_session_path, method: :delete do %>

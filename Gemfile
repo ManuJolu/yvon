@@ -18,10 +18,11 @@ gem 'geocoder'
 gem 'pundit'
 gem 'cloudinary', '1.1.0'
 gem 'rest-client'
-gem "gmaps4rails"
-gem 'money-rails'
+gem 'gmaps4rails'
+gem 'rails_admin', '>= 1.0.0.rc'
 gem 'acts_as_list'
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'money-rails'
 gem 'stripe'
 
 source 'https://rails-assets.org' do
