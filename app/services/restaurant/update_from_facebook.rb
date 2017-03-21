@@ -6,10 +6,10 @@ class Restaurant::UpdateFromFacebook
   def call
     begin
       return false unless restaurant.fb_page_id.present? || restaurant.facebook_url.present?
-      page_ref = restaurant.fb_page_id
+      /https:\/\/www.facebook.com\/(?<page_name>.*-(?<page_id>\d+)|.*)\// =~ restaurant.facebook_url
+      page_ref = page_id.present? ? page_id : page_name
       unless page_ref
-        /https:\/\/www.facebook.com\/(?<page_name>.*-(?<page_id>\d+)|.*)\// =~ restaurant.facebook_url
-        page_ref = page_id.present? ? page_id : page_name
+        page_ref = restaurant.fb_page_id
       end
       restaurant_data_json = RestClient.get("https://graph.facebook.com/v2.8/#{page_ref}?fields=name,about,description,price_range,fan_count,overall_star_rating,rating_count,location&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
       restaurant_data = JSON.parse restaurant_data_json
