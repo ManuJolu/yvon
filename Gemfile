@@ -19,8 +19,6 @@ gem 'pundit'
 gem 'cloudinary', '1.1.0'
 gem 'rest-client'
 gem "gmaps4rails"
-gem 'activeadmin', github: 'activeadmin/activeadmin'
-gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'money-rails'
 gem 'acts_as_list'
 gem 'acts_as_votable', '~> 0.10.0'

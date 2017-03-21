@@ -9,7 +9,7 @@ fr:
       profile: "Profil"
       restaurants: "Restaurants"
       new_restaurant: "Ajouter un restaurant"
-      active_admin: "Admin"
+      rails_admin: "Admin"
     footer:
       legal: "Mentions légales"
       privacy: "Confidentialité"
