@@ -25,6 +25,13 @@ $(document).ready(function() {
       js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'Messenger'));
+
+    window.extAsyncInit = function() {
+      MessengerExtensions.getSupportedFeatures(function success() {
+      }, function error(err) {
+        $('#messengerButton').show();
+      });
+    };
   };
 });
 
