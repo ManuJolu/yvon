@@ -35,7 +35,7 @@ $(document).ready(function() {
 
       MessengerExtensions.getSupportedFeatures(function success() {
       }, function error(err) {
-        $('#messengerButton').show();
+        $('#nonCreditCard').show();
       });
     };
   };

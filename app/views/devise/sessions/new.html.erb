@@ -1,8 +1,8 @@
 <div class="container">
-  <h3><%= t(".sign_in") %></h3>
 
   <div id="websiteLoginForm" style="display: none;">
 
+    <h3><%= t(".sign_in") %></h3>
     <p>
       <%= link_to omniauth_authorize_path(resource_name, 'facebook'), class: "btn btn-social btn-facebook" do %>
         <i class="fa fa-facebook"></i><%= t('devise.shared.links.sign_in_with_provider', provider: 'Facebook') %>

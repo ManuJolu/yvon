@@ -22,9 +22,6 @@
 
   <% else %>
 
-    <p><%= t '.stripe_info' %></p>
-    <p><%= t '.accept_card_payment' %></p>
-
     <%= form_tag credit_card_update_user_path(user), method: :patch do %>
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="<%= Rails.configuration.stripe[:publishable_key] %>"

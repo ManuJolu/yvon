@@ -6,26 +6,26 @@
     <%= render 'users/credit_card', user: @user.decorate %>
   </div>
 
-  <div id="messengerButton" style="display: none;">
+  <div id="nonCreditCard" style="display: none;">
     <h3><%= t '.messenger' %></h3>
     <%= render 'pages/messenger_button', ref: "profile" %>
-  </div>
 
-  <% if User.roles[@user.role] > 0 %>
-    <h3><%= t ".my_restaurants" %></h3>
-    <div class="row">
-      <% @user.restaurants.by_duty.each do |restaurant| %>
-        <div class="col-xs-12 col-sm-4">
-          <%= render 'restaurants/card', restaurant: restaurant %>
-        </div>
-      <% end %>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <%= link_to t(".add_restaurant", default: "Add a restaurant"), new_restaurant_path, class: "btn btn-danger marged" %>
+    <% if User.roles[@user.role] > 0 %>
+      <h3><%= t ".my_restaurants" %></h3>
+      <div class="row">
+        <% @user.restaurants.by_duty.each do |restaurant| %>
+          <div class="col-xs-12 col-sm-4">
+            <%= render 'restaurants/card', restaurant: restaurant %>
+          </div>
+        <% end %>
       </div>
-    </div>
-  <% end %>
+      <div class="row">
+        <div class="col-sm-4">
+          <%= link_to t(".add_restaurant", default: "Add a restaurant"), new_restaurant_path, class: "btn btn-danger marged" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <%= javascript_tag do %>
