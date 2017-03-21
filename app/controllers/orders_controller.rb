@@ -1,12 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :update]
+  before_action :set_order, only: [:update]
   before_action :set_restaurant, only: [:index]
 
   def index
     @orders = policy_scope(@restaurant.orders.at_today)
-  end
-
-  def show
   end
 
   def update

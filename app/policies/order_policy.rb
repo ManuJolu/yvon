@@ -5,10 +5,6 @@ class OrderPolicy < ApplicationPolicy
     end
   end
 
-  def show?
-    record.user == user || user.admin?
-  end
-
   def update?
     record.restaurant.user == user || user.admin?
   end
