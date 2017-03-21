@@ -70,6 +70,10 @@ fr:
       edit: "Editer"
       admin: "Admin"
   users:
+    credit_card:
+      stripe_info: "Les paiements s’effectuent sur les serveurs bancaires sécurisés de Stripe, Etablissement de Monnaie Electronique Agréé. Aucun numéro de carte bancaire ne transite ou n'est stocké sur @HelloYvon ou Facebook."
+      accept_card_payment: "En cliquant sur 'Ajouter ma carte', j'accepte que celle-ci soit utilisée pour mes paiements sur @HelloYvon."
+      confirm_destroy: "En supprimant ta carte, tu ne pourras plus payer sur @HelloYvon."
     show:
       my_card: "Ma carte bancaire"
       messenger: "Messenger"
@@ -158,3 +162,8 @@ fr:
         go_to: "Va au %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
       notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}, bon appétit ! N'hésite pas à me partager avec tes amis :"
+  devise:
+    sessions:
+      new:
+        fbm_link: "Pour faire le lien avec ton compte Facebook Messenger"
+

@@ -1,7 +1,9 @@
 <% if user.stripe_customer_id %>
 
+    <p><%= user.email %></p>
     <p><%= user.stripe_default_source %></p>
-    <%= form_tag credit_card_update_user_path(user), method: :patch, remote: true do %>
+
+    <%= form_tag credit_card_update_user_path(user), method: :patch do %>
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
         data-name="Yvon"
@@ -11,12 +13,19 @@
         data-panel-label="Mettre à jour ma carte"
         data-allow-remember-me=false
         data-locale="auto"></script>
+
+      <%= link_to credit_card_destroy_user_path(user), method: :patch, data: { confirm: t('.confirm_destroy') }, class: 'btn btn-danger btn-xs' do %>
+        <i class="fa fa-trash"></i>
+      <% end %>
     <% end %>
+
 
   <% else %>
 
-    <p>Pas de carte enregistrée</p>
-    <%= form_tag credit_card_update_user_path(user), method: :patch, remote: true do %>
+    <p><%= t '.stripe_info' %></p>
+    <p><%= t '.accept_card_payment' %></p>
+
+    <%= form_tag credit_card_update_user_path(user), method: :patch do %>
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
         data-name="Yvon"

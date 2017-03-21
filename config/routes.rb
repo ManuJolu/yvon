@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show] do
       member do
         patch '/credit_card_update' => 'users#credit_card_update'
+        patch '/credit_card_destroy' => 'users#credit_card_destroy'
       end
     end
     resources :restaurants, only: [:index, :new, :create, :edit, :update] do

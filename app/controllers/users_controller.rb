@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :credit_card_update]
+  before_action :set_user, only: [:show, :credit_card_update, :credit_card_destroy]
 
   def show
     @update = params[:update]
@@ -27,6 +27,15 @@ class UsersController < ApplicationController
     redirect_to user_path(@user, update: 'cc')
   rescue Stripe::CardError => e
     flash[:error] = e.message
+    redirect_to @user
+  end
+
+  def credit_card_destroy
+    @user.update({
+      stripe_customer_id: nil,
+      stripe_default_source_brand: nil,
+      stripe_default_source_last4: nil
+    })
     redirect_to @user
   end
 

@@ -1,7 +1,6 @@
 <div class="container">
 
   <h3><%= t '.my_card' %></h3>
-  <p><%= @user.email %></p>
 
   <div id="creditCard">
     <%= render 'users/credit_card', user: @user.decorate %>

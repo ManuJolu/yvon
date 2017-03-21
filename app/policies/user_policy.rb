@@ -12,4 +12,8 @@ class UserPolicy < ApplicationPolicy
   def credit_card_update?
     show?
   end
+
+  def credit_card_destroy?
+    credit_card_update?
+  end
 end
