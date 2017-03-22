@@ -36,8 +36,6 @@
 
   <body class="<%= controller_name %> <%= action_name %>">
 
-    <%= render 'cookies_eu/consent_banner' %>
-
     <%= render 'shared/navbar', path_info: request.env['PATH_INFO'] %>
 
     <%= render 'shared/flashes' %>
@@ -45,6 +43,8 @@
     <%= yield %>
 
     <%= render 'shared/footer' %>
+
+    <%= render 'cookies_eu/consent_banner' %>
 
     <%= javascript_include_tag "application", "data-turbolinks-track" => 'reload', 'data-turbolinks-eval' => false %>
 
