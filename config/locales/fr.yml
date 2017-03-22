@@ -148,7 +148,7 @@ fr:
         no_card: "Tu dois avoir une carte à jour pour pouvoir commander avec paiement au comptoir.\nAjoutes-en une sur mon site avant de confirmer la commande :"
         pay: "puis Confirmer"
       menu_update_card:
-        go_to_account: "Accède à ton compte sur hello-yvon.com pour mettre à jour ta carte :"
+        go_to_account: "Accède à ton compte sur mon site pour mettre à jour ta carte :"
         my_account: "Mon compte"
       card_error:
         message: "Oups, il y a eu une erreur : %{error_message}.\nVeux tu mettre à jour ta carte ?"

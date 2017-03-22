@@ -107,12 +107,12 @@ class BotYvon::OrdersView
           buttons: [
             {
               type: 'web_url',
-              url: user.decorate.show_url,
               title: I18n.t('bot.order.update_card.update_card'),
+              url: user.decorate.show_url(protocol: 'https'),
               webview_height_ratio: 'tall',
-              webview_share_button: 'hide',
               messenger_extensions: true,
-              fallback_url: 'http://www.hello-yvon.com/'
+              fallback_url: user.decorate.show_url,
+              webview_share_button: 'hide'
             },
             {
               type: 'postback',
@@ -135,12 +135,12 @@ class BotYvon::OrdersView
           buttons: [
             {
               type: 'web_url',
-              url: user.decorate.show_url,
               title: I18n.t('bot.order.update_card.update_card'),
+              url: user.decorate.show_url(protocol: 'https'),
               webview_height_ratio: 'tall',
-              webview_share_button: 'hide',
               messenger_extensions: true,
-              fallback_url: 'http://www.hello-yvon.com/'
+              fallback_url: user.decorate.show_url,
+              webview_share_button: 'hide'
             },
             {
               type: 'postback',
@@ -230,12 +230,12 @@ class BotYvon::OrdersView
           buttons: [
             {
               type: 'web_url',
-              url: user.decorate.show_url,
               title: I18n.t('bot.order.menu_update_card.my_account'),
+              url: user.decorate.show_url(protocol: 'https'),
               webview_height_ratio: 'tall',
-              webview_share_button: 'hide',
               messenger_extensions: true,
-              fallback_url: 'http://www.hello-yvon.com/'
+              fallback_url: user.decorate.show_url,
+              webview_share_button: 'hide'
             }
           ]
         }

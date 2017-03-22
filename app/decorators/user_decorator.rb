@@ -17,13 +17,19 @@ class UserDecorator < Draper::Decorator
     "<i class='fa fa-cc-#{brand}' aria-hidden='true'></i> •••• #{stripe_default_source_last4}".html_safe
   end
 
-  def show_url
-    url_helpers.user_url(self, user_url_options)
+  def show_url(options = {})
+    url_helpers.user_url(self, user_url_options(protocol: options[:protocol]))
   end
 
-  def user_url_options
+  def user_url_options(options = {})
+    if options[:protocol] == 'https'
+      host = 'https://yvon.herokuapp.com/'
+    else
+      host = 'http://www.hello-yvon.com/'
+    end
+
     {
-      host: 'https://yvon.herokuapp.com/',
+      host: host,
       locale: I18n.locale == I18n.default_locale ? nil : I18n.locale
     }
   end
