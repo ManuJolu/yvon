@@ -22,7 +22,7 @@ fr:
       menu: "Te propose l'ensemble de la carte"
       send: "Prend ta commande et la transmet en cuisine"
       messenger: "Te prévient quand elle est prête"
-      cool: "C'est posey !"
+      cool: "YVON tous kiffer !"
   orders:
     index:
       pending: "En cours"
