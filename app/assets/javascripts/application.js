@@ -8,3 +8,4 @@
 //= require gmaps/google
 //= require cocoon
 //= require_tree .
+//= require cookies_eu

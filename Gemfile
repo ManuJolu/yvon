@@ -24,6 +24,7 @@ gem 'acts_as_list'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'money-rails'
 gem 'stripe'
+gem 'cookies_eu'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
