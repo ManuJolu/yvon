@@ -6,11 +6,17 @@ class RestaurantsController < ApplicationController
 
     @restaurants = policy_scope(Restaurant).by_duty.where.not(latitude: nil, longitude: nil)
 
-    # @hash = Gmaps4rails.build_markers(@restaurants) do |restaurant, marker|
-    #   marker.lat restaurant.latitude
-    #   marker.lng restaurant.longitude
-    #   # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
-    # end
+    @hash = Gmaps4rails.build_markers(@restaurants) do |restaurant, marker|
+      marker.lat restaurant.latitude
+      marker.lng restaurant.longitude
+      marker.infowindow render_to_string(partial: "restaurants/card_map", locals: { restaurant: restaurant })
+      marker.picture({
+        "url" => view_context.image_path('restaurant-marker.png'),
+        "width" => 32,
+        "height" => 32
+      })
+    end
+
   end
 
   def new

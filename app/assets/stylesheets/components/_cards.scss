@@ -7,6 +7,10 @@
   position: relative;
   margin: 10px 0;
   border-radius: 10px;
+  &-map {
+    height: 200px;
+    width: 382px;
+  }
 }
 .card-user {
   position: absolute;

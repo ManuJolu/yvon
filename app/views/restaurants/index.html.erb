@@ -1,5 +1,12 @@
 <div class="container">
   <div class="row">
+    <div class="col-xs-2">
+      Recherche
+    </div>
+    <div class="col-xs-10">
+      <div id="map" style="width: 100%; height: 480px"></div>
+    </div>
+
     <% @restaurants.each do |restaurant| %>
       <div class="col-sm-4">
         <%= render 'card', restaurant: restaurant %>
@@ -7,3 +14,25 @@
     <% end %>
   </div>
 </div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_KEY']}" %>
+  <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/markerclusterer/src/markerclusterer_compiled.js" %>
+  <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" %>
+
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function() {
+        markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        if (markers.length == 0) {
+          handler.getMap().setZoom(2);
+        } else if (markers.length == 1) {
+          handler.getMap().setZoom(14);
+        }
+      });
+    });
+  <% end %>
+<% end %>

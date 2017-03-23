@@ -1,0 +1,26 @@
+<div class="card card-map" style="background-image: linear-gradient(rgba(41,44,60,0.6) 0%, rgba(80,78,100,0.5) 50%), url(<%= cl_image_path_with_default restaurant.photo&.path, height: 200, width: 382, crop: :fill %>);">
+  <div class="card-category">
+    <%= "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans" if restaurant.fb_overall_star_rating %>
+  </div>
+  <div class="card-user">
+    <% if restaurant.active? %>
+      <% if restaurant.on_duty? %>
+        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+      <% else %>
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      <% end %>
+    <% elsif restaurant.votable? %>
+      <i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: #0084FF"></i>
+    <% else %>
+      <i class="fa fa-power-off" aria-hidden="true" style="color: red;"></i>
+    <% end %>
+  </div>
+  <div class="card-description">
+    <h3><%= restaurant.name %></h3>
+    <p><%= restaurant&.description&.truncate(60) %><p>
+    <p><%= restaurant.address %></p>
+  </div>
+  <%= link_to '', restaurant_meals_path(restaurant), class: 'card-link' %>
+</div>
+
+
