@@ -10,8 +10,20 @@ class RestaurantsController < ApplicationController
       marker.lat restaurant.latitude
       marker.lng restaurant.longitude
       marker.infowindow render_to_string(partial: "restaurants/card_map", locals: { restaurant: restaurant })
+
+      if restaurant.active?
+        if restaurant.on_duty?
+          marker_url = view_context.image_path('bag.png')
+        else
+          marker_url = view_context.image_path('eye.png')
+        end
+      elsif restaurant.votable?
+        marker_url = view_context.image_path('thumb.png')
+      else
+        marker_url = view_context.image_path('off.png')
+      end
       marker.picture({
-        "url" => view_context.image_path('restaurant-marker.png'),
+        "url" => marker_url,
         "width" => 32,
         "height" => 32
       })
