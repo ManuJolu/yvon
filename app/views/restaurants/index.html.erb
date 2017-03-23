@@ -1,17 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-2">
-      Recherche
+      <%= render 'search_form', address: @address, modes: @modes, duty: @duty %>
     </div>
     <div class="col-xs-10">
       <div id="map" style="width: 100%; height: 480px"></div>
     </div>
 
-    <% @restaurants.each do |restaurant| %>
-      <div class="col-sm-4">
-        <%= render 'card', restaurant: restaurant %>
-      </div>
-    <% end %>
+    <div id="restaurantList">
+      <%= render 'list', restaurants: @restaurants %>
+    </div>
   </div>
 </div>
 

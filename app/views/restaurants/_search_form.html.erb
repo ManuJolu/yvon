@@ -1,0 +1,6 @@
+<%= simple_form_for :search, url: restaurants_path, method: :get, remote: true do |f| %>
+  <%= f.input :address, label: 'Adresse', input_html: { value: address } %>
+  <%= f.input :modes, collection: Restaurant.modes.map {|k, v| [t("restaurants.form.#{k}"), k]}, as: :check_boxes, checked: modes %>
+  <%= f.input :duty, label: 'Service', include_blank: 'Tous', collection: ['On', 'Off'], selected: duty %>
+  <%= f.submit 'Filtrer', class: 'btn btn-primary' %>
+<% end %>

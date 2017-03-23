@@ -3,8 +3,27 @@ class RestaurantsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index ]
 
   def index
-
     @restaurants = policy_scope(Restaurant).by_duty.where.not(latitude: nil, longitude: nil)
+
+    search = params[:search]
+
+    if search.try(:[], :address) && search[:address] !=""
+      @address = search[:address]
+      @restaurants = @restaurants.near(@address, 5)
+    end
+
+    if search.try(:[], :modes)
+      @modes = search[:modes]
+      @restaurants = @restaurants.where(mode: @modes[1..-1])
+    else
+      @modes = ['', 'votable', 'active']
+    end
+
+    if search.try(:[], :duty) && search[:duty] !=""
+      @duty = search[:duty]
+      on_duty = (@duty == 'On' ? true : false)
+      @restaurants = @restaurants.where(on_duty: on_duty)
+    end
 
     @hash = Gmaps4rails.build_markers(@restaurants) do |restaurant, marker|
       marker.lat restaurant.latitude
@@ -29,6 +48,10 @@ class RestaurantsController < ApplicationController
       })
     end
 
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new

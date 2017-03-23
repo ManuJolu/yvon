@@ -8,8 +8,8 @@
   margin: 10px 0;
   border-radius: 10px;
   &-map {
-    height: 200px;
-    width: 382px;
+    height: 100px;
+    width: 191px;
   }
 }
 .card-user {
@@ -24,6 +24,9 @@
   left: 10px;
   font-size: 1.4rem;
   text-transform: uppercase;
+  &-map {
+    font-size: 1rem;
+  }
 }
 .card-description {
   position: absolute;
@@ -36,6 +39,9 @@
   p {
     font-size: 1.6rem;
     margin: 0px;
+  }
+  &-map h3 {
+    font-size: 2.4rem;
   }
 }
 .card-link {
