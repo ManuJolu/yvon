@@ -7,17 +7,22 @@ class RestaurantsController < ApplicationController
 
     search = params[:search]
 
-    if search.try(:[], :address) && search[:address] !=""
-      @address = search[:address]
+    if search.try(:[], :address)
+      if search[:address] != ""
+        @address = search[:address]
+        @restaurants = @restaurants.near(@address, 5)
+      end
+    else
+      @address = 'Bordeaux'
       @restaurants = @restaurants.near(@address, 5)
     end
 
     if search.try(:[], :modes)
       @modes = search[:modes]
-      @restaurants = @restaurants.where(mode: @modes[1..-1])
     else
       @modes = ['', 'votable', 'active']
     end
+    @restaurants = @restaurants.where(mode: @modes[1..-1])
 
     if search.try(:[], :duty) && search[:duty] !=""
       @duty = search[:duty]
