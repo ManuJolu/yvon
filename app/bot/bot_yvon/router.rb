@@ -24,15 +24,17 @@ class BotYvon::Router
 
   def handle_message
     if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
+      message.type
       order = orders_controller.create
       coordinates = [order.latitude, order.longitude]
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
     end
 
     case message.text
-    when /hello/i
+    when /hello/i, /hi/i, /bonjour/i, /bonsoir/i, /coucou/i, /salut/i, /help/i, /aide/i
       messages_controller.hello
     when /bordeaux/i
+      message.type
       order = orders_controller.create(latitude: '44.840715', longitude: '-0.5721098')
       coordinates = [order.latitude, order.longitude]
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
@@ -44,6 +46,7 @@ class BotYvon::Router
         else
           case message.quick_reply
           when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
+            message.type
             meal = Meal.find($LAST_MATCH_INFO['meal_id'])
             option = Option.find($LAST_MATCH_INFO['option_id'])
             action = $LAST_MATCH_INFO['action']
@@ -58,13 +61,13 @@ class BotYvon::Router
             else
               restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
             end
-          else
-            messages_controller.no_comprendo if message.quick_reply.nil?
+          # else
+          #   messages_controller.no_comprendo if message.quick_reply.nil?
           end
         end
-      else
-        # message.type_off
-        messages_controller.else if user.current_order.nil?
+      # else
+      #   # message.type_off
+      #   messages_controller.else if user.current_order.nil?
       end
     end
   end
