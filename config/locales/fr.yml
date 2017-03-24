@@ -80,7 +80,8 @@ fr:
       my_restaurants: "Mes restaurants"
       add_restaurant: "Ajouter un restaurant"
   bot:
-    hello: "Salut %{username} ! Où puis-je t'aider à trouver un restaurant ? Envoie un emplacement ou cherche à Bordeaux, ma ville natale !"
+    hello_default_keyword: "Salut"
+    hello: "%{keyword} %{username} ! Où puis-je t'aider à trouver un restaurant ? Envoie un emplacement ou cherche à Bordeaux, ma ville natale !"
     share: "Essaye Yvon pour commander à emporter via Messenger !"
     no_restaurant: "Désolé, je n'ai pas trouvé de restaurant près de toi... Envoie un nouvel emplacement ou cherche à Bordeaux, ma ville natale !"
     no_restaurant_selected: "Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider à en trouver un ?"

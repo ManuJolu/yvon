@@ -4,9 +4,10 @@ class BotYvon::MessagesView
     @user = user
   end
 
-  def hello
+  def hello(options = {})
+  keyword = (options[:keyword]&.capitalize || I18n.t('bot.hello_default_keyword'))
   message.reply(
-    text: I18n.t('bot.hello', username: user.first_name.capitalize),
+    text: I18n.t('bot.hello', keyword: keyword, username: user.first_name.capitalize),
     quick_replies: [
       {
         content_type: 'location'

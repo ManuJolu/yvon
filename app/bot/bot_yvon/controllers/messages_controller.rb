@@ -3,8 +3,8 @@ class BotYvon::MessagesController
     @view = BotYvon::MessagesView.new(message, user)
   end
 
-  def hello
-    view.hello
+  def hello(options = {})
+    view.hello(options)
   end
 
   def share
