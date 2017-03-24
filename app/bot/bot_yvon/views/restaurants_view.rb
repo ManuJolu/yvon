@@ -21,7 +21,7 @@ class BotYvon::RestaurantsView
       url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 8]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},#{restaurant.longitude}"
       if restaurant.active?
         if restaurant.on_duty?
-          title = "#{i + 1} - #{I18n.t('bot.restaurant.index.on_duty').upcase} - #{restaurant.name}"
+          title = "#{i + 1} - #{I18n.t('bot.restaurant.index.on_duty').upcase} #{I18n.t('bot.restaurant.ready_in')} #{restaurant.preparation_time}min - #{restaurant.name}"
         else
           title = "#{i + 1} - #{I18n.t('bot.restaurant.index.off_duty').upcase} - #{restaurant.name}"
         end
@@ -103,6 +103,10 @@ class BotYvon::RestaurantsView
     )
 
     message.reply(
+      text: "Fait défiler à droite pour voir les autres restaurants ▷"
+    )
+
+    message.reply(
       attachment: {
         type: 'template',
         payload: {
@@ -167,6 +171,10 @@ class BotYvon::RestaurantsView
         }
       ]
     } if restaurant.menus.any?
+
+    message.reply(
+      text: "Fait défiler à droite pour voir la carte ▷"
+    )
 
     message.reply(
       attachment: {

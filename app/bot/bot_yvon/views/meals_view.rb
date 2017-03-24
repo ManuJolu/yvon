@@ -56,6 +56,10 @@ class BotYvon::MealsView
     end
 
     message.reply(
+      text: "Fait défiler à droite pour voir les plats ▷"
+    )
+
+    message.reply(
       attachment: {
         type: 'template',
         payload: {
