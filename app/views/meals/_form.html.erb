@@ -1,24 +1,13 @@
 <%= simple_form_for [restaurant, meal], remote: true do |f| %>
-  <%= f.association :meal_category, collection: meal.restaurant.meal_categories %>
   <%= f.input :name %>
   <%= f.input :description %>
-
-  <h4>Options</h4>
-  <div id="options">
-    <%= f.simple_fields_for :meal_options do |meal_option| %>
-      <%= render 'meal_option_fields', f: meal_option %>
-    <% end %>
-    <div class="links">
-      <%= link_to_add_association f, :meal_options do %>
-        <i class="fa fa-plus" aria-hidden="true"></i>
-      <% end %>
-    </div>
-  </div>
-
+  <%= f.association :options, as: :check_boxes %>
   <%= f.input :price %>
-  <%= f.input :tax_rate, collection: Meal.tax_rates.map {|k, v| [k, k]} %>
   <%= f.input :photo, as: :attachinary %>
-  <%= f.input :active %>
+  <%= f.submit class: 'btn btn-primary' %>
+  <%= f.association :meal_category, collection: meal.restaurant.meal_categories %>
   <%= f.input :position %>
+  <%= f.input :tax_rate, collection: Meal.tax_rates.map {|k, v| [k, k]} %>
+  <%= f.input :active %>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

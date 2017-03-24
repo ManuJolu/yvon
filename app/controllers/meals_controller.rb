@@ -76,8 +76,7 @@ end
 
   def meal_params
     params.require(:meal).permit(
-      :meal_category_id, :position, :name, :description, :price, :tax_rate, :photo, :active,
-      meal_options_attributes: [:id, :_destroy, :option_id, option_attributes: [:id, :name, :restaurant_id, :_destroy]]
+      :meal_category_id, :position, :name, :description, :price, :tax_rate, :photo, :active, option_ids: []
     )
   end
 end

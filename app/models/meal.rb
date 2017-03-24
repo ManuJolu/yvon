@@ -8,9 +8,6 @@ class Meal < ApplicationRecord
   validates :name, presence: true
   validates :tax_rate, presence: true
 
-  accepts_nested_attributes_for :options
-  accepts_nested_attributes_for :meal_options, allow_destroy: true
-
   acts_as_list scope: :meal_category
 
   monetize :price_cents, allow_nil: false, numericality: { greater_than_or_equal_to: 0 }
