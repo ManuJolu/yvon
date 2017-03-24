@@ -1,7 +1,7 @@
 <%= simple_form_for [restaurant, meal], remote: true do |f| %>
   <%= f.input :name %>
   <%= f.input :description %>
-  <%= f.association :options, as: :check_boxes %>
+  <%= f.association :options, collection: meal.restaurant.options, as: :check_boxes %>
   <%= f.input :price %>
   <%= f.input :photo, as: :attachinary %>
   <%= f.submit class: 'btn btn-primary' %>
