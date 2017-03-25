@@ -88,6 +88,7 @@ fr:
     no_current_order: "Désolé, tu n'as plus de commande en cours. Envoie un emplacement pour en commencer une nouvelle :"
     no_comprendo: "Désolé, no comprendo 😕"
     else: "Dis 'Hello' pour commencer une nouvelle commande"
+    swipe: "Fais défiler à droite pour voir %{item} ▷"
     restaurant:
       ready_in: "prêt en"
       index:

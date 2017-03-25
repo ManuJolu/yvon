@@ -103,7 +103,7 @@ class BotYvon::RestaurantsView
     )
 
     message.reply(
-      text: "Fait défiler à droite pour voir les autres restaurants ▷"
+      text: I18n.t('bot.swipe', item: 'les restaurants')
     )
 
     message.reply(
@@ -173,7 +173,7 @@ class BotYvon::RestaurantsView
     } if restaurant.menus.any?
 
     message.reply(
-      text: "Fait défiler à droite pour voir la carte ▷"
+      text: I18n.t('bot.swipe', item: 'la carte')
     )
 
     message.reply(

@@ -56,7 +56,7 @@ class BotYvon::MealsView
     end
 
     message.reply(
-      text: "Fait défiler à droite pour voir les plats ▷"
+      text: I18n.t('bot.swipe', item: 'les plats')
     )
 
     message.reply(
