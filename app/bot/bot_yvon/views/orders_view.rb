@@ -188,8 +188,24 @@ class BotYvon::OrdersView
     end
 
     message.reply(
-      text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (order.sent_at + order.preparation_time.minutes).strftime('%H:%M'))
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (order.sent_at + order.preparation_time.minutes).strftime('%H:%M')),
+          buttons: [{
+            type: 'web_url',
+            title: I18n.t('bot.order.confirm.itinerary'),
+            url: "http://maps.apple.com/maps?q=#{order.restaurant.address}",
+            webview_height_ratio: 'tall'
+          }]
+        }
+      }
     )
+
+    # message.reply(
+    #   text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (order.sent_at + order.preparation_time.minutes).strftime('%H:%M'))
+    # )
 
     # colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
     # url_array = [

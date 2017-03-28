@@ -161,6 +161,7 @@ fr:
         password: "Ta commande est envoyée en cuisine, n'oublies pas de payer au comptoir 😉 !"
         demo: "Tu continues sur la démo, ta commande n'est pas vraiment en cours de préparation 😉."
         ready: "Ta commande sera prête dans %{preparation_time} min à %{ready_time}."
+        itinerary: "Itinéraire ▷"
         go_to: "Va au %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
       notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}, bon appétit ! N'hésite pas à me partager avec tes amis :"
