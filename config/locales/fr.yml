@@ -152,9 +152,9 @@ fr:
       menu_update_card:
         go_to_account: "Accède à ton compte sur mon site pour mettre à jour ta carte :"
         my_account: "Mon compte"
-      card_error:
+      stripe_error:
         message: "Oups, il y a eu une erreur : %{error_message}.\nVeux tu mettre à jour ta carte ?"
-        udpate_card: "Mettre à jour ma carte"
+        update_card: "MàJ ma carte"
       ask_password: "Quel est ton code ?"
       confirm:
         paid: "Ta commande est payée, elle part en cuisine !"

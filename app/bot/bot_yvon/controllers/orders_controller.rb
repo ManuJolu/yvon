@@ -81,10 +81,10 @@ class BotYvon::OrdersController
           ActionCable.server.broadcast "restaurant_orders_#{order.restaurant.id}",
             order_status: "sent"
           view.confirm(order)
-        rescue Stripe::CardError => e
+        rescue Stripe::StripeError => e
           order.sent_at = nil
           order.save
-          view.card_error(e.message)
+          view.stripe_error(e.message)
         end
       else
         view.restaurant_closed(order.restaurant)

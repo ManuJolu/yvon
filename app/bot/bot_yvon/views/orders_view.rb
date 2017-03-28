@@ -153,17 +153,17 @@ class BotYvon::OrdersView
     )
   end
 
-  def card_error(error_message)
+  def stripe_error(error_message)
     message.reply(
       attachment: {
         type: "template",
         payload: {
           template_type: "button",
-          text: I18n.t('bot.order.card_error.message', error_message: error_message),
+          text: I18n.t('bot.order.stripe_error.message', error_message: error_message),
           buttons: [
             {
               type: 'postback',
-              title: I18n.t('bot.order.card_error.update_card'),
+              title: I18n.t('bot.order.stripe_error.update_card'),
               payload: 'update_card'
             }
           ]
