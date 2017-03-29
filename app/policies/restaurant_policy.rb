@@ -5,12 +5,12 @@ class RestaurantPolicy < ApplicationPolicy
     end
   end
 
-  def show?
-    true
+  def index?
+    user&.admin?
   end
 
   def create?
-    user.restaurant_owner? || user.admin?
+    user.admin?
   end
 
   def edit?

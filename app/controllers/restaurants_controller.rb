@@ -4,6 +4,7 @@ class RestaurantsController < ApplicationController
 
   def index
     @restaurants = policy_scope(Restaurant).by_duty.where.not(latitude: nil, longitude: nil)
+    authorize @restaurants
 
     search = params[:search]
 
@@ -37,9 +38,9 @@ class RestaurantsController < ApplicationController
 
       if restaurant.active?
         if restaurant.on_duty?
-          marker_url = view_context.image_path('bag.png')
+          marker_url = view_context.image_path('bag_on.png')
         else
-          marker_url = view_context.image_path('eye.png')
+          marker_url = view_context.image_path('bag_off.png')
         end
       elsif restaurant.displayable?
         marker_url = view_context.image_path('eye.png')

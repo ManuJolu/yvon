@@ -5,20 +5,26 @@
   <div class="card-user">
     <% if restaurant.active? %>
       <% if restaurant.on_duty? %>
-        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+        <i class="fa fa-shopping-bag" aria-hidden="true" style="color: #01DB01"></i>
       <% else %>
-        <i class="fa fa-eye" aria-hidden="true"></i>
+        <i class="fa fa-shopping-bag" aria-hidden="true" style="color: red"></i>
       <% end %>
+    <% elsif restaurant.displayable? %>
+      <i class="fa fa-eye" aria-hidden="true"></i>
     <% elsif restaurant.votable? %>
       <i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: #0084FF"></i>
     <% else %>
-      <i class="fa fa-power-off" aria-hidden="true" style="color: red;"></i>
+      <i class="fa fa-power-off" aria-hidden="true" style="color: #D0021B;"></i>
     <% end %>
   </div>
   <div class="card-description card-description-map">
     <h3><%= restaurant.name %></h3>
   </div>
-  <%= link_to '', restaurant_meals_path(restaurant), class: 'card-link' %>
+  <% if policy(restaurant).update? %>
+    <%= link_to '', restaurant_meals_path(restaurant), class: 'card-link' %>
+  <% else %>
+    <%= link_to '', 'http://m.me/HelloYvon', class: 'card-link' %>
+  <% end %>
 </div>
 
 
