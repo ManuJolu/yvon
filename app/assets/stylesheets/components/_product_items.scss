@@ -1,7 +1,7 @@
 .product {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 10px 5px;
   border-radius: 3px;
   transition: all 0.15s ease;
 }
@@ -24,8 +24,10 @@
 /* Product image */
 .product-image {
   border-radius: 10px;
-  margin-right: 20px;
+  margin-right: 10px;
   width: 191px;
+  max-width: 20%;
+  height: auto;
   &-100 {
     width: 100px;
   }
@@ -36,12 +38,12 @@
 
 /* Upvote design */
 .product-upvote {
-  padding-right: 20px;
+  padding-right: 10px;
   text-align: center;
   transition: all 0.15s ease;
   font-weight: bold;
   font-size: 13px;
-  line-height: 20px;
+  // line-height: 20px;
 }
 .product-count {
   margin: 2px 0 0;
@@ -66,13 +68,13 @@
   margin: 0px;
 }
 .product-controls a {
-  padding: 0 20px;
+  padding: 5px 15px;
   font-size: 17px;
   color: #E6E6E6;
 }
-.product-controls a:hover {
-  color: #D3473C !important
-}
+// .product-controls a:hover {
+//   color: #D3473C !important
+// }
 .product-controls-hidden a {
   color: transparent;
   font-size: 15px;

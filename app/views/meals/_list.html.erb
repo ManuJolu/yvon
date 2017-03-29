@@ -1,11 +1,9 @@
 <% restaurant.meal_categories.each do |meal_category| %>
-  <div class="col-xs-12">
-    <div class="meal-category-inline">
-      <h3><%= meal_category.decorate %></h3>
-      <%= button_to new_restaurant_meal_path(restaurant), method: :get, class: 'btn btn-success btn-xs', data: {toggle: "modal", target: "#mealFormModal", action: "New"}, params: {meal_category_id: meal_category.id}, remote: true do %>
-        <i class="fa fa-plus" aria-hidden="true"></i>
-      <% end %>
-    </div>
+  <div class="meal-category-inline">
+    <h3><%= meal_category.decorate %></h3>
+    <%= button_to new_restaurant_meal_path(restaurant), method: :get, class: 'btn btn-success btn-xs', data: {toggle: "modal", target: "#mealFormModal", action: "New"}, params: {meal_category_id: meal_category.id}, remote: true do %>
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    <% end %>
   </div>
   <% meal_category.meals.by_position.each do |meal| %>
     <div class="product">
@@ -16,14 +14,16 @@
           <%= f.input :active, label: false, input_html: { class: "meal-active-input" } %>
         <% end %>
       </div>
-      <%= cl_image_tag_with_default(meal.photo&.path, width: 191, height: 100, crop: :fill, class: "product-image hidden-xs") %>
+      <%= cl_image_tag_with_default(meal.photo&.path, width: 191, height: 100, crop: :fill, class: "product-image") %>
       <div class='product-body'>
-        <h3><%= meal.name %></h3>
-        <p><%= meal.description %> <%= meal.decorate.price %></p>
-        <p>Options : <%= meal.options.map { |option| option.decorate }.join(' - ') %></p>
+        <h3><%= meal.name %> - <%= meal.decorate.price %></h3>
+        <p><%= meal.description %></p>
+        <% if meal.options.present? %>
+          <p>Options : <%= meal.options.map { |option| option.decorate }.join(' - ') %></p>
+        <% end %>
       </div>
       <ul class="list-inline product-controls">
-        <li>
+        <li class="hidden-xs">
           <%= link_to meal, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm', remote: true do %>
             <i class="fa fa-trash"></i>
           <% end %>
