@@ -33,7 +33,7 @@ class BotYvon::NotificationsView
                       image_aspect_ratio: 'square',
                       elements: [
                         {
-                          title: I18n.t('bot.share'),
+                          title: I18n.t('bot.order.share'),
                           image_url: cl_image_path("yvon_messenger_code.png", width: 400, height: 400, crop: :fill),
                           buttons: [
                             {
