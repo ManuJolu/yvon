@@ -8,4 +8,9 @@ class MealCategory < ApplicationRecord
   acts_as_list scope: :restaurant
 
   enum timing: [ :starter, :main_course, :dessert, :drink ]
+
+  has_attachment :photo
+
+  scope :are_active, -> { where(active: true) }
+
 end

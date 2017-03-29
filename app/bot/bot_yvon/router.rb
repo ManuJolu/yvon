@@ -58,7 +58,7 @@ class BotYvon::Router
               when 'menu'
                 restaurants_controller.show(meal.restaurant.id)
               when 'next'
-                meals_controller.index(meal.meal_category.lower_item.id)
+                meals_controller.index(meal.meal_category.lower_items.find_by(active: true).id)
               end
             else
               restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
@@ -122,7 +122,7 @@ class BotYvon::Router
             when 'menu'
               restaurants_controller.show(meal.restaurant.id)
             when 'next'
-              meals_controller.index(meal.meal_category.lower_item.id)
+              meals_controller.index(meal.meal_category.lower_items.find_by(active: true).id)
             end
           end
         else

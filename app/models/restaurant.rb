@@ -2,7 +2,7 @@ class Restaurant < ApplicationRecord
   belongs_to :user, required: true
   belongs_to :restaurant_category, required: true
   belongs_to :messenger_user, class_name: 'User'
-  has_many :meal_categories, -> { order(timing: :asc, position: :asc) }, dependent: :destroy
+  has_many :meal_categories, -> { order(position: :asc) }, dependent: :destroy
   has_many :meals, through: :meal_categories
   has_many :menus, -> { order(position: :asc) }, dependent: :destroy
   has_many :orders, dependent: :restrict_with_exception
