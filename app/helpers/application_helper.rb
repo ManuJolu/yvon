@@ -22,4 +22,14 @@ module ApplicationHelper
       cl_image_path('YVON_382_200.png', options)
     end
   end
+
+  def cl_image_path_with_second(first_photo_path, second_photo_path, options = {})
+    if first_photo_path
+      cl_image_path(first_photo_path, options)
+    elsif second_photo_path
+      cl_image_path(second_photo_path, options)
+    else
+      cl_image_path('YVON_382_200.png', options)
+    end
+  end
 end

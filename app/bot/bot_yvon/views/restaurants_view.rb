@@ -150,7 +150,7 @@ class BotYvon::RestaurantsView
     restaurant.meal_categories.are_active.limit(8).each do |meal_category|
       elements << {
         title: meal_category.name,
-        image_url: (cl_image_path_with_default(meal_category.meals.are_active.first.photo&.path, width: 382, height: 200, crop: :fill) if meal_category.meals.are_active.any?),
+        image_url: cl_image_path_with_second(meal_category.meals.are_active.first&.photo&.path, meal_category.photo&.path, width: 382, height: 200, crop: :fill),
         subtitle: "#{('Suggestion: ' + meal_category.meals.are_active.first.name) if meal_category.meals.are_active.any?}",
         buttons: [
           {
