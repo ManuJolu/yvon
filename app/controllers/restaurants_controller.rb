@@ -20,7 +20,7 @@ class RestaurantsController < ApplicationController
     if search.try(:[], :modes)
       @modes = search[:modes]
     else
-      @modes = ['', 'votable', 'active']
+      @modes = ['', 'votable', 'displayable', 'active']
     end
     @restaurants = @restaurants.where(mode: @modes[1..-1])
 
@@ -41,6 +41,8 @@ class RestaurantsController < ApplicationController
         else
           marker_url = view_context.image_path('eye.png')
         end
+      elsif restaurant.displayable?
+        marker_url = view_context.image_path('eye.png')
       elsif restaurant.votable?
         marker_url = view_context.image_path('thumb.png')
       else

@@ -53,6 +53,7 @@ fr:
     form:
       inactive: 'Inactif'
       votable: 'Votable'
+      displayable: 'Affichable'
       active: 'Actif'
     meal_category_fields:
       starter: "Entrée"
@@ -93,7 +94,8 @@ fr:
       ready_in: "prêt en"
       index:
         on_duty: "🔵 en service"
-        off_duty: "⚪ consultation"
+        off_duty: "🔴 service fermé"
+        displayable: "⚪ consultation"
         votable: "🗳 vote pour moi"
         vote_invitation: "Vote pour pouvoir commander ici bientôt !\n"
         vote_share: "\nA voté ! Invite tes amis à voter"
@@ -121,13 +123,13 @@ fr:
       index:
         pick_menu: 'Commander'
         pick_next: "Commander & suite"
-        menu: '◁ Carte'
+        menu: '◁ Retour'
         next: "▷ %{next_meal_category}"
         no_thanks_image: "non%20merci"
         no_thanks: "Pas de %{meal_category} pour moi"
         no_thanks_message: "\nJe ferais mieux de surveiller ma ligne"
         back_image: "retour"
-        back: "◁ Carte"
+        back: "◁ Retour"
         back_message: "\n "
       get_option:
         choose_option: "Choisis ton option :"

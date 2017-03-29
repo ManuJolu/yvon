@@ -5,7 +5,7 @@ class BotYvon::RestaurantsView
   end
 
   def index(coordinates, restaurants)
-    colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
+    colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59', 'F8F4E3', 'FF8966']
     url_array = [
       "http://maps.googleapis.com/maps/api/staticmap", # base
       "?center=#{coordinates[0]},+#{coordinates[1]}", # center
@@ -19,8 +19,10 @@ class BotYvon::RestaurantsView
 
     elements = restaurants.map.with_index do |restaurant, i|
       url_array << "&markers=size:mid%7Ccolor:0x#{colors[(i + 1) % 8]}%7Clabel:#{i + 1}%7C#{restaurant.latitude},#{restaurant.longitude}"
-      if restaurant.active?
-        if restaurant.on_duty?
+      if restaurant.active? || restaurant.displayable?
+        if restaurant.displayable?
+          title = "#{i + 1} - #{I18n.t('bot.restaurant.index.displayable').upcase} - #{restaurant.name}"
+        elsif restaurant.on_duty?
           title = "#{i + 1} - #{I18n.t('bot.restaurant.index.on_duty').upcase} #{I18n.t('bot.restaurant.ready_in')} #{restaurant.preparation_time}min - #{restaurant.name}"
         else
           title = "#{i + 1} - #{I18n.t('bot.restaurant.index.off_duty').upcase} - #{restaurant.name}"

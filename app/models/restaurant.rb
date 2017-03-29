@@ -28,7 +28,7 @@ class Restaurant < ApplicationRecord
 
   acts_as_votable
 
-  enum mode: [ :inactive, :votable, :active ]
+  enum mode: [ :inactive, :votable, :displayable, :active ]
 
   scope :are_votable_plus, -> { where('mode > 0') }
   scope :by_duty, -> { order(mode: :desc, on_duty: :desc) }
