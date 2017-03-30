@@ -20,7 +20,7 @@ class Restaurant::CreateMenuFromFoodora
           meal_category.meals.create(
             name: menu_item.css('.menu__item__name').text.strip,
             description: menu_item.css('.menu__item__description').text.strip,
-            price: menu_item.css('.menu__item__price').text.strip.gsub(',', '.').to_f
+            price: menu_item.css('.menu__item__price').text.strip.gsub(',', '.').match(/\d*\.\d*/)[0].to_f
           )
         end
       end

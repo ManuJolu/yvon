@@ -15,7 +15,7 @@ class Restaurant::CreateMenuFromUbereats
           meal_category.meals.create(
             name: content.css('div[class^="header_"]').text.strip,
             description: content.css('div[class^="description_"]').text.strip,
-            price: content.css('div[class^="footer_"]').text.strip.match(/\d*\.\d*/)[0].to_f
+            price: content.css('div[class^="footer_"]').text.strip.gsub(',', '.').match(/\d*\.\d*/)[0].to_f
           )
         end
       end
