@@ -67,10 +67,14 @@
   color: $white;
   // font-size: 14px;
   // border: 2px solid $messenger-blue;
-}
-.navbar-wagon-button:hover {
-  color: $white;
-  // border-color: $facebook-blue;
+  &:hover {
+    color: $white;
+    text-decoration: none;
+  }
+  &:focus {
+    color: $white;
+    text-decoration: none;
+  }
 }
 
 /* Navbar search form */
