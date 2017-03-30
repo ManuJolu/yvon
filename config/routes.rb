@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   scope '(:locale)', locale: /fr|en/ do
     root to: 'pages#home'
+    get '/fooding', to: 'pages#fooding'
     get '/legal', to: 'pages#legal'
     get '/privacy', to: 'pages#privacy'
     resources :users, only: [:show] do
