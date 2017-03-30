@@ -22,6 +22,20 @@ class PagesController < ApplicationController
         "height" => 16
       })
     end
+
+    places = Place.all
+
+    place_hash = Gmaps4rails.build_markers(places) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      marker.picture({
+        "url" => view_context.image_path('google_pointer.png'),
+        "width" => 25,
+        "height" => 43
+      })
+    end
+
+    @hash.concat(place_hash)
   end
 
   def legal

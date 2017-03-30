@@ -94,7 +94,7 @@ fr:
       ready_in: "prêt en"
       index:
         on_duty: "🔵 en service"
-        off_duty: "🔴 service fermé"
+        off_duty: "⚪ service fermé"
         displayable: "⚪ consultation"
         votable: "🗳 vote pour moi"
         vote_invitation: "Vote pour pouvoir commander ici bientôt !\n"
