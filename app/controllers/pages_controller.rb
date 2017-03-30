@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :legal, :privacy]
+  skip_before_action :authenticate_user!, only: [:home, :fooding, :legal, :privacy]
 
   def home
   end
@@ -17,9 +17,9 @@ class PagesController < ApplicationController
       marker.lng restaurant.longitude
       marker.infowindow render_to_string(partial: "card_map", locals: { restaurant: restaurant })
       marker.picture({
-        "url" => view_context.image_path('yvon.png'),
-        "width" => 32,
-        "height" => 32
+        "url" => view_context.image_path('y_16.png'),
+        "width" => 16,
+        "height" => 16
       })
     end
   end

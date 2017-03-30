@@ -62,16 +62,15 @@
   margin-left: 10px;
   padding: 0 20px;
   border-radius: 20em;
-  line-height: 40px;
-  background-color: $brand-danger;
+  line-height: 3rem;
+  background-color: $messenger-blue;
   color: $white;
-  font-size: 14px;
-  // border: 2px solid #D23333;
+  // font-size: 14px;
+  // border: 2px solid $messenger-blue;
 }
 .navbar-wagon-button:hover {
   color: $white;
-  background: $brand-danger;
-  // border-color: #ac2626;
+  // border-color: $facebook-blue;
 }
 
 /* Navbar search form */

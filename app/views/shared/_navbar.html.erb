@@ -6,23 +6,21 @@
     <div class="navbar-background-still"></div>
 <% end %>
 
-    <!-- Logo -->
     <div class="navbar-wagon-brand">
       <%= link_to root_path do %>
         YVON
       <% end %>
     </div>
 
-    <!-- Middle Display -->
     <% if @restaurant %>
       <div class="navbar-wagon-middle">
         <%=  @restaurant.name %>
       </div>
     <% end %>
 
-    <!-- Right Navigation -->
     <div class="navbar-wagon-right">
-      <!-- Different navigation if login or not -->
+      <%= link_to 'Carte du fooding Bordelais', fooding_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+
       <% if user_signed_in? %>
         <% if @restaurant&.persisted? && @restaurant.active? %>
           <div class='navbar-wagon-item hidden-xs' id="restaurantPreparationTime">
@@ -77,7 +75,6 @@
           </div>
         </div>
       <% else %>
-        <!-- Login text link -->
         <%= link_to t(".sign_in"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <% end %>
     </div>
