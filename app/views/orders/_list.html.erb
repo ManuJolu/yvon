@@ -41,19 +41,25 @@
             <% end %>
           </td>
           <td class="text-right">
+            <%= order.decorate.price %>
+            <br>
             <% case order.payment_method %>
             <% when 'credit_card' %>
-              Payé
+              payé
             <% when 'counter' %>
-              <strong>Comptoir</strong>
+              <strong>comptoir</strong>
             <% when 'demo' %>
-              Démo
+              démo
             <% end %>
-            <br>
-            <%= order.decorate.price %>
           </td>
           <td class="text-center">
             <%= order.decorate.sent_at %>
+            <br>
+            <% if order.table.nil? %>
+              à emporter
+            <% else %>
+              table <%= order.table %>
+            <% end -%>
           </td>
           <td class="text-center">
             <% if order.handled_at.nil? %>

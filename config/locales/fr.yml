@@ -139,7 +139,10 @@ fr:
       cart:
         order_pending: "En attente"
         discounts: "Réductions"
-        ask_payment_method: "Comment souhaites-tu payer ta commande ?"
+        ask_table: "Tape le numéro de ta table ou sélectionne 'à emporter'"
+        take_away: 'à emporter'
+      ask_payment_method:
+        text: "Comment souhaites-tu payer ta commande ?"
         pay_card: "Par carte ••••%{last4}"
         pay_no_card: "Par carte bancaire"
         pay_counter: "Au comptoir"
@@ -164,7 +167,6 @@ fr:
         demo: "Tu continues sur la démo, ta commande n'est pas vraiment en cours de préparation 😉."
         ready: "Ta commande sera prête dans %{preparation_time} min à %{ready_time}."
         itinerary: "Itinéraire ▷"
-        go_to: "Va au %{restaurant_name}"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
       notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}, bon appétit ! N'hésite pas à me partager avec tes amis :"
       share: "Essaye Yvon pour commander à emporter via Messenger !"

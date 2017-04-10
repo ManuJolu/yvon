@@ -17,6 +17,13 @@ class BotAline::OrdersView
         order_array << "Démo : #{order.decorate.price}"
       end
 
+      if order.table.nil?
+        order_array << "A emporter"
+      else
+        order_array << "Table #{order.table}"
+      end
+
+
       buttons = []
 
       if order.ready_at.nil?

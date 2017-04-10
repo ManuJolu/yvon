@@ -63,10 +63,23 @@ class BotYvon::OrdersView
       }
     )
 
-    if order.user.stripe_customer_id.present?
-      card_payment = I18n.t('bot.order.cart.pay_card', last4: order.user.stripe_default_source_last4)
+    message.reply(
+      text: I18n.t('bot.order.cart.ask_table'),
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: I18n.t('bot.order.cart.take_away'),
+          payload: "order_takeaway"
+        }
+      ]
+    )
+  end
+
+  def ask_payment_method(order)
+    if user.stripe_customer_id.present?
+      card_payment = I18n.t('bot.order.ask_payment_method.pay_card', last4: user.stripe_default_source_last4)
     else
-      card_payment = I18n.t('bot.order.cart.pay_no_card')
+      card_payment = I18n.t('bot.order.ask_payment_method.pay_no_card')
     end
 
     message.reply(
@@ -74,7 +87,7 @@ class BotYvon::OrdersView
         type: "template",
         payload: {
           template_type: "button",
-          text: I18n.t('bot.order.cart.ask_payment_method'),
+          text: I18n.t('bot.order.ask_payment_method.text'),
           buttons: [
             {
               type: 'postback',
@@ -83,12 +96,12 @@ class BotYvon::OrdersView
             },
             {
               type: 'postback',
-              title: I18n.t('bot.order.cart.pay_counter'),
+              title: I18n.t('bot.order.ask_payment_method.pay_counter'),
               payload: 'check_counter'
             },
             {
               type: 'postback',
-              title: I18n.t('bot.order.cart.demo'),
+              title: I18n.t('bot.order.ask_payment_method.demo'),
               payload: 'demo'
             }
           ]
@@ -187,53 +200,23 @@ class BotYvon::OrdersView
       )
     end
 
-    message.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'button',
-          text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (order.sent_at + order.preparation_time.minutes).strftime('%H:%M')),
-          buttons: [{
-            type: 'web_url',
-            title: I18n.t('bot.order.confirm.itinerary'),
-            url: "http://maps.apple.com/maps?q=#{order.restaurant.address}",
-            webview_height_ratio: 'tall'
-          }]
+    if order.table.nil?
+      message.reply(
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'button',
+            text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (order.sent_at + order.preparation_time.minutes).strftime('%H:%M')),
+            buttons: [{
+              type: 'web_url',
+              title: I18n.t('bot.order.confirm.itinerary'),
+              url: "http://maps.apple.com/maps?q=#{order.restaurant.address}",
+              webview_height_ratio: 'tall'
+            }]
+          }
         }
-      }
-    )
-
-    # message.reply(
-    #   text: I18n.t('bot.order.confirm.ready', preparation_time: order.preparation_time, ready_time: (order.sent_at + order.preparation_time.minutes).strftime('%H:%M'))
-    # )
-
-    # colors = ['CC0000', 'FF69B4', 'FFC161', '48D1CC', '191970', '0d644e', '9c3e9a', '364c59']
-    # url_array = [
-    #   "http://maps.googleapis.com/maps/api/staticmap", # base
-    #   "?center=#{order.restaurant.latitude},+#{order.restaurant.longitude}", # center
-    #   # "&zoom=15", zoom
-    #   "&scale=2", # scale
-    #   "&size=382x382", # size
-    #   "&maptype=roadmap&format=png&visual_refresh=true", # format
-    #   "&key=#{ENV['GOOGLE_API_KEY']}", # key
-    #   # "&markers=size:mid%7Ccolor:0x#{colors[0]}%7Clabel:%7C#{coordinates[0]},#{coordinates[1]}", # user_marker
-    #   "&markers=size:mid%7Ccolor:0x#{colors[3]}%7Clabel:%7C#{order.restaurant.latitude},#{order.restaurant.longitude}"
-    # ]
-    # message.reply(
-    #   attachment: {
-    #     type: "template",
-    #     payload: {
-    #       template_type: "generic",
-    #       elements: [
-    #         {
-    #           title: I18n.t('bot.order.confirm.go_to', restaurant_name: order.restaurant.name),
-    #           image_url: url_array.join,
-    #           item_url: "http://maps.apple.com/maps?q=#{order.restaurant.address}"
-    #         }
-    #       ]
-    #     }
-    #   }
-    # )
+      )
+    end
   end
 
   def menu_update_card
