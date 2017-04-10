@@ -5,12 +5,12 @@ class BotYvon::NotificationsController
 
   def notify_ready(order)
     user = order.user
-    view.notify_ready(order, user) if user
+    view.notify_ready(order, user) if user && order.table.nil?
   end
 
   def notify_delivered(order)
     user = order.user
-    view.notify_delivered(order, user) if user
+    view.notify_delivered(order, user) if user && order.table.nil?
   end
 
   private

@@ -38,12 +38,23 @@ class BotYvon::OrdersController
   def cart
     if user.current_order&.meals.present?
       order = user.current_order
+      order.update(table: 0)
       order.create_elements
       order.reload
       view.cart(order)
     else
       view.no_meals
     end
+  end
+
+  def set_table(table_number)
+    user.current_order.update(table: table_number)
+    view.ask_payment_method(user.current_order)
+  end
+
+  def takeaway
+    user.current_order.update(table: nil)
+    view.ask_payment_method(user.current_order)
   end
 
   def check_card

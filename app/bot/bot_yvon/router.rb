@@ -45,6 +45,10 @@ class BotYvon::Router
         case message.text
         when /\Acds\z/i
           orders_controller.pay_counter
+        when /(?<table_number>\d+)/
+          orders_controller.set_table($LAST_MATCH_INFO['table_number']) if user.current_order.table == 0
+        when 'à emporter'
+          orders_controller.takeaway if user.current_order.table == 0
         else
           case message.quick_reply
           when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
@@ -65,6 +69,8 @@ class BotYvon::Router
             end
           # else
           #   messages_controller.no_comprendo if message.quick_reply.nil?
+          when 'order_takeaway'
+            orders_controller.takeaway
           end
         end
       # else
