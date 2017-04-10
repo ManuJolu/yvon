@@ -11,6 +11,18 @@ class BotYvon::NotificationsView
     )
   end
 
+  def notify_service(order, user)
+    Bot.deliver({
+      recipient: {
+        id: user.messenger_id
+      },
+      message: {
+        text: I18n.t('bot.order.notify_service', user_first_name: user.first_name,restaurant_name: order.restaurant.name)
+      }},
+      access_token: ENV['YVON_ACCESS_TOKEN']
+    )
+  end
+
   def notify_delivered(order, user)
     Bot.deliver({
       recipient: {
