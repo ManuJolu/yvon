@@ -17,12 +17,12 @@ fr:
     messenger_button:
       call_to_action_html: "Je commande avec <span class='yvon-logo'>YVON</span>"
     home:
-      slogan_html: "Contacte <span class='yvon-logo'>YVON</span> et commande à emporter via Messenger"
-      location: "Géolocalise le fooding autour de toi"
-      menu: "Te propose l'ensemble de la carte"
-      send: "Prend ta commande et la transmet en cuisine"
-      messenger: "Te prévient quand elle est prête"
-      cool: "YVON tous kiffer !"
+      slogan_html: "Commande et paye sur ton smartphone avec <span class='yvon-logo'>YVON</span>"
+      location: "Géolocalise toi"
+      menu: "Consulte la carte et fais ton choix"
+      takeorder: "Commande sur ton smartphone"
+      payment: "Paye avec YVON plus besoin de monnaie"
+      cool: "Yvon faire simple !"
   orders:
     index:
       pending: "En cours"
