@@ -11,7 +11,7 @@ class BotYvon::MealsController
 
   def get_option(meal, params = {})
     options = meal.options.are_active.limit(10)
-    view.get_option(options, meal_id: meal.id)
+    view.get_option(options.decorate, meal: meal)
   end
 
   private

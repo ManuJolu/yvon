@@ -121,6 +121,7 @@ fr:
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
     meal:
       index:
+        starting_at: "à partir de %{price}"
         pick: 'Commander'
         menu: '◁ Retour'
         next: "▷ %{next_meal_category}"

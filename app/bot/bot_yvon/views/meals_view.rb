@@ -6,6 +6,8 @@ class BotYvon::MealsView
 
   def index(meals, params = {})
     meals = meals.map do |meal|
+      price = meal.price
+      price = I18n.t('bot.meal.index.starting_at', price: meal.options.first.price) if meal.price_cents == 0
       buttons = [
         {
           type: 'postback',
@@ -16,7 +18,7 @@ class BotYvon::MealsView
       result = {
         title: meal.name,
         image_url: cl_image_path_with_second(meal.photo&.path, meal.meal_category.photo&.path, width: 382, height: 200, crop: :fill),
-        subtitle: "#{meal.price}\n#{meal.description}"
+        subtitle: "#{price}\n#{meal.description}"
       }
       result[:buttons] = buttons if params[:on_duty]
       result
@@ -66,12 +68,22 @@ class BotYvon::MealsView
   end
 
   def get_option(options, params = {})
-    options = options.map do |option|
-      {
-        content_type: 'text',
-        title: option.to_label.capitalize,
-        payload: "meal_#{params[:meal_id]}_option_#{option.id}"
-      }
+    if params[:meal].price_cents == 0
+      options = options.map do |option|
+        {
+          content_type: 'text',
+          title: "#{option.name.capitalize} : #{option.price}",
+          payload: "meal_#{params[:meal].id}_option_#{option.id}"
+        }
+      end
+    else
+      options = options.map do |option|
+        {
+          content_type: 'text',
+          title: option.to_label.capitalize,
+          payload: "meal_#{params[:meal].id}_option_#{option.id}"
+        }
+      end
     end
     message.reply(
       text: I18n.t('bot.meal.get_option.choose_option'),

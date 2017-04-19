@@ -6,4 +6,8 @@ class OptionDecorator < Draper::Decorator
     str += " (inact.)" unless object.active
     str
   end
+
+  def price
+    humanized_money_with_symbol object.price
+  end
 end
