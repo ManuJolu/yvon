@@ -19,8 +19,6 @@
     <% end %>
 
     <div class="navbar-wagon-right">
-      <%= link_to 'Carte du fooding Bordelais', fooding_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
-
       <% if user_signed_in? %>
         <% if @restaurant&.persisted? && @restaurant.active? %>
           <div class='navbar-wagon-item hidden-xs' id="restaurantPreparationTime">
