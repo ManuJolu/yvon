@@ -55,10 +55,10 @@
           <td class="text-center">
             <%= order.decorate.sent_at %>
             <br>
-            <% if order.table.nil? %>
-              à emporter
-            <% else %>
+            <% if order.table > 0 %>
               table <%= order.table %>
+            <% else %>
+              à emporter
             <% end -%>
           </td>
           <td class="text-center">

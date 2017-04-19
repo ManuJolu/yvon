@@ -6,11 +6,22 @@ class BotYvon::OrdersController
   end
 
   def create(params = {})
-    order = user.orders.create({
-        located_at: Time.now,
-        latitude: params[:latitude] || message.attachments[0]['payload']['coordinates']['lat'],
-        longitude: params[:longitude] || message.attachments[0]['payload']['coordinates']['long']
-      })
+    if params[:table]
+      restaurant = Restaurant.find(params[:restaurant_id])
+      order = user.orders.create({
+          located_at: Time.now,
+          latitude: restaurant.latitude,
+          longitude: restaurant.longitude,
+          restaurant: restaurant,
+          table: params[:table]
+        })
+    else
+      order = user.orders.create({
+          located_at: Time.now,
+          latitude: params[:latitude],
+          longitude: params[:longitude]
+        })
+    end
   end
 
   def update(params = {})
@@ -38,7 +49,7 @@ class BotYvon::OrdersController
   def cart
     if user.current_order&.meals.present?
       order = user.current_order
-      order.update(table: 0)
+      order.update(table: 0) if order.table.nil?
       view.cart(order)
     else
       view.no_meals
@@ -51,7 +62,7 @@ class BotYvon::OrdersController
   end
 
   def takeaway
-    user.current_order.update(table: nil)
+    user.current_order.update(table: -1)
     view.ask_payment_method(user.current_order)
   end
 

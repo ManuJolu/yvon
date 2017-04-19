@@ -9,15 +9,10 @@ class BotYvon::MealsView
       buttons = [
         {
           type: 'postback',
-          title: I18n.t('bot.meal.index.pick_menu'),
-          payload: "meal_#{meal.id}_menu"
+          title: I18n.t('bot.meal.index.pick'),
+          payload: "meal_#{meal.id}"
         }
       ]
-      buttons << {
-        type: 'postback',
-        title: I18n.t('bot.meal.index.pick_next', next_meal_category: params[:next_meal_category].name),
-        payload: "meal_#{meal.id}_next"
-      } if params[:next_meal_category]
       result = {
         title: meal.name,
         image_url: cl_image_path_with_second(meal.photo&.path, meal.meal_category.photo&.path, width: 382, height: 200, crop: :fill),
@@ -75,7 +70,7 @@ class BotYvon::MealsView
       {
         content_type: 'text',
         title: option.to_label.capitalize,
-        payload: "meal_#{params[:meal_id]}_option_#{option.id}_#{params[:action]}"
+        payload: "meal_#{params[:meal_id]}_option_#{option.id}"
       }
     end
     message.reply(

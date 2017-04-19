@@ -121,8 +121,7 @@ fr:
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
     meal:
       index:
-        pick_menu: 'Commander'
-        pick_next: "Commander & suite"
+        pick: 'Commander'
         menu: '◁ Retour'
         next: "▷ %{next_meal_category}"
         no_thanks_image: "non%20merci"
@@ -169,6 +168,9 @@ fr:
         itinerary: "Itinéraire ▷"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
       notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}, bon appétit ! N'hésite pas à me partager avec tes amis :"
-      share: "Essaye Yvon pour commander à emporter via Messenger !"
+      notify_served:
+        text: "%{user_first_name}, tu as été servi, bon appétit ! N'hésite pas à me partager avec tes amis et à recommander à ta table :"
+        table_button: "Table %{table}"
+      share: "Essaye Yvon pour commander et payer tes consos sur ton smartphone !"
   pundit:
     user_not_authorized: "Vous n'êtes pas autorisé à accéder à cette page"

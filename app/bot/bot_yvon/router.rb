@@ -23,10 +23,12 @@ class BotYvon::Router
     :restaurants_controller, :meals_controller, :orders_controller
 
   def handle_message
-    if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
+    if message.attachments&.first.try(:[], 'type') == 'location'
       message.type
-      order = orders_controller.create
-      coordinates = [order.latitude, order.longitude]
+      latitude = message.attachments.first['payload']['coordinates']['lat']
+      longitude = message.attachments.first['payload']['coordinates']['long']
+      orders_controller.create(latitude: latitude, longitude: longitude)
+      coordinates = [latitude, longitude]
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
     end
 
@@ -55,19 +57,13 @@ class BotYvon::Router
             orders_controller.pay_counter
           else
             case message.quick_reply
-            when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
+            when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)\z/
               message.type
               meal = Meal.find($LAST_MATCH_INFO['meal_id'])
               option = Option.find($LAST_MATCH_INFO['option_id'])
-              action = $LAST_MATCH_INFO['action']
               if orders_controller.meal_match_user_restaurant?(meal)
                 orders_controller.add_meal(meal, option)
-                case action
-                when 'menu'
-                  restaurants_controller.show(meal.restaurant.id)
-                when 'next'
-                  meals_controller.index(meal.meal_category.lower_items.find_by(active: true).id)
-                end
+                restaurants_controller.show(meal.restaurant.id)
               else
                 restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
               end
@@ -95,6 +91,11 @@ class BotYvon::Router
     when 'share'
       messages_controller.share
       return
+    when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
+      restaurant_id = $LAST_MATCH_INFO['id'].to_i
+      table = $LAST_MATCH_INFO['table'].to_i
+      orders_controller.create(restaurant_id: restaurant_id, table: table)
+      restaurants_controller.show(restaurant_id)
     end
 
     if user.current_order
@@ -113,20 +114,14 @@ class BotYvon::Router
         else
           restaurants_controller.user_restaurant_mismatch(meal_category_id)
         end
-      when /\Ameal_(?<id>\d+)_(?<action>\D+)\z/
+      when /\Ameal_(?<id>\d+)\z/
         meal = Meal.find($LAST_MATCH_INFO['id'])
-        action = $LAST_MATCH_INFO['action']
         if orders_controller.meal_match_user_restaurant?(meal)
           if meal.options.are_active.any?
-            meals_controller.get_option(meal, action: action)
+            meals_controller.get_option(meal)
           else
             orders_controller.add_meal(meal)
-            case action
-            when 'menu'
-              restaurants_controller.show(meal.restaurant.id)
-            when 'next'
-              meals_controller.index(meal.meal_category.lower_items.find_by(active: true).id)
-            end
+            restaurants_controller.show(meal.restaurant.id)
           end
         else
           restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)

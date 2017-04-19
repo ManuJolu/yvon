@@ -53,16 +53,20 @@ class BotYvon::OrdersView
       }
     )
 
-    message.reply(
-      text: I18n.t('bot.order.cart.ask_table'),
-      quick_replies: [
-        {
-          content_type: 'text',
-          title: I18n.t('bot.order.cart.take_away'),
-          payload: "order_takeaway"
-        }
-      ]
-    )
+    if order.table == 0
+      message.reply(
+        text: I18n.t('bot.order.cart.ask_table'),
+        quick_replies: [
+          {
+            content_type: 'text',
+            title: I18n.t('bot.order.cart.take_away'),
+            payload: "order_takeaway"
+          }
+        ]
+      )
+    else
+      ask_payment_method(order)
+    end
   end
 
   def ask_payment_method(order)
@@ -84,11 +88,11 @@ class BotYvon::OrdersView
               title: card_payment,
               payload: 'check_card'
             },
-            {
-              type: 'postback',
-              title: I18n.t('bot.order.ask_payment_method.pay_counter'),
-              payload: 'check_counter'
-            },
+            # {
+            #   type: 'postback',
+            #   title: I18n.t('bot.order.ask_payment_method.pay_counter'),
+            #   payload: 'check_counter'
+            # },
             {
               type: 'postback',
               title: I18n.t('bot.order.ask_payment_method.demo'),

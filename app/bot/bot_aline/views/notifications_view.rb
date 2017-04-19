@@ -10,10 +10,10 @@ class BotAline::NotificationsView
     when 'demo'
       order_array << "Démo : #{order.decorate.price}"
     end
-    if order.table.nil?
-      order_array << "A emporter"
-    else
+    if order.table > 0
       order_array << "Table #{order.table}"
+    else
+      order_array << "A emporter"
     end
     order_array << "Prêt : max #{order.decorate.ready_at_limit}"
 
