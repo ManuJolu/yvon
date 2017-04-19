@@ -24,7 +24,7 @@ Rails.application.routes.draw do
         get '/facebook_update' => 'restaurants#facebook_update'
         get '/orders/refresh/:order_status' => 'orders#refresh'
       end
-      resources :meal_categories, only: [:create, :update], shallow: true
+      resources :meal_categories, only: [:update], shallow: true
       resources :meals, only: [:index, :new, :create, :edit, :update, :destroy], shallow: true do
         resources :meal_options, only: [:index], shallow: true
       end

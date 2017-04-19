@@ -5,8 +5,11 @@
   }
   form {
     display: inline;
+    margin-left: 12px;
+    input {
+      margin-bottom: 16px;
+    }
     button {
-      margin-left: 12px;
       margin-bottom: 12px;
     }
   }

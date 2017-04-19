@@ -1,6 +1,11 @@
 <% restaurant.meal_categories.each do |meal_category| %>
   <div class="meal-category-inline">
+    <%= simple_form_for meal_category, html: { class: "form-inline" }, remote: true do |f| %>
+      <%= f.input :active, label: false, input_html: { class: "mealCategory-active-input" } %>
+    <% end %>
+
     <h3><%= meal_category.decorate %></h3>
+
     <%= button_to new_restaurant_meal_path(restaurant), method: :get, class: 'btn btn-success btn-xs', data: {toggle: "modal", target: "#mealFormModal", action: "New"}, params: {meal_category_id: meal_category.id}, remote: true do %>
       <i class="fa fa-plus" aria-hidden="true"></i>
     <% end %>

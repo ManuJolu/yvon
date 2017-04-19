@@ -12,33 +12,7 @@ $(document).ready(function() {
     $(this).submit();
   });
 
-  $("#options a.add_fields").
-  data("association-insertion-position", 'before').
-  data("association-insertion-node", 'this');
-
-  $('#options').on('cocoon:after-insert', function() {
-    $(".meal-option-fields a.add_fields").
-      data("association-insertion-position", 'before').
-      data("association-insertion-node", 'this');
-    $('.meal-option-fields').on('cocoon:after-insert', function() {
-      $(this).children(".option_from_list").remove();
-      $(this).children("a.add_fields").hide();
-    });
-  });
-});
-
-$(document).ajaxStop(function() {
-  $("#options a.add_fields").
-  data("association-insertion-position", 'before').
-  data("association-insertion-node", 'this');
-
-  $('#options').on('cocoon:after-insert', function() {
-    $(".meal-option-fields a.add_fields").
-      data("association-insertion-position", 'before').
-      data("association-insertion-node", 'this');
-    $('.meal-option-fields').on('cocoon:after-insert', function() {
-      $(this).children(".option_from_list").remove();
-      $(this).children("a.add_fields").hide();
-    });
+  $("#mealList").on('change', ".mealCategory-active-input", function() {
+    $(this).submit();
   });
 });
