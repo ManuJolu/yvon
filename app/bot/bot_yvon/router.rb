@@ -26,8 +26,8 @@ class BotYvon::Router
     :restaurants_controller, :meals_controller, :orders_controller
 
   def handle_message
+    message.typing_on
     if message.attachments&.first.try(:[], 'type') == 'location'
-      message.type
       latitude = message.attachments.first['payload']['coordinates']['lat']
       longitude = message.attachments.first['payload']['coordinates']['long']
       if (restaurant = Restaurant.find_by(name: message.attachments.first['title'])) && (restaurant.distance_from([latitude, longitude]) < 0.1)
@@ -44,7 +44,6 @@ class BotYvon::Router
     when /help/i, /aide/i
       messages_controller.hello
     when /bordeaux/i
-      message.type
       order = orders_controller.create(latitude: '44.840715', longitude: '-0.5721098')
       coordinates = [order.latitude, order.longitude]
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
@@ -79,6 +78,7 @@ class BotYvon::Router
           end
         end
       end
+      message.typing_off
     end
   end
 

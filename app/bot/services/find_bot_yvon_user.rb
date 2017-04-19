@@ -20,8 +20,8 @@ class FindBotYvonUser
       end
       @user.messenger_locale = user_data['locale']
       @user.save
-      I18n.locale = @user.messenger_locale.first(2).to_sym if I18n.available_locales.include?(@user.messenger_locale&.first(2)&.to_sym)
     end
+    I18n.locale = @user.messenger_locale.first(2).to_sym if I18n.available_locales.include?(@user.messenger_locale&.first(2)&.to_sym)
   end
 
   def call
