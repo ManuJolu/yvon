@@ -34,6 +34,7 @@ class BotYvon::Router
         orders_controller.create(latitude: latitude, longitude: longitude, restaurant: restaurant)
         restaurants_controller.show(restaurant.id)
       else
+        orders_controller.create(latitude: latitude, longitude: longitude)
         messages_controller.no_restaurant unless restaurants_controller.index([latitude, longitude])
       end
     end
