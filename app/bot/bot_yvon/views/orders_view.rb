@@ -22,9 +22,11 @@ class BotYvon::OrdersView
   end
 
   def cart(order)
+    title = I18n.t('bot.order.cart.title', price: order.decorate.price)
+    title += I18n.t('bot.order.cart.table', table: order.table) if order.table > 0
     elements = [
       {
-        title: I18n.t('bot.order.cart.title', price: order.decorate.price),
+        title: title,
         image_url: cl_image_path('cash_till.jpg', width: 382, height: 200, crop: :fill),
         subtitle: I18n.t('bot.order.cart.subtitle'),
         buttons: [

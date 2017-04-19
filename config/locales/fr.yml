@@ -107,7 +107,7 @@ fr:
         upvote: "+ 1 vote"
       upvote:
         text: "A voté !\nInvite tes amis à voter pour %{restaurant} :"
-        share: "Vote pour commander à emporter chez %{restaurant} avec Yvon !"
+        share: "Vote pour commander chez %{restaurant} avec Yvon !"
       menu:
         swipe_right: "Regarder la carte ▷"
         back_to_map: "◁ Retour"
@@ -138,6 +138,7 @@ fr:
       restaurant_closed: "Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à trouver un autre restaurant ?"
       cart:
         title: "Total : %{price}"
+        table: " - Table %{table}"
         subtitle: 'Dernière chance pour modifier ta commande !'
         add: "◁ Ajouter"
         remove: "Retirer"
@@ -176,7 +177,7 @@ fr:
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
       notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}, bon appétit ! N'hésite pas à me partager avec tes amis :"
       notify_served:
-        text: "%{user_first_name}, tu as été servi, bon appétit ! N'hésite pas à me partager avec tes amis et à recommander à ta table :"
+        text: "%{user_first_name}, tu as été servi, bon appétit ! N'hésite pas à me partager avec tes amis et à commander à nouveau à ta table :"
         table_button: "Table %{table}"
       share: "Essaye Yvon pour commander et payer tes consos sur ton smartphone !"
   pundit:
