@@ -20,11 +20,6 @@ class BotYvon::RestaurantsController
     view.upvote(restaurant)
   end
 
-  def menus(restaurant_id)
-    restaurant = Restaurant.find(restaurant_id)
-    view.menus(restaurant)
-  end
-
   def user_restaurant_match?(meal_category_id)
     meal_category = MealCategory.find(meal_category_id)
     user.current_order.restaurant == meal_category.restaurant

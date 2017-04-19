@@ -39,8 +39,6 @@ class BotYvon::OrdersController
     if user.current_order&.meals.present?
       order = user.current_order
       order.update(table: 0)
-      order.create_elements
-      order.reload
       view.cart(order)
     else
       view.no_meals
@@ -70,7 +68,7 @@ class BotYvon::OrdersController
   end
 
   def pay_card
-    if user.current_order.order_elements.present?
+    if user.current_order.ordered_meals.present?
       order = user.current_order
       if order.restaurant.on_duty?
         order.sent_at = Time.now
@@ -118,7 +116,7 @@ class BotYvon::OrdersController
   end
 
   def pay_counter
-    if user.current_order.order_elements.present?
+    if user.current_order.orderer_meals.present?
       order = user.current_order
       if order.restaurant.on_duty?
         order.sent_at = Time.now
@@ -139,7 +137,7 @@ class BotYvon::OrdersController
   end
 
   def demo
-    if user.current_order.order_elements.present?
+    if user.current_order.orderer_meals.present?
       order = user.current_order
       if order.restaurant.on_duty?
         order.preparation_time = order.restaurant.preparation_time

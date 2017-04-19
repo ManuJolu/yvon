@@ -106,9 +106,6 @@ class BotYvon::Router
       when /\Arestaurant_(?<id>\d+)_upvote\z/
         restaurant_id = $LAST_MATCH_INFO['id'].to_i
         restaurants_controller.upvote(restaurant_id)
-      when /\Arestaurant_(?<id>\d+)_menus\z/
-        restaurant_id = $LAST_MATCH_INFO['id'].to_i
-        restaurants_controller.menus(restaurant_id)
       when /\Ameal_category_(?<meal_category_id>\w+)\z/
         meal_category_id = $LAST_MATCH_INFO['meal_category_id']
         if restaurants_controller.user_restaurant_match?(meal_category_id)

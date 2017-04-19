@@ -147,7 +147,7 @@ class BotYvon::RestaurantsView
 
     elements << element
 
-    restaurant.meal_categories.are_active.limit(8).each do |meal_category|
+    restaurant.meal_categories.are_active.limit(9).each do |meal_category|
       elements << {
         title: meal_category.name,
         image_url: cl_image_path_with_second(meal_category.meals.are_active.first&.photo&.path, meal_category.photo&.path, width: 382, height: 200, crop: :fill),
@@ -161,18 +161,6 @@ class BotYvon::RestaurantsView
         ]
       }
     end
-
-    elements << {
-      title: I18n.t('bot.restaurant.menu.display_menus'),
-      image_url: cl_image_path("background_white_382_200.png", overlay:"text:Fredoka%20One_40:#{I18n.t('bot.restaurant.menu.menus_image')}", color: "#292C3C"),
-      buttons: [
-        {
-            title: I18n.t('bot.restaurant.menu.menus'),
-            type: "postback",
-            payload: "restaurant_#{restaurant.id}_menus"
-        }
-      ]
-    } if restaurant.menus.any?
 
     message.reply(
       text: I18n.t('bot.swipe', item: 'la carte')
@@ -230,15 +218,6 @@ class BotYvon::RestaurantsView
           ]
         }
       }
-    )
-  end
-
-  def menus(restaurant)
-    text = ""
-    text += restaurant.menus.decorate.join("\n")
-    text += I18n.t('bot.restaurant.menu.menus_back')
-    message.reply(
-      text: text
     )
   end
 

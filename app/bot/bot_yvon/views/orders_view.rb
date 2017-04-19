@@ -48,17 +48,7 @@ class BotYvon::OrdersView
             subtotal: order.decorate.pretax_price_num,
             total_tax: order.decorate.tax_num,
             total_cost: order.decorate.price_num
-          },
-          adjustments: [
-            {
-              name: I18n.t('bot.order.cart.discounts'),
-              amount: order.decorate.discount_num
-            }
-            # {
-            #   name: "Welcome coupon",
-            #   amount: 5
-            # }
-          ]
+          }
         }
       }
     )
