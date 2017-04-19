@@ -29,7 +29,7 @@ class BotYvon::OrdersController
     restaurant = Restaurant.find(params[:restaurant_id])
     unless user.current_order.restaurant == restaurant
       user.current_order.ordered_meals.destroy_all
-      user.current_order.update(restaurant: restaurant)
+      user.current_order.update(restaurant: restaurant, table: nil)
     end
   end
 
