@@ -64,7 +64,6 @@ class BotYvon::Router
           else
             case message.quick_reply
             when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)\z/
-              message.type
               meal = Meal.find($LAST_MATCH_INFO['meal_id'])
               option = Option.find($LAST_MATCH_INFO['option_id'])
               if orders_controller.meal_match_user_restaurant?(meal)
@@ -106,6 +105,11 @@ class BotYvon::Router
       return
     when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
       sit_at_table($LAST_MATCH_INFO)
+      return
+    when /\Aorder_(?<id>\d+)_receipt\z/
+      order_id = $LAST_MATCH_INFO['id']
+      orders_controller.receipt(order_id)
+      return
     end
 
     if user.current_order
@@ -136,6 +140,9 @@ class BotYvon::Router
         else
           restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
         end
+      when /\Arm_ordered_meal_(?<id>\d+)\z/
+        ordered_meal_id = $LAST_MATCH_INFO['id']
+        orders_controller.remove_ordered_meal(ordered_meal_id)
       when 'menu'
         if user.current_order&.restaurant
           restaurants_controller.show(user.current_order.restaurant.id)

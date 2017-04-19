@@ -57,6 +57,11 @@ class BotYvon::OrdersController
     end
   end
 
+  def remove_ordered_meal(ordered_meal_id)
+    OrderedMeal.find(ordered_meal_id).destroy
+    cart
+  end
+
   def set_table(table_number)
     user.current_order.update(table: table_number)
     view.ask_payment_method(user.current_order)
@@ -115,6 +120,11 @@ class BotYvon::OrdersController
     end
   end
 
+  def receipt(order_id)
+    order = Order.find(order_id)
+    view.receipt(order)
+  end
+
   def check_counter
     if user.stripe_customer_id
       pay_counter
@@ -127,8 +137,8 @@ class BotYvon::OrdersController
     view.update_card_counter
   end
 
-  def pay_counter
-    if user.current_order.orderer_meals.present?
+  def pay_counter # does not take into account if you have no table...
+    if user.current_order.ordered_meals.present?
       order = user.current_order
       if order.restaurant.on_duty?
         order.sent_at = Time.now
