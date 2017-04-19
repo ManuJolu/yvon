@@ -2,7 +2,6 @@ class Menu < ApplicationRecord
   belongs_to :restaurant, required: true
   has_many :menu_meal_categories, dependent: :destroy
   has_many :meal_categories, through: :menu_meal_categories
-  has_many :order_elements, as: :element, dependent: :restrict_with_exception
 
   accepts_nested_attributes_for :menu_meal_categories, reject_if: :all_blank, allow_destroy: true
 
@@ -33,13 +32,5 @@ class Menu < ApplicationRecord
     else
       price_cents
     end
-  end
-
-  def meal_categories_array
-    array = []
-    menu_meal_categories.each do |menu_meal_category|
-      menu_meal_category.quantity.times { array << menu_meal_category.meal_category }
-    end
-    array
   end
 end

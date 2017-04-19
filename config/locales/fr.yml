@@ -121,8 +121,8 @@ fr:
       meal_restaurant_mismatch: "Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :"
     meal:
       index:
-        pick_menu: 'Commander'
-        pick_next: "Commander & suite"
+        starting_at: "à partir de %{price}"
+        pick: 'Commander'
         menu: '◁ Retour'
         next: "▷ %{next_meal_category}"
         no_thanks_image: "non%20merci"
@@ -134,10 +134,13 @@ fr:
       get_option:
         choose_option: "Choisis ton option :"
     order:
-      no_meals: "Désolé, tu n'as pas encore de plats à commander !"
+      no_meals: "Désolé, tu n'as rien à commander !"
       restaurant_closed: "Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à trouver un autre restaurant ?"
       cart:
-        order_pending: "En attente"
+        title: "Total : %{price}"
+        subtitle: 'Dernière chance pour modifier ta commande !'
+        add: "◁ Ajouter"
+        remove: "Retirer"
         discounts: "Réductions"
         ask_table: "Tape le numéro de ta table ou sélectionne 'à emporter'"
         take_away: 'à emporter'
@@ -163,12 +166,18 @@ fr:
       ask_password: "Quel est ton code ?"
       confirm:
         paid: "Ta commande est payée, elle part en cuisine !"
+        get_receipt: "Obtenir le reçu"
         password: "Ta commande est envoyée en cuisine, n'oublies pas de payer au comptoir 😉 !"
         demo: "Tu continues sur la démo, ta commande n'est pas vraiment en cours de préparation 😉."
         ready: "Ta commande sera prête dans %{preparation_time} min à %{ready_time}."
         itinerary: "Itinéraire ▷"
+      receipt:
+        unknown_payment_method: "Non disponible"
       notify_ready: "Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !"
       notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name}, bon appétit ! N'hésite pas à me partager avec tes amis :"
-      share: "Essaye Yvon pour commander à emporter via Messenger !"
+      notify_served:
+        text: "%{user_first_name}, tu as été servi, bon appétit ! N'hésite pas à me partager avec tes amis et à recommander à ta table :"
+        table_button: "Table %{table}"
+      share: "Essaye Yvon pour commander et payer tes consos sur ton smartphone !"
   pundit:
     user_not_authorized: "Vous n'êtes pas autorisé à accéder à cette page"

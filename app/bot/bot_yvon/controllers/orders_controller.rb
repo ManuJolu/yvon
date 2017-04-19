@@ -6,11 +6,23 @@ class BotYvon::OrdersController
   end
 
   def create(params = {})
-    order = user.orders.create({
-        located_at: Time.now,
-        latitude: params[:latitude] || message.attachments[0]['payload']['coordinates']['lat'],
-        longitude: params[:longitude] || message.attachments[0]['payload']['coordinates']['long']
-      })
+    if params[:table]
+      restaurant = Restaurant.find(params[:restaurant_id])
+      order = user.orders.create({
+          located_at: Time.now,
+          latitude: restaurant.latitude,
+          longitude: restaurant.longitude,
+          restaurant: restaurant,
+          table: params[:table]
+        })
+    else
+      order = user.orders.create({
+          located_at: Time.now,
+          latitude: params[:latitude],
+          longitude: params[:longitude],
+          restaurant: params[:restaurant]
+        })
+    end
   end
 
   def update(params = {})
@@ -38,13 +50,16 @@ class BotYvon::OrdersController
   def cart
     if user.current_order&.meals.present?
       order = user.current_order
-      order.update(table: 0)
-      order.create_elements
-      order.reload
+      order.update(table: 0) if order.table.nil?
       view.cart(order)
     else
       view.no_meals
     end
+  end
+
+  def remove_ordered_meal(ordered_meal_id)
+    OrderedMeal.find(ordered_meal_id).destroy
+    cart
   end
 
   def set_table(table_number)
@@ -53,7 +68,7 @@ class BotYvon::OrdersController
   end
 
   def takeaway
-    user.current_order.update(table: nil)
+    user.current_order.update(table: -1)
     view.ask_payment_method(user.current_order)
   end
 
@@ -70,7 +85,7 @@ class BotYvon::OrdersController
   end
 
   def pay_card
-    if user.current_order.order_elements.present?
+    if user.current_order.ordered_meals.present?
       order = user.current_order
       if order.restaurant.on_duty?
         order.sent_at = Time.now
@@ -105,6 +120,11 @@ class BotYvon::OrdersController
     end
   end
 
+  def receipt(order_id)
+    order = Order.find(order_id)
+    view.receipt(order)
+  end
+
   def check_counter
     if user.stripe_customer_id
       pay_counter
@@ -117,8 +137,8 @@ class BotYvon::OrdersController
     view.update_card_counter
   end
 
-  def pay_counter
-    if user.current_order.order_elements.present?
+  def pay_counter # does not take into account if you have no table...
+    if user.current_order.ordered_meals.present?
       order = user.current_order
       if order.restaurant.on_duty?
         order.sent_at = Time.now
@@ -139,7 +159,7 @@ class BotYvon::OrdersController
   end
 
   def demo
-    if user.current_order.order_elements.present?
+    if user.current_order.orderer_meals.present?
       order = user.current_order
       if order.restaurant.on_duty?
         order.preparation_time = order.restaurant.preparation_time

@@ -1,4 +1,4 @@
-class BotAlineUserFinder < BotUserFinder
+class FindBotAlineUser < FindBotYvonUser
   private
 
   def messenger_field

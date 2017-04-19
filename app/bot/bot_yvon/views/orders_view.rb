@@ -22,15 +22,77 @@ class BotYvon::OrdersView
   end
 
   def cart(order)
+    elements = [
+      {
+        title: I18n.t('bot.order.cart.title', price: order.decorate.price),
+        image_url: cl_image_path('cash_till.jpg', width: 382, height: 200, crop: :fill),
+        subtitle: I18n.t('bot.order.cart.subtitle'),
+        buttons: [
+          {
+            type: 'postback',
+            title: I18n.t('bot.order.cart.add'),
+            payload: "restaurant_#{order.restaurant.id}"
+          }
+        ]
+      }
+    ]
+    elements += order.ordered_meals.by_meal_category.decorate.map do |ordered_meal|
+      {
+        title: ordered_meal,
+        image_url: cl_image_path_with_second(ordered_meal.meal.photo&.path, ordered_meal.meal.meal_category.photo&.path, width: 382, height: 200, crop: :fill),
+        subtitle: "#{ordered_meal.quantity} × #{ordered_meal.price}\n#{ordered_meal.meal.description}",
+        buttons: [
+          {
+            type: 'postback',
+            title: I18n.t('bot.order.cart.remove'),
+            payload: "rm_ordered_meal_#{ordered_meal.id}"
+          }
+        ]
+      }
+    end
+
+    message.reply(
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'generic',
+          elements: elements
+        }
+      }
+    )
+
+    if order.table == 0
+      message.reply(
+        text: I18n.t('bot.order.cart.ask_table'),
+        quick_replies: [
+          {
+            content_type: 'text',
+            title: I18n.t('bot.order.cart.take_away'),
+            payload: "order_takeaway"
+          }
+        ]
+      )
+    else
+      ask_payment_method(order)
+    end
+  end
+
+  def receipt(order)
     elements = order.ordered_meals.by_meal_category.map do |ordered_meal|
       {
         title: ordered_meal.meal.name,
         subtitle: "#{(ordered_meal.option.name + ' - ') if ordered_meal.option}#{ordered_meal.meal.description}",
         quantity: ordered_meal.quantity,
-        price: ordered_meal.meal.decorate.price_num,
+        price: ordered_meal.decorate.price_num,
         currency: "EUR",
         image_url: cl_image_path_with_second(ordered_meal.meal.photo&.path, ordered_meal.meal.meal_category.photo&.path, width: 100, height: 100, crop: :fill)
       }
+    end
+
+    if order.credit_card?
+      payment_method = order.user.decorate.stripe_default_source_text
+    else
+      payment_method = I18n.t('bot.order.receipt.unknown_payment_method')
     end
 
     message.reply(
@@ -41,37 +103,16 @@ class BotYvon::OrdersView
           recipient_name: "#{order.user.decorate.name}",
           order_number: "#{order.id}",
           currency: "EUR",
-          payment_method: I18n.t('bot.order.cart.order_pending'),
-          timestamp: Time.now.to_i,
+          payment_method: payment_method,
+          timestamp: order.sent_at.to_i,
           elements: elements,
           summary: {
             subtotal: order.decorate.pretax_price_num,
             total_tax: order.decorate.tax_num,
             total_cost: order.decorate.price_num
-          },
-          adjustments: [
-            {
-              name: I18n.t('bot.order.cart.discounts'),
-              amount: order.decorate.discount_num
-            }
-            # {
-            #   name: "Welcome coupon",
-            #   amount: 5
-            # }
-          ]
+          }
         }
       }
-    )
-
-    message.reply(
-      text: I18n.t('bot.order.cart.ask_table'),
-      quick_replies: [
-        {
-          content_type: 'text',
-          title: I18n.t('bot.order.cart.take_away'),
-          payload: "order_takeaway"
-        }
-      ]
     )
   end
 
@@ -94,11 +135,11 @@ class BotYvon::OrdersView
               title: card_payment,
               payload: 'check_card'
             },
-            {
-              type: 'postback',
-              title: I18n.t('bot.order.ask_payment_method.pay_counter'),
-              payload: 'check_counter'
-            },
+            # {
+            #   type: 'postback',
+            #   title: I18n.t('bot.order.ask_payment_method.pay_counter'),
+            #   payload: 'check_counter'
+            # },
             {
               type: 'postback',
               title: I18n.t('bot.order.ask_payment_method.demo'),
@@ -188,7 +229,18 @@ class BotYvon::OrdersView
   def confirm(order)
     if order.credit_card?
       message.reply(
-        text: I18n.t('bot.order.confirm.paid')
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'button',
+            text: I18n.t('bot.order.confirm.paid'),
+            buttons: [{
+              type: 'postback',
+              title: I18n.t('bot.order.confirm.get_receipt'),
+              payload: "order_#{order.id}_receipt",
+            }]
+          }
+        }
       )
     elsif order.counter?
       message.reply(
@@ -200,7 +252,7 @@ class BotYvon::OrdersView
       )
     end
 
-    if order.table.nil?
+    if order.table < 0
       message.reply(
         attachment: {
           type: 'template',

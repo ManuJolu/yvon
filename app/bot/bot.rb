@@ -24,6 +24,16 @@ Bot.on :postback do |postback|
   end
 end
 
+Bot.on :referral do |referral|
+  puts "Received '#{referral.inspect}' from #{referral.sender}"
+  case referral.recipient['id']
+  when ENV['YVON_PAGE_ID']
+    BotYvon::Router.new(referral)
+  when ENV['ALINE_PAGE_ID']
+    BotAline::Router.new(referral)
+  end
+end
+
 Bot.on :delivery do |delivery|
   puts "Delivered message(s) #{delivery.ids}"
 end

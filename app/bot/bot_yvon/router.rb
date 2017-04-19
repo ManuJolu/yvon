@@ -1,6 +1,6 @@
 class BotYvon::Router
   def initialize(message)
-    @user = BotUserFinder.new(message).call
+    @user = FindBotYvonUser.new(message).call
 
     @messages_controller = BotYvon::MessagesController.new(message, @user)
     @restaurants_controller = BotYvon::RestaurantsController.new(message, @user)
@@ -14,20 +14,29 @@ class BotYvon::Router
     when Facebook::Messenger::Incoming::Postback
       @postback = message
       handle_postback
+    when Facebook::Messenger::Incoming::Referral
+      @referral = message
+      handle_referral
     end
   end
 
   private
 
-  attr_reader :message, :postback, :user, :messages_controller,
+  attr_reader :message, :postback, :referral, :user, :messages_controller,
     :restaurants_controller, :meals_controller, :orders_controller
 
   def handle_message
-    if message.attachments.try(:[], 0).try(:[], 'payload').try(:[], 'coordinates')
-      message.type
-      order = orders_controller.create
-      coordinates = [order.latitude, order.longitude]
-      messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
+    message.typing_on
+    if message.attachments&.first.try(:[], 'type') == 'location'
+      latitude = message.attachments.first['payload']['coordinates']['lat']
+      longitude = message.attachments.first['payload']['coordinates']['long']
+      if (restaurant = Restaurant.find_by(name: message.attachments.first['title'])) && (restaurant.distance_from([latitude, longitude]) < 0.1)
+        orders_controller.create(latitude: latitude, longitude: longitude, restaurant: restaurant)
+        restaurants_controller.show(restaurant.id)
+      else
+        orders_controller.create(latitude: latitude, longitude: longitude)
+        messages_controller.no_restaurant unless restaurants_controller.index([latitude, longitude])
+      end
     end
 
     case message.text
@@ -36,51 +45,50 @@ class BotYvon::Router
     when /help/i, /aide/i
       messages_controller.hello
     when /bordeaux/i
-      message.type
       order = orders_controller.create(latitude: '44.840715', longitude: '-0.5721098')
       coordinates = [order.latitude, order.longitude]
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
     else
       if user.current_order&.restaurant
-        case message.text
-        when /\Acds\z/i
-          orders_controller.pay_counter
-        when /(?<table_number>\d+)/
-          orders_controller.set_table($LAST_MATCH_INFO['table_number']) if user.current_order.table == 0
-        when 'à emporter'
-          orders_controller.takeaway if user.current_order.table == 0
-        else
-          case message.quick_reply
-          when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
-            message.type
-            meal = Meal.find($LAST_MATCH_INFO['meal_id'])
-            option = Option.find($LAST_MATCH_INFO['option_id'])
-            action = $LAST_MATCH_INFO['action']
-            if orders_controller.meal_match_user_restaurant?(meal)
-              orders_controller.add_meal(meal, option)
-              case action
-              when 'menu'
-                restaurants_controller.show(meal.restaurant.id)
-              when 'next'
-                meals_controller.index(meal.meal_category.lower_items.find_by(active: true).id)
-              end
-            else
-              restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
-            end
-          # else
-          #   messages_controller.no_comprendo if message.quick_reply.nil?
-          when 'order_takeaway'
+        if user.current_order.table == 0
+          case message.text
+          when /(?<table_number>\d+)/
+            orders_controller.set_table($LAST_MATCH_INFO['table_number'])
+          when 'à emporter'
             orders_controller.takeaway
           end
+        else
+          case message.text
+          when /\Acds\z/i
+            orders_controller.pay_counter
+          else
+            case message.quick_reply
+            when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)\z/
+              meal = Meal.find($LAST_MATCH_INFO['meal_id'])
+              option = Option.find($LAST_MATCH_INFO['option_id'])
+              if orders_controller.meal_match_user_restaurant?(meal)
+                orders_controller.add_meal(meal, option)
+                restaurants_controller.show(meal.restaurant.id)
+              else
+                restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
+              end
+            when 'order_takeaway'
+              orders_controller.takeaway
+            end
+          end
         end
-      # else
-      #   # message.type_off
-      #   messages_controller.else if user.current_order.nil?
       end
+      message.typing_off
     end
   end
 
   def handle_postback
+    case postback&.referral&.ref
+    when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
+      sit_at_table($LAST_MATCH_INFO)
+      return
+    end
+
     case postback.payload
     when 'start'
       messages_controller.hello
@@ -95,6 +103,13 @@ class BotYvon::Router
     when 'share'
       messages_controller.share
       return
+    when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
+      sit_at_table($LAST_MATCH_INFO)
+      return
+    when /\Aorder_(?<id>\d+)_receipt\z/
+      order_id = $LAST_MATCH_INFO['id']
+      orders_controller.receipt(order_id)
+      return
     end
 
     if user.current_order
@@ -106,9 +121,6 @@ class BotYvon::Router
       when /\Arestaurant_(?<id>\d+)_upvote\z/
         restaurant_id = $LAST_MATCH_INFO['id'].to_i
         restaurants_controller.upvote(restaurant_id)
-      when /\Arestaurant_(?<id>\d+)_menus\z/
-        restaurant_id = $LAST_MATCH_INFO['id'].to_i
-        restaurants_controller.menus(restaurant_id)
       when /\Ameal_category_(?<meal_category_id>\w+)\z/
         meal_category_id = $LAST_MATCH_INFO['meal_category_id']
         if restaurants_controller.user_restaurant_match?(meal_category_id)
@@ -116,24 +128,21 @@ class BotYvon::Router
         else
           restaurants_controller.user_restaurant_mismatch(meal_category_id)
         end
-      when /\Ameal_(?<id>\d+)_(?<action>\D+)\z/
+      when /\Ameal_(?<id>\d+)\z/
         meal = Meal.find($LAST_MATCH_INFO['id'])
-        action = $LAST_MATCH_INFO['action']
         if orders_controller.meal_match_user_restaurant?(meal)
           if meal.options.are_active.any?
-            meals_controller.get_option(meal, action: action)
+            meals_controller.get_option(meal)
           else
             orders_controller.add_meal(meal)
-            case action
-            when 'menu'
-              restaurants_controller.show(meal.restaurant.id)
-            when 'next'
-              meals_controller.index(meal.meal_category.lower_items.find_by(active: true).id)
-            end
+            restaurants_controller.show(meal.restaurant.id)
           end
         else
           restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
         end
+      when /\Arm_ordered_meal_(?<id>\d+)\z/
+        ordered_meal_id = $LAST_MATCH_INFO['id']
+        orders_controller.remove_ordered_meal(ordered_meal_id)
       when 'menu'
         if user.current_order&.restaurant
           restaurants_controller.show(user.current_order.restaurant.id)
@@ -158,5 +167,21 @@ class BotYvon::Router
     else
       messages_controller.no_current_order
     end
+  end
+
+  def handle_referral
+    case referral.ref
+    when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
+      sit_at_table($LAST_MATCH_INFO)
+    end
+  end
+
+  private
+
+  def sit_at_table(last_match_info)
+    restaurant_id = last_match_info['id'].to_i
+    table = last_match_info['table'].to_i
+    orders_controller.create(restaurant_id: restaurant_id, table: table)
+    restaurants_controller.show(restaurant_id)
   end
 end

@@ -1,6 +1,6 @@
 class BotAline::Router
   def initialize(message)
-    @user = BotAlineUserFinder.new(message).call
+    @user = FindBotAlineUser.new(message).call
 
     @messages_controller = BotAline::MessagesController.new(message, @user)
     @restaurants_controller = BotAline::RestaurantsController.new(message, @user)

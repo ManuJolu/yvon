@@ -21,14 +21,6 @@ class OrderDecorator < Draper::Decorator
     format '%.2f', object.pretax_price
   end
 
-  def alacarte_price_num
-    format '%.2f', object.alacarte_price
-  end
-
-  def discount_num
-    format '%.2f', object.discount
-  end
-
   def sent_at
     object.sent_at&.strftime('%H:%M')
   end
