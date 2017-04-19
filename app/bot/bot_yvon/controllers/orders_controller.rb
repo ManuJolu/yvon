@@ -120,11 +120,6 @@ class BotYvon::OrdersController
     end
   end
 
-  def receipt(order_id)
-    order = Order.find(order_id)
-    view.receipt(order)
-  end
-
   def check_counter
     if user.stripe_customer_id
       pay_counter
@@ -159,7 +154,7 @@ class BotYvon::OrdersController
   end
 
   def demo
-    if user.current_order.orderer_meals.present?
+    if user.current_order.ordered_meals.present?
       order = user.current_order
       if order.restaurant.on_duty?
         order.preparation_time = order.restaurant.preparation_time
@@ -177,6 +172,11 @@ class BotYvon::OrdersController
     else
       view.no_meals
     end
+  end
+
+  def receipt(order_id)
+    order = Order.find(order_id)
+    view.receipt(order)
   end
 
   def menu_update_card
