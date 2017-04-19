@@ -19,7 +19,8 @@ class BotYvon::OrdersController
       order = user.orders.create({
           located_at: Time.now,
           latitude: params[:latitude],
-          longitude: params[:longitude]
+          longitude: params[:longitude],
+          restaurant: params[:restaurant]
         })
     end
   end

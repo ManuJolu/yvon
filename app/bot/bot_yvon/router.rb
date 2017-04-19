@@ -27,9 +27,12 @@ class BotYvon::Router
       message.type
       latitude = message.attachments.first['payload']['coordinates']['lat']
       longitude = message.attachments.first['payload']['coordinates']['long']
-      orders_controller.create(latitude: latitude, longitude: longitude)
-      coordinates = [latitude, longitude]
-      messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
+      if (restaurant = Restaurant.find_by(name: message.attachments.first['title'])) && (restaurant.distance_from([latitude, longitude]) < 0.1)
+        orders_controller.create(latitude: latitude, longitude: longitude, restaurant: restaurant)
+        restaurants_controller.show(restaurant.id)
+      else
+        messages_controller.no_restaurant unless restaurants_controller.index([latitude, longitude])
+      end
     end
 
     case message.text
