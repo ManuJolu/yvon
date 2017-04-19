@@ -1,6 +1,6 @@
 class BotYvon::Router
   def initialize(message)
-    @user = BotUserFinder.new(message).call
+    @user = FindBotYvonUser.new(message).call
 
     @messages_controller = BotYvon::MessagesController.new(message, @user)
     @restaurants_controller = BotYvon::RestaurantsController.new(message, @user)
@@ -14,12 +14,15 @@ class BotYvon::Router
     when Facebook::Messenger::Incoming::Postback
       @postback = message
       handle_postback
+    when Facebook::Messenger::Incoming::Referral
+      @referral = message
+      handle_referral
     end
   end
 
   private
 
-  attr_reader :message, :postback, :user, :messages_controller,
+  attr_reader :message, :postback, :referral, :user, :messages_controller,
     :restaurants_controller, :meals_controller, :orders_controller
 
   def handle_message
@@ -80,6 +83,12 @@ class BotYvon::Router
   end
 
   def handle_postback
+    case postback&.referral&.ref
+    when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
+      sit_at_table($LAST_MATCH_INFO)
+      return
+    end
+
     case postback.payload
     when 'start'
       messages_controller.hello
@@ -95,10 +104,7 @@ class BotYvon::Router
       messages_controller.share
       return
     when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
-      restaurant_id = $LAST_MATCH_INFO['id'].to_i
-      table = $LAST_MATCH_INFO['table'].to_i
-      orders_controller.create(restaurant_id: restaurant_id, table: table)
-      restaurants_controller.show(restaurant_id)
+      sit_at_table($LAST_MATCH_INFO)
     end
 
     if user.current_order
@@ -153,5 +159,21 @@ class BotYvon::Router
     else
       messages_controller.no_current_order
     end
+  end
+
+  def handle_referral
+    case referral.ref
+    when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
+      sit_at_table($LAST_MATCH_INFO)
+    end
+  end
+
+  private
+
+  def sit_at_table(last_match_info)
+    restaurant_id = last_match_info['id'].to_i
+    table = last_match_info['table'].to_i
+    orders_controller.create(restaurant_id: restaurant_id, table: table)
+    restaurants_controller.show(restaurant_id)
   end
 end
