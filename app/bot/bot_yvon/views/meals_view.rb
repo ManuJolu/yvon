@@ -74,7 +74,7 @@ class BotYvon::MealsView
     options = options.map do |option|
       {
         content_type: 'text',
-        title: option.name.capitalize,
+        title: option.to_label.capitalize,
         payload: "meal_#{params[:meal_id]}_option_#{option.id}_#{params[:action]}"
       }
     end

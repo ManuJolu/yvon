@@ -17,14 +17,14 @@ class Order < ApplicationRecord
   scope :are_delivered, -> { where('delivered_at IS NOT NULL').order(delivered_at: :desc) }
 
   def price_cents
-    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.meal.price_cents }
+    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.price_cents }
   end
 
   def tax_cents
-    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.meal.tax_cents }
+    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.tax_cents }
   end
 
   def pretax_price_cents
-    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.meal.pretax_price_cents }
+    ordered_meals.sum { |ordered_meal| ordered_meal.quantity * ordered_meal.pretax_price_cents }
   end
 end

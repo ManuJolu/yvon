@@ -42,40 +42,40 @@ class BotYvon::Router
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
     else
       if user.current_order&.restaurant
-        case message.text
-        when /\Acds\z/i
-          orders_controller.pay_counter
-        when /(?<table_number>\d+)/
-          orders_controller.set_table($LAST_MATCH_INFO['table_number']) if user.current_order.table == 0
-        when 'à emporter'
-          orders_controller.takeaway if user.current_order.table == 0
-        else
-          case message.quick_reply
-          when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
-            message.type
-            meal = Meal.find($LAST_MATCH_INFO['meal_id'])
-            option = Option.find($LAST_MATCH_INFO['option_id'])
-            action = $LAST_MATCH_INFO['action']
-            if orders_controller.meal_match_user_restaurant?(meal)
-              orders_controller.add_meal(meal, option)
-              case action
-              when 'menu'
-                restaurants_controller.show(meal.restaurant.id)
-              when 'next'
-                meals_controller.index(meal.meal_category.lower_items.find_by(active: true).id)
-              end
-            else
-              restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
-            end
-          # else
-          #   messages_controller.no_comprendo if message.quick_reply.nil?
-          when 'order_takeaway'
+        if user.current_order.table == 0
+          case message.text
+          when /(?<table_number>\d+)/
+            orders_controller.set_table($LAST_MATCH_INFO['table_number'])
+          when 'à emporter'
             orders_controller.takeaway
           end
+        else
+          case message.text
+          when /\Acds\z/i
+            orders_controller.pay_counter
+          else
+            case message.quick_reply
+            when /\Ameal_(?<meal_id>\d+)_option_(?<option_id>\d+)_(?<action>\D+)\z/
+              message.type
+              meal = Meal.find($LAST_MATCH_INFO['meal_id'])
+              option = Option.find($LAST_MATCH_INFO['option_id'])
+              action = $LAST_MATCH_INFO['action']
+              if orders_controller.meal_match_user_restaurant?(meal)
+                orders_controller.add_meal(meal, option)
+                case action
+                when 'menu'
+                  restaurants_controller.show(meal.restaurant.id)
+                when 'next'
+                  meals_controller.index(meal.meal_category.lower_items.find_by(active: true).id)
+                end
+              else
+                restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
+              end
+            when 'order_takeaway'
+              orders_controller.takeaway
+            end
+          end
         end
-      # else
-      #   # message.type_off
-      #   messages_controller.else if user.current_order.nil?
       end
     end
   end

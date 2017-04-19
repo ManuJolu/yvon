@@ -27,7 +27,7 @@ class BotYvon::OrdersView
         title: ordered_meal.meal.name,
         subtitle: "#{(ordered_meal.option.name + ' - ') if ordered_meal.option}#{ordered_meal.meal.description}",
         quantity: ordered_meal.quantity,
-        price: ordered_meal.meal.decorate.price_num,
+        price: ordered_meal.decorate.price_num,
         currency: "EUR",
         image_url: cl_image_path_with_second(ordered_meal.meal.photo&.path, ordered_meal.meal.meal_category.photo&.path, width: 100, height: 100, crop: :fill)
       }

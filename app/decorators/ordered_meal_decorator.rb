@@ -7,4 +7,12 @@ class OrderedMealDecorator < Draper::Decorator
     str += " - #{object.option.name}" if object.option
     str
   end
+
+  def price
+    humanized_money_with_symbol object.price
+  end
+
+  def price_num
+    format '%.2f', object.price
+  end
 end
