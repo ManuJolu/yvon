@@ -1,6 +1,6 @@
 class MealCategory < ApplicationRecord
   belongs_to :restaurant, required: true
-  has_many :meals, dependent: :restrict_with_exception
+  has_many :meals, -> { order(position: :asc) }, dependent: :restrict_with_exception
 
   validates :name, presence: true, uniqueness: { scope: :restaurant }
   validates :timing, presence: true
