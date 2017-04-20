@@ -84,6 +84,9 @@ class BotYvon::Router
 
   def handle_postback
     case postback&.referral&.ref
+    when /\Arestaurant_(?<id>\d+)\z/
+      enter_restaurant($LAST_MATCH_INFO)
+      return
     when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
       sit_at_table($LAST_MATCH_INFO)
       return
@@ -115,9 +118,7 @@ class BotYvon::Router
     if user.current_order
       case postback.payload
       when /\Arestaurant_(?<id>\d+)\z/
-        restaurant_id = $LAST_MATCH_INFO['id'].to_i
-        orders_controller.update(restaurant_id: restaurant_id)
-        restaurants_controller.show(restaurant_id)
+        enter_restaurant($LAST_MATCH_INFO)
       when /\Arestaurant_(?<id>\d+)_upvote\z/
         restaurant_id = $LAST_MATCH_INFO['id'].to_i
         restaurants_controller.upvote(restaurant_id)
@@ -171,12 +172,20 @@ class BotYvon::Router
 
   def handle_referral
     case referral.ref
+    when /\Arestaurant_(?<id>\d+)\z/
+      enter_restaurant($LAST_MATCH_INFO)
     when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
       sit_at_table($LAST_MATCH_INFO)
     end
   end
 
   private
+
+  def enter_restaurant(last_match_info)
+    restaurant_id = last_match_info['id'].to_i
+    orders_controller.update(restaurant_id: restaurant_id)
+    restaurants_controller.show(restaurant_id)
+  end
 
   def sit_at_table(last_match_info)
     restaurant_id = last_match_info['id'].to_i
