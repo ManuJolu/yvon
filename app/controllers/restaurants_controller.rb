@@ -3,7 +3,7 @@ class RestaurantsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index ]
 
   def index
-    @restaurants = policy_scope(Restaurant).by_duty.where.not(latitude: nil, longitude: nil)
+    @restaurants = policy_scope(Restaurant).includes(:user, :photo_files).by_duty.where.not(latitude: nil, longitude: nil)
     authorize @restaurants
 
     search = params[:search]

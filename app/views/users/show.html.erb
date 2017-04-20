@@ -13,7 +13,7 @@
     <% if User.roles[@user.role] > 0 %>
       <h3><%= t ".my_restaurants" %></h3>
       <div class="row">
-        <% @user.restaurants.by_duty.each do |restaurant| %>
+        <% @user.restaurants.includes(:user, :photo_files).by_duty.each do |restaurant| %>
           <div class="col-xs-12 col-sm-4">
             <%= render 'restaurants/card', restaurant: restaurant %>
           </div>

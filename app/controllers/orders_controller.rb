@@ -80,7 +80,7 @@ class OrdersController < ApplicationController
   end
 
   def set_restaurant
-    @restaurant = Restaurant.find(params[:restaurant_id])
+    @restaurant = Restaurant.includes(:user).find(params[:restaurant_id])
     authorize @restaurant, :update?
   end
 
