@@ -70,7 +70,7 @@ end
   end
 
   def set_restaurant
-    @restaurant = Restaurant.includes(:user, meal_categories: { meals: :options }).find(params[:restaurant_id])
+    @restaurant = Restaurant.includes(:user, meal_categories: { meals: [ :options, :photo_files ] }).find(params[:restaurant_id])
     authorize @restaurant, :update?
   end
 
