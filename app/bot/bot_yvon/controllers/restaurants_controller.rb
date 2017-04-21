@@ -10,7 +10,7 @@ class BotYvon::RestaurantsController
   end
 
   def show(restaurant_id)
-    restaurant = Restaurant.includes(active_meal_categories: [ :photo_files, { active_meal: :photo_files } ]).find(restaurant_id)
+    restaurant = Restaurant.includes([ :restaurant_category, :photo_files, { active_meal_categories: [ :photo_files, { active_meal: :photo_files } ] } ]).find(restaurant_id)
     view.show(restaurant, ordered_meals?: user.current_order.ordered_meals.present?)
   end
 
