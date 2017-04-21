@@ -1,9 +1,9 @@
 class MealsController < ApplicationController
   before_action :set_meal, only: [:edit, :update, :destroy]
-  before_action :set_restaurant, only: [:index, :new, :create]
+  before_action :set_restaurant, only: [:new, :create]
 
   def index
-    @restaurant = policy_scope(@restaurant)
+    @restaurant = policy_scope(Restaurant.includes(meal_categories: { meals: [ :options, :photo_files ] }).find(params[:restaurant_id]))
   end
 
   def new
@@ -70,7 +70,7 @@ end
   end
 
   def set_restaurant
-    @restaurant = Restaurant.includes(:user, meal_categories: { meals: [ :options, :photo_files ] }).find(params[:restaurant_id])
+    @restaurant = Restaurant.find(params[:restaurant_id])
     authorize @restaurant, :update?
   end
 
