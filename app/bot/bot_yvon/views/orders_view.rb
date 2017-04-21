@@ -23,19 +23,28 @@ class BotYvon::OrdersView
 
   def cart(order)
     title = I18n.t('bot.order.cart.title', price: order.decorate.price)
-    title += I18n.t('bot.order.cart.table', table: order.table) if order.table > 0
+    buttons = [
+      {
+        type: 'postback',
+        title: I18n.t('bot.order.cart.add'),
+        payload: "restaurant_#{order.restaurant.id}"
+      }
+    ]
+    if order.table > 0
+      title += I18n.t('bot.order.cart.table', table: order.table)
+      buttons << {
+        type: 'postback',
+        title: I18n.t('bot.order.cart.change_table'),
+        payload: 'change_table'
+      }
+    end
+
     elements = [
       {
         title: title,
         image_url: cl_image_path('cash_till.jpg', width: 382, height: 200, crop: :fill),
         subtitle: I18n.t('bot.order.cart.subtitle'),
-        buttons: [
-          {
-            type: 'postback',
-            title: I18n.t('bot.order.cart.add'),
-            payload: "restaurant_#{order.restaurant.id}"
-          }
-        ]
+        buttons: buttons
       }
     ]
     elements += order.ordered_meals.by_meal_category.decorate.map do |ordered_meal|
@@ -64,19 +73,23 @@ class BotYvon::OrdersView
     )
 
     if order.table == 0
-      message.reply(
-        text: I18n.t('bot.order.cart.ask_table'),
-        quick_replies: [
-          {
-            content_type: 'text',
-            title: I18n.t('bot.order.cart.take_away'),
-            payload: "order_takeaway"
-          }
-        ]
-      )
+      ask_table
     else
       ask_payment_method(order)
     end
+  end
+
+  def ask_table
+    message.reply(
+      text: I18n.t('bot.order.cart.ask_table'),
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: I18n.t('bot.order.cart.take_away'),
+          payload: "order_takeaway"
+        }
+      ]
+    )
   end
 
   def ask_payment_method(order)

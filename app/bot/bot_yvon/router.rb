@@ -143,6 +143,8 @@ class BotYvon::Router
         else
           restaurants_controller.meal_user_restaurant_mismatch(meal.restaurant.id)
         end
+      when 'change_table'
+        orders_controller.ask_table
       when /\Arm_ordered_meal_(?<id>\d+)\z/
         ordered_meal_id = $LAST_MATCH_INFO['id']
         orders_controller.remove_ordered_meal(ordered_meal_id)

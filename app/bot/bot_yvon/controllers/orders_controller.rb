@@ -57,6 +57,11 @@ class BotYvon::OrdersController
     end
   end
 
+  def ask_table
+    user.current_order.update(table: 0)
+    view.ask_table
+  end
+
   def remove_ordered_meal(ordered_meal_id)
     OrderedMeal.find(ordered_meal_id).destroy
     cart

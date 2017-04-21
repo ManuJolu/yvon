@@ -139,6 +139,7 @@ fr:
       cart:
         title: "Total : %{price}"
         table: " - Table %{table}"
+        change_table: "Modifier la table"
         subtitle: 'Dernière chance pour modifier ta commande !'
         add: "◁ Ajouter"
         remove: "Retirer"
