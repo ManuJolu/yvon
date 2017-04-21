@@ -215,10 +215,10 @@ en:
       location: Géolocalise toi
       menu: Consulte la carte et fais ton choix
       payment: Paye avec YVON plus besoin de monnaie
-      slogan_html: Commande et paye sur ton smartphone avec <span class='yvon-logo'>YVON</span>
+      slogan_html: Order and pay on your smartphone with <span class='yvon-logo'>YVON</span>
       takeorder: Commande sur ton smartphone
     messenger_button:
-      call_to_action_html: Je commande avec <span class='yvon-logo'>YVON</span>
+      call_to_action_html: I order with <span class='yvon-logo'>YVON</span>
   pundit:
     user_not_authorized: Vous n'êtes pas autorisé à accéder à cette page
   restaurants:
@@ -245,20 +245,20 @@ en:
       orders: Commandes
   shared:
     footer:
-      legal: Mentions légales
-      privacy: Confidentialité
+      legal: Legal notice
+      privacy: Privacy policy
     navbar:
-      new_restaurant: Ajouter un restaurant
-      profile: Profil
+      new_restaurant: Add a restaurant
+      profile: Profile
       rails_admin: Admin
       restaurants: Restaurants
-      sign_in: Connexion
-      sign_out: Déconnexion
+      sign_in: Sign in
+      sign_out: Sign out
   users:
     credit_card:
       confirm_destroy: En supprimant ta carte, tu ne pourras plus payer sur @HelloYvon.
     show:
-      add_restaurant: Ajouter un restaurant
+      add_restaurant: Add a restaurant
       messenger: Messenger
-      my_card: Ma carte bancaire
-      my_restaurants: Mes restaurants
+      my_card: My card
+      my_restaurants: My restaurants
