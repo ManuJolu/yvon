@@ -2,9 +2,9 @@
 en:
   bot:
     else: Dis 'Hello' pour commencer une nouvelle recherche
-    hello: "%{keyword} %{username} ! Où puis-je t'aider à trouver un restaurant ?
-      Envoie un emplacement ou cherche à Bordeaux, ma ville natale !"
-    hello_default_keyword: Salut
+    hello: "%{keyword} %{username}! Where can I help you find a restaurant?
+      Send your location or check my hometown Bordeaux!"
+    hello_default_keyword: Hello
     meal:
       get_option:
         choose_option: 'Choisis ton option :'
