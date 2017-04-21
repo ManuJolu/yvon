@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:edit, :update, :duty_update, :preparation_time_update, :facebook_update, :refresh]
+  before_action :set_restaurant, only: [:update, :duty_update, :preparation_time_update, :facebook_update, :refresh]
   skip_before_action :authenticate_user!, only: [ :index ]
 
   def index
@@ -86,6 +86,8 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
+    @restaurant = Restaurant.includes(:user, :options, :photo_files, { menus: :menu_meal_categories }, { meal_categories: :photo_files }).find(params[:id])
+    authorize @restaurant
     @active = params[:tab] || 'configure'
   end
 
