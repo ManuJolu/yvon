@@ -147,11 +147,11 @@ class BotYvon::RestaurantsView
 
     elements << element
 
-    restaurant.meal_categories.are_active.limit(9).each do |meal_category|
+    restaurant.active_meal_categories.each do |meal_category|
       elements << {
         title: meal_category.name,
-        image_url: cl_image_path_with_second(meal_category.meals.are_active.first&.photo&.path, meal_category.photo&.path, width: 382, height: 200, crop: :fill),
-        subtitle: "#{('Suggestion: ' + meal_category.meals.are_active.first.name) if meal_category.meals.are_active.any?}",
+        image_url: cl_image_path_with_second(meal_category.active_meal&.photo&.path, meal_category.photo&.path, width: 382, height: 200, crop: :fill),
+        subtitle: "#{('Suggestion: ' + meal_category.active_meal.name) if meal_category.active_meal.present?}",
         buttons: [
           {
               title: "#{meal_category.name} ▷",

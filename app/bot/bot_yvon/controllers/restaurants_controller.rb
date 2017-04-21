@@ -5,12 +5,12 @@ class BotYvon::RestaurantsController
   end
 
   def index(coordinates)
-    restaurants = Restaurant.are_votable_plus.by_duty.where.not(latitude: nil, longitude: nil).near(coordinates, 0.5).limit(10)
+    restaurants = Restaurant.are_votable_plus.by_duty.where.not(latitude: nil, longitude: nil).near(coordinates, 0.5).limit(10).includes(:restaurant_category, :photo_files)
     view.index(coordinates, restaurants) if restaurants.present?
   end
 
   def show(restaurant_id)
-    restaurant = Restaurant.find(restaurant_id)
+    restaurant = Restaurant.includes(active_meal_categories: [ :photo_files, { active_meal: :photo_files } ]).find(restaurant_id)
     view.show(restaurant, ordered_meals?: user.current_order.ordered_meals.present?)
   end
 

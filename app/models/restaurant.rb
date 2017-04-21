@@ -3,6 +3,7 @@ class Restaurant < ApplicationRecord
   belongs_to :restaurant_category, required: true
   belongs_to :messenger_user, class_name: 'User'
   has_many :meal_categories, -> { order(position: :asc) }, dependent: :destroy
+  has_many :active_meal_categories, -> { where(active: true).limit(9).order(position: :asc) }, class_name: 'MealCategory'
   has_many :meals, through: :meal_categories
   has_many :menus, -> { order(position: :asc) }, dependent: :destroy
   has_many :orders, dependent: :restrict_with_exception
