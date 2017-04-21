@@ -60,7 +60,7 @@ class BotYvon::RestaurantsView
                         buttons: [
                           {
                             type: 'web_url',
-                            title: "Hello Yvon",
+                            title: I18n.t('bot.shared_m_me'),
                             url: "http://m.me/HelloYvon?ref=shared_vote"
                           }
                         ]
@@ -151,7 +151,7 @@ class BotYvon::RestaurantsView
       elements << {
         title: meal_category.name,
         image_url: cl_image_path_with_second(meal_category.active_meal&.photo&.path, meal_category.photo&.path, width: 382, height: 200, crop: :fill),
-        subtitle: "#{('Suggestion: ' + meal_category.active_meal.name) if meal_category.active_meal.present?}",
+        subtitle: ((I18n.t('bot.restaurant.menu.suggestion') + meal_category.active_meal.name) if meal_category.active_meal.present?),
         buttons: [
           {
               title: "#{meal_category.name} ▷",
@@ -205,7 +205,7 @@ class BotYvon::RestaurantsView
                         buttons: [
                           {
                             type: 'web_url',
-                            title: "Hello Yvon",
+                            title: I18n.t('bot.shared_m_me'),
                             url: "http://m.me/HelloYvon?ref=shared_vote"
                           }
                         ]

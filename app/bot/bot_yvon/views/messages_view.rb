@@ -48,7 +48,7 @@ class BotYvon::MessagesView
                           buttons: [
                             {
                               type: 'web_url',
-                              title: "Hello Yvon",
+                              title: I18n.t('bot.shared_m_me'),
                               url: "http://m.me/HelloYvon?ref=shared"
                             }
                           ]

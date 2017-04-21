@@ -84,6 +84,7 @@ fr:
     hello_default_keyword: "Salut"
     hello: "%{keyword} %{username} ! Où puis-je t'aider à trouver un restaurant ? Envoie un emplacement ou cherche à Bordeaux, ma ville natale !"
     share: "Essaye Yvon pour trouver ton fooding via Messenger !"
+    shared_m_me: "Hello Yvon"
     no_restaurant: "Désolé, je n'ai pas trouvé de restaurant près de toi... Envoie un nouvel emplacement ou cherche à Bordeaux, ma ville natale !"
     no_restaurant_selected: "Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider à en trouver un ?"
     no_current_order: "Désolé, tu n'as plus de recherche en cours. Envoie un emplacement pour en commencer une nouvelle :"
@@ -111,6 +112,7 @@ fr:
       menu:
         swipe_right: "Regarder la carte ▷"
         back_to_map: "◁ Retour"
+        suggestion: 'Suggestion : '
         display_menus: "Les formules sont calculées automatiquement à la commande"
         menus_image: "formules"
         menus: "▽ Voir les formules"
@@ -181,5 +183,7 @@ fr:
         text: "%{user_first_name}, tu as été servi, bon appétit ! N'hésite pas à me partager avec tes amis et à commander à nouveau à ta table :"
         table_button: "Table %{table}"
       share: "Essaye Yvon pour commander et payer tes consos sur ton smartphone !"
+  devise:
+    messenger_provider: 'lien Messenger'
   pundit:
     user_not_authorized: "Vous n'êtes pas autorisé à accéder à cette page"
