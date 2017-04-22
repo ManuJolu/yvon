@@ -77,7 +77,7 @@
             <% end %>
           </td>
           <td class="text-center">
-            <% if order.ready_at && order.delivered_at.nil? %>
+            <% if order.delivered_at.nil? && (order.table > 0 || order.ready_at) %>
               <%= render 'orders/button_delivered', order: order %>
             <% else %>
               <%= order.decorate.delivered_at %>

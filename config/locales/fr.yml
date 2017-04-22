@@ -2,31 +2,34 @@
 fr:
   bot:
     else: Dis 'Hello' pour commencer une nouvelle recherche
-    hello: "%{keyword} %{username} ! Où puis-je t'aider à trouver un restaurant ?
-      Envoie un emplacement ou cherche à Bordeaux, ma ville natale !"
+    hello: |-
+      %{keyword} %{username} ! Où puis-je t'aider à trouver un restaurant ?
+      Envoie un emplacement ou cherche à Bordeaux, ma ville natale !
     hello_default_keyword: Salut
     meal:
       get_option:
-        choose_option: 'Choisis ton option :'
+        choose_option: >-
+          Choisis ton option :
       index:
-        back: "◁ Retour"
+        back: ◁ Retour
         back_image: retour
         back_message: "\n "
-        menu: "◁ Retour"
+        menu: ◁ Retour
         no_thanks: Pas de %{meal_category} pour moi
         no_thanks_image: non%20merci
-        no_thanks_message: |2-
-
-          Je ferais mieux de surveiller ma ligne
+        no_thanks_message: Je ferais mieux de surveiller ma ligne
         pick: Commander
         starting_at: à partir de %{price}
-    no_comprendo: "Désolé, no comprendo \U0001F615"
-    no_current_order: 'Désolé, tu nas plus de recherche en cours. Envoie un emplacement
-      pour en commencer une nouvelle :'
-    no_restaurant: Désolé, je n'ai pas trouvé de restaurant près de toi... Envoie
-      un nouvel emplacement ou cherche à Bordeaux, ma ville natale !
-    no_restaurant_selected: Désolé, tu n'as pas de restaurant sélectionné. Est-ce
-      que je peux t'aider à en trouver un ?
+    no_comprendo: Désolé, no comprendo 😕
+    no_current_order: >-
+      Désolé, tu n'as plus de recherche en cours. Envoie un emplacement pour en
+      commencer une nouvelle :
+    no_restaurant: >-
+      Désolé, je n'ai pas trouvé de restaurant près de toi... Envoie un nouvel
+      emplacement ou cherche à Bordeaux, ma ville natale !
+    no_restaurant_selected: >-
+      Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider
+      à en trouver un ?
     order:
       ask_payment_method:
         demo: Continuer en démo
@@ -34,41 +37,47 @@ fr:
         pay_no_card: Par carte bancaire
         text: Comment souhaites-tu payer ta commande ?
       cart:
-        add: "◁ Ajouter"
+        add: ◁ Ajouter
         ask_table: Tape le numéro de ta table ou sélectionne 'à emporter'
         change_table: Modifier la table
         remove: Retirer
         subtitle: Dernière chance pour modifier ta commande !
-        table: " - Table %{table}"
+        table: ' - Table %{table}'
         take_away: à emporter
-        title: 'Total : %{price}'
+        title: >-
+          Total : %{price}
       confirm:
-        demo: "Tu continues sur la démo, ta commande n'est pas vraiment en cours de
-          préparation \U0001F609."
+        demo: >-
+          Tu continues sur la démo, ta commande n'est pas vraiment en cours de
+          préparation \U0001F609.
         get_receipt: Obtenir le reçu
         itinerary: Itinéraire ▷
         paid: Ta commande est payée, elle part en cuisine !
-        password: "Ta commande est envoyée en cuisine, n'oublies pas de payer au comptoir
-          \U0001F609 !"
+        password: >-
+          Ta commande est envoyée en cuisine, n'oublies pas de payer au comptoir
+          \U0001F609 !
         ready: Ta commande sera prête dans %{preparation_time} min à %{ready_time}.
       menu_update_card:
-        go_to_account: 'Accède à ton compte sur mon site pour mettre à jour ta carte
-          :'
+        go_to_account: >-
+          Accède à ton compte sur mon site pour mettre à jour ta carte :
         my_account: Mon compte
       no_meals: Désolé, tu n'as rien à commander !
-      notify_delivered: "%{user_first_name}, tu as récupéré ta commande chez %{restaurant_name},
-        bon appétit ! N'hésite pas à me partager avec tes amis :"
-      notify_ready: Hey %{user_first_name}, ta commande chez %{restaurant_name} est
-        prête !
+      notify_delivered: >-
+        %{user_first_name}, tu as récupéré ta commande chez %{restaurant_name},
+        bon appétit ! N'hésite pas à me partager avec tes amis :
+      notify_ready: >-
+        Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !
       notify_served:
         table_button: Table %{table}
-        text: "%{user_first_name}, tu as été servi, bon appétit ! N'hésite pas à me
-          partager avec tes amis et à commander à nouveau à ta table :"
-      notify_service: Notify service
+        text: >-
+          %{user_first_name}, tu as été servi, bon appétit ! N'hésite pas à me
+          partager avec tes amis et à commander à nouveau à ta table :
+      notify_service: Hey %{user_first_name}, ta commande arrive!
       receipt:
         unknown_payment_method: Non disponible
-      restaurant_closed: Oups, %{restaurant_name} vient tout juste de fermer... Puis-je
-        t'aider à trouver un autre restaurant ?
+      restaurant_closed: >-
+        Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à
+        trouver un autre restaurant ?
       share: Essaye Yvon pour commander et payer tes consos sur ton smartphone !
       stripe_error:
         message: |-
@@ -76,8 +85,9 @@ fr:
           Veux tu mettre à jour ta carte ?
         update_card: MàJ ma carte
       update_card:
-        no_card: 'Tu n''as pas de carte à jour, ajoutes-en une sur mon site avant
-          de payer :'
+        no_card: >-
+          Tu n''as pas de carte à jour, ajoutes-en une sur mon site avant de
+          payer :
         pay: puis Payer
         update_card: Ajouter ma carte
       update_card_counter:
@@ -87,32 +97,28 @@ fr:
         pay: puis Confirmer
     restaurant:
       index:
-        displayable: "⚪ consultation"
+        displayable: ⚪ consultation
         enter: Entrer
-        off_duty: "⚪ service fermé"
-        on_duty: "\U0001F535 en service"
-        upvote: "+ 1 vote"
-        votable: "\U0001F5F3 vote pour moi"
-        vote_invitation: 'Vote pour pouvoir commander ici bientôt !
-
-'
-        vote_share: |2-
-
-          A voté ! Invite tes amis à voter
+        off_duty: ⚪ service fermé
+        on_duty: 🔵 en service
+        upvote: + 1 vote
+        votable: 🗳 vote pour moi
+        vote_invitation: Vote pour pouvoir commander ici bientôt !
+        vote_share: A voté ! Invite tes amis à voter
         votes:
           one: 1 vote
-          other: "%{count} votes"
+          other: '%{count} votes'
           zero: 0 votes
-      meal_restaurant_mismatch: 'Désolé, ce plat appartient au %{restaurant_name},
-        voici le bon menu :'
+      meal_restaurant_mismatch: >-
+        Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :
       menu:
-        back_to_map: "◁ Retour"
+        back_to_map: ◁ Retour
         order: J'envoie ma commande
         suggestion: 'Suggestion : '
         swipe_right: Regarder la carte ▷
       ready_in: prêt en
-      restaurant_mismatch: 'Désolé, ce menu appartient au %{restaurant_name}, voici
-        le bon menu :'
+      restaurant_mismatch: >-
+        Désolé, ce menu appartient au %{restaurant_name}, voici le bon menu :
       upvote:
         share: Vote pour commander chez %{restaurant} avec Yvon !
         text: |-
@@ -122,68 +128,7 @@ fr:
     shared_m_me: Hello Yvon
     swipe: Fais défiler à droite pour voir %{item} ▷
   devise:
-    confirmations:
-      new:
-        resend_confirmation_instructions: Resend confirmation instructions
-    mailer:
-      confirmation_instructions:
-        action: Action
-        greeting: Greeting
-        instruction: Instruction
-      password_change:
-        greeting: Greeting
-        message: Message
-      reset_password_instructions:
-        action: Action
-        greeting: Greeting
-        instruction: Instruction
-        instruction_2: Instruction 2
-        instruction_3: Instruction 3
-      unlock_instructions:
-        action: Action
-        greeting: Greeting
-        instruction: Instruction
-        message: Message
     messenger_provider: lien Messenger
-    passwords:
-      edit:
-        change_my_password: Change my password
-        change_your_password: Change your password
-        confirm_new_password: Confirm new password
-        new_password: New password
-      new:
-        forgot_your_password: Forgot your password
-        send_me_reset_password_instructions: Send me reset password instructions
-    registrations:
-      edit:
-        are_you_sure: Are you sure
-        cancel_my_account: Cancel my account
-        currently_waiting_confirmation_for_email: Currently waiting confirmation for
-          email
-        leave_blank_if_you_don_t_want_to_change_it: Leave blank if you don t want
-          to change it
-        title: Title
-        unhappy: Unhappy
-        update: Update
-        we_need_your_current_password_to_confirm_your_changes: We need your current
-          password to confirm your changes
-      new:
-        sign_up: Sign up
-    sessions:
-      new:
-        sign_in: Sign in
-    shared:
-      links:
-        back: Back
-        didn_t_receive_confirmation_instructions: Didn t receive confirmation instructions
-        didn_t_receive_unlock_instructions: Didn t receive unlock instructions
-        forgot_your_password: Forgot your password
-        sign_in: Sign in
-        sign_in_with_provider: Sign in with provider
-        sign_up: Sign up
-    unlocks:
-      new:
-        resend_unlock_instructions: Resend unlock instructions
   layouts:
     application:
       title: Yvon - Commande à emporter via Messenger
@@ -215,7 +160,8 @@ fr:
       location: Géolocalise toi
       menu: Consulte la carte et fais ton choix
       payment: Paye avec YVON plus besoin de monnaie
-      slogan_html: Commande et paye sur ton smartphone avec <span class='yvon-logo'>YVON</span>
+      slogan_html: >-
+        Commande et paye sur ton smartphone avec <span class='yvon-logo'>YVON</span>
       takeorder: Commande sur ton smartphone
     messenger_button:
       call_to_action_html: Je commande avec <span class='yvon-logo'>YVON</span>
@@ -256,7 +202,8 @@ fr:
       sign_out: Déconnexion
   users:
     credit_card:
-      confirm_destroy: En supprimant ta carte, tu ne pourras plus payer sur @HelloYvon.
+      confirm_destroy: >-
+        En supprimant ta carte, tu ne pourras plus payer sur @HelloYvon.
     show:
       add_restaurant: Ajouter un restaurant
       messenger: Messenger
