@@ -72,7 +72,7 @@ fr:
         text: >-
           %{user_first_name}, tu as été servi, bon appétit ! N'hésite pas à me
           partager avec tes amis et à commander à nouveau à ta table :
-      notify_service: Hey %{user_first_name}, ta commande arrive!
+      notify_service: Hey %{user_first_name}, ta commande arrive !
       receipt:
         unknown_payment_method: Non disponible
       restaurant_closed: >-
