@@ -131,7 +131,7 @@ fr:
     messenger_provider: lien Messenger
   layouts:
     application:
-      title: Yvon - Commande à emporter via Messenger
+      title: Yvon - Commande et paye via Messenger
   orders:
     button_delivered:
       delivered: LIVRÉ
