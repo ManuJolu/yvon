@@ -1,8 +1,8 @@
 <h3>restaurant_<%= @restaurant.id %></h3>
 <%= image_tag @restaurant_messenger_code %>
-<div class="row">
+<div class="row text-center">
   <% @table_messenger_code.each do |k, v| %>
-    <div class="col-md-4">
+    <div class="col-md-6 col-lg-4">
       <h3><%= k %></h3>
       <%= image_tag v %>
     </div>
