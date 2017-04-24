@@ -18,4 +18,8 @@ class Admin::RestaurantPolicy < ApplicationPolicy
   def ubereats_update?
     update?
   end
+
+  def messenger_codes?
+    update?
+  end
 end

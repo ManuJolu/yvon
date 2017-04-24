@@ -37,6 +37,9 @@ Rails.application.routes.draw do
         get '/deliveroo_update' => 'restaurants#deliveroo_update'
         get '/foodora_update' => 'restaurants#foodora_update'
         get '/ubereats_update' => 'restaurants#ubereats_update'
+        member do
+          get '/messenger_codes' => 'restaurants#messenger_codes'
+        end
       end
     end
   end

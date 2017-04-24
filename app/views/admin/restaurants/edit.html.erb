@@ -30,15 +30,17 @@
     <% end %>
   </div>
 
-  <h3>restaurant_<%= @restaurant.id %></h3>
-  <%= image_tag @restaurant_messenger_code %>
-  <div class="row">
-    <% @table_messenger_code.each do |k, v| %>
-      <div class="col-md-4">
-        <h3><%= k %></h3>
-        <%= image_tag v %>
-      </div>
-    <% end -%>
+  <div class="col-sm-10 col-sm-offset-1">
+    <h4>Affichage des Messenger Codes (12 tables à partir de l'index)</h4>
+
+    <%= simple_form_for :search, url: messenger_codes_admin_restaurant_path(@restaurant), method: :get, remote: true do |f| %>
+      <%= f.input :start_index, label: 'Index de départ', as: :integer, input_html: { value: 1 } %>
+      <%= f.submit 'ça tourne...', value: 'Lancer les requêtes', class: 'btn btn-danger' %>
+    <% end %>
+    <br>
+  </div>
+
+  <div id="messengerCodes">
   </div>
 
 </div>

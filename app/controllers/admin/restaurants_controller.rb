@@ -1,33 +1,7 @@
 class Admin::RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:edit, :update]
+  before_action :set_restaurant, only: [:edit, :update, :messenger_codes]
 
   def edit
-    @restaurant_messenger_code = JSON.parse(RestClient.post(
-      "https://graph.facebook.com/v2.6/me/messenger_codes?access_token=#{ENV['YVON_ACCESS_TOKEN']}",
-      {
-        type: "standard",
-        data: {
-          ref:"restaurant_#{@restaurant.id}"
-        },
-        image_size: 400
-      }.to_json,
-      {content_type: :json, accept: :json}
-    ))['uri']
-
-    @table_messenger_code = {}
-    (1..30).each do |table_number|
-      @table_messenger_code["table_#{table_number}"] = JSON.parse(RestClient.post(
-      "https://graph.facebook.com/v2.6/me/messenger_codes?access_token=#{ENV['YVON_ACCESS_TOKEN']}",
-      {
-        type: "standard",
-        data: {
-          ref:"restaurant_#{@restaurant.id}_table_#{table_number}"
-        },
-        image_size: 400
-      }.to_json,
-      {content_type: :json, accept: :json}
-    ))['uri']
-    end
   end
 
   def update
@@ -76,6 +50,41 @@ class Admin::RestaurantsController < ApplicationController
       flash[:alert] = "Mise à jour UberEATS impossible."
     end
     redirect_to edit_admin_restaurant_path(@restaurant)
+  end
+
+  def messenger_codes
+    @restaurant_messenger_code = JSON.parse(RestClient.post(
+      "https://graph.facebook.com/v2.6/me/messenger_codes?access_token=#{ENV['YVON_ACCESS_TOKEN']}",
+      {
+        type: "standard",
+        data: {
+          ref:"restaurant_#{@restaurant.id}"
+        },
+        image_size: 400
+      }.to_json,
+      {content_type: :json, accept: :json}
+    ))['uri']
+
+    start_index = params[:search][:start_index].to_i
+
+    @table_messenger_code = {}
+    (start_index..start_index + 11).each do |table_number|
+      @table_messenger_code["table_#{table_number}"] = JSON.parse(RestClient.post(
+        "https://graph.facebook.com/v2.6/me/messenger_codes?access_token=#{ENV['YVON_ACCESS_TOKEN']}",
+        {
+          type: "standard",
+          data: {
+            ref:"restaurant_#{@restaurant.id}_table_#{table_number}"
+          },
+          image_size: 400
+        }.to_json,
+        {content_type: :json, accept: :json}
+      ))['uri']
+    end
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
