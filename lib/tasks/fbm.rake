@@ -49,7 +49,7 @@ namespace :fbm do
             {
               type: "postback",
               title: "👋 Hello Yvon",
-              payload: "start"
+              payload: "hello"
             },
             {
               type: "postback",
@@ -70,7 +70,7 @@ namespace :fbm do
             {
               type: "postback",
               title: "👋 Hello Yvon",
-              payload: "start"
+              payload: "hello"
             },
             {
               type: "postback",

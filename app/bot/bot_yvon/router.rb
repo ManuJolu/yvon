@@ -93,8 +93,10 @@ class BotYvon::Router
         sit_at_table($LAST_MATCH_INFO, start: true)
         return
       end
-      messages_controller.hello
+      messages_controller.hello(start: true)
       return
+    when 'hello'
+      messages_controller.hello
     when 'map'
       coordinates = [user.current_order&.latitude, user.current_order&.longitude]
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
