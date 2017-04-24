@@ -97,6 +97,7 @@ class BotYvon::Router
       return
     when 'hello'
       messages_controller.hello
+      return
     when 'map'
       coordinates = [user.current_order&.latitude, user.current_order&.longitude]
       messages_controller.no_restaurant unless restaurants_controller.index(coordinates)
