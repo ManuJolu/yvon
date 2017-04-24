@@ -40,7 +40,7 @@ class BotYvon::Router
     end
 
     case message.text
-    when /hello/i, /bonjour/i, /bonsoir/i, /coucou/i, /salut/i
+    when /hello/i, /bonjour/i, /bonsoir/i, /coucou/i, /salut/i, /wesh/i
       messages_controller.hello(keyword: $LAST_MATCH_INFO[0])
     when /help/i, /aide/i
       messages_controller.hello

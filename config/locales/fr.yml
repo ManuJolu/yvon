@@ -114,10 +114,10 @@ fr:
       meal_restaurant_mismatch: >-
         Désolé, ce plat appartient au %{restaurant_name}, voici la bonne carte :
       menu:
-        back_to_map: ◁ Retour
+        back_to_map: '.'
         order: J'envoie ma commande
         suggestion: 'Suggestion : '
-        go_to_category: '%{category} ▽'
+        go_to_category: '▽ %{category}'
       ready_in: prêt en
       restaurant_mismatch: >-
         Désolé, ce menu appartient au %{restaurant_name}, voici la bonne carte

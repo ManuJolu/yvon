@@ -141,8 +141,11 @@ class BotYvon::RestaurantsView
       type: "postback",
       payload: "cart"
     }
-    buttons << back_button unless params[:ordered_meals?]
-    buttons << order_button if params[:ordered_meals?]
+    if params[:ordered_meals?]
+    buttons << order_button
+    else
+    buttons << back_button
+    end
     element[:buttons] = buttons
 
     elements << element
