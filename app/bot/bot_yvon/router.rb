@@ -83,17 +83,16 @@ class BotYvon::Router
   end
 
   def handle_postback
-    case postback&.referral&.ref
-    when /\Arestaurant_(?<id>\d+)\z/
-      sit_at_table($LAST_MATCH_INFO, restaurant_only: true)
-      return
-    when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
-      sit_at_table($LAST_MATCH_INFO)
-      return
-    end
-
     case postback.payload
     when 'start'
+      case postback&.referral&.ref
+      when /\Arestaurant_(?<id>\d+)\z/
+        sit_at_table($LAST_MATCH_INFO, start: true, restaurant_only: true)
+        return
+      when /\Arestaurant_(?<id>\d+)_table_(?<table>\d+)\z/
+        sit_at_table($LAST_MATCH_INFO, start: true)
+        return
+      end
       messages_controller.hello
       return
     when 'map'
@@ -188,7 +187,12 @@ class BotYvon::Router
 
   def sit_at_table(last_match_info, params = {})
     restaurant_id = last_match_info['id'].to_i
-    table = last_match_info['table'].to_i unless params[:restaurant_only]
+    if params[:restaurant_only]
+      messages_controller.hello(start: params[:start], restaurant_id: restaurant_id)
+    else
+      table = last_match_info['table'].to_i
+      messages_controller.hello(start: params[:start], table: table)
+    end
     orders_controller.create(restaurant_id: restaurant_id, table: table)
     restaurants_controller.show(restaurant_id)
   end

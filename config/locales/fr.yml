@@ -2,19 +2,14 @@
 fr:
   bot:
     else: Dis 'Hello' pour commencer une nouvelle recherche
-    hello: |-
+    hello_01_new: >
+      %{keyword} %{username}, bienvenue parmi mes nouveaux clients !
+    hello_02_returning: >
       %{keyword} %{username}, ça fait plaisir de te revoir !
-      Envoie-moi ton emplacement que je puisse prendre ta commande 😎
+    hello_11_search: Envoie-moi ton emplacement que je puisse prendre ta commande 😎
+    hello_12_restaurant: Je prends ta commande au %{restaurant} 😎
+    hello_13_table: Je prends ta commande à la table %{table} 😎
     hello_default_keyword: Hello
-    hello_start: |-
-      %{keyword} %{username}, bienvenue parmi mes nouveaux clients !
-      Envoie-moi ton emplacement que je puisse prendre ta commande 😎
-    hello_start_with_table: |-
-      %{keyword} %{username}, bienvenue parmi mes nouveaux clients !
-      Je prends ta commande à la table %{table_number} 😎
-    hello_with_table: |-
-      %{keyword} %{username}, ça fait plaisir de te revoir !
-      Je prends ta commande à la table %{table_number} 😎
     meal:
       get_option:
         choose_option: Tu peux préciser ?

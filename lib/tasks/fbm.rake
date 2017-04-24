@@ -5,7 +5,7 @@ namespace :fbm do
       greeting:[
         {
           locale: "default",
-          text: "Hello it's Yvon"
+          text: "Hello {{user_first_name}}, shall we start?"
         },
         {
           locale: "fr_FR",
@@ -53,12 +53,12 @@ namespace :fbm do
             },
             {
               type: "postback",
-              title: "💳 Mets à jour ta carte",
+              title: "💳 Update your card",
               payload: "menu_update_card"
             },
             {
               type: "postback",
-              title: "🎁 Partage",
+              title: "🎁 Share",
               payload: "share"
             }
           ]
@@ -101,11 +101,11 @@ namespace :fbm do
       greeting:[
         {
           locale: "default",
-          text: "Hello it's Aline"
+          text: "Hello {{user_first_name}}, shall we start?"
         },
         {
           locale: "fr_FR",
-          text: "Salut {{user_first_name}}, je m'appelle Aline"
+          text: "Salut {{user_first_name}}, on y va ?"
         }
       ]
     }, access_token: ENV['ALINE_ACCESS_TOKEN'])

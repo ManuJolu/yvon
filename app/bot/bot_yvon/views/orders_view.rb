@@ -42,7 +42,7 @@ class BotYvon::OrdersView
     elements = [
       {
         title: title,
-        image_url: cl_image_path('cash_till.jpg', width: 382, height: 200, crop: :fill),
+        image_url: cl_image_path('cash_till.png', width: 382, height: 200, crop: :fill),
         # subtitle: I18n.t('bot.order.cart.subtitle'),
         buttons: buttons
       }

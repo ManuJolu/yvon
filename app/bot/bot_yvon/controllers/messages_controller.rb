@@ -4,6 +4,7 @@ class BotYvon::MessagesController
   end
 
   def hello(options = {})
+    options[:restaurant] = Restaurant.find(options[:restaurant_id]) if options[:restaurant_id]
     view.hello(options)
   end
 

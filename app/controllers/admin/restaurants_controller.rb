@@ -15,7 +15,7 @@ class Admin::RestaurantsController < ApplicationController
     ))['uri']
 
     @table_messenger_code = {}
-    (1..12).each do |table_number|
+    (1..30).each do |table_number|
       @table_messenger_code["table_#{table_number}"] = JSON.parse(RestClient.post(
       "https://graph.facebook.com/v2.6/me/messenger_codes?access_token=#{ENV['YVON_ACCESS_TOKEN']}",
       {
