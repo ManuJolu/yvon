@@ -36,7 +36,7 @@ fr:
         demo: Continuer en démo
         pay_card: Par carte ••••%{last4}
         pay_no_card: Par carte bancaire
-        text: C'est toi qui régale ? 💰💶💰
+        text: C'est toi qui régales ? 💰💶💰
       cart:
         add: ◁ J'ajouterais bien...
         ask_table: Envoie-moi ton numéro de table
