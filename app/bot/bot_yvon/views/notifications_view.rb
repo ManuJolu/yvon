@@ -46,11 +46,11 @@ class BotYvon::NotificationsView
                       elements: [
                         {
                           title: I18n.t('bot.order.share'),
-                          image_url: cl_image_path("yvon_messenger_code.png", width: 400, height: 400, crop: :fill),
+                          image_url: cl_image_path("yvon_messenger_code.png", width: 400, crop: :scale),
                           buttons: [
                             {
                               type: 'web_url',
-                              title: "Hello Yvon",
+                              title: I18n.t('bot.shared_m_me'),
                               url: "http://m.me/HelloYvon?ref=shared"
                             }
                           ]
@@ -78,7 +78,7 @@ class BotYvon::NotificationsView
           type: 'template',
           payload: {
             template_type: 'button',
-            text: I18n.t('bot.order.notify_served.text', user_first_name: user.first_name),
+            text: I18n.t('bot.order.notify_served.text'),
             buttons: [
               {
                 type: 'element_share',
@@ -91,11 +91,11 @@ class BotYvon::NotificationsView
                       elements: [
                         {
                           title: I18n.t('bot.order.share'),
-                          image_url: cl_image_path("yvon_messenger_code.png", width: 400, height: 400, crop: :fill),
+                          image_url: cl_image_path("yvon_messenger_code.png", width: 400, crop: :scale),
                           buttons: [
                             {
                               type: 'web_url',
-                              title: "Hello Yvon",
+                              title: I18n.t('bot.shared_m_me'),
                               url: "http://m.me/HelloYvon?ref=shared"
                             }
                           ]

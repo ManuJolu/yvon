@@ -3,27 +3,33 @@ fr:
   bot:
     else: Dis 'Hello' pour commencer une nouvelle recherche
     hello: |-
-      %{keyword} %{username} ! Où puis-je t'aider à trouver un restaurant ?
-      Envoie un emplacement ou cherche à Bordeaux, ma ville natale !
-    hello_default_keyword: Salut
+      %{keyword} %{username}, ça fait plaisir de te revoir !
+      Envoie-moi ton emplacement que je puisse prendre ta commande 😎
+    hello_default_keyword: Hello
+    hello_start: |-
+      %{keyword} %{username}, bienvenue parmi mes nouveaux clients !
+      Envoie-moi ton emplacement que je puisse prendre ta commande 😎
+    hello_start_with_table: |-
+      %{keyword} %{username}, bienvenue parmi mes nouveaux clients !
+      Je prends ta commande à la table %{table_number} 😎
+    hello_with_table: |-
+      %{keyword} %{username}, ça fait plaisir de te revoir !
+      Je prends ta commande à la table %{table_number} 😎
     meal:
       get_option:
-        choose_option: >-
-          Choisis ton option :
+        choose_option: Tu peux préciser ?
       index:
         back: ◁ Retour
         back_image: retour
-        back_message: "\n "
         menu: ◁ Retour
-        no_thanks: Pas de %{meal_category} pour moi
+        no_thanks: Pas de %{meal_category} finalement
         no_thanks_image: non%20merci
-        no_thanks_message: Je ferais mieux de surveiller ma ligne
-        pick: Commander
+        pick: Je veux ça !
         starting_at: à partir de %{price}
     no_comprendo: Désolé, no comprendo 😕
     no_current_order: >-
       Désolé, tu n'as plus de recherche en cours. Envoie un emplacement pour en
-      commencer une nouvelle :
+      commencer une nouvelle
     no_restaurant: >-
       Désolé, je n'ai pas trouvé de restaurant près de toi... Envoie un nouvel
       emplacement ou cherche à Bordeaux, ma ville natale !
@@ -35,50 +41,51 @@ fr:
         demo: Continuer en démo
         pay_card: Par carte ••••%{last4}
         pay_no_card: Par carte bancaire
-        text: Comment souhaites-tu payer ta commande ?
+        text: C'est toi qui régale ? 💰💶💰
       cart:
-        add: ◁ Ajouter
-        ask_table: Tape le numéro de ta table ou sélectionne 'à emporter'
-        change_table: Modifier la table
+        add: ◁ J'ajouterais bien...
+        ask_table: Envoie-moi ton numéro de table
+        change_table: J'ai changé de table
         remove: Retirer
-        subtitle: Dernière chance pour modifier ta commande !
+        text: Je récapitule, dernière chance pour modifier ta commande !
         table: ' - Table %{table}'
         take_away: à emporter
         title: >-
           Total : %{price}
       confirm:
-        demo: >-
-          Tu continues sur la démo, ta commande n'est pas vraiment en cours de
-          préparation \U0001F609.
-        get_receipt: Obtenir le reçu
+        demo: |-
+          Tu es en démo ✌
+          Présente moi autour de toi et fais moi signe pour ta future commande 😉
+        get_receipt: J'ai besoin du reçu
         itinerary: Itinéraire ▷
-        paid: Ta commande est payée, elle part en cuisine !
+        paid: |-
+          C'est réglé !
+          Je m'occupe de tout, profites 😎
         password: >-
           Ta commande est envoyée en cuisine, n'oublies pas de payer au comptoir
-          \U0001F609 !
+          😉 !
         ready: Ta commande sera prête dans %{preparation_time} min à %{ready_time}.
       menu_update_card:
-        go_to_account: >-
-          Accède à ton compte sur mon site pour mettre à jour ta carte :
+        go_to_account: Accède à ton compte sur mon site pour mettre à jour ta carte
         my_account: Mon compte
       no_meals: Désolé, tu n'as rien à commander !
       notify_delivered: >-
         %{user_first_name}, tu as récupéré ta commande chez %{restaurant_name},
-        bon appétit ! N'hésite pas à me partager avec tes amis :
+        bon appétit ! N'hésite pas à me partager avec tes amis
       notify_ready: >-
         Hey %{user_first_name}, ta commande chez %{restaurant_name} est prête !
       notify_served:
-        table_button: Table %{table}
-        text: >-
-          %{user_first_name}, tu as été servi, bon appétit ! N'hésite pas à me
-          partager avec tes amis et à commander à nouveau à ta table :
-      notify_service: Hey %{user_first_name}, ta commande arrive !
+        table_button: ☝ table %{table}
+        text: |-
+          J'espère que tu apprécies le service 😉
+          Partage et fais moi signe si tu as besoin d'autre chose
+      notify_service: Ça arrive !
       receipt:
         unknown_payment_method: Non disponible
       restaurant_closed: >-
         Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à
         trouver un autre restaurant ?
-      share: Essaye Yvon pour commander et payer tes consos sur ton smartphone !
+      share: Essaye Yvon pour commander et payer depuis ta table !
       stripe_error:
         message: |-
           Oups, il y a eu une erreur : %{error_message}.
@@ -86,14 +93,14 @@ fr:
         update_card: MàJ ma carte
       update_card:
         no_card: >-
-          Tu n''as pas de carte à jour, ajoutes-en une sur mon site avant de
-          payer :
-        pay: puis Payer
-        update_card: Ajouter ma carte
+          Tu n'as pas de carte à jour, ajoutes-en une sur mon site avant de
+          régler :
+        pay: et je règle
+        update_card: J'ajoute ma carte
       update_card_counter:
         no_card: |-
           Tu dois avoir une carte à jour pour pouvoir commander avec paiement au comptoir.
-          Ajoutes-en une sur mon site avant de confirmer la commande :
+          Ajoutes-en une sur mon site avant de confirmer la commande
         pay: puis Confirmer
     restaurant:
       index:
@@ -110,28 +117,28 @@ fr:
           other: '%{count} votes'
           zero: 0 votes
       meal_restaurant_mismatch: >-
-        Désolé, ce plat appartient au %{restaurant_name}, voici le bon menu :
+        Désolé, ce plat appartient au %{restaurant_name}, voici la bonne carte :
       menu:
         back_to_map: ◁ Retour
         order: J'envoie ma commande
         suggestion: 'Suggestion : '
-        swipe_right: Regarder la carte ▷
+        go_to_category: '%{category} ▽'
       ready_in: prêt en
       restaurant_mismatch: >-
-        Désolé, ce menu appartient au %{restaurant_name}, voici le bon menu :
+        Désolé, ce menu appartient au %{restaurant_name}, voici la bonne carte
       upvote:
         share: Vote pour commander chez %{restaurant} avec Yvon !
         text: |-
           A voté !
-          Invite tes amis à voter pour %{restaurant} :
-    share: Essaye Yvon pour trouver ton fooding via Messenger !
+          Invite tes amis à voter pour %{restaurant}
+    share: Essaye Yvon pour commander et payer depuis ta table !
     shared_m_me: Hello Yvon
     swipe: Fais défiler à droite pour voir %{item} ▷
   devise:
     messenger_provider: lien Messenger
   layouts:
     application:
-      title: Yvon - Commande et paye via Messenger
+      title: Yvon - Commande et paye depuis ta table
   orders:
     button_delivered:
       delivered: LIVRÉ
@@ -161,7 +168,7 @@ fr:
       menu: Consulte la carte et fais ton choix
       payment: Paye avec YVON plus besoin de monnaie
       slogan_html: >-
-        Commande et paye sur ton smartphone avec <span class='yvon-logo'>YVON</span>
+        Commande et paye depuis ta table avec <span class='yvon-logo'>YVON</span>
       takeorder: Commande sur ton smartphone
     messenger_button:
       call_to_action_html: Je commande avec <span class='yvon-logo'>YVON</span>

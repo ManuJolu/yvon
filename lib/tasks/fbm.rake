@@ -9,7 +9,7 @@ namespace :fbm do
         },
         {
           locale: "fr_FR",
-          text: "Salut {{user_first_name}}, je m'appelle Yvon"
+          text: "Hello {{user_first_name}}, on y va ?"
         }
       ]
     }, access_token: ENV['YVON_ACCESS_TOKEN'])
@@ -48,34 +48,18 @@ namespace :fbm do
           call_to_actions: [
             {
               type: "postback",
-              title: "🍴 Nouvelle recherche",
+              title: "👋 Hello Yvon",
               payload: "start"
             },
             {
               type: "postback",
-              title: "💳 Mettre à jour ma carte",
+              title: "💳 Mets à jour ta carte",
               payload: "menu_update_card"
             },
             {
-              type: "nested",
+              type: "postback",
               title: "🎁 Partage",
-              call_to_actions: [
-                {
-                  type: "postback",
-                  title: "Partage Yvon avec tes amis",
-                  payload: "share"
-                },
-                {
-                  type: "web_url",
-                  title: "Suis moi sur Facebook",
-                  url: "https://www.facebook.com/HelloYvon/"
-                },
-                {
-                  type: "web_url",
-                  title: "www.hello-yvon.com",
-                  url: "http://www.hello-yvon.com/"
-                }
-              ]
+              payload: "share"
             }
           ]
         },
@@ -85,34 +69,18 @@ namespace :fbm do
           call_to_actions: [
             {
               type: "postback",
-              title: "🍴 Nouvelle recherche",
+              title: "👋 Hello Yvon",
               payload: "start"
             },
             {
               type: "postback",
-              title: "💳 Mettre à jour ma carte",
+              title: "💳 Mets à jour ta carte",
               payload: "menu_update_card"
             },
             {
-              type: "nested",
+              type: "postback",
               title: "🎁 Partage",
-              call_to_actions: [
-                {
-                  type: "postback",
-                  title: "Partage Yvon avec tes amis",
-                  payload: "share"
-                },
-                {
-                  type: "web_url",
-                  title: "Suis moi sur Facebook",
-                  url: "https://www.facebook.com/HelloYvon/"
-                },
-                {
-                  type: "web_url",
-                  title: "www.hello-yvon.com",
-                  url: "http://www.hello-yvon.com/"
-                }
-              ]
+              payload: "share"
             }
           ]
         },

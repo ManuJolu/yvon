@@ -105,7 +105,7 @@ class BotYvon::RestaurantsView
     )
 
     message.reply(
-      text: I18n.t('bot.swipe', item: 'les restaurants')
+      text: I18n.t('bot.swipe', item: 'mes partenaires')
     )
 
     message.reply(
@@ -123,7 +123,7 @@ class BotYvon::RestaurantsView
     elements = []
     subtitle = ""
     subtitle += "#{restaurant.fb_overall_star_rating} #{restaurant.star_rating} - #{restaurant.fb_fan_count} fans\n" if restaurant.fb_overall_star_rating.present?
-    subtitle += "#{restaurant.restaurant_category.name} - #{I18n.t('bot.restaurant.ready_in')} #{restaurant.preparation_time} min\n#{I18n.t('bot.restaurant.menu.swipe_right')}"
+    subtitle += "#{restaurant.restaurant_category.name} - #{I18n.t('bot.restaurant.ready_in')} #{restaurant.preparation_time} min"
     element = {
       title: restaurant.name,
       image_url: cl_image_path_with_default(restaurant.photo&.path, width: 382, height: 200, crop: :fill),
@@ -154,7 +154,7 @@ class BotYvon::RestaurantsView
         subtitle: ((I18n.t('bot.restaurant.menu.suggestion') + meal_category.active_meal.name) if meal_category.active_meal.present?),
         buttons: [
           {
-              title: "#{meal_category.name} ▷",
+              title: I18n.t('bot.restaurant.menu.go_to_category', category: meal_category.name),
               type: "postback",
               payload: "meal_category_#{meal_category.id}"
           }

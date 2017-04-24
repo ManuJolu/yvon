@@ -31,7 +31,7 @@ class BotYvon::MessagesView
         elements: [
           {
             title: I18n.t('bot.share'),
-            image_url: cl_image_path("yvon_messenger_code.png", width: 400, height: 400, crop: :fill),
+            image_url: cl_image_path("yvon_messenger_code.png", width: 400, crop: :scale),
             buttons: [
               {
                 type: 'element_share',
@@ -44,7 +44,7 @@ class BotYvon::MessagesView
                       elements: [
                         {
                           title: I18n.t('bot.share'),
-                          image_url: cl_image_path("yvon_messenger_code.png", width: 400, height: 400, crop: :fill),
+                          image_url: cl_image_path("yvon_messenger_code.png", width: 400, crop: :scale),
                           buttons: [
                             {
                               type: 'web_url',
