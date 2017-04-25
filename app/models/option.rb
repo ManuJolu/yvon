@@ -9,12 +9,9 @@ class Option < ApplicationRecord
   monetize :price_cents, allow_nil: false, numericality: { greater_than_or_equal_to: 0 }
 
   scope :are_active, -> { where(active: true) }
+  scope :select_active, -> { select { |option| option.active} }
 
   def to_label
-    if price > 0
-      "#{name} (+ #{humanized_money_with_symbol price})"
-    else
-      name
-    end
+    price > 0 ? "#{name} (+ #{humanized_money_with_symbol price})" : name
   end
 end

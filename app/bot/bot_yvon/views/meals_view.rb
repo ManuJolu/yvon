@@ -6,8 +6,9 @@ class BotYvon::MealsView
 
   def index(meals, params = {})
     meals = meals.map do |meal|
-      price = meal.price
-      price = I18n.t('bot.meal.index.starting_at', price: meal.options.first.price) if meal.price_cents == 0
+      subtitle = meal.price_cents > 0 ? "💰 #{meal.price}\n" : ''
+      subtitle += "#{meal.display_options}\n" if meal.options.any?
+      subtitle += "#{meal.description}"
       buttons = [
         {
           type: 'postback',
@@ -18,7 +19,7 @@ class BotYvon::MealsView
       result = {
         title: meal.name,
         image_url: cl_image_path_with_second(meal.photo&.path, params[:meal_category].photo&.path, width: 382, height: 200, crop: :fill),
-        subtitle: "#{price}\n#{meal.description}"
+        subtitle: subtitle
       }
       result[:buttons] = buttons if params[:on_duty]
       result

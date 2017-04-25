@@ -2,9 +2,17 @@ class OptionDecorator < Draper::Decorator
   delegate_all
 
   def to_s
-    str = object.to_label
-    str += " (inact.)" unless object.active
+    str = to_label
+    str += " (inact.)" unless active
     str
+  end
+
+  def signed_price
+    to_label.capitalize
+  end
+
+  def unsigned_price
+    "#{name.capitalize} : #{price}"
   end
 
   def price
