@@ -37,7 +37,7 @@ class BotAline::NotificationsView
         }
       },
       access_token: ENV['ALINE_ACCESS_TOKEN']
-    )
+    ) rescue nil
   end
 
   def notify_duty(user, duty)
@@ -51,7 +51,7 @@ class BotAline::NotificationsView
         }
       },
       access_token: ENV['ALINE_ACCESS_TOKEN']
-    )
+    ) rescue nil
   end
 
   def notify_preparation_time(user, preparation_time)
@@ -65,7 +65,7 @@ class BotAline::NotificationsView
         }
       },
       access_token: ENV['ALINE_ACCESS_TOKEN']
-    )
+    ) rescue nil
   end
 
   def logged_out(logged_out_user, restaurant, user)
@@ -79,6 +79,6 @@ class BotAline::NotificationsView
         }
       },
       access_token: ENV['ALINE_ACCESS_TOKEN']
-    )
+    ) rescue nil
   end
 end

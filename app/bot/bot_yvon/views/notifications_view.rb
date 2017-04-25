@@ -8,7 +8,7 @@ class BotYvon::NotificationsView
         text: I18n.t('bot.order.notify_ready', user_first_name: user.first_name,restaurant_name: order.restaurant.name)
       }},
       access_token: ENV['YVON_ACCESS_TOKEN']
-    )
+    ) rescue nil
   end
 
   def notify_service(order, user)
@@ -20,7 +20,7 @@ class BotYvon::NotificationsView
         text: I18n.t('bot.order.notify_service', user_first_name: user.first_name,restaurant_name: order.restaurant.name)
       }},
       access_token: ENV['YVON_ACCESS_TOKEN']
-    )
+    ) rescue nil
   end
 
   def notify_delivered(order, user)
@@ -65,7 +65,7 @@ class BotYvon::NotificationsView
         }
       }},
       access_token: ENV['YVON_ACCESS_TOKEN']
-    )
+    ) rescue nil
   end
 
   def notify_served(order, user)
@@ -115,6 +115,6 @@ class BotYvon::NotificationsView
         }
       }},
       access_token: ENV['YVON_ACCESS_TOKEN']
-    )
+    ) rescue nil
   end
 end
