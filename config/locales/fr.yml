@@ -33,8 +33,10 @@ fr:
     order:
       ask_payment_method:
         demo: Continuer en démo
-        pay_card: Par carte ••••%{last4}
-        pay_no_card: Par carte bancaire
+        pay_card: >-
+          OK : carte ••••%{last4}
+        pay_no_card: >-
+          OK : carte bancaire
         text: C'est toi qui régales ? 💰💶💰
       cart:
         add: ◁ J'ajouterais bien...
@@ -126,7 +128,7 @@ fr:
           A voté !
           Invite tes amis à voter pour %{restaurant}
     share: Essaye Yvon pour commander et payer depuis ta table !
-    shared_m_me: Hello Yvon
+    shared_m_me: 👋 Hello Yvon
     swipe: Fais défiler à droite pour voir %{item} ▷
   devise:
     messenger_provider: lien Messenger
