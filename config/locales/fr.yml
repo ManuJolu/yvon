@@ -25,7 +25,7 @@ fr:
       Ohé, je ne sais plus où tu es 👀
       Envoie-moi ton emplacement afin que je puisse prendre ta commande 😎
     no_restaurant: |-
-      Je ne trouve pas de partenaire ouvert autour de toi 👀
+      Je ne trouve pas de partenaire ouvert autour de toi 🔍
       Envoie-moi un autre emplacement ou essaye au Harriet's, mon QG à Bordeaux !
     no_restaurant_selected: |-
       Ohé, je ne sais plus où tu es 👀
@@ -51,7 +51,7 @@ fr:
       confirm:
         demo: |-
           Tu es en démo ✌
-          Présente moi autour de toi et fais moi signe pour ta future commande 😉
+          Partage 🎁 et fais moi signe pour ta future commande 😉
         get_receipt: J'ai besoin du reçu
         itinerary: Itinéraire ▷
         paid: |-
@@ -64,7 +64,7 @@ fr:
       menu_update_card:
         go_to_account: Accède à ton compte sur mon site pour mettre à jour ta carte
         my_account: Mon compte
-      no_meals: Désolé, tu n'as rien à commander !
+      no_meals: Tu n'as rien à commander 🛒
       notify_delivered: >-
         %{user_first_name}, tu as récupéré ta commande chez %{restaurant_name},
         bon appétit ! N'hésite pas à me partager avec tes amis
@@ -74,17 +74,17 @@ fr:
         table_button: ☝ table %{table}
         text: |-
           J'espère que tu apprécies le service 😉
-          Partage et fais moi signe si tu as besoin d'autre chose
+          Partage 🎁 et fais moi signe si tu as besoin d'autre chose
       notify_service: Ça arrive !
       receipt:
         unknown_payment_method: Non disponible
-      restaurant_closed: >-
-        Oups, %{restaurant_name} vient tout juste de fermer... Puis-je t'aider à
-        trouver un autre restaurant ?
+      restaurant_closed: |-
+        Oups, %{restaurant_name} vient tout juste de fermer 🚪
+        Je peux t'aider à trouver un autre partenaire ?
       share: Essaye Yvon pour commander et payer depuis ta table !
       stripe_error:
         message: |-
-          Oups, il y a eu une erreur : %{error_message}.
+          Il y a eu une erreur : %{error_message}.
           Veux tu mettre à jour ta carte ?
         update_card: MàJ ma carte
       update_card:
@@ -97,7 +97,7 @@ fr:
         no_card: |-
           Tu dois avoir une carte à jour pour pouvoir commander avec paiement au comptoir.
           Ajoutes-en une sur mon site avant de confirmer la commande
-        pay: puis Confirmer
+        pay: et je confirme
     restaurant:
       index:
         displayable: ⚪ consultation
@@ -113,7 +113,7 @@ fr:
           other: '%{count} votes'
           zero: 0 votes
       meal_restaurant_mismatch: >-
-        Désolé, ce plat appartient au %{restaurant_name}, voici la bonne carte :
+        Désolé, ce plat appartient au %{restaurant_name}, voici la bonne carte
       menu:
         back_to_map: '.'
         order: J'envoie ma commande
@@ -162,7 +162,7 @@ fr:
       cool: Yvon faire simple !
       location: Géolocalise toi
       menu: Consulte la carte et fais ton choix
-      payment: Paye avec YVON plus besoin de monnaie
+      payment: Paye avec Yvon, plus besoin de monnaie
       slogan_html: >-
         Commande et paye depuis ta table avec <span class='yvon-logo'>YVON</span>
       takeorder: Commande sur ton smartphone
@@ -205,8 +205,10 @@ fr:
       sign_out: Déconnexion
   users:
     credit_card:
+      add_card: Ajouter ma carte
       confirm_destroy: >-
-        En supprimant ta carte, tu ne pourras plus payer sur @HelloYvon.
+        En supprimant ta carte, tu ne pourras plus payer avec @HelloYvon.
+      update_card: Mettre à jour ma carte
     show:
       add_restaurant: Ajouter un restaurant
       messenger: Messenger

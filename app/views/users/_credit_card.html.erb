@@ -9,8 +9,8 @@
         data-name="Yvon"
         data-image=<%= image_path 'yvon_avatar_128.png' %>
         data-email="<%= user.email %>"
-        data-label="Mettre à jour ma carte"
-        data-panel-label="Mettre à jour ma carte"
+        data-label="<%= t('.update_card') %>"
+        data-panel-label="<%= t('.update_card') %>"
         data-allow-remember-me=false
         data-locale="auto"></script>
 
@@ -28,8 +28,8 @@
         data-name="Yvon"
         data-image=<%= image_path 'yvon_avatar_128.png' %>
         data-email="<%= user.email %>"
-        data-label="Ajouter ma carte"
-        data-panel-label="Ajouter ma carte"
+        data-label="<%= t('.add_card') %>"
+        data-panel-label="<%= t('.add_card') %>"
         data-allow-remember-me=false
         data-locale="auto"></script>
     <% end %>
