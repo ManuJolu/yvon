@@ -1,7 +1,136 @@
 ---
 en:
   bot:
-    shared_m_me: Hello Yvon
+    else: Say 'Hello' to start a new search
+    hello_01_new: >
+      %{keyword} %{username}, welcome among my new customers!
+    hello_02_returning: >
+      %{keyword} %{username}, it's a pleasure to see you back!
+    hello_11_search: Send me your location so I can take your order 😎
+    hello_12_restaurant: I take your order at %{restaurant} 😎
+    hello_13_table: I take your order at table %{table} 😎
+    hello_default_keyword: Hello
+    meal:
+      get_option:
+        choose_option: Can you specify?
+      index:
+        back: ◁ Back
+        back_image: back
+        menu: ◁ Back
+        no_thanks: No %{meal_category} for me
+        no_thanks_image: no%20thanks
+        pick: I want this!
+    no_comprendo: Sorry, no comprendo 😕
+    no_current_order: |-
+      Hey, I don't know where you are 👀
+      Send me your location so I can take your order 😎
+    no_restaurant: |-
+      I can't find open partners around you 🔍
+      Send me another location or try Harriet's, my HQ in Bordeaux!
+    no_restaurant_selected: |-
+      Hey, I don't know where you are 👀
+      Send me your location so I can take your order 😎
+    order:
+      ask_payment_method:
+        demo: Continue on demo
+        pay_card: >-
+          OK : card ••••%{last4}
+        pay_no_card: >-
+          OK : credit card
+        text: It's your treat ? 💰💶💰
+      cart:
+        add: ◁ I might add...
+        ask_table: Send me your table number
+        change_table: I changed table
+        remove: Remove
+        text: Let me summarise, last chance to change your order!
+        table: ' - Table %{table}'
+        take_away: take away
+        title: >-
+          Total : %{price}
+      confirm:
+        demo: |-
+          You are on the demo ✌
+          Share 🎁 and give me a shout for your future order 😉
+        get_receipt: I need a receipt
+        itinerary: Itinerary ▷
+        paid: |-
+          We're all good!
+          I take care of everything, just chill out 😎
+        password: >-
+          Your order is sent to kitchen, don't forget to pay at the counter
+          😉 !
+        ready: Your order will be ready in %{preparation_time} min at %{ready_time}.
+      menu_update_card:
+        go_to_account: Go to your account on my website to update your credit card
+        my_account: My account
+      no_meals: You have nothing to order 🛒
+      notify_delivered: >-
+        %{user_first_name}, you have picked-up your order at %{restaurant_name},
+        enjoy your meal ! Don't hesitate to share me with your friends
+      notify_ready: >-
+        Hey %{user_first_name}, your order at %{restaurant_name} is ready!
+      notify_served:
+        table_button: ☝ table %{table}
+        text: |-
+          I hope you enjoy the service 😉
+          Share 🎁 and make a sign if you need something else
+      notify_service: It's coming!
+      receipt:
+        unknown_payment_method: Not available
+      restaurant_closed: |-
+        Whoops, %{restaurant_name} has just closed 🚪
+        Can I help you make a new search?
+      share: Try Yvon to order and pay from your table!
+      stripe_error:
+        message: |-
+          There was an error : %{error_message}.
+          Do you want to update your credit card?
+        update_card: Update my card
+      update_card:
+        no_card: >-
+          You have no card up-to-date, add one on my website first to be able to
+          pay
+        pay: and I pay
+        update_card: I add my card
+      update_card_counter:
+        no_card: |-
+          You need to have a card up-to-date to order and pay at counter.
+          Add one on my website first to be able to confirm your order
+        pay: and I confirm
+    restaurant:
+      index:
+        displayable: ⚪ display only
+        enter: Enter
+        my_partners: my partners
+        off_duty: ⚪ off duty
+        on_duty: 🔵 on duty
+        upvote: + 1 vote
+        votable: 🗳 vote for me
+        vote_invitation: Vote to be able to order here soon!
+        vote_share: 👍 Invite your friends to vote
+        votes:
+          one: 1 vote
+          other: '%{count} votes'
+          zero: 0 votes
+      meal_restaurant_mismatch: >-
+        Sorry, this meal belongs to %{restaurant_name}, this is the right menu
+      show:
+        back_to_map: '.'
+        menu: the menu
+        order: I send my order
+        suggestion: 'Suggestion: '
+        go_to_category: '▽ %{category}'
+      ready_in: ready in
+      restaurant_mismatch: >-
+        Sorry, this menu belongs to %{restaurant_name}, this is the right menu
+      upvote:
+        share: Vote to order at %{restaurant} with Yvon!
+        text: |-
+          👍
+          Invite your friends to vote for %{restaurant}
+    share: Try Yvon to order and pay from your table!
+    shared_m_me: 👋 Hello Yvon
     swipe: Swipe right to see %{item} ▷
   devise:
     messenger_provider: Messenger link
@@ -36,8 +165,10 @@ en:
       location: Geolocalise yourself
       menu: Look at the menu and make your choice
       payment: Pay with YVON, no more cash
-      slogan_html: Order and pay from your table with <span class='yvon-logo'>YVON</span>
+      slogan_html: >-
+        Order and pay from your table with <span class='yvon-logo'>YVON</span>
       takeorder: Order on your smartphone
+      with_yvon: With YVON
     messenger_button:
       call_to_action_html: I order with <span class='yvon-logo'>YVON</span>
   pundit:

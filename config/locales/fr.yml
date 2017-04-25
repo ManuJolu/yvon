@@ -80,7 +80,7 @@ fr:
         unknown_payment_method: Non disponible
       restaurant_closed: |-
         Oups, %{restaurant_name} vient tout juste de fermer 🚪
-        Je peux t'aider à trouver un autre partenaire ?
+        Je peux t'aider à faire une nouvelle recherche ?
       share: Essaye Yvon pour commander et payer depuis ta table !
       stripe_error:
         message: |-
@@ -90,7 +90,7 @@ fr:
       update_card:
         no_card: >-
           Tu n'as pas de carte à jour, ajoutes-en une sur mon site avant de
-          régler :
+          régler
         pay: et je règle
         update_card: J'ajoute ma carte
       update_card_counter:
@@ -102,6 +102,7 @@ fr:
       index:
         displayable: ⚪ consultation
         enter: Entrer
+        my_partners: mes partenaires
         off_duty: ⚪ service fermé
         on_duty: 🔵 en service
         upvote: + 1 vote
@@ -114,8 +115,9 @@ fr:
           zero: 0 votes
       meal_restaurant_mismatch: >-
         Désolé, ce plat appartient au %{restaurant_name}, voici la bonne carte
-      menu:
+      show:
         back_to_map: '.'
+        menu: la carte
         order: J'envoie ma commande
         suggestion: 'Suggestion : '
         go_to_category: '▽ %{category}'
@@ -166,6 +168,7 @@ fr:
       slogan_html: >-
         Commande et paye depuis ta table avec <span class='yvon-logo'>YVON</span>
       takeorder: Commande sur ton smartphone
+      with_yvon: Avec YVON
     messenger_button:
       call_to_action_html: Je commande avec <span class='yvon-logo'>YVON</span>
   pundit:

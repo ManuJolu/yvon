@@ -105,7 +105,7 @@ class BotYvon::RestaurantsView
     )
 
     message.reply(
-      text: I18n.t('bot.swipe', item: 'mes partenaires')
+      text: I18n.t('bot.swipe', item: I18n.t('bot.restaurant.index.my_partners'))
     )
 
     message.reply(
@@ -136,12 +136,12 @@ class BotYvon::RestaurantsView
 
     buttons = []
     back_button = {
-      title: I18n.t('bot.restaurant.menu.back_to_map'),
+      title: I18n.t('bot.restaurant.show.back_to_map'),
       type: "postback",
       payload: "map"
     }
     order_button = {
-      title: I18n.t('bot.restaurant.menu.order'),
+      title: I18n.t('bot.restaurant.show.order'),
       type: "postback",
       payload: "cart"
     }
@@ -158,10 +158,10 @@ class BotYvon::RestaurantsView
       elements << {
         title: meal_category.name,
         image_url: cl_image_path_with_second(meal_category.active_meal&.photo&.path, meal_category.photo&.path, width: 382, height: 200, crop: :fill),
-        subtitle: ((I18n.t('bot.restaurant.menu.suggestion') + meal_category.active_meal.name) if meal_category.active_meal.present?),
+        subtitle: ((I18n.t('bot.restaurant.show.suggestion') + meal_category.active_meal.name) if meal_category.active_meal.present?),
         buttons: [
           {
-              title: I18n.t('bot.restaurant.menu.go_to_category', category: meal_category.name),
+              title: I18n.t('bot.restaurant.show.go_to_category', category: meal_category.name),
               type: "postback",
               payload: "meal_category_#{meal_category.id}"
           }
@@ -170,7 +170,7 @@ class BotYvon::RestaurantsView
     end
 
     message.reply(
-      text: I18n.t('bot.swipe', item: 'la carte')
+      text: I18n.t('bot.swipe', item: I18n.t('bot.restaurant.show.menu'))
     )
 
     message.reply(
@@ -193,7 +193,7 @@ class BotYvon::RestaurantsView
           text: I18n.t('bot.restaurant.upvote.text', restaurant: restaurant.name),
           buttons: [
             {
-              title: I18n.t('bot.restaurant.menu.back_to_map'),
+              title: I18n.t('bot.restaurant.show.back_to_map'),
               type: "postback",
               payload: "map"
             },

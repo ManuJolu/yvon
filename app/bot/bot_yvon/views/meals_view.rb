@@ -52,7 +52,7 @@ class BotYvon::MealsView
     end
 
     message.reply(
-      text: I18n.t('bot.swipe', item: 'la carte')
+      text: I18n.t('bot.swipe', item: I18n.t('bot.restaurant.show.menu'))
     )
 
     message.reply(

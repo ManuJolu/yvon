@@ -8,10 +8,10 @@ RailsAdmin.config do |config|
 
   config.model 'User' do
     list do
-      include_fields :email, :first_name, :last_name, :messenger_id, :token, :messenger_aline_id, :role
+      include_fields :id, :email, :first_name, :last_name, :messenger_id, :messenger_locale, :token, :messenger_aline_id, :role
     end
     edit do
-      include_fields :email, :first_name, :last_name, :role
+      include_fields :email, :first_name, :last_name, :messenger_locale, :role
     end
   end
 
