@@ -24,8 +24,8 @@ class BotYvon::MessagesView
       },
       {
         content_type: 'text',
-        title: 'Bordeaux',
-        payload: 'bordeaux'
+        title: "Harriet's",
+        payload: 'harriets'
       }
     ]
   )
@@ -85,8 +85,8 @@ class BotYvon::MessagesView
         },
         {
           content_type: 'text',
-          title: 'Bordeaux',
-          payload: 'bordeaux'
+          title: "Harriet's",
+          payload: 'harriets'
         }
       ]
     )
@@ -98,6 +98,11 @@ class BotYvon::MessagesView
       quick_replies: [
         {
           content_type: 'location'
+        },
+        {
+          content_type: 'text',
+          title: "Harriet's",
+          payload: 'harriets'
         }
       ]
     )
@@ -109,6 +114,11 @@ class BotYvon::MessagesView
       quick_replies: [
         {
           content_type: 'location'
+        },
+        {
+          content_type: 'text',
+          title: "Harriet's",
+          payload: 'harriets'
         }
       ]
     )

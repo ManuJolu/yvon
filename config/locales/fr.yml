@@ -6,7 +6,7 @@ fr:
       %{keyword} %{username}, bienvenue parmi mes nouveaux clients !
     hello_02_returning: >
       %{keyword} %{username}, ça fait plaisir de te revoir !
-    hello_11_search: Envoie-moi ton emplacement que je puisse prendre ta commande 😎
+    hello_11_search: Envoie-moi ton emplacement afin que je puisse prendre ta commande 😎
     hello_12_restaurant: Je prends ta commande au %{restaurant} 😎
     hello_13_table: Je prends ta commande à la table %{table} 😎
     hello_default_keyword: Hello
@@ -21,15 +21,15 @@ fr:
         no_thanks_image: non%20merci
         pick: Je veux ça !
     no_comprendo: Désolé, no comprendo 😕
-    no_current_order: >-
-      Désolé, tu n'as plus de recherche en cours. Envoie un emplacement pour en
-      commencer une nouvelle
-    no_restaurant: >-
-      Désolé, je n'ai pas trouvé de restaurant près de toi... Envoie un nouvel
-      emplacement ou cherche à Bordeaux, ma ville natale !
-    no_restaurant_selected: >-
-      Désolé, tu n'as pas de restaurant sélectionné. Est-ce que je peux t'aider
-      à en trouver un ?
+    no_current_order: |-
+      Ohé, je ne sais plus où tu es 👀
+      Envoie-moi ton emplacement afin que je puisse prendre ta commande 😎
+    no_restaurant: |-
+      Je ne trouve pas de partenaire ouvert autour de toi 👀
+      Envoie-moi un autre emplacement ou essaye au Harriet's, mon QG à Bordeaux !
+    no_restaurant_selected: |-
+      Ohé, je ne sais plus où tu es 👀
+      Envoie-moi ton emplacement afin que je puisse prendre ta commande 😎
     order:
       ask_payment_method:
         demo: Continuer en démo

@@ -126,7 +126,11 @@ class BotYvon::RestaurantsView
     subtitle += "#{restaurant.restaurant_category.name} - #{I18n.t('bot.restaurant.ready_in')} #{restaurant.preparation_time} min"
     element = {
       title: restaurant.name,
-      image_url: cl_image_path_with_default(restaurant.photo&.path, width: 382, height: 200, crop: :fill),
+      image_url: cl_image_path_with_default(restaurant.photo&.path, transformation: [
+        { width: 340, height: 200, crop: :fill },
+        { overlay: 'one_pixel.png', effect: :colorize, color: "#292C3C", width: 42, height: 200, x: 191 },
+        { overlay:"text:Open%20Sans_40:▷", color: "#fff", gravity: 'east', x: 4 }
+      ]),
       subtitle: subtitle
     }
 

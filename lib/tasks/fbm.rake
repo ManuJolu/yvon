@@ -53,7 +53,7 @@ namespace :fbm do
             },
             {
               type: "postback",
-              title: "💳 Update your card",
+              title: "💳 Update my credit card",
               payload: "menu_update_card"
             },
             {
@@ -74,7 +74,7 @@ namespace :fbm do
             },
             {
               type: "postback",
-              title: "💳 Mets à jour ta carte",
+              title: "💳 Mets à jour ma carte",
               payload: "menu_update_card"
             },
             {
