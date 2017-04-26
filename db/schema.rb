@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419073624) do
+ActiveRecord::Schema.define(version: 20170426082051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,31 @@ ActiveRecord::Schema.define(version: 20170419073624) do
     t.index ["restaurant_id"], name: "index_menus_on_restaurant_id", using: :btree
   end
 
+  create_table "mobility_string_translations", force: :cascade do |t|
+    t.string   "locale"
+    t.string   "key"
+    t.string   "value"
+    t.integer  "translatable_id"
+    t.string   "translatable_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["translatable_id", "translatable_type", "key"], name: "index_mobility_string_translations_on_translatable_attribute", using: :btree
+    t.index ["translatable_id", "translatable_type", "locale", "key"], name: "index_mobility_string_translations_on_keys", unique: true, using: :btree
+    t.index ["translatable_type", "key", "value", "locale"], name: "index_mobility_string_translations_on_query_keys", using: :btree
+  end
+
+  create_table "mobility_text_translations", force: :cascade do |t|
+    t.string   "locale"
+    t.string   "key"
+    t.text     "value"
+    t.integer  "translatable_id"
+    t.string   "translatable_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["translatable_id", "translatable_type", "key"], name: "index_mobility_text_translations_on_translatable_attribute", using: :btree
+    t.index ["translatable_id", "translatable_type", "locale", "key"], name: "index_mobility_text_translations_on_keys", unique: true, using: :btree
+  end
+
   create_table "options", force: :cascade do |t|
     t.string   "name"
     t.integer  "restaurant_id"
@@ -142,7 +167,7 @@ ActiveRecord::Schema.define(version: 20170419073624) do
   end
 
   create_table "restaurant_categories", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name_ut"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

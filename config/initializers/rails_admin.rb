@@ -15,6 +15,15 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'RestaurantCategory' do
+    list do
+      include_fields :id, :name_ut
+    end
+    edit do
+      include_fields :name_ut
+    end
+  end
+
   ### Popular gems integration
 
   ## == Devise ==
