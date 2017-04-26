@@ -105,13 +105,13 @@ en:
         my_partners: my partners
         off_duty: ⚪ off duty
         on_duty: 🔵 on duty
-        upvote: + 1 vote
+        upvote: I vote!
         votable: 🗳 vote for me
         vote_invitation: >
           Vote to be able to order here soon!
         vote_share: |-
 
-          Voted 👍 Share with your friends to invite them to vote
+          Share & invite your friends to vote
         votes:
           one: 1 vote
           other: '%{count} votes'

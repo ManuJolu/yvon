@@ -111,7 +111,7 @@ fr:
           Vote pour pouvoir commander ici bientôt !
         vote_share: |-
 
-          A voté ! 👍 Partage à tes amis pour les inviter à voter
+          Partage et invite tes amis à voter
         votes:
           one: 1 vote
           other: '%{count} votes'
