@@ -26,7 +26,7 @@ gem 'acts_as_list'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'money-rails'
 gem 'stripe'
-gem 'cookies_eu'
+gem 'mobility', '~> 0.1.13'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
@@ -44,6 +44,7 @@ gem 'autoprefixer-rails'
 gem "attachinary", github: "assembler/attachinary"
 gem "jquery-fileupload-rails"
 gem "coffee-rails"
+gem 'cookies_eu'
 
 group :development, :test do
   gem 'binding_of_caller'

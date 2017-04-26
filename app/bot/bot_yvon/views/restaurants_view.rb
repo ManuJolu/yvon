@@ -193,7 +193,7 @@ class BotYvon::RestaurantsView
           text: I18n.t('bot.restaurant.upvote.text', restaurant: restaurant.name),
           buttons: [
             {
-              title: I18n.t('bot.restaurant.show.back_to_map'),
+              title: I18n.t('bot.restaurant.upvote.back_to_map'),
               type: "postback",
               payload: "map"
             },

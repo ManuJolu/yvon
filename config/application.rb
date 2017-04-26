@@ -33,6 +33,7 @@ module Yvon
     config.time_zone = "Europe/Paris"
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr, :en]
+    config.i18n.fallbacks = { en: :fr, ru: :en }
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

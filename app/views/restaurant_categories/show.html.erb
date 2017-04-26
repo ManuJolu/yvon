@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name ut:</strong>
+  <%= @restaurant_category.name_ut %>
+</p>
+
+<p>
+  <strong>Name fr:</strong>
+  <%= @restaurant_category.name_fr %>
+</p>
+
+<p>
+  <strong>Name en:</strong>
+  <%= @restaurant_category.name_en %>
+</p>
+
+<%= link_to 'Edit', edit_restaurant_category_path(@restaurant_category) %> |
+<%= link_to 'Back', restaurant_categories_path %>
