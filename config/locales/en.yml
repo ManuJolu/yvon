@@ -107,8 +107,11 @@ en:
         on_duty: 🔵 on duty
         upvote: + 1 vote
         votable: 🗳 vote for me
-        vote_invitation: Vote to be able to order here soon!
-        vote_share: 👍 Invite your friends to vote
+        vote_invitation: >
+          Vote to be able to order here soon!
+        vote_share: |-
+
+          Voted 👍 Share with your friends to invite them to vote
         votes:
           one: 1 vote
           other: '%{count} votes'
@@ -125,10 +128,11 @@ en:
       restaurant_mismatch: >-
         Sorry, this menu belongs to %{restaurant_name}, this is the right menu
       upvote:
+        back_to_map: '◁ Back'
         share: Vote to order at %{restaurant} with Yvon!
         text: |-
-          👍
-          Invite your friends to vote for %{restaurant}
+          Voted 👍
+          Share with your friends to invite them to vote for %{restaurant}
     share: Try Yvon to order and pay from your table!
     shared_m_me: 👋 Hello Yvon
     swipe: Swipe right to see %{item} ▷
@@ -203,6 +207,7 @@ en:
       new_restaurant: Add a restaurant
       profile: Profile
       rails_admin: Admin
+      restaurant_categories: Restaurant Categories
       restaurants: Restaurants
       sign_in: Sign in
       sign_out: Sign out

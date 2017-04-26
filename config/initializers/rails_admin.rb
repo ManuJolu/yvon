@@ -4,7 +4,7 @@ RailsAdmin.config do |config|
     redirect_to main_app.root_path unless current_user && current_user.admin?
   end
 
-  config.included_models = ["User", "RestaurantCategory", "Place"]
+  config.included_models = ["User", "Place"]
 
   config.model 'User' do
     list do
@@ -12,15 +12,6 @@ RailsAdmin.config do |config|
     end
     edit do
       include_fields :email, :first_name, :last_name, :messenger_locale, :role
-    end
-  end
-
-  config.model 'RestaurantCategory' do
-    list do
-      include_fields :id, :name_ut
-    end
-    edit do
-      include_fields :name_ut
     end
   end
 

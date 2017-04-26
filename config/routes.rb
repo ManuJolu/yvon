@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         patch '/credit_card_destroy' => 'users#credit_card_destroy'
       end
     end
+    resources :restaurant_categories
     resources :restaurants, only: [:index, :new, :create, :edit, :update] do
       member do
         get '/refresh/:update' => 'restaurants#refresh'

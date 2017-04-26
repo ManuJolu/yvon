@@ -63,6 +63,11 @@
                     <i class="fa fa-lock" aria-hidden="true"></i> <%= t('.rails_admin') %>
                   <% end %>
                 </li>
+                <li>
+                  <%= link_to restaurant_categories_path do %>
+                    <i class="fa fa-lock" aria-hidden="true"></i> <%= t('.restaurant_categories') %>
+                  <% end %>
+                </li>
               <% end %>
               <li>
                 <%= link_to destroy_user_session_path, method: :delete do %>

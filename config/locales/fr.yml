@@ -105,10 +105,13 @@ fr:
         my_partners: mes partenaires
         off_duty: ⚪ service fermé
         on_duty: 🔵 en service
-        upvote: + 1 vote
+        upvote: Je vote !
         votable: 🗳 vote pour moi
-        vote_invitation: Vote pour pouvoir commander ici bientôt !
-        vote_share: A voté ! Invite tes amis à voter
+        vote_invitation: >
+          Vote pour pouvoir commander ici bientôt !
+        vote_share: |-
+
+          A voté ! 👍 Partage à tes amis pour les inviter à voter
         votes:
           one: 1 vote
           other: '%{count} votes'
@@ -125,10 +128,11 @@ fr:
       restaurant_mismatch: >-
         Désolé, ce menu appartient au %{restaurant_name}, voici la bonne carte
       upvote:
+        back_to_map: '◁ Retour'
         share: Vote pour commander chez %{restaurant} avec Yvon !
         text: |-
-          A voté !
-          Invite tes amis à voter pour %{restaurant}
+          A voté ! 👍
+          Partage à tes amis pour les inviter à voter pour %{restaurant}
     share: Essaye Yvon pour commander et payer depuis ta table !
     shared_m_me: 👋 Hello Yvon
     swipe: Fais défiler à droite pour voir %{item} ▷
@@ -203,6 +207,7 @@ fr:
       new_restaurant: Ajouter un restaurant
       profile: Profil
       rails_admin: Admin
+      restaurant_categories: Catégories Restaurant
       restaurants: Restaurants
       sign_in: Connexion
       sign_out: Déconnexion
