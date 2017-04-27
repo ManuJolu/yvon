@@ -1,6 +1,8 @@
 <%= simple_form_for [restaurant, meal], remote: true do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
+  <%= f.input :name_fr %>
+  <%= f.input :name_en %>
+  <%= f.input :description_fr %>
+  <%= f.input :description_en %>
   <%= f.association :options, collection: meal.restaurant.options, as: :check_boxes %>
   <%= f.input :price %>
   <%= f.input :photo, as: :attachinary %>

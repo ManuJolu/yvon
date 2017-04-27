@@ -1,7 +1,7 @@
 <%= simple_form_for restaurant do |f| %>
   <%= f.input :facebook_url %>
-  <%= f.association :restaurant_category %>
-  <%= f.input :mode, collection: Restaurant.modes.map {|k, v| [t("restaurants.form.#{k}"), k]} %>
+  <%= f.association :restaurant_category, collection: RestaurantCategory.includes(:mobility_string_translations).sort_by { |rc| rc.name }, include_blank: false %>
+  <%= f.input :mode, collection: Restaurant.modes.map {|k, v| [t("restaurants.form.#{k}"), k]}, include_blank: false %>
   <%= f.input :messenger_pass %>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

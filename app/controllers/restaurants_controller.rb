@@ -86,7 +86,7 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
-    @restaurant = Restaurant.includes(:user, :options, :photo_files, { menus: :menu_meal_categories }, { meal_categories: :photo_files }).find(params[:id])
+    @restaurant = Restaurant.includes(:user, :options, :photo_files, :mobility_string_translations, { meal_categories: [ :photo_files, :mobility_string_translations ] }, { options: :mobility_string_translations }, { menus: :menu_meal_categories }).find(params[:id])
     authorize @restaurant
     @active = params[:tab] || 'configure'
   end
@@ -156,9 +156,9 @@ class RestaurantsController < ApplicationController
 
   def restaurant_params
     params.require(:restaurant).permit(
-      :name, :about, :user_id, :restaurant_category_id, :address, :on_duty, :shift, :photo, :description, :preparation_time, :facebook_url, :mode, :messenger_pass,
-      meal_categories_attributes: [:id, :name, :position, :timing, :active, :photo, :_destroy],
-      options_attributes: [:id, :active, :name, :price, :position, :_destroy],
+      :name, :about, :about_fr, :about_en, :user_id, :restaurant_category_id, :address, :on_duty, :shift, :photo, :description, :preparation_time, :facebook_url, :mode, :messenger_pass,
+      meal_categories_attributes: [:id, :name, :name_fr, :name_en, :position, :timing, :active, :photo, :_destroy],
+      options_attributes: [:id, :active, :name, :name_fr, :name_en, :price, :position, :_destroy],
       menus_attributes: [:id, :name, :price, :tax_rate, :position, :_destroy,
         menu_meal_categories_attributes:[:id, :menu_id, :meal_category_id, :quantity, :_destroy]
       ]

@@ -4,7 +4,7 @@ class RestaurantCategoriesController < ApplicationController
   # GET /restaurant_categories
   # GET /restaurant_categories.json
   def index
-    @restaurant_categories = policy_scope(RestaurantCategory.includes(:mobility_string_translations).all)
+    @restaurant_categories = policy_scope(RestaurantCategory).includes(:mobility_string_translations).all.sort_by { |rc| rc.name }
   end
 
   # GET /restaurant_categories/1
@@ -66,12 +66,12 @@ class RestaurantCategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant_category
-      @restaurant_category = RestaurantCategory.find(params[:id])
+      @restaurant_category = RestaurantCategory.includes(:mobility_string_translations).find(params[:id])
       authorize @restaurant_category
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_category_params
-      params.require(:restaurant_category).permit(:name_ut, :name_fr, :name_en)
+      params.require(:restaurant_category).permit(:name_fr, :name_en)
     end
 end

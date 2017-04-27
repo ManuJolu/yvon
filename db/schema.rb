@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426082051) do
+ActiveRecord::Schema.define(version: 20170427094524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20170426082051) do
   end
 
   create_table "meal_categories", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name_ut"
     t.integer  "restaurant_id"
     t.integer  "position"
     t.datetime "created_at",                   null: false
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20170426082051) do
   end
 
   create_table "meals", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
+    t.string   "name_ut"
+    t.string   "description_ut"
     t.integer  "price_cents"
     t.integer  "tax_rate",         default: 0
     t.string   "photo"
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20170426082051) do
   end
 
   create_table "options", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name_ut"
     t.integer  "restaurant_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(version: 20170426082051) do
     t.string   "facebook_url"
     t.integer  "preparation_time",       default: 15
     t.integer  "restaurant_category_id"
-    t.string   "about"
+    t.string   "about_ut"
     t.integer  "mode",                   default: 0
     t.integer  "messenger_user_id"
     t.string   "messenger_pass"
