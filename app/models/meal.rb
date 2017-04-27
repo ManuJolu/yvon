@@ -4,8 +4,11 @@ class Meal < ApplicationRecord
   has_many :meal_options, dependent: :destroy
   has_many :options, -> { order(position: :asc) }, through: :meal_options
 
-  validates :name, presence: true
   validates :tax_rate, presence: true
+
+  include Mobility
+  translates :name, type: :string, fallbacks: true, locale_accessors: [:fr, :en]
+  translates :description, type: :string, fallbacks: true, locale_accessors: [:fr, :en]
 
   acts_as_list scope: :meal_category
 

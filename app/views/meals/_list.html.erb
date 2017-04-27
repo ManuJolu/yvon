@@ -21,8 +21,8 @@
       </div>
       <%= cl_image_tag_with_default(meal.photo&.path, width: 191, height: 100, crop: :fill, class: "product-image") %>
       <div class='product-body'>
-        <h3><%= meal.name %> - <%= meal.decorate.price %><%= " - TVA #{meal.tax_rate}%" if meal.tax_rate != "10" %></h3>
-        <p><%= meal.description %></p>
+        <h3><%= meal.name %> | <%= meal.name_en %> - <%= meal.decorate.price %><%= " - TVA #{meal.tax_rate}%" if meal.tax_rate != "10" %></h3>
+        <p><%= meal.description %> | <%= meal.description_en %></p>
         <% if meal.options.present? %>
           <p>Options : <%= meal.options.map { |option| option.decorate }.join(' - ') %></p>
         <% end %>
