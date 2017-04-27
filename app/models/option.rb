@@ -2,7 +2,8 @@ class Option < ApplicationRecord
   belongs_to :restaurant
   has_many :meal_options, dependent: :destroy
 
-  validates :name, presence: true
+  include Mobility
+  translates :name, type: :string, fallbacks: true, locale_accessors: [:fr, :en]
 
   acts_as_list scope: :restaurant
 

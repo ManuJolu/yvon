@@ -1,6 +1,7 @@
 <div class="nested-fields form-inline">
   <%= f.input :active, label: false %>
-  <%= f.input :name, label: false, placeholder: "Name" %>
+  <%= f.input :name_fr, label: 'fr', placeholder: "Nom" %>
+  <%= f.input :name_en, label: 'en', placeholder: "Name" %>
   <%= f.input :timing, collection: MealCategory.timings.map {|k, v| [t(".#{k}"), k]}, label:false, prompt: t('.select_timing') %>
   <%= f.input :photo, as: :attachinary %>
   <%= f.input :position, label: false, placeholder: "Position" %>

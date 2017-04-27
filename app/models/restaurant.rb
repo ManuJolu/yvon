@@ -15,12 +15,14 @@ class Restaurant < ApplicationRecord
   accepts_nested_attributes_for :menus, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true
-  validates :about, presence: true
   validates :address, presence: true
   validates :preparation_time, presence: true
   validates :mode, presence: true
   validates :messenger_pass, format: { with: /\A\d{2}\z/,
     message: "2 chiffres" }, allow_nil: true
+
+  include Mobility
+  translates :about, type: :string, fallbacks: true, locale_accessors: [:fr, :en]
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
