@@ -221,46 +221,50 @@ class BotYvon::OrdersView
       )
     elsif order.demo?
       message.reply(
-        attachment: {
-          type: 'template',
-          payload: {
-            template_type: 'button',
-            text: I18n.t('bot.order.confirm.demo'),
-            buttons: [
-              {
-                type: 'element_share',
-                share_contents: {
-                  attachment: {
-                    type: 'template',
-                    payload: {
-                      template_type: 'generic',
-                      image_aspect_ratio: 'square',
-                      elements: [
-                        {
-                          title: I18n.t('bot.order.share'),
-                          image_url: cl_image_path("yvon_messenger_code.png", width: 400, crop: :scale),
-                          buttons: [
-                            {
-                              type: 'web_url',
-                              title: I18n.t('bot.shared_m_me'),
-                              url: "http://m.me/HelloYvon?ref=shared"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              },
-              {
-                type: 'postback',
-                title: I18n.t('bot.order.confirm.get_receipt'),
-                payload: "order_#{order.id}_receipt",
-              }
-            ]
-          }
-        }
+        text: I18n.t('bot.order.confirm.demo')
       )
+
+      # message.reply(
+      #   attachment: {
+      #     type: 'template',
+      #     payload: {
+      #       template_type: 'button',
+      #       text: I18n.t('bot.order.confirm.demo'),
+      #       buttons: [
+      #         {
+      #           type: 'element_share',
+      #           share_contents: {
+      #             attachment: {
+      #               type: 'template',
+      #               payload: {
+      #                 template_type: 'generic',
+      #                 image_aspect_ratio: 'square',
+      #                 elements: [
+      #                   {
+      #                     title: I18n.t('bot.order.share'),
+      #                     image_url: cl_image_path("yvon_messenger_code.png", width: 400, crop: :scale),
+      #                     buttons: [
+      #                       {
+      #                         type: 'web_url',
+      #                         title: I18n.t('bot.shared_m_me'),
+      #                         url: "http://m.me/HelloYvon?ref=shared"
+      #                       }
+      #                     ]
+      #                   }
+      #                 ]
+      #               }
+      #             }
+      #           }
+      #         },
+      #         {
+      #           type: 'postback',
+      #           title: I18n.t('bot.order.confirm.get_receipt'),
+      #           payload: "order_#{order.id}_receipt",
+      #         }
+      #       ]
+      #     }
+      #   }
+      # )
     end
 
     if order.table < 0
