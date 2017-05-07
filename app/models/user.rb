@@ -27,11 +27,14 @@ class User < ApplicationRecord
     if user
       user.update(user_params)
     else
-      user_data_json = RestClient.get("https://graph.facebook.com/v2.8/me?fields=picture&access_token=#{user_params[:token]}")
-      user_data = JSON.parse user_data_json
-      user_params[:facebook_picture_check] = user_data['picture']['data']['url'].match(/\/(\w+).jpg/)[1]
+      id_matching = JSON.parse(RestClient.get("https://graph.facebook.com/v2.9"\
+        "/#{auth.uid}/ids_for_pages"\
+        "?access_token=#{ENV['YVON_APP_ACCESS_TOKEN']}"))
+      yvon_id = id_matching['data'].find { |result| result['page']['id'] == ENV['YVON_PAGE_ID'] }.try(:[], 'id')
+      aline_id = id_matching['data'].find { |result| result['page']['id'] == ENV['ALINE_PAGE_ID'] }.try(:[], 'id')
 
-      user = User.find_by(facebook_picture_check: user_params[:facebook_picture_check])
+      user = User.find_by(messenger_id: yvon_id)
+      user ||= User.find_by(messenger_aline_id: aline_id)
       user ||= User.find_by(email: auth.info.email)
       if user
         user.update(user_params)
