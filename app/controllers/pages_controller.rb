@@ -1,10 +1,10 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :fooding, :legal, :privacy]
+  skip_before_action :authenticate_user!, only: [:home, :fooding, :legal, :privacy, :restaurateurs]
 
   def home
   end
 
-  def restaurateur
+  def restaurateurs
   end
 
   def fooding
