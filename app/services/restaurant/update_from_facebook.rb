@@ -11,7 +11,7 @@ class Restaurant::UpdateFromFacebook
       unless page_ref
         page_ref = restaurant.fb_page_id
       end
-      restaurant_data_json = RestClient.get("https://graph.facebook.com/v2.8/#{page_ref}?fields=name,about,description,price_range,fan_count,overall_star_rating,rating_count,location&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
+      restaurant_data_json = RestClient.get("https://graph.facebook.com/v2.9/#{page_ref}?fields=name,about,description,price_range,fan_count,overall_star_rating,rating_count,location&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
       restaurant_data = JSON.parse restaurant_data_json
       restaurant.fb_page_id = restaurant_data['id']
       restaurant.name ||= restaurant_data['name']
@@ -24,7 +24,7 @@ class Restaurant::UpdateFromFacebook
       restaurant.address ||= "#{restaurant_data['location']['street']}, #{restaurant_data['location']['zip']} #{restaurant_data['location']['city']}, #{restaurant_data['location']['country']}"
       return false unless restaurant.save
 
-      restaurant_picture_data_json = RestClient.get("https://graph.facebook.com/v2.8/#{page_ref}/picture?width=480&redirect=0&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
+      restaurant_picture_data_json = RestClient.get("https://graph.facebook.com/v2.9/#{page_ref}/picture?width=480&redirect=0&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
       restaurant_picture_data = JSON.parse restaurant_picture_data_json
       restaurant.photo_url = restaurant_picture_data['data']['url']
       true

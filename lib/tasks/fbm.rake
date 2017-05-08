@@ -16,7 +16,7 @@ namespace :fbm do
 
     if success
       puts 'Yvon Greeting Text set :'
-      puts RestClient.get("https://graph.facebook.com/v2.8/me/messenger_profile?fields=greeting&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
+      puts RestClient.get("https://graph.facebook.com/v2.9/me/messenger_profile?fields=greeting&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
     else
       puts 'Failure'
     end
@@ -32,7 +32,7 @@ namespace :fbm do
 
     if success
       puts 'Yvon Get Started Button set :'
-      puts RestClient.get("https://graph.facebook.com/v2.8/me/messenger_profile?fields=get_started&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
+      puts RestClient.get("https://graph.facebook.com/v2.9/me/messenger_profile?fields=get_started&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
     else
       puts 'Failure'
     end
@@ -89,7 +89,7 @@ namespace :fbm do
 
     if success
       puts 'Yvon Persistent Menu set :'
-      puts RestClient.get("https://graph.facebook.com/v2.8/me/messenger_profile?fields=persistent_menu&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
+      puts RestClient.get("https://graph.facebook.com/v2.9/me/messenger_profile?fields=persistent_menu&access_token=#{ENV['YVON_ACCESS_TOKEN']}")
     else
       puts 'Failure'
     end
@@ -112,7 +112,7 @@ namespace :fbm do
 
     if success
       puts 'Aline Greeting Text set :'
-      puts RestClient.get("https://graph.facebook.com/v2.8/me/messenger_profile?fields=greeting&access_token=#{ENV['ALINE_ACCESS_TOKEN']}")
+      puts RestClient.get("https://graph.facebook.com/v2.9/me/messenger_profile?fields=greeting&access_token=#{ENV['ALINE_ACCESS_TOKEN']}")
     else
       puts 'Failure'
     end
@@ -128,7 +128,7 @@ namespace :fbm do
 
     if success
       puts 'Aline Get Started Button set :'
-      puts RestClient.get("https://graph.facebook.com/v2.8/me/messenger_profile?fields=get_started&access_token=#{ENV['ALINE_ACCESS_TOKEN']}")
+      puts RestClient.get("https://graph.facebook.com/v2.9/me/messenger_profile?fields=get_started&access_token=#{ENV['ALINE_ACCESS_TOKEN']}")
     else
       puts 'Failure'
     end
@@ -217,7 +217,7 @@ namespace :fbm do
 
     if success
       puts 'Aline Persistent Menu set :'
-      puts RestClient.get("https://graph.facebook.com/v2.8/me/messenger_profile?fields=persistent_menu&access_token=#{ENV['ALINE_ACCESS_TOKEN']}")
+      puts RestClient.get("https://graph.facebook.com/v2.9/me/messenger_profile?fields=persistent_menu&access_token=#{ENV['ALINE_ACCESS_TOKEN']}")
     else
       puts 'Failure'
     end

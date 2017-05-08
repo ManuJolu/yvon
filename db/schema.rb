@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427094524) do
+ActiveRecord::Schema.define(version: 20170508094549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -225,7 +225,6 @@ ActiveRecord::Schema.define(version: 20170427094524) do
     t.string   "facebook_picture_url"
     t.string   "token"
     t.datetime "token_expiry"
-    t.string   "facebook_picture_check"
     t.string   "messenger_aline_id"
     t.string   "stripe_customer_id"
     t.integer  "role",                        default: 0
