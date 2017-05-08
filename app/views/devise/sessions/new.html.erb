@@ -1,15 +1,14 @@
 <div class="container">
 
-  <div id="websiteLoginForm" style="display: none;">
+  <div id="websiteLoginForm">
 
-    <h3><%= t(".sign_in") %></h3>
     <p>
-      <%= link_to omniauth_authorize_path(resource_name, 'facebook'), class: "btn btn-social btn-facebook" do %>
-        <i class="fa fa-facebook"></i><%= t('devise.shared.links.sign_in_with_provider', provider: 'Facebook') %>
+      <%= link_to omniauth_authorize_path(resource_name, 'facebook'), class: "btn-fbm" do %>
+        <%= image_tag 'messenger_icon_white.png' %><%= t('devise.shared.links.sign_in_with_provider', provider: t('devise.messenger_provider')) %>
       <% end %>
     </p>
 
-    <br>
+<!--     <br>
     <br>
     <h4>Pour restaurateurs uniquement :</h4>
 
@@ -28,11 +27,6 @@
     <%= render "devise/shared/links" %>
   </div>
 
-  <div id="webviewLoginForm" style="display: none;">
-    <p>
-      <%= link_to omniauth_authorize_path(resource_name, 'facebook'), class: "btn-fbm" do %>
-        <%= image_tag 'messenger_icon_white.png' %><%= t('devise.shared.links.sign_in_with_provider', provider: t('devise.messenger_provider')) %>
-      <% end %>
-    </p>
+  <div id="webviewLoginForm" style="display: none;"> -->
   </div>
 </div>

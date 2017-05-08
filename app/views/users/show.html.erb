@@ -6,9 +6,9 @@
     <%= render 'users/credit_card', user: @user.decorate %>
   </div>
 
-  <div id="nonCreditCard" style="display: none;">
-    <h3><%= t '.messenger' %></h3>
-    <%= render 'pages/messenger_button', ref: "profile" %>
+  <div id="nonCreditCard">
+<!--     <h3><%= t '.messenger' %></h3>
+    <%= render 'pages/messenger_button', ref: "profile" %> -->
 
     <% if User.roles[@user.role] > 0 %>
       <h3><%= t ".my_restaurants" %></h3>
