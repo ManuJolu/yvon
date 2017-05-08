@@ -9,10 +9,18 @@ $(document).ready(function() {
     }(document, 'script', 'Messenger'));
 
     window.extAsyncInit = function() {
-      MessengerExtensions.getSupportedFeatures(function success() {
-        $('#webviewLoginForm').show();
+      MessengerExtensions.getSupportedFeatures(function success(result) {
+        console.log(result.supported_features)
+        alert(result)
+        alert(result.supported_features)
+        if (result.supported_features[0] === 'context') {
+          $('#webviewLoginForm').show();
+        } else {
+          $('#websiteLoginForm').show();
+        }
       }, function error(err) {
         $('#websiteLoginForm').show();
+        alert('fail')
       });
     };
   };
