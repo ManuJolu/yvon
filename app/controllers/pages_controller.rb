@@ -4,6 +4,9 @@ class PagesController < ApplicationController
   def home
   end
 
+  def restaurateur
+  end
+
   def fooding
     @restaurants = Restaurant.by_duty.where.not(latitude: nil, longitude: nil)
 
