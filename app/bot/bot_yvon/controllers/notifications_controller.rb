@@ -6,10 +6,12 @@ class BotYvon::NotificationsController
   def notify_ready(order)
     user = order.user
     if user
-      if order.table > 0
-        view.notify_service(order, user)
-      else
-        view.notify_ready(order, user)
+      UserLocaleContext.new(user).call do
+        if order.table > 0
+          view.notify_service(order, user)
+        else
+          view.notify_ready(order, user)
+        end
       end
     end
   end
@@ -17,10 +19,12 @@ class BotYvon::NotificationsController
   def notify_delivered(order)
     user = order.user
     if user
-      if order.table > 0
-        view.notify_served(order, user)
-      else
-        view.notify_delivered(order, user)
+      UserLocaleContext.new(user).call do
+        if order.table > 0
+          view.notify_served(order, user)
+        else
+          view.notify_delivered(order, user)
+        end
       end
     end
   end

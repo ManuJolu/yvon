@@ -74,7 +74,7 @@ fr:
         table_button: ☝ table %{table}
         text: |-
           J'espère que tu apprécies le service 😉
-          Partage 🎁 et fais moi signe si tu as besoin d'autre chose
+          Donne ton avis sur bit.ly/YvonAndYou 🎁 et fais moi signe si tu as besoin d'autre chose
       notify_service: Ça arrive !
       receipt:
         unknown_payment_method: Non disponible
