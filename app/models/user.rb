@@ -33,9 +33,9 @@ class User < ApplicationRecord
       yvon_id = id_matching['data'].find { |result| result['page']['id'] == ENV['YVON_PAGE_ID'] }.try(:[], 'id')
       aline_id = id_matching['data'].find { |result| result['page']['id'] == ENV['ALINE_PAGE_ID'] }.try(:[], 'id')
 
-      user = User.find_by(messenger_id: yvon_id)
-      user ||= User.find_by(messenger_aline_id: aline_id)
-      user ||= User.find_by(email: auth.info.email)
+      user = User.find_by(messenger_id: yvon_id) if yvon_id.present?
+      user ||= User.find_by(messenger_aline_id: aline_id) if aline_id.present?
+      user ||= User.find_by(email: auth.info.email) if auth.info.email.present?
       if user
         user.update(user_params)
       else

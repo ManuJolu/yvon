@@ -6,7 +6,7 @@ class BotAline::MessagesView
 
   def hello
     message.reply(
-      text: "Salut #{user.first_name&.capitalize}, où se situe ton restaurant ?",
+      text: "Salut #{user.first_name.capitalize}, où se situe ton restaurant ?",
       quick_replies: [
         {
           content_type: 'location'

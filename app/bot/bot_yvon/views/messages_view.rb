@@ -5,9 +5,9 @@ class BotYvon::MessagesView
   end
 
   def hello(options = {})
-  keyword = (options[:keyword]&.capitalize || I18n.t('bot.hello_default_keyword'))
+  keyword = (options[:keyword].capitalize || I18n.t('bot.hello_default_keyword'))
   path = options[:start] ? 'bot.hello_01_new' : 'bot.hello_02_returning'
-  text = I18n.t(path, keyword: keyword, username: user.first_name&.capitalize)
+  text = I18n.t(path, keyword: keyword, username: user.first_name.capitalize)
   if options[:table]
     text += I18n.t('bot.hello_13_table', table: options[:table])
   elsif options[:restaurant]

@@ -8,7 +8,8 @@ class FindBotYvonUser
         "&access_token=#{access_token}"))
       user_data = JSON.parse RestClient.get("https://graph.facebook.com/v2.9"\
         "/#{message.sender['id']}?access_token=#{access_token}")
-      @user = User.find_by(uid: id_matching['data'].first.try(:[], 'id'))
+      uid = id_matching['data'].first.try(:[], 'id')
+      @user = User.find_by(uid: uid) if uid.present?
       if @user
         @user.send("#{messenger_field}=", message.sender['id'])
       else
