@@ -5,7 +5,7 @@ class UserDecorator < Draper::Decorator
   delegate :url_helpers, to: 'Rails.application.routes'
 
   def name
-    "#{first_name.capitalize} #{last_name.capitalize}"
+    "#{first_name&.capitalize} #{last_name&.capitalize}"
   end
 
   def stripe_default_source

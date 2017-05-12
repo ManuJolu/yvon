@@ -60,7 +60,7 @@ class MealsController < ApplicationController
       format.html { redirect_to @meals }
       format.js
     end
-end
+  end
 
   private
 

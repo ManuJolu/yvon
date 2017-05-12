@@ -15,6 +15,7 @@ class MealCategoriesController < ApplicationController
     #   end
     end
   end
+
   private
 
   def set_meal_category
