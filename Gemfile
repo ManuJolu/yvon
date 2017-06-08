@@ -27,6 +27,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'money-rails'
 gem 'stripe'
 gem 'mobility', '~> 0.1.13'
+gem 'newrelic_rpm'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
@@ -58,5 +59,3 @@ group :development, :test do
   gem 'bullet'
   gem 'rails_real_favicon'
 end
-
-
